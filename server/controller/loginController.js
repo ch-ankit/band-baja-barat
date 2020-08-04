@@ -1,14 +1,51 @@
-const mysqlConnection = require('./../connection');
+const mysqlConnection = require("./../connection");
 
 exports.user = async (req, res, next) => {
   try {
-    const userDetails = mysqlConnection.query(
-      "SELECT userName,password FROM user WHERE userName LIKE '%al%'",
+    mysqlConnection.query(
+      `SELECT userName,password FROM user WHERE  userName="${req.body.userName}" AND password="${req.body.password}"`,
       (err, rows, fields) => {
         if (!err) {
-          res.send(rows);
+          if (rows.length == 0) res.json("LOGIN ERROR");
+          else res.json("LOGIN SUCCESSFUL");
         } else {
-          res.send(err);
+          res.json(err);
+        }
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.host = async (req, res, next) => {
+  try {
+    mysqlConnection.query(
+      `SELECT vatNo,password FROM host WHERE  vatNo="${req.body.vatNo}" AND password="${req.body.password}"`,
+      (err, rows, fields) => {
+        if (!err) {
+          if (rows.length == 0) res.json("LOGIN ERROR");
+          else res.json("LOGIN SUCCESSFUL");
+        } else {
+          res.json(err);
+        }
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.admin = async (req, res, next) => {
+  try {
+    const userDetails = mysqlConnection.query(
+      `SELECT userName,password FROM admin WHERE  userName="${req.body.userName}" AND password="${req.body.password}"`,
+      (err, rows, fields) => {
+        if (!err) {
+          if (rows.length == 0) res.json("LOGIN ERROR");
+          else res.json("LOGIN SUCCESSFUL");
+        } else {
+          res.json(err);
         }
       }
     );
