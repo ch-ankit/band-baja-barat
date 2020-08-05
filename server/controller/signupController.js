@@ -4,8 +4,8 @@ exports.adduser = async (req, res) => {
   try {
     mysqlConnection.query(
       `INSERT INTO user (firstName,lastName,middleName,userName,password,points,email,mobileNo,street,city,provience) VALUES(
-        '${req.body.lastName}',
         '${req.body.firstName}',
+        '${req.body.lastName}',
         '${req.body.middleName}',
         '${req.body.userName}',
         '${req.body.password}',
