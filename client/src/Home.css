@@ -1,0 +1,26 @@
+.home {
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.home__image {
+    width: 100%;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    max-height: 300px;
+    z-index: -1;
+    margin-bottom: -40px;
+    object-fit: contain;
+}
+.carousal > a {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 40px;
+    width: 50px;
+    background-color: black !important;
+}
+.home__row {
+    display: flex;
+    z-index: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+}

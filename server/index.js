@@ -10,6 +10,7 @@ const signupRouter = require("./routes/signup");
 app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
