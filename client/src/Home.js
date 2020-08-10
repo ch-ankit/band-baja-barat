@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import shop from "./images/shop.jpg";
 import shop2 from "./images/shop2.jpg";
@@ -12,21 +12,11 @@ import kitchen from "./images/kitchen.jpg";
 import "./Home.css";
 import Product from "./Product";
 
-let product;
-const getApi = async () => {
-  const data = await fetch("http://localhost:9000/giftstore/product");
-  const response = await data.json();
-
-  // .then((response) => response.json())
-  // .then((response) => {
-  //   data1 = response.data;
-  // })
-  // .catch((error) => {
-  //   return error;
-  // });
-  // console.log(data1);
-  product = response.data;
-  return product;
+async function alt(data, setData) {
+  const res = await fetch("http://localhost:9000/giftstore/product")
+  const send = await res.json();
+  setData(send);
+  return send.data
 };
 
 function ControlledCarousel() {
@@ -55,9 +45,26 @@ function ControlledCarousel() {
   );
 }
 
+function usePrevious(value) {
+  const ref = useRef();
+
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+}
+
 function Home(props) {
-  getApi();
-  console.log(product);
+  let [data, setData] = useState({ data: null })
+
+  const prevData = usePrevious(data);
+
+  if (JSON.stringify(prevData) != JSON.stringify(data)) {//Stop the infinite looping of states
+    alt(data, setData);
+  }
+  //Present in prevdata or in data the responses we want.
   return (
     <div className="home">
       <ControlledCarousel />
