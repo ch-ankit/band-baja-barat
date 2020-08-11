@@ -8,7 +8,7 @@ exports.product = async (req, res, next) => {
         if (!err) {
           if (rows.length == 0) res.json("Store Empty");
           else res.json({ status: "success", data: rows });
-          // console.log(rows);
+          console.log(fields);
         } else {
           res.json(err);
         }
@@ -22,11 +22,19 @@ exports.product = async (req, res, next) => {
 exports.addProducts = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `INSERT INTO giftshop (modelNo,price,quantity,description,image,name)`,
-      (err, rows, fields) => {
+      `INSERT INTO giftshop (modelNo,price,quantity,description,image,name) 
+      VALUES 
+      (
+        '${req.body.modelNo}',
+        '${req.body.price}',
+        '${req.body.quantity}',
+        '${req.body.description}',
+        '${req.body.image}',
+        '${req.body.name}'
+      )`,
+      (err) => {
         if (!err) {
           res.json(giftAdded);
-          console.log(rows);
         } else {
           res.json(err);
         }

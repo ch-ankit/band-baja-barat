@@ -1,9 +1,11 @@
 const mysqlConnection = require("./../connection");
 
-exports.adduser = async (req, res) => {
+exports.addUser = async (req, res) => {
   try {
     mysqlConnection.query(
-      `INSERT INTO user (firstName,lastName,middleName,userName,password,points,email,mobileNo,street,city,provience) VALUES(
+      `INSERT INTO user (firstName,lastName,middleName,userName,password,points,email,mobileNo,street,city,provience) 
+      VALUES
+      (
         '${req.body.firstName}',
         '${req.body.lastName}',
         '${req.body.middleName}',
@@ -29,12 +31,13 @@ exports.adduser = async (req, res) => {
   }
 };
 
-exports.addhost = async (req, res, next) => {
+exports.addHost = async (req, res, next) => {
   try {
     console.log(req.body);
     mysqlConnection.query(
       `INSERT INTO host (vatNo,password,capacity,hostLocation,email,contactInfo,hostName,latitude,longitude,photo,description,hallsNumber)
-      VALUES (
+      VALUES
+      (
         "${req.body.vatNo}",
         "${req.body.password}",
         ${req.body.capacity},
@@ -47,7 +50,7 @@ exports.addhost = async (req, res, next) => {
         "${req.body.photo}",
         "${req.body.description}",
         ${req.body.hallsNumber}
-        )`,
+      )`,
       (err) => {
         if (!err) {
           res.json("HOST Sign up successful");
