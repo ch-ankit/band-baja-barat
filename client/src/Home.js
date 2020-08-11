@@ -12,13 +12,6 @@ import kitchen from "./images/kitchen.jpg";
 import "./Home.css";
 import Product from "./Product";
 
-async function alt(data, setData) {
-  const res = await fetch("http://localhost:9000/giftstore/product")
-  const send = await res.json();
-  setData(send);
-  return send.data
-};
-
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex, e) => {
@@ -45,25 +38,18 @@ function ControlledCarousel() {
   );
 }
 
-function usePrevious(value) {
-  const ref = useRef();
-
-  // Store current value in ref
-  useEffect(() => {
-    ref.current = value;
-  }, [value]); // Only re-run if value changes
-  // Return previous value (happens before update in useEffect above)
-  return ref.current;
-}
-
 function Home(props) {
+  let res;
   let [data, setData] = useState({ data: null })
-
-  const prevData = usePrevious(data);
-
-  if (JSON.stringify(prevData) != JSON.stringify(data)) {//Stop the infinite looping of states
-    alt(data, setData);
-  }
+  useEffect(() => {
+    async function fetchData() {
+      res = await fetch("http://localhost:9000/giftstore/product")
+      const send = await res.json();
+      setData(send.data);
+    }
+    fetchData();
+  }, [])
+  console.log(data)
   //Present in prevdata or in data the responses we want.
   return (
     <div className="home">
