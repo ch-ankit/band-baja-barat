@@ -8,7 +8,6 @@ import logo from "./images/logo.png";
 
 function Header(props) {
   const [{ basket }] = useStateValue();
-  console.log(basket);
   return (
     <nav className="header">
       {/* Logo BBB-> Image */}

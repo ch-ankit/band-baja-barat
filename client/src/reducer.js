@@ -8,7 +8,9 @@ export const initialState = {
         //     image: 'http://www.cryptoemporium.eu/wp-content/uploads/2019/09/Screen-Shot-2019-09-25-at-11.31.06.png'
         // }
     ],
-    user: null
+    user: false,
+    isAdmin: true,
+    product: {}
 }
 
 export const getBasketTotal = (basket) =>
@@ -42,6 +44,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.user
+            };
+        case "ADD_PRODUCTS":
+            return {
+                ...state,
+                product: action.item
             }
         default:
             return state;
