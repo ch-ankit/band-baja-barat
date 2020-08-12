@@ -8,7 +8,6 @@ exports.product = async (req, res, next) => {
         if (!err) {
           if (rows.length == 0) res.json("Store Empty");
           else res.json({ status: "success", data: rows });
-          console.log(fields);
         } else {
           res.json(err);
         }

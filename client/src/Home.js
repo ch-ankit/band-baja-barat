@@ -40,16 +40,25 @@ function ControlledCarousel() {
 
 function Home(props) {
   let res;
-  let [data, setData] = useState({ data: null })
+  let [data, setData] = useState({ data: [] });
   useEffect(() => {
     async function fetchData() {
-      res = await fetch("http://localhost:9000/giftstore/product")
+      res = await fetch("http://localhost:9000/giftstore/product");
       const send = await res.json();
       setData(send.data);
     }
     fetchData();
-  }, [])
-  console.log(data)
+  }, []);
+  const show = Object.keys(data).map((keys) => (
+    <Product
+      id={data[keys].modelno}
+      title={data[keys].name}
+      image={data[keys].image}
+      price={data[keys].price}
+      description={data[keys].description}
+      rating={5}
+    />
+  ));
   //Present in prevdata or in data the responses we want.
   return (
     <div className="home">
@@ -60,7 +69,7 @@ function Home(props) {
              */}
 
       <div className="home__row">
-        <Product
+        {/* <Product
           id={12345}
           title="Gagri Khadkulo Set"
           price={5000}
@@ -74,8 +83,6 @@ function Home(props) {
           rating={5}
           image={kitchen}
         />
-      </div>
-      <div className="home__row">
         <Product
           id={12345}
           title="Silver Karuwa-2 Tola"
@@ -97,8 +104,6 @@ function Home(props) {
           rating={5}
           image={vacuum}
         />
-      </div>
-      <div className="home__row">
         <Product
           id={12345}
           title="Samsung 55'' UHD Curved Smart TV"
@@ -112,8 +117,10 @@ function Home(props) {
           price={5000}
           rating={5}
           image={fridge}
-        />
+        /> */}
+        {show}
       </div>
+      <div> </div>
     </div>
   );
 }
