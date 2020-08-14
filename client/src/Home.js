@@ -45,6 +45,9 @@ function Home(props) {
     }
     fetchData();
   }, []);
+  const removeFun = (removedData) => {
+    console.log(data)
+  }
   const show = Object.keys(data).map((keys) => (
     <Product
       id={data[keys].modelNo}
@@ -53,6 +56,7 @@ function Home(props) {
       price={data[keys].price}
       description={data[keys].description}
       rating={5}
+      removeFun={removeFun}
     />
   ));
   //Present in prevdata or in data the responses we want.

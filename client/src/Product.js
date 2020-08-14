@@ -3,8 +3,8 @@ import './Product.css'
 import { useStateValue } from './StateProvider';
 import { Link } from 'react-router-dom'
 
-function Product({ id, title, price, rating, image, description }) {
-    const [{ basket }, dispatch] = useStateValue();
+function Product({ id, title, price, rating, image, description, removeFun }) {
+    const [{ basket, isAdmin }, dispatch] = useStateValue();
 
     const addToBasket = () => {
         dispatch({
@@ -31,6 +31,19 @@ function Product({ id, title, price, rating, image, description }) {
             },
         })
     }
+    const removeGift = async (event) => {
+        console.log(event)
+        // const data = { modelNo: id }
+        // console.log(data)
+        // const returned = await fetch('http://localhost:9000/giftstore/product/removeGift', {
+        //     method: 'POST', headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data)
+        // })
+        // const response = await returned.json()
+        // console.log(response)
+    }
     return (
         <div className="product">
             <div className="product__info">
@@ -56,7 +69,7 @@ function Product({ id, title, price, rating, image, description }) {
                     <img className="image" src={image} alt="product" />
                 </Link>
             </div>
-            <button onClick={addToBasket}>Add to Basket</button>
+            {isAdmin ? <button onClick={() => removeFun({ modelNo: id })}>Remove Gift</button> : <button onClick={addToBasket}>Add to Basket</button>}
         </div >
     );
 }
