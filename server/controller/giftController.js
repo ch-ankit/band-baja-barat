@@ -18,15 +18,17 @@ exports.product = async (req, res, next) => {
   }
 };
 
-exports.addProducts = async (req, res, next) => {
+exports.productHistory = async (req, res, next) => {};
+
+exports.addProduct = async (req, res, next) => {
   try {
     mysqlConnection.query(
       `INSERT INTO giftshop (modelNo,price,quantity,description,image,name) 
       VALUES 
       (
         '${req.body.modelNo}',
-        '${req.body.price}',
-        '${req.body.quantity}',
+        ${req.body.price},
+        ${req.body.quantity},
         '${req.body.description}',
         '${req.body.image}',
         '${req.body.name}'
@@ -43,3 +45,7 @@ exports.addProducts = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateProduct = async (req, res, next) => {};
+
+exports.deleteProduct = async (req, res, next) => {};

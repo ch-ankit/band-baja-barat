@@ -7,4 +7,6 @@ router
   .post(giftController.addProducts);
 // router.route("/admin").post(giftController.admin);
 
+router.route("/history").get(giftController.productHistory);
+
 module.exports = router;

@@ -3,7 +3,7 @@ const mysqlConnection = require("./../connection");
 exports.addUser = async (req, res) => {
   try {
     mysqlConnection.query(
-      `INSERT INTO user (firstName,lastName,middleName,userName,password,points,image,email,mobileNo,street,city,provience) 
+      `INSERT INTO user (firstName,lastName,middleName,userName,password,points,photo,email,mobileNo,street,city,provience) 
       VALUES
       (
         '${req.body.firstName}',
@@ -12,7 +12,7 @@ exports.addUser = async (req, res) => {
         '${req.body.userName}',
         '${req.body.password}',
         '${req.body.points}',
-        '${req.body.image}',
+        '${req.body.photo}',
         '${req.body.email}',
         '${req.body.mobileNo}',
         '${req.body.street}',
@@ -36,21 +36,18 @@ exports.addHost = async (req, res, next) => {
   try {
     console.log(req.body);
     mysqlConnection.query(
-      `INSERT INTO host (vatNo,password,capacity,hostLocation,email,contactInfo,hostName,latitude,longitude,photo,description,hallsNumber)
+      `INSERT INTO host (vatNo,password,hostLocation,email,contactInfo,hostName,latitude,longitude,photo)
       VALUES
       (
         "${req.body.vatNo}",
         "${req.body.password}",
-        ${req.body.capacity},
         "${req.body.hostLocation}",
         "${req.body.email}",
         "${req.body.contactInfo}",
         "${req.body.hostName}",
         "${req.body.latitude}",
         "${req.body.longitude}",
-        "${req.body.photo}",
-        "${req.body.description}",
-        ${req.body.hallsNumber}
+        "${req.body.photo}"
       )`,
       (err) => {
         if (!err) {
