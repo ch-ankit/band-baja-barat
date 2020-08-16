@@ -1,4 +1,4 @@
-.header{
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -8,31 +8,29 @@
     background-color: white;
     z-index: 100%;
 }
-.header__right{
+.header__right {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    
 }
-.header__logo{
+.header__logo {
     color: orange;
     margin-left: 10px;
 }
-.header__link{
+.header__link {
     text-decoration: none;
-    color:black;
-    padding-right:15px;
+    color: black;
+    padding-right: 15px;
 }
 
-.header__link:hover{
+.header__link:hover {
     color: orange;
     cursor: pointer;
 }
-.header__icon:hover{
+.header__icon:hover {
     color: orange !important;
     cursor: pointer;
 }
-.header__right >h4.selected{
+.header__right > h4.selected {
     color: orange;
 }
-
