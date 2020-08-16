@@ -4,7 +4,7 @@ const giftController = require("../controller/giftController");
 router
   .route("/product")
   .get(giftController.product)
-  .post(giftController.addProducts);
+  .post(giftController.addProduct);
 // router.route("/admin").post(giftController.admin);
 
 router.route("/history").get(giftController.productHistory);
