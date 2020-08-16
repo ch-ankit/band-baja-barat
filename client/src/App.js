@@ -12,7 +12,6 @@ import UserPage from "./UserPage"
 import Invite from './invite/invite';
 import Party from "./Party"
 import Band from "./Band"
-import ImageUpload from './ImageUpload';
 
 function App() {
   return (
