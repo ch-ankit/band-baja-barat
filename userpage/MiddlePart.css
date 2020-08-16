@@ -1,0 +1,59 @@
+.middlePart{
+    background-color: olivedrab;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    justify-content: space-evenly;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.middlePart__card{
+    padding-top: 10px;
+    background-color: lightgray;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+}
+.middlePart__Nav{
+    margin-top: 10px;
+    display: flex;
+    width:100%;
+    align-items: center;
+    justify-content: space-around;
+    border:1px solid black;
+    
+}
+
+.middlePart__button{
+    width: 30%*inherit;
+    border-radius: 75px;
+    margin-top: 20px;
+    font-size: inherit;
+}
+.middlePart__input{
+    display: flex;
+    flex-direction: column;
+    width:80%;
+}
+.middlePart__input > label{
+    
+    margin-top: 20px;
+}
+.middleButtonPart{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.middlePart__button:hover{
+    cursor: pointer;
+}
+.middlePart__Nav > h4:hover{
+    background-color: red;
+}
+

@@ -1,0 +1,10 @@
+
+.userPage__header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+}
+.userPage__rest{
+    flex:0.9 !important;
+}

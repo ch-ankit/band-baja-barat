@@ -1,0 +1,14 @@
+.drawer__items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.drawer__header{
+    color:orange;
+}
+.drawer__Avatar{
+    font-size: 80px !important;
+    height: 80px !important;
+    width: 80px !important;
+}

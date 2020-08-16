@@ -1,0 +1,8 @@
+.explore__card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.explore > h1{
+    padding-left: 10px;
+}
