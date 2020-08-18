@@ -13,6 +13,7 @@ import Invite from './invite/invite';
 import Party from "./Party"
 import Band from "./Band"
 import History from "./History";
+import SearchPage from "./SearchPage";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           </Route>
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route path="/products/:modelNo" render={() => <Details />} />
+          <Route path="/search/:searchTerm" render={() => <SearchPage />} />
         </Switch>
       </div>
     </Router >

@@ -52,9 +52,10 @@ function Home(props) {
     <Product
       id={data[keys].modelNo}
       title={data[keys].name}
-      image={data[keys].image}
+      image={data[keys].photo}
       price={data[keys].price}
       description={data[keys].description}
+      quantity={data[keys].quantity}
       rating={data[keys].rating}
       removeFun={removeFun}
     />
@@ -67,7 +68,6 @@ function Home(props) {
       <div className="home__row">
         {show}
       </div>
-      <div> </div>
     </div>
   );
 }

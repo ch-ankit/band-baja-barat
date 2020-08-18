@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,7 +7,9 @@ import { useStateValue } from "./StateProvider";
 import logo from "./images/logo.png";
 
 function Header(props) {
-  const [{ basket }] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
+  const [inputSearch, setInpuSearch] = useState('')
+
   return (
     <nav className="headergift">
       {/* Logo BBB-> Image */}
@@ -21,8 +23,8 @@ function Header(props) {
       </Link>
       {/* Searchbox */}
       <div className="header__searchgift">
-        <input type="text" className="header__searchInputgift" />
-        <SearchIcon className="header__searchIcongift" />
+        <input onChange={e => setInpuSearch(e.target.value)} type="text" value={inputSearch} className="header__searchInputgift" />
+        <Link to={`/search/${inputSearch}`}><SearchIcon className="header__searchIcongift" /></Link>
       </div>
       {/* 3-Links */}
       <div className="header__navgift">

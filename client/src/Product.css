@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    max-height: 400px;
+    max-height: 500px;
     min-width: 100px;
     padding: 20px;
     width: 30%;
@@ -21,6 +21,27 @@
 
 .product__rating {
     display: flex;
+}
+.product__quantity {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.product__quantityView {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: inherit;
+    justify-content: space-between;
+}
+.product__quantityView > span {
+    background-color: wheat;
+    width: 25px;
+    height: 25px;
+    border: 1px solid grey;
+    text-align: center;
+}
+.product__quantityView:hover {
+    cursor: pointer;
 }
 
 .image {

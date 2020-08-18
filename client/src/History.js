@@ -3,16 +3,16 @@ import { Table } from 'react-bootstrap'
 import Header from './Header';
 
 function History({ userId }) {
-    // const [history, setHistory] = useState()
-    // useEffect(() => {
-    //     async function fetchHistory() {
-    //         const response = await fetch('http://localhost:9000/giftstore/history')
-    //         const data = await response.json();
-    //         setHistory(data.data)
-    //     }
-    //     fetchHistory();
-    // }, [])
-    // const userHistory = Object.keys(history).map(keys => history[keys].userId === userId)
+    const [history, setHistory] = useState()
+    useEffect(() => {
+        async function fetchHistory() {
+            const response = await fetch('http://localhost:9000/giftstore/orders')
+            const data = await response.json();
+            setHistory(data.data)
+        }
+        fetchHistory();
+    }, [])
+    const userHistory = Object.keys(history).map(keys => history[keys].userId === userId)
     return (
         <div className="history">
             <Header />
