@@ -5,7 +5,8 @@ router
   .route("/product")
   .get(giftController.product)
   .post(giftController.addProduct)
-  .patch(giftController.updateProduct);
+  .patch(giftController.updateProduct)
+  .delete(giftController.deleteProduct);
 
 // router.route("/admin").post(giftController.admin);
 
