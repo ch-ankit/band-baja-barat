@@ -158,7 +158,7 @@ CREATE TABLE menu (
 );
 
 CREATE TABLE orders (
-  orderNo INT ,
+  orderNo INT AUTO_INCREMENT,
   giftId VARCHAR(255) ,
   quantity INT ,
   price float ,
