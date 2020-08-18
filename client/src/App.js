@@ -12,6 +12,7 @@ import UserPage from "./UserPage"
 import Invite from './invite/invite';
 import Party from "./Party"
 import Band from "./Band"
+import History from "./History";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
             <h1>Payment page</h1>
           </Route>
           <Route path="/history">
-            <h1>History Page</h1>
+            <History />
           </Route>
           <Route path="/details">
             <Header />

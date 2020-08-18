@@ -55,7 +55,7 @@ function Home(props) {
       image={data[keys].image}
       price={data[keys].price}
       description={data[keys].description}
-      rating={5}
+      rating={data[keys].rating}
       removeFun={removeFun}
     />
   ));

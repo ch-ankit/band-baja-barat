@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import ReactStars from "react-rating-stars-component";
 import './Details.css'
 import { useStateValue } from './StateProvider';
 
@@ -14,13 +15,15 @@ function Details(props) {
                 <div className="details__description">
                     <h2>{title}</h2>
                     <div className="product__rating">
-                        {
-                            Array(rating)
-                                .fill()
-                                .map((_) =>
-                                    <span>⭐</span>
-                                )
-                        }
+                        <ReactStars
+                            count={5}
+                            value={rating}
+                            color='gray'
+                            activeColor='#ffd700'
+                            size='50px'
+                            edit={true}
+                            isHalf={true}
+                        />
                     </div>
                     <p>{description}</p>
                 </div>

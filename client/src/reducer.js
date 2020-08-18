@@ -9,8 +9,7 @@ export const initialState = {
         // }
     ],
     user: false,
-    isAdmin: true,
-    product: {}
+    isAdmin: false,
 }
 
 export const getBasketTotal = (basket) =>
