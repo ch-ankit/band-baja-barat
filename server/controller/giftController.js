@@ -30,7 +30,7 @@ exports.addProduct = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(giftAdded);
+        res.json("giftAdded");
       } else {
         res.json(err);
       }
@@ -42,7 +42,7 @@ exports.addProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
-    var sql = ` UPDATE giftshop SET quantity=${req.body.quantity},price=${req.body.price} WHERE modelNo= '${req.body.modelNo}'`;
+    var sql = ` UPDATE giftshop SET quantity=quantity+${req.body.quantity},price= ${req.body.price} WHERE modelNo = "${req.body.modelNo}"`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json(
@@ -57,7 +57,20 @@ exports.updateProduct = async (req, res, next) => {
   }
 };
 
-exports.deleteProduct = async (req, res, next) => {};
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    var sql = ` DELETE FROM giftshop WHERE modelNo = "${req.query.modelNo}"`;
+    mysqlConnection.query(sql, (err) => {
+      if (!err) {
+        res.json(`${req.query.modelNo} is deleted `);
+      } else {
+        res.json(err);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.orderedProduct = async (req, res, next) => {
   try {
