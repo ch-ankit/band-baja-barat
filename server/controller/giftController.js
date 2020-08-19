@@ -164,7 +164,7 @@ exports.addBasket = async (req, res, next) => {
   }
 };
 
-exports.updatebasket = async (req, res, next) => {
+exports.updateBasket = async (req, res, next) => {
   try {
     var sql = ` UPDATE basket SET quantity=${req.body.quantity} WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
     mysqlConnection.query(sql, (err) => {
@@ -179,7 +179,7 @@ exports.updatebasket = async (req, res, next) => {
   }
 };
 
-exports.deletebasket = async (req, res, next) => {
+exports.deleteBasket = async (req, res, next) => {
   try {
     var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
     mysqlConnection.query(sql, (err) => {
@@ -189,6 +189,84 @@ exports.deletebasket = async (req, res, next) => {
         res.json(err);
       }
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.productRating = async (req, res, next) => {
+  try {
+    var sql = ` SELECT modelNo,value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json(rows);
+      } else {
+        res.json(err);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addRating = async (req, res, next) => {
+  try {
+    var sql = ` INSERT INTO rating (userName,modelNo,value) VALUES (
+        "${req.query.userName}",
+        "${req.query.modelNo}",
+         ${req.body.value}
+      )`;
+    var sql1 = ` UPDATE giftshop SET rating = CASE rating WHEN 0 THEN ${req.body.value} ELSE rating/2 + ${req.body.value}/2 END WHERE modelNo = "${req.query.modelNo}" `;
+    mysqlConnection.query(sql, (err) => {
+      if (!err) {
+        mysqlConnection.query(sql1, (err) => {
+          if (!err) {
+            res.json(
+              `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} `
+            );
+          } else {
+            res.json(err);
+          }
+        });
+      } else {
+        res.json(err);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateRating = async (req, res, next) => {
+  try {
+    mysqlConnection.query(
+      ` SELECT VALUE FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `,
+      (err, rows) => {
+        if (!err) {
+          const oldRating = (req.body.value - rows[0].VALUE) / 2;
+          console.log(oldRating);
+          var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
+          var sql1 = ` UPDATE giftshop SET rating =rating+ ${oldRating} WHERE modelNo = "${req.query.modelNo}" `;
+          mysqlConnection.query(sql, (err) => {
+            if (!err) {
+              mysqlConnection.query(sql1, (err) => {
+                if (!err) {
+                  res.json(
+                    `${req.query.modelNo} rating updated by ${req.query.userName}`
+                  );
+                } else {
+                  res.json(err);
+                }
+              });
+            } else {
+              res.json(err);
+            }
+          });
+        } else {
+          next(err);
+        }
+      }
+    );
   } catch (err) {
     next(err);
   }
