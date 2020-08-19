@@ -181,6 +181,13 @@ CREATE TABLE basket(
   FOREIGN KEY (modelNo) REFERENCES giftShop(modelNo)
 );
 
+CREATE TABLE rating (
+  userName VARCHAR(255),
+  modelNo VARCHAR(255),
+  PRIMARY KEY (userName,modelNo),
+  FOREIGN KEY (userName) REFERENCES user(userName),
+  FOREIGN KEY (modelNo) REFERENCES giftShop(modelNo)
+);
 
 
 INSERT INTO admin (userName, password)

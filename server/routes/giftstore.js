@@ -1,14 +1,12 @@
 const router = require("express").Router();
 const giftController = require("../controller/giftController");
-//For Login
+
 router
   .route("/product")
   .get(giftController.product)
   .post(giftController.addProduct)
   .patch(giftController.updateProduct)
   .delete(giftController.deleteProduct);
-
-// router.route("/admin").post(giftController.admin);
 
 router
   .route("/orders")
@@ -22,5 +20,7 @@ router
   .post(giftController.addBasket)
   .delete(giftController.deletebasket)
   .patch(giftController.updatebasket);
+
+// router.route("/rating")
 
 module.exports = router;
