@@ -12,7 +12,9 @@ function History({ userId }) {
         }
         fetchHistory();
     }, [])
-    const userHistory = Object.keys(history).map(keys => history[keys].userId === userId)
+    if (history) {
+        const userHistory = Object.keys(history).map(keys => history[keys].userId === userId)
+    }
     return (
         <div className="history">
             <Header />
@@ -20,11 +22,12 @@ function History({ userId }) {
                 <thead>
                     <tr>
                         <th>S.No</th>
+                        <th>Event</th>
                         <th>Name</th>
-                        <th>Model Number</th>
                         <th>Price</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
