@@ -18,9 +18,13 @@ router
   .route("/basket")
   .get(giftController.basketData)
   .post(giftController.addBasket)
-  .delete(giftController.deletebasket)
-  .patch(giftController.updatebasket);
+  .delete(giftController.deleteBasket)
+  .patch(giftController.updateBasket);
 
-// router.route("/rating")
+router
+  .route("/rating")
+  .get(giftController.productRating)
+  .post(giftController.addRating)
+  .patch(giftController.updateRating);
 
 module.exports = router;

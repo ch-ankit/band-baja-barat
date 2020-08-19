@@ -30,7 +30,7 @@ exports.updateHostData = async (req, res, next) => {
                   provience = "${req.body.provience}",
                   latitude = "${req.body.latitude}",
                   longitude = "${req.body.longitude}
-                   WHERE vatNo = ${req.body.vatNo})`;
+                  WHERE vatNo = ${req.body.vatNo})`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("HOST Data update successful");
@@ -72,3 +72,5 @@ exports.deleteHostData = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.addPhoto = async (req, res, next) => {};
