@@ -35,19 +35,30 @@ function ControlledCarousel() {
 }
 
 function Home(props) {
-  let res;
   let [data, setData] = useState({ data: [] });
+  let [newData, setnewData] = useState({ data: [] });
   useEffect(() => {
     async function fetchData() {
-      res = await fetch("http://localhost:9000/giftstore/product");
+      const res = await fetch("http://localhost:9000/giftstore/product");
       const send = await res.json();
       setData(send.data);
     }
     fetchData();
-  }, []);
-  const removeFun = (removedData) => {
-    console.log(data)
+  }, [newData]);
+
+  const removeFun = async (removedData) => {
+    const removed = { modelNo: removedData.modelNo }
+    const returned = await fetch('http://localhost:9000/giftstore/product', {
+      method: 'DELETE', headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(removed)
+    })
+    const response = await returned.json()
+    alert(`${response.message}`)
+    setnewData(response.message)
   }
+
   const show = Object.keys(data).map((keys) => (
     <Product
       id={data[keys].modelNo}

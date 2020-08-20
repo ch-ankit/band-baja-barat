@@ -59,10 +59,10 @@ exports.updateProduct = async (req, res, next) => {
 
 exports.deleteProduct = async (req, res, next) => {
   try {
-    var sql = ` DELETE FROM giftshop WHERE modelNo = "${req.query.modelNo}"`;
+    var sql = `DELETE FROM giftshop WHERE modelNo="${req.body.modelNo}"`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`${req.query.modelNo} is deleted `);
+        res.json({ status: 'success', message: `${req.body.modelNo} is deleted ` });
       } else {
         res.json(err);
       }
@@ -196,10 +196,24 @@ exports.deleteBasket = async (req, res, next) => {
 
 exports.productRating = async (req, res, next) => {
   try {
-    var sql = ` SELECT modelNo,value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
+    var sql = ` SELECT value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
-        res.json(rows);
+        res.json({ message: 'success', data: rows });
+      } else {
+        res.json(err);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+exports.allProductRating = async (req, res, next) => {
+  try {
+    var sql = ` SELECT modelNo FROM rating WHERE userName="${req.query.userName}"`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({ status: 'success', data: rows });
       } else {
         res.json(err);
       }

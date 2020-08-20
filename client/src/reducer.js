@@ -1,15 +1,9 @@
 export const initialState = {
     basket: [
-        // {
-        //     id: "3254354345",
-        //     title: "New Apple iPad Pro (12.9 inch, Wi-Fi, 128GB)- Silver Color",
-        //     price: 120000,
-        //     rating: 4,
-        //     image: 'http://www.cryptoemporium.eu/wp-content/uploads/2019/09/Screen-Shot-2019-09-25-at-11.31.06.png'
-        // }
     ],
     user: false,
-    isAdmin: false,
+    isAdmin: true,
+
 }
 
 export const getBasketTotal = (basket) =>
