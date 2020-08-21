@@ -27,8 +27,5 @@ router
   .post(giftController.addRating)
   .patch(giftController.updateRating);
 
-router
-  .route("/rating/all")
-  .get(giftController.allProductRating)
 
 module.exports = router;

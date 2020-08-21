@@ -208,20 +208,7 @@ exports.productRating = async (req, res, next) => {
     next(err);
   }
 };
-exports.allProductRating = async (req, res, next) => {
-  try {
-    var sql = ` SELECT modelNo FROM rating WHERE userName="${req.query.userName}"`;
-    mysqlConnection.query(sql, (err, rows) => {
-      if (!err) {
-        res.json({ status: 'success', data: rows });
-      } else {
-        res.json(err);
-      }
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+
 
 exports.addRating = async (req, res, next) => {
   try {
