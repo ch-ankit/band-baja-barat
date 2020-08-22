@@ -4,7 +4,8 @@ import ReactStars from "react-rating-stars-component";
 import { useStateValue } from './StateProvider';
 import { Link } from 'react-router-dom'
 
-function Product({ id, title, price, rating, image, quantity, description, removeFun }) {
+function Product(props) {
+    const { id, title, price, rating, image, quantity, description, removeFun } = props
     let [{ isAdmin }, dispatch] = useStateValue();
     const addProductDetail = () => {
         dispatch({
@@ -20,8 +21,6 @@ function Product({ id, title, price, rating, image, quantity, description, remov
             },
         })
     }
-
-
     return (
         <div className="product">
             <div className="product__info">
@@ -39,7 +38,6 @@ function Product({ id, title, price, rating, image, quantity, description, remov
                     activeColor='#ffd700'
                     edit={false}
                     isHalf={true}
-
                 />
             </div>
             <div style={{ textDecoration: 'none', color: 'black', height: '200px', marginBottom: '15px' }}>

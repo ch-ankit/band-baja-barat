@@ -10,7 +10,7 @@ function Details(props) {
     const [{ basket, product, isAdmin, user }, dispatch] = useStateValue()
     const { id, image, description, price, title, rating } = product
     let [addedQuantity, setAddedQuantity] = useState(1)
-    let [productRating, setproductRating] = useState(0)
+    let [productRating, setproductRating] = useState([])
     let [userBasket, setUserBasket] = useState([])
     let [prodRating, setProdRating] = useState(0)
     let rated = 0.0;
@@ -19,17 +19,20 @@ function Details(props) {
         async function productRating() {
             const response = await fetch(`http://localhost:9000/giftstore/rating?userName=${user.userName}&modelNo=${id}`)
             const newRating = await response.json()
-            console.log(newRating)
-            setproductRating(newRating.data[0].value)
+            if (newRating.data.length !== 0) {
+                setproductRating(newRating.data)
+            }
         }
+        productRating()
+    }, [prodRating])
+    useEffect(() => {
         async function getBasket() {
             const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${user.userName}`)
             const { status, data } = await response.json();
             setUserBasket(data)
         }
         getBasket();
-        productRating()
-    }, [prodRating, addedQuantity])
+    }, [addedQuantity])
 
     const updateRating = async (data) => {
         let name = 'POST'
@@ -43,7 +46,6 @@ function Details(props) {
             })
     }
 
-    if (productRating !== 0) { rated = productRating }
 
     const addToBasket = async () => {
         let totalPrice = addedQuantity * price;
@@ -91,7 +93,21 @@ function Details(props) {
     }
     let addButton = (addedQuantity === 0) ? <button onClick={addToBasket} disabled>Add to Basket</button> : <button onClick={addToBasket}>Add to Basket</button>
     const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
-    if (productRating !== 0) { console.log(productRating) }
+    if (productRating.length !== 0) { rated = productRating[0].value }
+    const star = Object.keys(productRating).map((item) =>
+        <ReactStars
+            count={5}
+            value={productRating[item].value}
+            color='gray'
+            activeColor='#ffd700'
+            edit={true}
+            isHalf={true}
+            onChange={(newRating) => {
+                const data = { modelNo: id, rating: newRating }
+                setProdRating(newRating)
+                updateRating(data)
+            }}
+        />)
     return (
         <div className="details">
             <Header />
@@ -100,19 +116,20 @@ function Details(props) {
                 <div className="details__description">
                     <h2>{title}</h2>
                     <div className="rating">
-                        <ReactStars
-                            count={5}
-                            value={productRating !== 0 ? productRating : 0}
-                            color='gray'
-                            activeColor='#ffd700'
-                            edit={true}
-                            isHalf={true}
-                            onChange={(newRating) => {
-                                const data = { modelNo: id, rating: newRating }
-                                setProdRating(newRating)
-                                updateRating(data)
-                            }}
-                        />
+                        {productRating.length !== 0 ? star :
+                            <ReactStars
+                                count={5}
+                                value={0}
+                                color='gray'
+                                activeColor='#ffd700'
+                                edit={true}
+                                isHalf={true}
+                                onChange={(newRating) => {
+                                    const data = { modelNo: id, rating: newRating }
+                                    setProdRating(newRating)
+                                    updateRating(data)
+                                }}
+                            />}
                         <span>Average Rating: {rating}</span>
                     </div>
                     <p>{description}</p>

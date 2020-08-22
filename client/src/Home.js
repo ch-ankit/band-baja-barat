@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid'
+
 import Carousel from "react-bootstrap/Carousel";
 import shop from "./images/shop.jpg";
 import shop2 from "./images/shop2.jpg";
@@ -59,8 +61,9 @@ function Home(props) {
     setnewData(response.message)
   }
 
-  const show = Object.keys(data).map((keys) => (
-    <Product
+  const show = Object.keys(data).map((keys) => {
+    return <Product
+      key={uuidv4()}
       id={data[keys].modelNo}
       title={data[keys].name}
       image={data[keys].photo}
@@ -70,7 +73,8 @@ function Home(props) {
       rating={data[keys].rating}
       removeFun={removeFun}
     />
-  ));
+  }
+  );
   //Present in prevdata or in data the responses we want.
   return (
     <div className="home">
