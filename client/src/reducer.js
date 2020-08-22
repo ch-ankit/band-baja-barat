@@ -1,8 +1,8 @@
 export const initialState = {
     basket: [
     ],
-    user: false,
-    isAdmin: true,
+    user: { userName: 'junushu' },
+    isAdmin: false,
 
 }
 

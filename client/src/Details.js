@@ -10,49 +10,63 @@ function Details(props) {
     const [{ basket, product, isAdmin, user }, dispatch] = useStateValue()
     const { id, image, description, price, title, rating } = product
     let [addedQuantity, setAddedQuantity] = useState(1)
-    let [productRating, setproductRating] = useState()
+    let [productRating, setproductRating] = useState(0)
+    let [userBasket, setUserBasket] = useState([])
+    let [prodRating, setProdRating] = useState(0)
     let rated = 0.0;
 
     useEffect(() => {
         async function productRating() {
             const response = await fetch(`http://localhost:9000/giftstore/rating?userName=${user.userName}&modelNo=${id}`)
-            const rating = await response.json()
-            setproductRating(rating.data)
+            const newRating = await response.json()
+            console.log(newRating)
+            setproductRating(newRating.data[0].value)
         }
-
-        // async function getBasket() {
-        //     const response = await fetch('http://localhost:9000/giftstore/basketdata')
-        //     const data = await response.json();
-        //     console.log(data)
-        //     dispatch({
-        //         type: 'ADD_TO_BASKET',
-        //         item: {
-        //             id: id,
-        //             title: title,
-        //             image: image,
-        //             price: price,
-        //             rating: rating
-        //         },
-        //     })
-        // }
-        // async function updateBasket() {
-        //     await fetch('http://localhost:9000/giftstore/updatebasket',
-        //         {
-        //             method: 'POST', headers: { 'Content-type': 'application/json' },
-        //             body: JSON.stringify(basket)
-        //         }).then(res => {
-        //             res.json()
-        //             console.log(res)
-        //         })
-        // }
+        async function getBasket() {
+            const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${user.userName}`)
+            const { status, data } = await response.json();
+            setUserBasket(data)
+        }
+        getBasket();
         productRating()
-        // updateBasket();
-        // getBasket();
-    }, [])
+    }, [prodRating, addedQuantity])
 
-    if (productRating !== undefined) { rated = productRating[0].value } else { rated = `${0.0}` }
-    const addToBasket = () => {
+    const updateRating = async (data) => {
+        let name = 'POST'
+        if (productRating.length !== 0) {
+            name = 'PATCH'
+        }
+        await fetch(`http://localhost:9000/giftstore/rating?modelNo=${data.modelNo}&userName=${user.userName}`,
+            {
+                method: name, headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ value: data.rating })
+            })
+    }
+
+    if (productRating !== 0) { rated = productRating }
+
+    const addToBasket = async () => {
         let totalPrice = addedQuantity * price;
+        let name = 'POST'
+        let prevQuantity = 0
+        if (userBasket.length !== 0) {
+            const index = Object.keys(userBasket).findIndex((item) => userBasket[item].modelNo === id)
+            index === -1 ? name = 'POST' : name = 'PATCH'
+            index === -1 ? prevQuantity = 0 : prevQuantity = userBasket[index].quantity
+        }
+        const basketToDb = {
+            userName: user.userName,
+            modelNo: id,
+            quantity: addedQuantity + prevQuantity
+        }
+        await fetch('http://localhost:9000/giftstore/basket',
+            {
+                method: name, headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(basketToDb)
+            }).then(res => {
+                res.json()
+                console.log(res)
+            })
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -64,7 +78,7 @@ function Details(props) {
                 quantity: addedQuantity
             },
         })
-
+        setAddedQuantity(1)
     }
     const addQuantity = () => {
         let newQuantity = addedQuantity + 1;
@@ -72,10 +86,12 @@ function Details(props) {
     }
 
     const removeQuantity = () => {
-        let newQuantity = (addedQuantity === 0) ? 0 : (addedQuantity - 1);
+        let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
         setAddedQuantity(newQuantity)
     }
     let addButton = (addedQuantity === 0) ? <button onClick={addToBasket} disabled>Add to Basket</button> : <button onClick={addToBasket}>Add to Basket</button>
+    const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
+    if (productRating !== 0) { console.log(productRating) }
     return (
         <div className="details">
             <Header />
@@ -86,14 +102,18 @@ function Details(props) {
                     <div className="rating">
                         <ReactStars
                             count={5}
-                            value={rating}
+                            value={productRating !== 0 ? productRating : 0}
                             color='gray'
                             activeColor='#ffd700'
-                            size='50px'
                             edit={true}
                             isHalf={true}
+                            onChange={(newRating) => {
+                                const data = { modelNo: id, rating: newRating }
+                                setProdRating(newRating)
+                                updateRating(data)
+                            }}
                         />
-                        <span>You have rated: {rated}</span>
+                        <span>Average Rating: {rating}</span>
                     </div>
                     <p>{description}</p>
                     <p className="price">
@@ -103,7 +123,7 @@ function Details(props) {
                     <div className="product__quantity">
                         <p>Quantity:</p>
                         <div className="product__quantityView">
-                            <div onClick={removeQuantity}><RemoveIcon /></div>
+                            {removeIcon}
                             <span>{addedQuantity}</span>
                             <div onClick={addQuantity}><AddIcon /></div>
                         </div>

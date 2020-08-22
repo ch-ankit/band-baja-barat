@@ -9,7 +9,12 @@ import logo from "./images/logo.png";
 function Header(props) {
   const [{ basket }, dispatch] = useStateValue();
   const [inputSearch, setInpuSearch] = useState('')
-
+  let totalItems = 0
+  if (basket.length !== 0) {
+    basket.forEach(element => {
+      totalItems = totalItems + element.quantity
+    });
+  }
   return (
     <nav className="headergift">
       {/* Logo BBB-> Image */}
@@ -49,7 +54,7 @@ function Header(props) {
           <div className="header__optionBasketgift">
             <ShoppingBasketIcon />
             <span className="header__optionLineTwogift header__basketCountgift">
-              {basket.length}
+              {totalItems}
             </span>
           </div>
         </Link>

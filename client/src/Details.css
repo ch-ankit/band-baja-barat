@@ -46,3 +46,11 @@
 .price {
     margin-top: 5px;
 }
+
+.disabled {
+    color: gray;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+}
