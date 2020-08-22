@@ -7,27 +7,54 @@ import ReactStars from "react-rating-stars-component";
 
 
 function CheckoutProduct({ id, title, image, price, rating, quantity }) {
-    const [{ basket }, dispatch] = useStateValue()
+    const [{ basket, user }, dispatch] = useStateValue()
     let [addedQuantity, setAddedQuantity] = useState(quantity)
+    let [message, setMessage] = useState('')
     const unitPrice = price / quantity
-    useEffect(() => {
-
-    }, [])
-
-    useEffect(() => {
-
-    }, [addedQuantity])
-
-    const addQuantity = () => {
+    useEffect(() => { }, [message])
+    const addQuantity = async () => {
         let newQuantity = addedQuantity + 1;
         setAddedQuantity(newQuantity)
+        const sendBody = {
+            userName: user.userName,
+            modelNo: id,
+            quantity: newQuantity
+        }
+        await fetch('http://localhost:9000/giftstore/basket',
+            {
+                method: 'PATCH', headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(sendBody)
+            })
+
     }
 
-    const removeQuantity = () => {
+    const removeQuantity = async () => {
         let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
         setAddedQuantity(newQuantity)
+        const sendBody = {
+            userName: user.userName,
+            modelNo: id,
+            quantity: newQuantity
+        }
+        await fetch('http://localhost:9000/giftstore/basket',
+            {
+                method: 'PATCH', headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(sendBody)
+            })
     }
-    const removeFromBasket = () => {
+
+    const removeFromBasket = async () => {
+        const dbBody = {
+            userName: user.userName,
+            modelNo: id
+        }
+        const response = await fetch('http://localhost:9000/giftstore/basket',
+            {
+                method: 'DELETE', headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(dbBody)
+            })
+        const { message, data } = await response.json()
+        setMessage(message)
         dispatch({
             type: 'REMOVE_FROM_BASKET',
             id: id,
