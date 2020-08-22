@@ -4,22 +4,30 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { auth } from './firebaseConfig';
-
+import {useSelector,useDispatch} from 'react-redux';
+import { actionCreate } from './redux/action.js';
 
 function MiddlePart() {
+    const uid = useSelector(state => state.uid)
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
     const [User, setUser] = useState(null);
+    const dispatch=useDispatch();
     let history = useHistory();
     const logIn = (event) => {
         event.preventDefault();
         auth.signInWithEmailAndPassword(Email, Password)
+            .then((authuser)=>{
+                
+                history.push("/User");
+
+            })
             .catch(error => alert(error.message))
     }
     useEffect(
         auth.onAuthStateChanged((authUser) => {
             if (authUser) {
-                console.log(authUser);
+                dispatch(actionCreate(authUser.uid));
                 setUser(authUser);
             } else {
                 setUser(null);
@@ -28,8 +36,7 @@ function MiddlePart() {
 
     return (
         <div>
-            {console.log(User)}
-            {User ? history.push("/User") : history.push('/')}
+            {uid ? history.push('/User') : ''}
             <div className="middlePart">
                 <div className="middlePart__card">
                     <h1>Log In</h1>

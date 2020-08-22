@@ -6,13 +6,22 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
+import SignUp from "./SignUp";
+import {Provider} from "react-redux"
+import {Store} from './redux/store'
+import Gallery from './Gallery';
+import Dropdown from "./Dropdown.js";
+import PartyDetail from "./PartyDetail.js";
 
 ReactDOM.render(
+  <Provider store={Store}>
   <StateProvider initialState={initialState} reducer={reducer}>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </StateProvider>,
+  </StateProvider>
+  </Provider>
+  ,
   document.getElementById("root")
 );
 

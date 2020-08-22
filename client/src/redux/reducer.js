@@ -1,14 +1,12 @@
 const initialState={
-    logIn:false,
-    name:'Babin',
-    signUp:false,
+    uid:null,
 }
 
 export const reducerr=(state=initialState,action)=>{
     switch (action.type){
-        case 'LogIn':
+        case 'UserLog':
             return {
-                logIn:!state.logIn
+                uid:action.payload
             }
         case 'Name':
             return{
