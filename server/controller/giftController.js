@@ -62,7 +62,10 @@ exports.deleteProduct = async (req, res, next) => {
     var sql = `DELETE FROM giftshop WHERE modelNo="${req.body.modelNo}"`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json({ status: 'success', message: `${req.body.modelNo} is deleted ` });
+        res.json({
+          status: "success",
+          message: `${req.body.modelNo} is deleted `,
+        });
       } else {
         res.json(err);
       }
@@ -199,7 +202,7 @@ exports.productRating = async (req, res, next) => {
     var sql = ` SELECT value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
-        res.json({ message: 'success', data: rows });
+        res.json({ message: "success", data: rows });
       } else {
         res.json(err);
       }
@@ -208,7 +211,6 @@ exports.productRating = async (req, res, next) => {
     next(err);
   }
 };
-
 
 exports.addRating = async (req, res, next) => {
   try {
@@ -244,10 +246,9 @@ exports.updateRating = async (req, res, next) => {
       ` SELECT VALUE FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `,
       (err, rows) => {
         if (!err) {
-          const oldRating = (req.body.value - rows[0].VALUE) / 2;
-          console.log(oldRating);
+          const netRating = (req.body.value - rows[0].VALUE) / 2;
           var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
-          var sql1 = ` UPDATE giftshop SET rating =rating+ ${oldRating} WHERE modelNo = "${req.query.modelNo}" `;
+          var sql1 = ` UPDATE giftshop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
               mysqlConnection.query(sql1, (err) => {

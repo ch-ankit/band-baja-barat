@@ -7,8 +7,14 @@ router
   .patch(hostController.updateHostData)
   .delete(hostController.deleteHostData);
 
-// router.route("/band").get(hostController.bandData);
+router
+  .route("/addphoto")
+  .post(hostController.addPhoto)
+  .delete(hostController.deletePhoto);
 
-// router.route("/user").get(hostController.userName);
+router
+  .route("addHalls")
+  .post(hostController.addHalls)
+  .patch(hostController.updateHalls);
 
 module.exports = router;
