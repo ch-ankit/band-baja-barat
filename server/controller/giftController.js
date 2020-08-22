@@ -137,7 +137,7 @@ exports.basketData = async (req, res, next) => {
     var sql = ` SELECT * FROM basket WHERE userName = "${req.query.userName}" `;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json("Basket Empty");
+        if (rows.length == 0) res.json({ status: 'success', data: [], message: 'Empty Basket' });
         else res.json({ status: "Items in basket", data: rows });
       } else {
         res.json(err);
@@ -157,7 +157,7 @@ exports.addBasket = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`${req.body.modelNo} added to basket`);
+        res.json({ status: 'success', message: `${req.body.modelNo} added to basket` });
       } else {
         res.json(err);
       }
@@ -202,7 +202,8 @@ exports.productRating = async (req, res, next) => {
     var sql = ` SELECT value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
-        res.json({ message: "success", data: rows });
+        if (rows.legth === 0) res.json({ message: 'no previous rating', data: [] })
+        else res.json({ message: "success", data: rows });
       } else {
         res.json(err);
       }
@@ -214,7 +215,7 @@ exports.productRating = async (req, res, next) => {
 
 exports.addRating = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO rating (userName,modelNo,value) VALUES (
+    var sql = ` INSERT INTO rating (userName, modelNo, value) VALUES (
         "${req.query.userName}",
         "${req.query.modelNo}",
          ${req.body.value}
@@ -246,7 +247,7 @@ exports.updateRating = async (req, res, next) => {
       ` SELECT VALUE FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `,
       (err, rows) => {
         if (!err) {
-          const netRating = (req.body.value - rows[0].VALUE) / 2;
+          const netRating = (req.body.value - rows[0].value) / 2;
           var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
           var sql1 = ` UPDATE giftshop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
           mysqlConnection.query(sql, (err) => {
