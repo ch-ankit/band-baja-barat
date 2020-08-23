@@ -3,10 +3,10 @@ const mysqlConnection = require("../connection");
 exports.hostData = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `SELECT * FROM host ORDER BY hostname`,
+      `SELECT hostName,profilePhoto,description FROM host ORDER BY hostname`,
       (err, rows, fields) => {
         if (!err) {
-          if (rows.length == 0) res.json("No Host Registered");
+          if (rows.length == 0) res.json({ status: "No Host Registered", data: [] });
           else res.json({ status: "success", data: rows });
         } else {
           res.json(err);
@@ -20,7 +20,7 @@ exports.hostData = async (req, res, next) => {
 
 exports.bandData = async (req, res, next) => {
   try {
-    mysqlConnection.query(`SELECT * FROM band `, (err, rows, fields) => {
+    mysqlConnection.query(`SELECT bandName,profilePhoto,description FROM band `, (err, rows, fields) => {
       if (!err) {
         if (rows.length == 0) res.json("No Host Registered");
         else res.json({ status: "success", data: rows });

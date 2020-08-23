@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { auth } from './firebaseConfig';
-import {useSelector,useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { actionCreate } from './redux/action.js';
 
 function MiddlePart() {
@@ -12,13 +12,13 @@ function MiddlePart() {
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
     const [User, setUser] = useState(null);
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     let history = useHistory();
     const logIn = (event) => {
         event.preventDefault();
         auth.signInWithEmailAndPassword(Email, Password)
-            .then((authuser)=>{
-                
+            .then((authuser) => {
+                dispatch(actionCreate(authuser.user.uid));
                 history.push("/User");
 
             })
@@ -27,7 +27,7 @@ function MiddlePart() {
     useEffect(
         auth.onAuthStateChanged((authUser) => {
             if (authUser) {
-                dispatch(actionCreate(authUser.uid));
+
                 setUser(authUser);
             } else {
                 setUser(null);

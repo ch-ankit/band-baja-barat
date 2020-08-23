@@ -11,7 +11,7 @@ exports.addUser = async (req, res, next) => {
         "${req.body.middleName}",
         "${req.body.userName}",
         "${req.body.password}",
-        "${req.body.points}",
+        1,
         "${req.body.photo}",
         "${req.body.email}",
         "${req.body.mobileNo}",

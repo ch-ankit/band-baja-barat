@@ -48,19 +48,26 @@ exports.addbandData = async (req, res, next) => {
 
 exports.updatebandData = async (req, res, next) => {
     try {
-        var sql = ` UPDATE band SET
-                  description = "${req.body.description}",
-                  profilePhoto = "${req.body.profilePhoto}",
-                  contactInfo = "${req.body.contactInfo}",
-                  email = "${req.body.email}",
-                  WHERE bandName = ${req.body.bandName} `;
-        mysqlConnection.query(sql, (err) => {
+        var sql = `SELECT * FROM band WHERE bandName = "${req.body.bandName}"`
+        mysqlConnection.query(sql, (err, rows) => {
             if (!err) {
-                res.json("bandData update successful");
+                var sql = ` UPDATE band SET
+                  description = "${(req.body.description == undefined) ? rows[0].description : req.body.description}",
+                  profilePhoto = "${(req.body.profilePhoto == undefined) ? rows[0].profilePhoto : req.body.profilePhoto}",
+                  contactInfo = "${(req.body.contactInfo == undefined) ? rows[0].contactInfo : req.body.contactInfo}",
+                  email = "${(req.body.email == undefined) ? rows[0].email : req.body.email}"
+                  WHERE bandName= "${req.body.bandName}"`;
+                mysqlConnection.query(sql, (err) => {
+                    if (!err) {
+                        res.json("bandData update successful");
+                    } else {
+                        res.send(err);
+                    }
+                });
             } else {
-                res.send(err);
+                next(err);
             }
-        });
+        })
     } catch (err) {
         next(err);
     }
