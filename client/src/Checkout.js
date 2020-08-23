@@ -9,8 +9,8 @@ function Checkout(props) {
     const [{ basket, user }, dispatch] = useStateValue();
     let [data, setData] = useState([]);
     const [basketData, setBasketData] = useState([]);
-    const [basketQuantity] = useState([])
     let [message, setMessage] = useState('')
+    let [msgSubtotal, setMsgsubtotal] = useState('')
     let basketDataValues = []
     useEffect(() => {
         async function getBasket() {
@@ -25,15 +25,16 @@ function Checkout(props) {
         }
         fetchData();
         getBasket()
-    }, [message])
+    }, [message, msgSubtotal])
     if (basketData.length !== 0) {
         basketData.forEach(element => {
             const index = Object.keys(data).findIndex(product => element.modelNo === data[product].modelNo)
-            basketDataValues.push(data[index])
-            basketQuantity.push(element.quantity)
+            basketDataValues.push({ ...data[index], quantity: element.quantity })
         })
     }
-
+    const setMsg = (message) => {
+        setMsgsubtotal(message)
+    }
     const removeFromBasket = async ({ id }) => {
         const dbBody = {
             userName: user.userName,
@@ -61,8 +62,9 @@ function Checkout(props) {
                 image={basketDataValues[item].photo}
                 price={basketDataValues[item].price}
                 rating={basketDataValues[item].rating}
-                quantity={basketQuantity[item]}
+                quantity={basketDataValues[item].quantity}
                 removeFun={removeFromBasket}
+                renSubtotal={setMsg}
             />
         )
         )
@@ -89,9 +91,9 @@ function Checkout(props) {
                         </div>
                     )}
             </div>
-            {basket.length > 0 &&
+            {(basketDataValues[0] !== undefined) &&
                 <div className="checkout__right">
-                    <Subtotal />
+                    <Subtotal basketValues={basketDataValues} message={msgSubtotal} />
                 </div>
             }
 

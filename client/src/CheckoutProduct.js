@@ -6,13 +6,13 @@ import { useStateValue } from './StateProvider';
 import ReactStars from "react-rating-stars-component";
 
 
-function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun }) {
+function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun, renSubtotal }) {
     const [{ basket, user }, dispatch] = useStateValue()
     let [addedQuantity, setAddedQuantity] = useState(quantity)
-    const unitPrice = price / quantity
     const addQuantity = async () => {
         let newQuantity = addedQuantity + 1;
         setAddedQuantity(newQuantity)
+        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
             userName: user.userName,
             modelNo: id,
@@ -29,6 +29,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun 
     const removeQuantity = async () => {
         let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
         setAddedQuantity(newQuantity)
+        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
             userName: user.userName,
             modelNo: id,
@@ -51,7 +52,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun 
                 <p className="checkoutProduct__title">{title}</p>
                 <p className="checkoutProduct__price">
                     <small>Rs.</small>
-                    <strong>{addedQuantity * unitPrice}</strong>
+                    <strong>{price * addedQuantity}</strong>
                 </p>
                 <span>Quantity: <div className="product__quantityView">
                     {removeIcon}
