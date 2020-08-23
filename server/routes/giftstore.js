@@ -3,10 +3,10 @@ const giftController = require("../controller/giftController");
 
 router
   .route("/product")
-  .get(giftController.product)
-  .post(giftController.addProduct)
-  .patch(giftController.updateProduct)
-  .delete(giftController.deleteProduct);
+  .get(giftController.product) //complete
+  .post(giftController.addProduct)//admin #remaining work
+  .patch(giftController.updateProduct)//admin + user buy #remaining work
+  .delete(giftController.deleteProduct);//completed
 
 router
   .route("/orders")
@@ -16,16 +16,16 @@ router
 
 router
   .route("/basket")
-  .get(giftController.basketData)
-  .post(giftController.addBasket)
-  .delete(giftController.deleteBasket)
-  .patch(giftController.updateBasket);
+  .get(giftController.basketData) // completed
+  .post(giftController.addBasket) //completed
+  .delete(giftController.deleteBasket) //remaining
+  .patch(giftController.updateBasket);//completed
 
 router
   .route("/rating")
-  .get(giftController.productRating)
-  .post(giftController.addRating)
-  .patch(giftController.updateRating);
+  .get(giftController.productRating) //completed
+  .post(giftController.addRating) //completed
+  .patch(giftController.updateRating); //completed
 
 
 module.exports = router;
