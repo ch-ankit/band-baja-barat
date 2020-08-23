@@ -6,15 +6,13 @@ import { useStateValue } from './StateProvider';
 import ReactStars from "react-rating-stars-component";
 
 
-function CheckoutProduct({ id, title, image, price, rating, quantity }) {
+function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun, renSubtotal }) {
     const [{ basket, user }, dispatch] = useStateValue()
     let [addedQuantity, setAddedQuantity] = useState(quantity)
-    let [message, setMessage] = useState('')
-    const unitPrice = price / quantity
-    useEffect(() => { }, [message])
     const addQuantity = async () => {
         let newQuantity = addedQuantity + 1;
         setAddedQuantity(newQuantity)
+        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
             userName: user.userName,
             modelNo: id,
@@ -31,6 +29,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity }) {
     const removeQuantity = async () => {
         let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
         setAddedQuantity(newQuantity)
+        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
             userName: user.userName,
             modelNo: id,
@@ -43,23 +42,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity }) {
             })
     }
 
-    const removeFromBasket = async () => {
-        const dbBody = {
-            userName: user.userName,
-            modelNo: id
-        }
-        const response = await fetch('http://localhost:9000/giftstore/basket',
-            {
-                method: 'DELETE', headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify(dbBody)
-            })
-        const { message, data } = await response.json()
-        setMessage(message)
-        dispatch({
-            type: 'REMOVE_FROM_BASKET',
-            id: id,
-        })
-    }
+
     const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
     return (
         <div className="checkoutProduct">
@@ -69,7 +52,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity }) {
                 <p className="checkoutProduct__title">{title}</p>
                 <p className="checkoutProduct__price">
                     <small>Rs.</small>
-                    <strong>{addedQuantity * unitPrice}</strong>
+                    <strong>{price * addedQuantity}</strong>
                 </p>
                 <span>Quantity: <div className="product__quantityView">
                     {removeIcon}
@@ -86,7 +69,7 @@ function CheckoutProduct({ id, title, image, price, rating, quantity }) {
                         isHalf={true}
                     />
                 </div>
-                <button onClick={removeFromBasket}>Remove from Basket</button>
+                <button onClick={() => removeFun({ id })}>Remove from Basket</button>
             </div>
         </div>
     );

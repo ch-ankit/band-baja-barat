@@ -5,7 +5,7 @@ exports.product = async (req, res, next) => {
     var sql = `SELECT * FROM giftshop ORDER BY price`;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json("Store Empty");
+        if (rows.length == 0) res.json({ message: "Store Empty", data: [] });
         else res.json({ status: "success", data: rows });
       } else {
         res.json(err);
@@ -187,7 +187,7 @@ exports.deleteBasket = async (req, res, next) => {
     var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json("removed from basket");
+        res.json({ message: `${req.body.modelNo} removed from basket`, data: [] });
       } else {
         res.json(err);
       }
