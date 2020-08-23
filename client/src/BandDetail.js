@@ -20,12 +20,13 @@ function BandDetail() {
             return(
             <>
             <img src={data[keys].profilePhoto} className='bandDetail__image' />
-            <h1>{bandName['band']}</h1>
+            <h1>{data[keys].bandName}</h1>
             <div className='bandDetail__detail'>
-                <h4>Details</h4>
+            <h4>{data[keys].description}</h4>
                 <div className="bandDetail__contact">
                     <h4>Contact Info</h4>
-                        9879687750
+                    <p>{data[keys].contactInfo}</p>
+                    <p>{data[keys].email}</p>
                 </div>
             </div>
             </>

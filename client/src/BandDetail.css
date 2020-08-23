@@ -6,6 +6,8 @@
 
 .bandDetail{
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 .bandDetail > h1{
     color: black;
@@ -16,7 +18,13 @@
     display: flex;
     justify-content: space-between;
 }
-
+.bandDetail__detail > h4{
+    flex: 0.8;
+}
 .bandDetail__contact{
+    flex:0.2;
     border-left: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    
 }
