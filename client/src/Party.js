@@ -1,20 +1,26 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
 import DetailCard from './DetailCard'
 import "./Party.css"
-import UserHeader from './UserHeader'
+import HeaderHome from './HeaderHome'
 function Party() {
+    const [data, setdata] = useState([]);
+    useEffect(() => {
+        async function getHostData() {
+            const response = await fetch('http://localhost:9000/host');
+            const allData = await response.json()
+            setdata(allData.data)
+        }
+        getHostData();
+    }, [])
     return (
         <div>
             <div className="userPage__header">
-                <UserHeader />
+                <HeaderHome />
             </div>
             <div className="party">
-                <DetailCard image="https://lh3.googleusercontent.com/proxy/wEr7NoR_d2c0gCfCIFgKDao2YsSXAZYKaFuHrLZgaS6H4iun0TtdSYixVJQehrAP-oO6TUhWUDjlPkuY9LIRdXV2bXoq_w" name="KU Party Palace" details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi metus, luctus eleifend nulla at, semper cursus turpis. Sed ac gravida mi. Donec elementum, urna ut aliquet blandit, mi dui molestie eros, consequat fermentum turpis augue ac nibh. Sed in consequat libero. Proin sagittis semper est sit amet sodales. Aliquam in rhoncus velit. Aenean nec erat ipsum. Nullam purus nisi, commodo non libero ut, convallis volutpat erat." />
-                <DetailCard image="https://lh3.googleusercontent.com/proxy/wEr7NoR_d2c0gCfCIFgKDao2YsSXAZYKaFuHrLZgaS6H4iun0TtdSYixVJQehrAP-oO6TUhWUDjlPkuY9LIRdXV2bXoq_w" name="KU Party Palace" details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi metus, luctus eleifend nulla at, semper cursus turpis. Sed ac gravida mi. Donec elementum, urna ut aliquet blandit, mi dui molestie eros, consequat fermentum turpis augue ac nibh. Sed in consequat libero. Proin sagittis semper est sit amet sodales. Aliquam in rhoncus velit. Aenean nec erat ipsum. Nullam purus nisi, commodo non libero ut, convallis volutpat erat." />
-                <DetailCard image="https://lh3.googleusercontent.com/proxy/wEr7NoR_d2c0gCfCIFgKDao2YsSXAZYKaFuHrLZgaS6H4iun0TtdSYixVJQehrAP-oO6TUhWUDjlPkuY9LIRdXV2bXoq_w" name="KU Party Palace" details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi metus, luctus eleifend nulla at, semper cursus turpis. Sed ac gravida mi. Donec elementum, urna ut aliquet blandit, mi dui molestie eros, consequat fermentum turpis augue ac nibh. Sed in consequat libero. Proin sagittis semper est sit amet sodales. Aliquam in rhoncus velit. Aenean nec erat ipsum. Nullam purus nisi, commodo non libero ut, convallis volutpat erat." />
-                <DetailCard image="https://lh3.googleusercontent.com/proxy/wEr7NoR_d2c0gCfCIFgKDao2YsSXAZYKaFuHrLZgaS6H4iun0TtdSYixVJQehrAP-oO6TUhWUDjlPkuY9LIRdXV2bXoq_w" name="KU Party Palace" details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi metus, luctus eleifend nulla at, semper cursus turpis. Sed ac gravida mi. Donec elementum, urna ut aliquet blandit, mi dui molestie eros, consequat fermentum turpis augue ac nibh. Sed in consequat libero. Proin sagittis semper est sit amet sodales. Aliquam in rhoncus velit. Aenean nec erat ipsum. Nullam purus nisi, commodo non libero ut, convallis volutpat erat." />
-                <DetailCard image="https://lh3.googleusercontent.com/proxy/wEr7NoR_d2c0gCfCIFgKDao2YsSXAZYKaFuHrLZgaS6H4iun0TtdSYixVJQehrAP-oO6TUhWUDjlPkuY9LIRdXV2bXoq_w" name="KU Party Palace" details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi metus, luctus eleifend nulla at, semper cursus turpis. Sed ac gravida mi. Donec elementum, urna ut aliquet blandit, mi dui molestie eros, consequat fermentum turpis augue ac nibh. Sed in consequat libero. Proin sagittis semper est sit amet sodales. Aliquam in rhoncus velit. Aenean nec erat ipsum. Nullam purus nisi, commodo non libero ut, convallis volutpat erat." />
-
+                {Object.keys(data).map((keys)=>{
+                return( <DetailCard path='/party' image={data[keys].profilePhoto} name={data[keys].hostName} details={data[keys].description} />
+                )})}
             </div>
         </div>
 

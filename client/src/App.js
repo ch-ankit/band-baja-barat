@@ -12,6 +12,9 @@ import UserPage from "./UserPage"
 import Invite from './invite/invite';
 import Party from "./Party"
 import Band from "./Band"
+import SignUp from './SignUp.js'
+import PartyDetail from "./PartyDetail.js";
+import BandDetail from "./BandDetail.js";
 import History from "./History";
 
 function App() {
@@ -33,7 +36,11 @@ function App() {
           </Route>
           <Route path="/Party" component={Party} />
           <Route path="/Band" component={Band} />
-
+          <Route path='/bands/:band' children={<BandDetail />} />
+          <Route exact path='/partypalace/:party' children={<PartyDetail />} />
+         
+          {/*Sign up page */}
+          <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}
           <Route path="/checkout">
             <Header />

@@ -64,7 +64,7 @@ exports.bandData = async (req, res, next) => {
   try {
     mysqlConnection.query(`SELECT * FROM band `, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json("No Host Registered");
+        if (rows.length == 0) res.json("No band Registered");
         else res.json({ status: "success", data: rows });
       } else {
         res.json(err);

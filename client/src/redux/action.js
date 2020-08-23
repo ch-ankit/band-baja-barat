@@ -1,6 +1,7 @@
 
-export const actionCreate=()=>{
+export const actionCreate=(uid)=>{
     return {
-        type:'LogIn'
+        type:'UserLog',
+        payload:uid
     }
 }

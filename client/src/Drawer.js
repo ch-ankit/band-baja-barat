@@ -12,6 +12,8 @@ import Avatar from "@material-ui/core/Avatar"
 import './Drawer.css'
 import {auth} from "./firebaseConfig"
 import {useHistory} from "react-router-dom"
+import {useDispatch} from 'react-redux'
+import { actionCreate } from './redux/action.js';
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -21,6 +23,7 @@ const useStyles = makeStyles({
   },
 });
 export default function TemporaryDrawer() {
+  const dispatch=useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: true,
@@ -56,6 +59,7 @@ export default function TemporaryDrawer() {
       <List>
         {[ 'Log Out'].map((text, index) => (
           <ListItem button key={text} onClick={()=>{auth.signOut();
+            dispatch(actionCreate(null));
             history.push('/');
             window.location.reload(true);
           }}>

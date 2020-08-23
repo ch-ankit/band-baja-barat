@@ -1,0 +1,21 @@
+GET http://localhost:9000/giftstore/orders?userName=kshitzahi
+
+###
+POST http://localhost:9000/giftstore/orders
+Content-Type: application/json
+
+{
+    "giftId":"FXQ5243",
+    "quantity":4,
+    "price":3313,
+    "orderStatus":"shipping",
+    "eventId":1,
+    "userName":"kshitzahi" ,
+    "orderedDate":"2020-08-02"  
+}
+
+###
+DELETE http://localhost:9000/giftstore/orders?orderNo=5
+
+###
+GET http://localhost:9000/giftstore/orders?userName=admin
