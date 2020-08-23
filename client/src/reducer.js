@@ -1,7 +1,7 @@
 export const initialState = {
     basket: [
     ],
-    user: false,
+    user: { userName: 'junushu' },
     isAdmin: true,
 
 }
