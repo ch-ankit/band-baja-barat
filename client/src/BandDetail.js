@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import './BandDetail.css'
 function BandDetail() {
     let bandName=useParams();
+    
     return (
         <div className="bandDetail">
             <img src={explore3} className='bandDetail__image' />

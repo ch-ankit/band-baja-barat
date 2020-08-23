@@ -1,0 +1,667 @@
+{
+	"info": {
+		"_postman_id": "add3b36b-bf1c-4a00-bbeb-6118c523b175",
+		"name": "BBB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "adminlogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/login/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"login",
+								"admin"
+							]
+						},
+						"description": "#user login post req"
+					},
+					"response": []
+				},
+				{
+					"name": "hostlogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vatNo\": \"406820\",\r\n    \"password\": \"9833883SR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/login/host",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"login",
+								"host"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userlogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"pujamatta\",\r\n    \"password\": \"0848425UH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/login/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"login",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "signup",
+			"item": [
+				{
+					"name": "host signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vatNo\":667724,\r\n    \"password\":\"easynow1\",\r\n    \"hostName\":\"yukihia\",\r\n    \"profilePhoto\":\"dummyimages\",\r\n    \"email\":\"dum2@gmail.com\",\r\n    \"contactInfo\":\"04122456\",\r\n    \"latitude\":\"112\",\r\n    \"longitude\":\"221\",\r\n    \"photo\":\"foototo\",\r\n    \"totalHalls\":3,\r\n    \"city\":\"kathmandu\",\r\n    \"street\":\"chabahil\",\r\n    \"provience\":\"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/signup/host",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"signup",
+								"host"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Ritchie\",\r\n    \"lastName\": \"MacVagh\",\r\n    \"middleName\": \"\",\r\n    \"userName\": \"rmacvagh22\",\r\n    \"password\": \"beRfjI\",\r\n    \"points\": 978,\r\n    \"email\": \"rmacvagh01@pinterest.com\",\r\n    \"mobileNo\": 2147483647,\r\n    \"street\": \"Pepper Wood\",\r\n    \"city\": \"Bęczarka\",\r\n    \"provience\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/signup/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"signup",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "giftStore",
+			"item": [
+				{
+					"name": "order",
+					"item": [
+						{
+							"name": "ordered product viewed by user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/orders?userName=kshitzahi",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "kshitzahi"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user adding order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"giftId\":\"FXQ5243\",\r\n    \"quantity\":4,\r\n    \"price\":3313,\r\n    \"orderStatus\":\"shipping\",\r\n    \"eventId\":1,\r\n    \"userName\":\"kshitzahi\" ,\r\n    \"orderedDate\":\"2020-08-02\"  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user deleting order",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/orders?orderNo=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderNo",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ordered product viewed by admin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/orders?userName=admin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "basket",
+					"item": [
+						{
+							"name": "model added to basket",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\":\"pratikan\",\r\n    \"modelNo\":\"BGO4644\",\r\n    \"quantity\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/basket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "model removed from  basket",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\":\"pratikan\",\r\n    \"modelNo\":\"BGO4644\",\r\n    \"quantity\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/basket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "model quantity updated in basket",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\":\"pratikan\",\r\n    \"modelNo\":\"BGO4644\",\r\n    \"quantity\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/basket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productinUSERbasket",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9000/giftstore/basket?userName=pujamatta",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"giftstore",
+										"basket"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "pujamatta"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "productsofgiftstore",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/giftstore/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"giftstore",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update products quantity and price",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":21,\r\n    \"modelNo\":\"BGO4644\",\r\n    \"price\":2704\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/giftstore/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"giftstore",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adding product by admin ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"modelNo\":\"rented\",\r\n\"price\":200,\r\n\"quantity\":10,\r\n\"description\":\"dream inducer\",\r\n\"photo\":\"https://dummyimage.com\",\r\n\"name\":\"dreamland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/giftstore/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"giftstore",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleting product by admin ",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/giftstore/product?modelNo=rented",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"giftstore",
+								"product"
+							],
+							"query": [
+								{
+									"key": "modelNo",
+									"value": "rented"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "bbb",
+			"item": [
+				{
+					"name": "bbb-host",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/bbb/host",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"bbb",
+								"host"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bbb-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/bbb/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"bbb",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bbb-band",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/bbb/band",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"bbb",
+								"band"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "host",
+			"item": [
+				{
+					"name": "host ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/host/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"host",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

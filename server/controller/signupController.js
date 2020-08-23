@@ -1,23 +1,23 @@
 const mysqlConnection = require("./../connection");
 
-exports.addUser = async (req, res) => {
+exports.addUser = async (req, res, next) => {
   try {
     mysqlConnection.query(
       `INSERT INTO user (firstName,lastName,middleName,userName,password,points,photo,email,mobileNo,street,city,provience) 
       VALUES
       (
-        '${req.body.firstName}',
-        '${req.body.lastName}',
-        '${req.body.middleName}',
-        '${req.body.userName}',
-        '${req.body.password}',
-        '${req.body.points}',
-        '${req.body.photo}',
-        '${req.body.email}',
-        '${req.body.mobileNo}',
-        '${req.body.street}',
-        '${req.body.city}',
-        '${req.body.provience}'
+        "${req.body.firstName}",
+        "${req.body.lastName}",
+        "${req.body.middleName}",
+        "${req.body.userName}",
+        "${req.body.password}",
+        "${req.body.points}",
+        "${req.body.photo}",
+        "${req.body.email}",
+        "${req.body.mobileNo}",
+        "${req.body.street}",
+        "${req.body.city}",
+        "${req.body.provience}"
       )`,
       (err) => {
         if (!err) {
@@ -34,29 +34,29 @@ exports.addUser = async (req, res) => {
 
 exports.addHost = async (req, res, next) => {
   try {
-    console.log(req.body);
-    mysqlConnection.query(
-      `INSERT INTO host (vatNo,password,hostLocation,email,contactInfo,hostName,latitude,longitude,photo)
-      VALUES
-      (
-        "${req.body.vatNo}",
-        "${req.body.password}",
-        "${req.body.hostLocation}",
-        "${req.body.email}",
-        "${req.body.contactInfo}",
-        "${req.body.hostName}",
-        "${req.body.latitude}",
-        "${req.body.longitude}",
-        "${req.body.photo}"
-      )`,
-      (err) => {
-        if (!err) {
-          res.json("HOST Sign up successful");
-        } else {
-          res.send(err);
-        }
+    var sql = `INSERT INTO host (vatNo,password,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
+    VALUES
+    (
+       ${req.body.vatNo},
+      "${req.body.password}",
+      "${req.body.hostName}",
+      "${req.body.email}",
+      "${req.body.profilePhoto}",
+       ${req.body.totalHalls},
+      "${req.body.contactInfo}",
+      "${req.body.street}",
+      "${req.body.city}",
+      "${req.body.provience}",
+      "${req.body.latitude}",
+      "${req.body.longitude}"
+)`;
+    mysqlConnection.query(sql, (err) => {
+      if (!err) {
+        res.json("HOST Sign up successful");
+      } else {
+        res.send(err);
       }
-    );
+    });
   } catch (err) {
     next(err);
   }

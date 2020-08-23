@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    max-height: 400px;
+    max-height: 500px;
     min-width: 100px;
     padding: 20px;
     width: 30%;
@@ -27,10 +27,4 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-}
-
-.product > button {
-    background-color: #f0c14b;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;
 }

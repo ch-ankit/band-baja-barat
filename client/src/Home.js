@@ -35,27 +35,39 @@ function ControlledCarousel() {
 }
 
 function Home(props) {
-  let res;
   let [data, setData] = useState({ data: [] });
+  let [newData, setnewData] = useState({ data: [] });
   useEffect(() => {
     async function fetchData() {
-      res = await fetch("http://localhost:9000/giftstore/product");
+      const res = await fetch("http://localhost:9000/giftstore/product");
       const send = await res.json();
       setData(send.data);
     }
     fetchData();
-  }, []);
-  const removeFun = (removedData) => {
-    console.log(data)
+  }, [newData]);
+
+  const removeFun = async (removedData) => {
+    const removed = { modelNo: removedData.modelNo }
+    const returned = await fetch('http://localhost:9000/giftstore/product', {
+      method: 'DELETE', headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(removed)
+    })
+    const response = await returned.json()
+    alert(`${response.message}`)
+    setnewData(response.message)
   }
+
   const show = Object.keys(data).map((keys) => (
     <Product
       id={data[keys].modelNo}
       title={data[keys].name}
-      image={data[keys].image}
+      image={data[keys].photo}
       price={data[keys].price}
       description={data[keys].description}
-      rating={5}
+      quantity={data[keys].quantity}
+      rating={data[keys].rating}
       removeFun={removeFun}
     />
   ));
@@ -67,7 +79,6 @@ function Home(props) {
       <div className="home__row">
         {show}
       </div>
-      <div> </div>
     </div>
   );
 }
