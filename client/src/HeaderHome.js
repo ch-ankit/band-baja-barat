@@ -12,7 +12,7 @@ function Header() {
             <div className="header__right">
                 <Link to='/' className="header__link">Home</Link>
                 <Link to='/User' className="header__link">About Us</Link>
-                <Link className="header__link" onClick={() => { setSign(true) }}>Sign Up</Link>
+                <Link className="header__link" to='/SignUp'>Sign Up</Link>
                 <Link to="/help" className="header_link"><HelpIcon className="header__icon" /></Link>
             </div>
         </div>

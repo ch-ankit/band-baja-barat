@@ -1,0 +1,22 @@
+.bandDetail__image{
+    width:100%;
+    height:450px;
+    object-fit: contain;
+}
+
+.bandDetail{
+    text-align: center;
+}
+.bandDetail > h1{
+    color: black;
+}
+
+.bandDetail__detail{
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bandDetail__contact{
+    border-left: 1px solid lightgray;
+}

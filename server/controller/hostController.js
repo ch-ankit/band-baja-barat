@@ -4,7 +4,7 @@ exports.hostData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.vatNo == null) {
-      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,contactInfo FROM host  ORDER BY hostname `;
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description FROM host  ORDER BY hostname `;
     } else {
       sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" `;
     }
