@@ -19,7 +19,7 @@ function Party() {
             </div>
             <div className="party">
                 {Object.keys(data).map((keys)=>{
-                return( <DetailCard path='/party' image={data[keys].profilePhoto} name={data[keys].hostName} details={data[keys].description} />
+                return( <DetailCard path='/party' image={data[keys].profilePhoto} name={data[keys].hostName} details={data[keys].description} vatno={data[keys].vatNo} />
                 )})}
             </div>
         </div>

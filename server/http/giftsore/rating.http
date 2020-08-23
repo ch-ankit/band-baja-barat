@@ -1,0 +1,17 @@
+GET http://localhost:9000/giftstore/rating?userName=pujamatta&modelNo=ddsd
+
+###
+POST http://localhost:9000/giftstore/rating?userName=junushu&modelNo=BGO4644
+Content-Type: application/json
+
+{
+    "value":5
+}
+
+###
+PATCH http://localhost:9000/giftstore/rating?userName=missula&modelNo=BGO4644
+Content-Type: application/json
+
+{
+    "value":4
+}

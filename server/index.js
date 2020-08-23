@@ -10,6 +10,7 @@ const loginRouter = require("./routes/login");
 const signupRouter = require("./routes/signup");
 const giftRouter = require("./routes/giftstore");
 const hostRouter = require("./routes/host");
+const bandRouter = require("./routes/band");
 
 app = express();
 app.use(bodyParser.json());
@@ -21,6 +22,8 @@ app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/giftstore", giftRouter);
 app.use("/host", hostRouter);
+app.use("/band", bandRouter);
+
 
 // mysqlConnection.query(
 //   "SELECT * FROM user limit 2",

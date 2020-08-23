@@ -1,5 +1,6 @@
 const initialState={
     uid:null,
+    vatNo: null
 }
 
 export const reducerr=(state=initialState,action)=>{
@@ -16,6 +17,10 @@ export const reducerr=(state=initialState,action)=>{
             return{
                 signUp:!state.signUp
             }
+        case 'VatNo':
+                return{
+                    vatNo:action.payload
+                }
         default:
             return state;
     }

@@ -247,7 +247,7 @@ exports.updateRating = async (req, res, next) => {
       ` SELECT VALUE FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `,
       (err, rows) => {
         if (!err) {
-          const netRating = (req.body.value - rows[0].value) / 2;
+          const netRating = (req.body.value - rows[0].VALUE) / 2;
           var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
           var sql1 = ` UPDATE giftshop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
           mysqlConnection.query(sql, (err) => {
