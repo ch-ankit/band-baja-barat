@@ -9,7 +9,8 @@ function Checkout(props) {
     const [{ basket, user }, dispatch] = useStateValue();
     let [data, setData] = useState([]);
     const [basketData, setBasketData] = useState([]);
-    const [basketQuantity, setBasketQuantity] = useState([])
+    const [basketQuantity] = useState([])
+    let [message, setMessage] = useState('')
     let basketDataValues = []
     useEffect(() => {
         async function getBasket() {
@@ -24,13 +25,47 @@ function Checkout(props) {
         }
         fetchData();
         getBasket()
-    }, [])
+    }, [message])
     if (basketData.length !== 0) {
         basketData.forEach(element => {
             const index = Object.keys(data).findIndex(product => element.modelNo === data[product].modelNo)
             basketDataValues.push(data[index])
             basketQuantity.push(element.quantity)
         })
+    }
+
+    const removeFromBasket = async ({ id }) => {
+        const dbBody = {
+            userName: user.userName,
+            modelNo: id
+        }
+        const response = await fetch('http://localhost:9000/giftstore/basket',
+            {
+                method: 'DELETE', headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(dbBody)
+            })
+        const { message, data } = await response.json()
+        setMessage(message)
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: id,
+        })
+    }
+    let hello;
+    if (basketDataValues[0] !== undefined) {
+        hello = Object.keys(basketDataValues).map(item => (
+            <CheckoutProduct
+                key={uuidv4()}
+                id={basketDataValues[item].modelNo}
+                title={basketDataValues[item].name}
+                image={basketDataValues[item].photo}
+                price={basketDataValues[item].price}
+                rating={basketDataValues[item].rating}
+                quantity={basketQuantity[item]}
+                removeFun={removeFromBasket}
+            />
+        )
+        )
     }
     return (
         <div className="checkout">
@@ -50,18 +85,7 @@ function Checkout(props) {
                         <div>
                             <h2 className="checkout__title">Your Shopping Basket</h2>
                             {/* List out all checkout Product */}
-                            {(basketDataValues.length !== 0 && basketDataValues !== undefined) && Object.keys(basketDataValues).map(item => (
-                                <CheckoutProduct
-                                    key={uuidv4()}
-                                    id={basketDataValues[item].modelNo}
-                                    title={basketDataValues[item].name}
-                                    image={basketDataValues[item].photo}
-                                    price={basketDataValues[item].price}
-                                    rating={basketDataValues[item].rating}
-                                    quantity={basketQuantity[item]}
-                                />
-                            )
-                            )}
+                            {hello}
                         </div>
                     )}
             </div>

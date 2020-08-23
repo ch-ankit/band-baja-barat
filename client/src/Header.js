@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,18 +7,29 @@ import { useStateValue } from "./StateProvider";
 import logo from "./images/logo.png";
 
 function Header(props) {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const [inputSearch, setInpuSearch] = useState('')
+  const [basketData, setBasketData] = useState([])
   let totalItems = 0
-  if (basket.length !== 0) {
-    basket.forEach(element => {
+  useEffect(() => {
+    async function getBasket() {
+      const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${user.userName}`)
+      const { data } = await response.json()
+      setBasketData(data)
+    }
+    getBasket()
+  }, [basket])
+
+  if (basketData.length !== 0) {
+    basketData.forEach(element => {
       totalItems = totalItems + element.quantity
-    });
+    })
   }
+
   return (
     <nav className="headergift">
       {/* Logo BBB-> Image */}
-      <Link to="/">
+      <Link to="/giftstore">
         <img
           className="header__logogift"
           // src="http://pngimg.com/uploads/amazon/amazon_PNG25.png"
