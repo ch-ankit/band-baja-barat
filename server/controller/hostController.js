@@ -4,7 +4,7 @@ exports.hostData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.vatNo == null) {
-      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description FROM host  ORDER BY hostname `;
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,CONCAT(left(description,40),'...') AS description FROM host  ORDER BY hostname `;
     } else {
       sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" `;
     }
@@ -44,7 +44,7 @@ exports.hostData = async (req, res, next) => {
 
 exports.updateHostData = async (req, res, next) => {
   try {
-    var sql = ` UPDATE  host SET 
+    var sql = ` UPDATE host SET 
                   hostName = "${req.body.hostName}",
                   totalHalls = ${req.body.totalHalls},
                   description = "${req.body.description}",
@@ -55,8 +55,8 @@ exports.updateHostData = async (req, res, next) => {
                   city = "${req.body.city}",
                   provience = "${req.body.provience}",
                   latitude = "${req.body.latitude}",
-                  longitude = "${req.body.longitude}
-                  WHERE vatNo = ${req.body.vatNo})`;
+                  longitude = "${req.body.longitude}"
+                  WHERE vatNo = ${req.body.vatNo} `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("HOST Data update successful");

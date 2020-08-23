@@ -1,0 +1,45 @@
+POST http://localhost:9000/login/admin
+content-type: application/json
+
+{
+    "userName": "admin",
+    "password": "admin"
+}
+
+###
+
+POST http://localhost:9000/login/user
+content-type: application/json
+
+{
+       "userName": "pujamatta",
+       "password": "0848425UH"
+}
+
+###
+POST http://localhost:9000/login/host
+content-type: application/json
+
+{
+    "vatNo": "406820",
+    "password": "9833883SR"
+}
+
+###
+
+POST http://localhost:9000/signup/host
+Content-Type: application/json
+
+{
+    "firstName": "Ritchie",
+    "lastName": "MacVagh",
+    "middleName": "",
+    "userName": "rmacvagh22",
+    "password": "beRfjI",
+    "points": 978,
+    "email": "rmacvagh01@pinterest.com",
+    "mobileNo": 2147483647,
+    "street": "Pepper Wood",
+    "city": "Bęczarka",
+    "provience": "5"
+}

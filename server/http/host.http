@@ -1,0 +1,23 @@
+GET http://localhost:9000/host/
+
+###
+DELETE http://localhost:9000/host?vatNo=667724
+
+###
+PATCH http://localhost:9000/host
+Content-Type: application/json
+
+{
+    "vatNo":667724,
+    "hostName":"yukihia2",
+    "profilePhoto":"dummyimages2",
+    "description":"dummy party palace for trial",
+    "email":"dum22@gmail.com",
+    "contactInfo":"041-22456",
+    "latitude":"77",
+    "longitude":"22",
+    "totalHalls":3,
+    "city":"kathmandu",
+    "street":"chabahil",
+    "provience":"3"
+}

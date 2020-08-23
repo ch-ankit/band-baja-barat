@@ -1,0 +1,37 @@
+POST http://localhost:9000/signup/user
+Content-Type: application/json
+
+{
+    "firstName": "Ritchie",
+    "lastName": "MacVagh",
+    "middleName": "",
+    "userName": "rmacvagh22",
+    "password": "beRfjI",
+    "points": 978,
+    "email": "rmacvagh01@pinterest.com",
+    "mobileNo": 2147483647,
+    "street": "Pepper Wood",
+    "city": "Bęczarka",
+    "provience": "5"
+}
+
+###
+POST http://localhost:9000/signup/host
+Content-Type: application/json
+
+{
+    "vatNo":667724,
+    "password":"easynow1",
+    "hostName":"yukihia",
+    "profilePhoto":"dummyimages",
+    "email":"dum2@gmail.com",
+    "contactInfo":"04122456",
+    "latitude":"112",
+    "longitude":"221",
+    "totalHalls":3,
+    "city":"kathmandu",
+    "street":"chabahil",
+    "provience":"3"
+}
+
+

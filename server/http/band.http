@@ -1,0 +1,13 @@
+GET http://localhost:9000/band
+
+###
+POST http://localhost:9000/band
+Content-Type: application/json
+
+{
+    "bandName":"trialband", 
+    "description":"qwertyuiopasdfg zxcfghj wertyu adsf we sadsfd asdsfv aewr sdsf qwew wadndhe ahhd X-Http-Method-Override", 
+    "profilePhoto":"https://placeimg.com/640/480/any", 
+    "contactInfo":"9831-765311", 
+    "email":"trial@gmail.com" 
+ }
