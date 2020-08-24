@@ -5,10 +5,11 @@ import Carousel from "react-bootstrap/Carousel";
 import shop from "./images/shop.jpg";
 import shop2 from "./images/shop2.jpg";
 import shop3 from "./images/shop3.png";
-
-import "./Home.css";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'; import "./Home.css";
 import Product from "./Product";
 import Header from "./Header";
+import { useStateValue } from "./StateProvider";
+import { Link } from "react-router-dom";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -37,6 +38,7 @@ function ControlledCarousel() {
 }
 
 function Home(props) {
+  const [{ isAdmin }] = useStateValue()
   let [data, setData] = useState({ data: [] });
   let [newData, setnewData] = useState({ data: [] });
   useEffect(() => {
@@ -60,27 +62,35 @@ function Home(props) {
     alert(`${response.message}`)
     setnewData(response.message)
   }
-
-  const show = Object.keys(data).map((keys) => {
-    return <Product
-      key={uuidv4()}
-      id={data[keys].modelNo}
-      title={data[keys].name}
-      image={data[keys].photo}
-      price={data[keys].price}
-      description={data[keys].description}
-      quantity={data[keys].quantity}
-      rating={data[keys].rating}
-      removeFun={removeFun}
-    />
+  let show;
+  if (data[0] !== undefined) {
+    show = Object.keys(data).map((keys) => {
+      return <Product
+        key={uuidv4()}
+        id={data[keys].modelNo}
+        title={data[keys].name}
+        image={data[keys].photo}
+        price={data[keys].price}
+        description={data[keys].description}
+        quantity={data[keys].quantity}
+        rating={data[keys].rating}
+        removeFun={removeFun}
+      />
+    }
+    );
   }
-  );
-  //Present in prevdata or in data the responses we want.
+  const adminAddProduct = (
+    <Link to='/giftstore/product/add' className="home__addProduct" style={{ textDecoration: 'none', color: 'teal' }}>
+      <span><AddCircleOutlineIcon style={{ fontSize: '90px', color: 'teal' }} /></span>
+      <div>Add Product</div>
+    </Link>
+  )
   return (
     <div className="home">
       <Header />
       <ControlledCarousel />
       <div className="home__row">
+        {isAdmin && adminAddProduct}
         {show}
       </div>
     </div>

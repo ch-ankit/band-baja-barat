@@ -30,7 +30,7 @@ exports.addProduct = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json("giftAdded");
+        res.json({ message: `${req.body.modelNo} has been added to the store` });
       } else {
         res.json(err);
       }

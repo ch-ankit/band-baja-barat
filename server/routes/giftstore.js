@@ -9,7 +9,7 @@ router
   .delete(giftController.deleteProduct);//completed
 
 router
-  .route("/orders")
+  .route("/orders")//Whole Remaining
   .get(giftController.orderedProduct)
   .post(giftController.addOrder)
   .delete(giftController.deleteOrder);
@@ -18,7 +18,7 @@ router
   .route("/basket")
   .get(giftController.basketData) // completed
   .post(giftController.addBasket) //completed
-  .delete(giftController.deleteBasket) //remaining
+  .delete(giftController.deleteBasket) //completed
   .patch(giftController.updateBasket);//completed
 
 router

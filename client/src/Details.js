@@ -91,7 +91,7 @@ function Details(props) {
         let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
         setAddedQuantity(newQuantity)
     }
-    let addButton = (addedQuantity === 0) ? <button onClick={addToBasket} disabled>Add to Basket</button> : <button onClick={addToBasket}>Add to Basket</button>
+
     const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
     if (productRating.length !== 0) { rated = productRating[0].value }
     const star = Object.keys(productRating).map((item) =>
@@ -116,7 +116,7 @@ function Details(props) {
                 <div className="details__description">
                     <h2>{title}</h2>
                     <div className="rating">
-                        {productRating.length !== 0 ? star :
+                        {!isAdmin && (productRating.length !== 0 ? star :
                             <ReactStars
                                 count={5}
                                 value={0}
@@ -129,7 +129,7 @@ function Details(props) {
                                     setProdRating(newRating)
                                     updateRating(data)
                                 }}
-                            />}
+                            />)}
                         <span>Average Rating: {rating}</span>
                     </div>
                     <p>{description}</p>
@@ -145,7 +145,7 @@ function Details(props) {
                             <div onClick={addQuantity}><AddIcon /></div>
                         </div>
                     </div>
-                    {addButton}
+                    {!isAdmin && <button onClick={addToBasket}>Add to Basket</button>}
                 </div>
             </div>
         </div>
