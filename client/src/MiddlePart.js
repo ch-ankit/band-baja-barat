@@ -18,7 +18,7 @@ function MiddlePart() {
         event.preventDefault();
         auth.signInWithEmailAndPassword(Email, Password)
             .then((authuser) => {
-                dispatch(actionCreate(authuser.user.uid));
+               
                 history.push("/User");
 
             })
@@ -26,17 +26,19 @@ function MiddlePart() {
     }
     useEffect(
         auth.onAuthStateChanged((authUser) => {
+            
             if (authUser) {
+                dispatch(actionCreate(authUser.uid));
                 console.log(authUser.uid);
                 setUser(authUser);
             } else {
                 setUser(null);
             }
-        }), [User])
+        }), [uid])
 
     return (
         <div>
-            {uid ? history.push('/User') : ''}
+            {User ? history.push('/User') : ''}
             <div className="middlePart">
                 <div className="middlePart__card">
                     <h1>Log In</h1>

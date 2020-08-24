@@ -61,7 +61,6 @@ export default function TemporaryDrawer() {
           <ListItem button key={text} onClick={()=>{auth.signOut();
             dispatch(actionCreate(null));
             history.push('/');
-            window.location.reload(true);
           }}>
             
             <ListItemText primary={text} />

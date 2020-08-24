@@ -12,3 +12,10 @@ export const actionvatNo=(vatNo)=>{
         payload:vatNo
     }
 }
+
+export const UserData=(userData)=>{
+    return {
+        type:'UserData',
+        payload: userData
+    }
+}

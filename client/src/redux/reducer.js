@@ -1,6 +1,7 @@
 const initialState={
     uid:null,
-    vatNo: null
+    vatNo: null,
+    userData:null
 }
 
 export const reducerr=(state=initialState,action)=>{
@@ -9,14 +10,11 @@ export const reducerr=(state=initialState,action)=>{
             return {
                 uid:action.payload
             }
-        case 'Name':
+        case 'UserData':
             return{
-                name:'Bob'
+                userData: action.payload
             }
-        case 'SignUp':
-            return{
-                signUp:!state.signUp
-            }
+        
         case 'VatNo':
                 return{
                     vatNo:action.payload

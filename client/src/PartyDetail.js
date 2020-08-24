@@ -47,6 +47,7 @@ function PartyDetail() {
                         return(< div keys={keys}>
                             <h1>{data[keys].hostName}</h1>
                             {data[keys].description}
+                            <hr/>
                             <h2><u>Gallery</u></h2>
                             <div className='partyDetail__gallery'>
                                 {Object.keys(Photo).map((keys)=>{
