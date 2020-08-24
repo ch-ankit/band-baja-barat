@@ -18,7 +18,7 @@ exports.product = async (req, res, next) => {
 
 exports.addProduct = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO giftshop (modelNo,price,quantity,description,photo,name) 
+    var sql = ` INSERT INTO giftShop (modelNo,price,quantity,description,photo,name) 
     VALUES 
     (
       "${req.body.modelNo}",
@@ -42,7 +42,7 @@ exports.addProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
-    var sql = ` UPDATE giftshop SET quantity=quantity+${req.body.quantity},price= ${req.body.price} WHERE modelNo = "${req.body.modelNo}"`;
+    var sql = ` UPDATE giftShop SET quantity=quantity+${req.body.quantity},price= ${req.body.price} WHERE modelNo = "${req.body.modelNo}"`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json(
@@ -59,7 +59,7 @@ exports.updateProduct = async (req, res, next) => {
 
 exports.deleteProduct = async (req, res, next) => {
   try {
-    var sql = `DELETE FROM giftshop WHERE modelNo="${req.body.modelNo}"`;
+    var sql = `DELETE FROM giftShop WHERE modelNo="${req.body.modelNo}"`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json({
@@ -220,7 +220,7 @@ exports.addRating = async (req, res, next) => {
         "${req.query.modelNo}",
          ${req.body.value}
       )`;
-    var sql1 = ` UPDATE giftshop SET rating = CASE rating WHEN 0 THEN ${req.body.value} ELSE rating/2 + ${req.body.value}/2 END WHERE modelNo = "${req.query.modelNo}" `;
+    var sql1 = ` UPDATE giftShop SET rating = CASE rating WHEN 0 THEN ${req.body.value} ELSE rating/2 + ${req.body.value}/2 END WHERE modelNo = "${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         mysqlConnection.query(sql1, (err) => {
@@ -249,7 +249,7 @@ exports.updateRating = async (req, res, next) => {
         if (!err) {
           const netRating = (req.body.value - rows[0].VALUE) / 2;
           var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
-          var sql1 = ` UPDATE giftshop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
+          var sql1 = ` UPDATE giftShop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
               mysqlConnection.query(sql1, (err) => {
