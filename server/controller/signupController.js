@@ -3,14 +3,13 @@ const mysqlConnection = require("./../connection");
 exports.addUser = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `INSERT INTO user (firstName,lastName,middleName,userName,password,points,photo,email,mobileNo,street,city,provience) 
+      `INSERT INTO user (firstName,lastName,middleName,userName,points,photo,email,mobileNo,street,city,provience) 
       VALUES
       (
         "${req.body.firstName}",
         "${req.body.lastName}",
         "${req.body.middleName}",
         "${req.body.userName}",
-        "${req.body.password}",
         1,
         "${req.body.photo}",
         "${req.body.email}",
