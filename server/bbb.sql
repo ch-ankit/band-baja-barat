@@ -24,8 +24,7 @@ USE bb2;
 
  CREATE TABLE host(
    hostName VARCHAR(255),
-   vatNo INT,
-   password VARCHAR(255), 
+   vatNo INT, 
    totalHalls INT,
    description TEXT,
    profilePhoto VARCHAR(255),
@@ -471,55 +470,55 @@ USE bb2;
  Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
  Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', 'http://dummyimage.com/239x204.png/dddddd/000000', 'http://dummyimage.com/228x232.jpg/cc0000/ffffff');
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Amrapali banquet', 406820, '9833883SR', 4, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Amrapali banquet', 406820, 4, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
  Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
  Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
  Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'https://picsum.photos/200/300?random=1', '+977 9848-196186', 'egajewski0@hud.gov', 'Tahachal', 'Taplejung', 2, 27.686386, 83.432426);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Alfa house', 771982, '4737406JX', 2, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Alfa house', 771982, 2, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
  Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
  Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
  Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
 
  Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', 'https://picsum.photos/200/300?random=6', '+977 9877-442279', 'dimlock1@nature.com', 'Minbhawan', 'Butwal', 3, 28.98728, 80.165184);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Anmol catering service', 830058, '4778975CW', 5, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Anmol catering service', 830058, 5, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
  Sed ante. Vivamus tortor. Duis mattis egestas metus.
  Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'https://picsum.photos/200/300?random=9', '+977 9882-030045', 'acrimin2@histats.com', 'Kusaltar', 'Bhimdatta', 4, 28.683359, 80.608063);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('City banquet', 571317, '4537051VJ', 2, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('City banquet', 571317, 2, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
  Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
  Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', 'https://picsum.photos/200/300?random=9', '+977 9833-200736', 'bromi3@usnews.com', 'Bharatpur', 'Dhangadhi', 1, 27.005915, 84.859085);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Namaste kitchen and banquet', 990441, '8989083DJ', 1, 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Namaste kitchen and banquet', 990441, 1, 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
  Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
  Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
  Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
  Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', 'https://picsum.photos/200/300?random=7', '+977 9878-114312', 'pcloake4@yolasite.com', 'Thamel', 'Birgunj', 2, 27.700001, 85.333336);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Crystal banquet', 493744, '4799588WX', 5, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Crystal banquet', 493744, 5, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
  In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
  Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
  Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', 'https://picsum.photos/200/300?random=7', '+977 9877-084997', 'supham5@ning.com', 'Indrachowk', 'Kathmandu', 2, 27.429071, 85.029716);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Tripureshwor party palace', 488366, '5584075JN', 5, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Tripureshwor party palace', 488366, 5, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
  In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
  Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
  Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', 'https://picsum.photos/200/300?random=4', '+977 9846-199148', 'sstadding6@free.fr', 'Thamel', 'Hetauda', 4, 27.700769, 85.30014);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Star banquet', 458869, '7320924LW', 1, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Star banquet', 458869, 1, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
  Phasellus in felis. Donec semper sapien a libero. Nam dui.
  Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
  Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.
  Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 'https://picsum.photos/200/300?random=1', '+977 9884-101212', 'rtander7@livejournal.com', 'Gograha', 'Kathmandu', 2, 27.686386, 83.432426);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Durbar banquet', 202698, '3586855RZ', 5, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Durbar banquet', 202698, 5, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
  Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
  Fusce consequat. Nulla nisl. Nunc nisl.
  Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
  In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 'https://picsum.photos/200/300?random=6', '+977 9801-285722', 'lbanck8@fc2.com', 'Sinamanghal', 'Taplejung', 3, 28.98728, 80.165184);
  
- insert into host ( hostName, vatNo, password, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Heritage garden banquet', 455238, '7702642CU', 2, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
+ insert into host ( hostName, vatNo, totalHalls, description, profilePhoto, contactInfo, email, street, city, provience, latitude, longitude) values ('Heritage garden banquet', 455238, 2, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
  Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.
  Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
  Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.

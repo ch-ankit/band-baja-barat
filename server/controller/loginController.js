@@ -3,8 +3,8 @@ const mysqlConnection = require("./../connection");
 exports.user = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `SELECT * FROM user WHERE  userName="${req.body.userName}" AND password="${req.body.password}"`,
-      (err, rows, fields) => {
+      `SELECT * FROM user WHERE  email="${req.body.email}" `,
+      (err, rows) => {
         if (!err) {
           if (rows.length == 0) res.json({ status: "login failed" });
           else res.json({ status: "login success", data: rows });
