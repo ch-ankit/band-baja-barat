@@ -2,7 +2,7 @@ const mysqlConnection = require("./../connection");
 
 exports.product = async (req, res, next) => {
   try {
-    var sql = `SELECT * FROM giftshop ORDER BY price`;
+    var sql = `SELECT * FROM giftShop ORDER BY price`;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
         if (rows.length == 0) res.json({ message: "Store Empty", data: [] });
