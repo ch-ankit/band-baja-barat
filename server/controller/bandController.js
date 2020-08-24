@@ -75,7 +75,7 @@ exports.updatebandData = async (req, res, next) => {
 
 exports.deletebandData = async (req, res, next) => {
     try {
-        var sql = `DELETE FROM  bandphoto WHERE bandName = ${req.query.bandName} `;
+        var sql = `DELETE FROM  band WHERE bandName = "${req.query.bandName}" `;
         mysqlConnection.query(sql, (err) => {
             if (!err) {
                 res.json("band deleted");

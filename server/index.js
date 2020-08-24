@@ -11,6 +11,7 @@ const signupRouter = require("./routes/signup");
 const giftRouter = require("./routes/giftstore");
 const hostRouter = require("./routes/host");
 const bandRouter = require("./routes/band");
+const userHomeRouter = require("./routes/userHome");
 
 app = express();
 app.use(bodyParser.json());
@@ -23,6 +24,7 @@ app.use("/signup", signupRouter);
 app.use("/giftstore", giftRouter);
 app.use("/host", hostRouter);
 app.use("/band", bandRouter);
+app.use("/userhome", userHomeRouter);
 
 
 // mysqlConnection.query(

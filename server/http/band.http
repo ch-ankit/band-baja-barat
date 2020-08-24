@@ -1,4 +1,4 @@
-GET http://localhost:9000/band?bandName=trialband
+GET http://localhost:9000/band?bandName=trialband2
 
 ###
 POST http://localhost:9000/band
@@ -20,3 +20,6 @@ Content-Type: application/json
     "bandName":"trialband2",
     "description":"dfghj dfghjk dfghjk fghjiuyt 876r"
 }
+
+###
+DELETE http://localhost:9000/band?bandName=trialband2
