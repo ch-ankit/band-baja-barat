@@ -287,7 +287,7 @@ exports.updateRating = async (req, res, next) => {
 
 exports.search = (req, res, next) => {
   try {
-    var sql = ` SELECT hostName, CONCAT(street,",",city,",",provience) AS location FROM host WHERE name REGEXP "${req.query.value}"  `;
+    var sql = ` SELECT name FROM giftShop WHERE name REGEXP "${req.query.value}"  `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         if (rows.length == 0)
