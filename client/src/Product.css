@@ -11,6 +11,10 @@
     margin: 10px;
     z-index: 1;
 }
+.product:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
 .product__price {
     margin-top: 5px;
 }

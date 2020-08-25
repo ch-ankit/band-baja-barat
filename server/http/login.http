@@ -12,8 +12,7 @@ POST http://localhost:9000/login/user
 content-type: application/json
 
 {
-       "userName": "pujamatta",
-       "password": "0848425UH"
+       "email": "junushu@gmail.com"
 }
 
 ###
@@ -21,8 +20,7 @@ POST http://localhost:9000/login/host
 content-type: application/json
 
 {
-    "vatNo": "406820",
-    "password": "9833883SR"
+    "email": "406820"
 }
 
 ###

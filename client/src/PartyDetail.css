@@ -44,3 +44,12 @@
     height: 250px;
     margin: 10px 20px;
 }
+
+.partyDetail__booking{
+    flex:0.85
+}
+
+.partyDetail__title{
+    display: flex;
+    justify-content: space-between;
+}

@@ -14,6 +14,7 @@ import {auth} from "./firebaseConfig"
 import {useHistory} from "react-router-dom"
 import {useDispatch} from 'react-redux'
 import { actionCreate } from './redux/action.js';
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
   },
 });
 export default function TemporaryDrawer() {
+  const Userdata=useSelector(state=>state.userData)
   const dispatch=useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -76,7 +78,15 @@ export default function TemporaryDrawer() {
           <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
             <div className="drawer__items">
             <h1 className="drawer__header">BBB</h1>
-            <Avatar src="sfdsdf" alt="Babin Khatri" className="drawer__Avatar"/>
+            {Object.keys(Userdata).map((keys)=>{
+              return(
+                <>
+                <Avatar src={Userdata[keys].photo} alt={Userdata[keys].userName} className="drawer__Avatar"/>
+                <br/><h4>{Userdata[keys].userName}</h4>
+                </>
+              )
+            })}
+            
             {list('left')}
             </div>
           </Drawer>

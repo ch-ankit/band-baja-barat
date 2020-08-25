@@ -10,6 +10,7 @@ import Gallery from './Gallery.js'
 import Booking from './Booking.js';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import {Link} from 'react-router-dom'
 function PartyDetail() {
     let name=useParams();
     const [book, setbook] = useState(false);
@@ -41,11 +42,13 @@ function PartyDetail() {
                     }
                 })}
             </Carousel>
+            
             <div className='partyDetail__Detail'>
-                <div className="partyDetail__detailPart">
+            { book ? <div className='partyDetail__booking'><button onClick={()=>setbook(false)}> Home</button><Booking /> </div>:<div className="partyDetail__detailPart">
                     {Object.keys(data).map((keys)=>{
                         return(< div keys={keys}>
-                            <h1>{data[keys].hostName}</h1>
+                            <div className='partyDetail__title'><h1>{data[keys].hostName} </h1> <button onClick={()=>setbook(true)}>Book now</button>
+                            </div>
                             {data[keys].description}
                             <hr/>
                             <h2><u>Gallery</u></h2>
@@ -58,7 +61,7 @@ function PartyDetail() {
                         </div>
                         );
                     })}
-                </div>
+                </div>}
                 <div className="partyDetail__rightPart">
                     <h2>Booked Date</h2>
                     <ul>

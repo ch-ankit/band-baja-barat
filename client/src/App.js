@@ -16,6 +16,7 @@ import SignUp from './SignUp.js'
 import PartyDetail from "./PartyDetail.js";
 import BandDetail from "./BandDetail.js";
 import History from "./History";
+import AddProduct from "./AddProduct";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
           <Route path="/Band" component={Band} />
           <Route path='/bands/:band' children={<BandDetail />} />
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
-         
+
           {/*Sign up page */}
           <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}
@@ -57,6 +58,7 @@ function App() {
             <Details />
           </Route>
           <Route exact path="/giftstore" render={() => <Home />} />
+          <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
           <Route path="/products/:modelNo" render={() => <Details />} />
         </Switch>
       </div>

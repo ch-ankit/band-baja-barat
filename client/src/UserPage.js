@@ -6,6 +6,8 @@ import {useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import { UserData } from './redux/action'
 import { useDispatch } from 'react-redux'
+import Map from './Map'
+
 function UserPage() {
     const Uid=useSelector(state=>state.uid);
     const email=useSelector(state=>state.userEmail);

@@ -16,7 +16,7 @@ exports.oragnizer = async (req, res, next) => {
           res.json({ status: "Not registered" });
         }
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (error) {
@@ -31,7 +31,7 @@ exports.addOragnizer = async (req, res, next) => {
       if (!err) {
         res.json("registered");
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (error) {
@@ -46,7 +46,7 @@ exports.deleteOragnizer = async (req, res, next) => {
       if (!err) {
         res.json(" Organizer Deleted");
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (error) {

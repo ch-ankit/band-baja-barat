@@ -39,3 +39,31 @@
     border-radius: 75px !important;
     background-color: aquamarine !important;
 }
+
+.signUp__name > div{
+    margin-right: 10px;
+}
+
+.signUp__name{
+    display: flex;
+    margin-bottom:15px;
+}
+.signUp__userPass{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:15px;
+}
+
+.signUp__contactInfo{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:15px;
+}
+
+.signUp__Address{
+    display: flex;
+    margin-bottom:15px;
+}
+.signUp__Address > div{
+    margin-right: 10px;
+}

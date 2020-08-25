@@ -72,7 +72,7 @@ function UserHeader() {
                 <Link to='/giftstore' className="userHeader__link">Gift Store</Link>
                 {Object.keys(UserData).map((keys)=>{
                     return (
-                        <Avatar src="fggdfg" alt={UserData[0].userName} onClick={() => setDrawer(!drawer)} />
+                        <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
                     )
 
                 })}
