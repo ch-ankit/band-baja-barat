@@ -4,12 +4,12 @@ const giftController = require("../controller/giftController");
 router
   .route("/product")
   .get(giftController.product) //complete
-  .post(giftController.addProduct)//admin #remaining work
-  .patch(giftController.updateProduct)//admin + user buy #remaining work
-  .delete(giftController.deleteProduct);//completed
+  .post(giftController.addProduct) //admin #remaining work
+  .patch(giftController.updateProduct) //admin + user buy #remaining work
+  .delete(giftController.deleteProduct); //completed
 
 router
-  .route("/orders")//Whole Remaining
+  .route("/orders") //Whole Remaining
   .get(giftController.orderedProduct)
   .post(giftController.addOrder)
   .delete(giftController.deleteOrder);
@@ -19,7 +19,7 @@ router
   .get(giftController.basketData) // completed
   .post(giftController.addBasket) //completed
   .delete(giftController.deleteBasket) //completed
-  .patch(giftController.updateBasket);//completed
+  .patch(giftController.updateBasket); //completed
 
 router
   .route("/rating")
@@ -27,5 +27,6 @@ router
   .post(giftController.addRating) //completed
   .patch(giftController.updateRating); //completed
 
+route.route("/search").get(giftController.search);
 
 module.exports = router;
