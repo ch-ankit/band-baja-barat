@@ -1,25 +1,34 @@
 const initialState={
     uid:null,
     vatNo: null,
-    userData:null
+    userData:null,
+    userEmail: null,
 }
 
 export const reducerr=(state=initialState,action)=>{
     switch (action.type){
         case 'UserLog':
             return {
+                ...state,
                 uid:action.payload
             }
         case 'UserData':
             return{
+                ...state,
                 userData: action.payload
             }
+            case 'UserEmail':
+                return{
+                    ...state,
+                    userEmail: action.payload,
+                    
+                }
         
         case 'VatNo':
                 return{
                     vatNo:action.payload
                 }
         default:
-            return state;
+            return{ ...state}
     }
 }

@@ -8,11 +8,13 @@ import PopResult from "./PopResult";
 import PartyD from './PartyD.js';
 import UserD from './UserD.js';
 import ZoneD from './ZoneD.js';
+import { useSelector } from 'react-redux';
 function UserHeader() {
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState(PartyD);
     const [search, setsearch] = useState('');
     const [drop, setdrop] = useState(false)
+    const UserData = useSelector(state => state.userData ?? [])
     const handleChange=(e)=>{
         switch(e.target.value){
             case 'Party Palace':
@@ -68,7 +70,13 @@ function UserHeader() {
                 <Link to='/Party' className="userHeader__link">Party Palaces</Link>
                 <Link to='/Band' className="userHeader__link">Bands</Link>
                 <Link to='/giftstore' className="userHeader__link">Gift Store</Link>
-                <Avatar src="fggdfg" alt="Babin Khatri" onClick={() => setDrawer(!drawer)} />
+                {Object.keys(UserData).map((keys)=>{
+                    return (
+                        <Avatar src="fggdfg" alt={UserData[0].userName} onClick={() => setDrawer(!drawer)} />
+                    )
+
+                })}
+                
                 {drawer ? <TemporaryDrawer /> : ''}
             </div>
         </div>

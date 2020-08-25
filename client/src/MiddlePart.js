@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { auth } from './firebaseConfig';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreate } from './redux/action.js';
+import { actionCreate, UserEmail } from './redux/action.js';
 
 function MiddlePart() {
     const uid = useSelector(state => state.uid)
@@ -29,12 +29,13 @@ function MiddlePart() {
             
             if (authUser) {
                 dispatch(actionCreate(authUser.uid));
-                console.log(authUser.uid);
+                dispatch(UserEmail(authUser.email));
                 setUser(authUser);
+                
             } else {
                 setUser(null);
             }
-        }), [uid])
+        }), [])
 
     return (
         <div>

@@ -19,3 +19,10 @@ export const UserData=(userData)=>{
         payload: userData
     }
 }
+export const UserEmail=(userEmail)=>{
+    return {
+        type:'UserEmail',
+        payload: userEmail
+    }
+}
+
