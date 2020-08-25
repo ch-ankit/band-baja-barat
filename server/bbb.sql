@@ -81,8 +81,8 @@ USE bb2;
    brideName VARCHAR(255),
    eventDate DATE,
    shift VARCHAR(255),
-   eventStatus VARCHAR(255),
-   hostStatus  VARCHAR(255),
+   eventStatus VARCHAR(255) DEFAULT "UPCOMING",
+   hostStatus  VARCHAR(255) DEFAULT "PENDING",
    PRIMARY KEY (id),
    FOREIGN KEY (organizerId) REFERENCES organizer(id)
  );

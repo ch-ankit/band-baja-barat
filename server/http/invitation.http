@@ -1,0 +1,15 @@
+GET http://localhost:9000/invitation/prototype
+
+###
+GET http://localhost:9000/invitation/draft
+
+###
+POST http://localhost:9000/invitation/draft
+Content-Type: application/json
+
+{
+    "eventId":,
+    "draft":"1234567890 jkashgfgd kadfegvh lakdnkefjbh akmlnfjskbh akmlnj",
+    "backgroundimage1":"image1",
+    "backgroundimage2":"image2"
+}

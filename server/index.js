@@ -12,6 +12,9 @@ const giftRouter = require("./routes/giftstore");
 const hostRouter = require("./routes/host");
 const bandRouter = require("./routes/band");
 const userHomeRouter = require("./routes/userHome");
+const invitationRouter = require("./routes/invitation");
+const organizerRouter = require("./routes/organizer");
+const eventRouter = require("./routes/event");
 
 app = express();
 app.use(bodyParser.json());
@@ -25,7 +28,9 @@ app.use("/giftstore", giftRouter);
 app.use("/host", hostRouter);
 app.use("/band", bandRouter);
 app.use("/userhome", userHomeRouter);
-
+app.use("/invitation", invitationRouter);
+app.use("/organizer", organizerRouter);
+app.use("/event", eventRouter);
 
 // mysqlConnection.query(
 //   "SELECT * FROM user limit 2",
