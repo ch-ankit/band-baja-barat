@@ -8,7 +8,7 @@ exports.product = async (req, res, next) => {
         if (rows.length == 0) res.json({ message: "Store Empty", data: [] });
         else res.json({ status: "success", data: rows });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -30,9 +30,11 @@ exports.addProduct = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json({ message: `${req.body.modelNo} has been added to the store` });
+        res.json({
+          message: `${req.body.modelNo} has been added to the store`,
+        });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -49,7 +51,7 @@ exports.updateProduct = async (req, res, next) => {
           `${req.body.modelNo} quantity updated by ${req.body.quantity} and price is ${req.body.price} `
         );
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -67,7 +69,7 @@ exports.deleteProduct = async (req, res, next) => {
           message: `${req.body.modelNo} is deleted `,
         });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -86,7 +88,7 @@ exports.orderedProduct = async (req, res, next) => {
         if (rows.length == 0) res.json("No order placed yet");
         else res.json({ status: "success", data: rows });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -109,7 +111,7 @@ exports.addOrder = async (req, res, next) => {
       if (!err) {
         res.json(`${req.body.giftId} added to order by ${req.body.userName}`);
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -124,7 +126,7 @@ exports.deleteOrder = async (req, res, next) => {
       if (!err) {
         res.json(`orderNo ${req.query.orderNo}  order deleted`);
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -137,10 +139,11 @@ exports.basketData = async (req, res, next) => {
     var sql = ` SELECT * FROM basket WHERE userName = "${req.query.userName}" `;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json({ status: 'success', data: [], message: 'Empty Basket' });
+        if (rows.length == 0)
+          res.json({ status: "success", data: [], message: "Empty Basket" });
         else res.json({ status: "Items in basket", data: rows });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -157,9 +160,12 @@ exports.addBasket = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json({ status: 'success', message: `${req.body.modelNo} added to basket` });
+        res.json({
+          status: "success",
+          message: `${req.body.modelNo} added to basket`,
+        });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -174,7 +180,7 @@ exports.updateBasket = async (req, res, next) => {
       if (!err) {
         res.json("updated in basket");
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -187,9 +193,12 @@ exports.deleteBasket = async (req, res, next) => {
     var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json({ message: `${req.body.modelNo} removed from basket`, data: [] });
+        res.json({
+          message: `${req.body.modelNo} removed from basket`,
+          data: [],
+        });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -202,10 +211,11 @@ exports.productRating = async (req, res, next) => {
     var sql = ` SELECT value FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
-        if (rows.legth === 0) res.json({ message: 'no previous rating', data: [] })
+        if (rows.legth === 0)
+          res.json({ message: "no previous rating", data: [] });
         else res.json({ message: "success", data: rows });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -229,11 +239,11 @@ exports.addRating = async (req, res, next) => {
               `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} `
             );
           } else {
-            res.json(err);
+            res.json({ error: err });
           }
         });
       } else {
-        res.json(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
@@ -258,11 +268,11 @@ exports.updateRating = async (req, res, next) => {
                     `${req.query.modelNo} rating updated by ${req.query.userName}`
                   );
                 } else {
-                  res.json(err);
+                  res.json({ error: err });
                 }
               });
             } else {
-              res.json(err);
+              res.json({ error: err });
             }
           });
         } else {
@@ -270,6 +280,23 @@ exports.updateRating = async (req, res, next) => {
         }
       }
     );
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.search = (req, res, next) => {
+  try {
+    var sql = ` SELECT hostName, CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}"  `;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        if (rows.length == 0)
+          res.json({ status: "no matching data", data: [] });
+        else res.json({ data: rows });
+      } else {
+        res.json({ error: err });
+      }
+    });
   } catch (err) {
     next(err);
   }

@@ -9,7 +9,7 @@ exports.user = async (req, res, next) => {
           if (rows.length == 0) res.json({ status: "login failed" });
           else res.json({ status: "login success", data: rows });
         } else {
-          res.json(err);
+          res.json({ error: err });
         }
       }
     );
@@ -21,13 +21,13 @@ exports.user = async (req, res, next) => {
 exports.host = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `SELECT * FROM host WHERE  vatNo="${req.body.vatNo}" AND password="${req.body.password}"`,
+      `SELECT * FROM host WHERE  email="${req.body.email}"`,
       (err, rows, fields) => {
         if (!err) {
           if (rows.length == 0) res.json("LOGIN ERROR");
           else res.json({ status: "LOGIN SUCCESSFUL", data: rows });
         } else {
-          res.json(err);
+          res.json({ error: err });
         }
       }
     );
@@ -45,7 +45,7 @@ exports.admin = async (req, res, next) => {
           if (rows.length == 0) res.json("LOGIN ERROR");
           else res.json({ status: "LOGIN SUCCESSFUL", data: "admin" });
         } else {
-          res.json(err);
+          res.json({ error: err });
         }
       }
     );

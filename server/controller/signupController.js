@@ -22,7 +22,7 @@ exports.addUser = async (req, res, next) => {
         if (!err) {
           res.json(" USER Sign up successful");
         } else {
-          res.json(err);
+          res.json({ error: err });
         }
       }
     );
@@ -53,7 +53,7 @@ exports.addHost = async (req, res, next) => {
       if (!err) {
         res.json("HOST Sign up successful");
       } else {
-        res.send(err);
+        res.json({ error: err });
       }
     });
   } catch (err) {
