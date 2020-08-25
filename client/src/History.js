@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap'
-import Header from './Header';
+import './History.css'
 
 function History({ userId }) {
     const [history, setHistory] = useState()
@@ -17,7 +17,6 @@ function History({ userId }) {
     }
     return (
         <div className="history">
-            <Header />
             <Table striped bordered hover>
                 <thead>
                     <tr>

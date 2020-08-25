@@ -17,8 +17,11 @@ import PartyDetail from "./PartyDetail.js";
 import BandDetail from "./BandDetail.js";
 import History from "./History";
 import AddProduct from "./AddProduct";
+import SearchDisplay from "./SearchDisplay";
+import { useStateValue } from "./StateProvider";
 
 function App() {
+  const [{ searchQuery }] = useStateValue();
   return (
     <Router>
       <div className="app">
@@ -44,22 +47,23 @@ function App() {
           <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}
           <Route path="/checkout">
-            <Header />
+            <div className="headerz"><Header /></div>
             <Checkout />
           </Route>
           <Route path="/addPoints">
             <h1>Payment page</h1>
           </Route>
           <Route path="/history">
+            <div className="headerz"><Header /></div>
             <History />
           </Route>
-          <Route path="/details">
-            <Header />
+          <Route path="/products/:modelNo">
+            <div className="headerz"><Header /></div>
             <Details />
           </Route>
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
-          <Route path="/products/:modelNo" render={() => <Details />} />
+          <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
         </Switch>
       </div>
     </Router >

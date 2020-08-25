@@ -110,7 +110,6 @@ function Details(props) {
         />)
     return (
         <div className="details">
-            <Header />
             <div className="details__body">
                 <img className="details__image" src={image} />
                 <div className="details__description">

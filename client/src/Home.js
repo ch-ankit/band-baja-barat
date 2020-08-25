@@ -17,7 +17,7 @@ function ControlledCarousel() {
     setIndex(selectedIndex);
   };
   return (
-    <div className="home">
+    <div className="carousalHome">
       <Carousel
         className="carousal"
         activeIndex={index}
@@ -87,7 +87,7 @@ function Home(props) {
   )
   return (
     <div className="home">
-      <Header />
+      <div className="headerz"><Header /></div>
       <ControlledCarousel />
       <div className="home__row">
         {isAdmin && adminAddProduct}

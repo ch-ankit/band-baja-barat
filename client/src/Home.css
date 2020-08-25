@@ -3,6 +3,17 @@
     margin-left: auto;
     margin-right: auto;
 }
+.headerz{
+    width: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 100;
+}
+
+.carousalHome{
+    margin-top:80px;
+}
+
 .home__image {
     width: 100%;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
