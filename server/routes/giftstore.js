@@ -27,6 +27,6 @@ router
   .post(giftController.addRating) //completed
   .patch(giftController.updateRating); //completed
 
-route.route("/search").get(giftController.search);
+router.route("/search").get(giftController.search);
 
 module.exports = router;
