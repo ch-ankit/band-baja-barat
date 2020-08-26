@@ -10,6 +10,7 @@ import SearchDrop from "./SearchDrop";
 function Header(props) {
   const [{ basket, user }, dispatch] = useStateValue();
   const [inputSearch, setInputSearch] = useState('')
+  const [focus, setFocus] = useState(false)
   const [basketData, setBasketData] = useState([])
   const [searchedData, setSearchedData] = useState([])
   let totalItems = 0
@@ -49,6 +50,12 @@ function Header(props) {
   if (searchedData !== undefined) {
     check = (display.props.children !== "No result Found")
   }
+  const handleBlur = () => {
+    setFocus(false)
+  }
+  const handleFocus = () => {
+    setFocus(true)
+  }
   return (
     <div className="giftheader">
       <nav className="headergift">
@@ -63,7 +70,7 @@ function Header(props) {
         </Link>
         {/* Searchbox */}
         <div className="header__searchgift">
-          <input onChange={e => setInputSearch(e.target.value)} type="text" value={inputSearch} className="header__searchInputgift" />
+          <input onChange={e => setInputSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} type="text" value={inputSearch} className="header__searchInputgift" />
           <Link to={`/giftstore/products/search?query=${inputSearch}`}><SearchIcon className="header__searchIcongift" /></Link>
         </div>
         {/* 3-Links */}
@@ -95,10 +102,10 @@ function Header(props) {
           </Link>
         </div>
       </nav>
-      <div className="searchDrop">
+      {focus && <div className="searchDrop">
         {display}
         {check && <Link className="seemore" to={`/giftstore/products/search?query=${inputSearch}`}>See More...</Link>}
-      </div>
+      </div>}
     </div>
   );
 }
