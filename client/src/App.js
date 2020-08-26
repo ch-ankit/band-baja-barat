@@ -19,6 +19,7 @@ import History from "./History";
 import AddProduct from "./AddProduct";
 import SearchDisplay from "./SearchDisplay";
 import { useStateValue } from "./StateProvider";
+import UserInfo from "./UserInfo.js";
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -28,7 +29,7 @@ function App() {
         <Switch>
 
           {/* Routes from logins */}
-          <Route path="/User" render={() => <UserPage />} />
+          <Route exact path="/User" render={() => <UserPage />} />
           <Route path="/invite" render={() => <Invite />} />
           <Route exact path="/">
             <HeaderHome />
@@ -43,6 +44,7 @@ function App() {
           <Route path='/bands/:band' children={<BandDetail />} />
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
 
+          <Route path='/User/userInfo' component={UserInfo} />
           {/*Sign up page */}
           <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}

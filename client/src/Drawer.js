@@ -51,11 +51,15 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['My Information', 'Invitations', 'Devices & Credentials', 'Orders'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button  onClick={()=>history.push('/User/userInfo')}>
+          <ListItemText primary='My Information' />
+        </ListItem>
+        <ListItem button >
+          <ListItemText primary='Invitations' />
+        </ListItem>
+        <ListItem button >
+          <ListItemText primary='Orders' />
+        </ListItem>
       </List>
       <Divider />
       <List>
