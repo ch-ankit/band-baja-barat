@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CheckoutProduct.css'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -7,7 +7,7 @@ import ReactStars from "react-rating-stars-component";
 
 
 function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun, renSubtotal }) {
-    const [{ basket, user }, dispatch] = useStateValue()
+    const [{ user }] = useStateValue()
     let [addedQuantity, setAddedQuantity] = useState(quantity)
     const addQuantity = async () => {
         let newQuantity = addedQuantity + 1;

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "./StateProvider";
+import { v4 as uuidv4 } from 'uuid'
+
 import logo from "./images/logo.png";
 import SearchDrop from "./SearchDrop";
+import "./Header.css";
 
 function Header(props) {
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [{ basket, user }] = useStateValue();
   const [inputSearch, setInputSearch] = useState('')
   const [focus, setFocus] = useState(false)
   const [basketData, setBasketData] = useState([])
@@ -43,7 +45,7 @@ function Header(props) {
 
   if (searchedData !== undefined) {
     //Randomly displaying first 8 eight elements
-    const mapSearchData = Object.keys(searchedData).slice(0, (searchedData.length > 8 ? 8 : searchedData.length)).map(items => <SearchDrop image={searchedData[items].photo} name={searchedData[items].name} modelNo={searchedData[items].modelNo} />)
+    const mapSearchData = Object.keys(searchedData).slice(0, (searchedData.length > 8 ? 8 : searchedData.length)).map(items => <SearchDrop key={uuidv4()} image={searchedData[items].photo} name={searchedData[items].name} modelNo={searchedData[items].modelNo} />)
     display = searchedData.length !== 0 ? <ol className="search__display">{mapSearchData}</ol> : <div style={{ color: 'white' }}>No result Found</div>
   }
   if (searchedData !== undefined) {

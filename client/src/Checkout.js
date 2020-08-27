@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import './Checkout.css'
 import Subtotal from './Subtotal';
 function Checkout(props) {
-    const [{ basket, user }, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     let [data, setData] = useState([]);
     const [basketData, setBasketData] = useState([]);
     let [message, setMessage] = useState('')
@@ -45,7 +45,7 @@ function Checkout(props) {
                 method: 'DELETE', headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify(dbBody)
             })
-        const { message, data } = await response.json()
+        const { message } = await response.json()
         setMessage(message)
         dispatch({
             type: 'REMOVE_FROM_BASKET',

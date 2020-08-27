@@ -60,7 +60,7 @@ function SearchDisplay({ location }) {
         <div className="searchPage">
             <span>Search result for "{searchQuery}"</span>
             <div className="searcheditems">
-                {searchedData.length !== 0 ? displaySearched : <span>💥💥 No such products found in Store!! 💥💥</span>}
+                {searchedData.length !== 0 ? displaySearched : <span><span role="img" aria-label="emoji">💥💥</span> No such products found in Store!! <span role="img" aria-label="emoji">💥💥</span></span>}
             </div>
         </div>
     );
