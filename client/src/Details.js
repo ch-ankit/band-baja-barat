@@ -7,12 +7,14 @@ import './Details.css'
 import { useStateValue } from './StateProvider';
 
 function Details(props) {
-    const [{ basket, product, isAdmin, user }, dispatch] = useStateValue()
+    const [{ product, isAdmin, user }, dispatch] = useStateValue()
     const { id, image, description, price, title, rating } = product
-    let [addedQuantity, setAddedQuantity] = useState(1)
-    let [productRating, setproductRating] = useState([])
-    let [userBasket, setUserBasket] = useState([])
-    let [prodRating, setProdRating] = useState(0)
+    const [addedQuantity, setAddedQuantity] = useState(1)
+    const [productRating, setproductRating] = useState([])
+    const [userBasket, setUserBasket] = useState([])
+    const [edit, setEdit] = useState(false)
+    const [prodRating, setProdRating] = useState(0)
+    const [editableDescription, setEditabledescription] = useState(description)
     let rated = 0.0;
 
     useEffect(() => {
@@ -108,6 +110,17 @@ function Details(props) {
                 updateRating(data)
             }}
         />)
+    const handleSubmit = async () => {
+        const response = await fetch('http://localhost:9000/giftstore/product',
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                // body: JSON.stringify()
+            }
+        )
+    }
     return (
         <div className="details">
             <div className="details__body">
@@ -131,7 +144,8 @@ function Details(props) {
                             />)}
                         <span>Average Rating: {rating}</span>
                     </div>
-                    <p>{description}</p>
+                    {edit ? <form onSubmit={handleSubmit}><textarea type='text' value={editableDescription} onChange={e => setEditabledescription(e.target.value)} /></form> : <p>{description}</p>}
+                    {isAdmin && <button type='submit' onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Edit'}</button>}
                     <p className="price">
                         <small>Rs.</small>
                         <small>{price}</small>

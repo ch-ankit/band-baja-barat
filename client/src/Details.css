@@ -36,7 +36,7 @@
 }
 .details__image {
     max-width: 40%;
-    object-fit: contain;
+    object-fit: cover;
     margin-left: 20px;
 }
 .details__description {

@@ -13,6 +13,7 @@ function Header(props) {
   const [focus, setFocus] = useState(false)
   const [basketData, setBasketData] = useState([])
   const [searchedData, setSearchedData] = useState([])
+  const [searchDropFocus, setSearchdropfocus] = useState(false)
   let totalItems = 0
   let display = [];
   let check = false;
@@ -39,19 +40,17 @@ function Header(props) {
       totalItems = totalItems + element.quantity
     })
   }
-  function random(a) {
-    return Math.floor(Math.random() * a)
-  }
+
   if (searchedData !== undefined) {
     //Randomly displaying first 8 eight elements
-    const mapSearchData = Object.keys(searchedData).sort(() => random(searchedData.length)).slice(0, (searchedData.length > 8 ? 8 : searchedData.length)).map(items => <SearchDrop image={searchedData[items].photo} name={searchedData[items].name} modelNo={searchedData[items].modelNo} />)
+    const mapSearchData = Object.keys(searchedData).slice(0, (searchedData.length > 8 ? 8 : searchedData.length)).map(items => <SearchDrop image={searchedData[items].photo} name={searchedData[items].name} modelNo={searchedData[items].modelNo} />)
     display = searchedData.length !== 0 ? <ol className="search__display">{mapSearchData}</ol> : <div style={{ color: 'white' }}>No result Found</div>
   }
   if (searchedData !== undefined) {
     check = (display.props.children !== "No result Found")
   }
   const handleBlur = () => {
-    setFocus(false)
+    if (!searchDropFocus) { setFocus(false) }
   }
   const handleFocus = () => {
     setFocus(true)
@@ -102,7 +101,7 @@ function Header(props) {
           </Link>
         </div>
       </nav>
-      {focus && <div className="searchDrop">
+      {focus && <div className="searchDrop" onMouseEnter={() => setSearchdropfocus(true)} onMouseLeave={() => setSearchdropfocus(false)} >
         {display}
         {check && <Link className="seemore" to={`/giftstore/products/search?query=${inputSearch}`}>See More...</Link>}
       </div>}
