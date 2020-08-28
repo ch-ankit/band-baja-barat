@@ -3,28 +3,20 @@ import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "./StateProvider";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 import logo from "./images/logo.png";
 import SearchDrop from "./SearchDrop";
 import "./Header.css";
 
 function Header(props) {
-<<<<<<< HEAD
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [{ basket, user }] = useStateValue();
   const [inputSearch, setInputSearch] = useState("");
+  const [focus, setFocus] = useState(false);
   const [basketData, setBasketData] = useState([]);
   const [searchedData, setSearchedData] = useState([]);
+  const [searchDropFocus, setSearchdropfocus] = useState(false);
   let totalItems = 0;
-=======
-  const [{ basket, user }] = useStateValue();
-  const [inputSearch, setInputSearch] = useState('')
-  const [focus, setFocus] = useState(false)
-  const [basketData, setBasketData] = useState([])
-  const [searchedData, setSearchedData] = useState([])
-  const [searchDropFocus, setSearchdropfocus] = useState(false)
-  let totalItems = 0
->>>>>>> aa60d101d3098126b849da4bb89b744e018e63a0
   let display = [];
   let check = false;
   useEffect(() => {
@@ -58,45 +50,37 @@ function Header(props) {
       totalItems = totalItems + element.quantity;
     });
   }
-<<<<<<< HEAD
-  function random(a) {
-    return Math.floor(Math.random() * a);
-  }
+
   if (searchedData !== undefined) {
     //Randomly displaying first 8 eight elements
     const mapSearchData = Object.keys(searchedData)
-      .sort(() => random(searchedData.length))
       .slice(0, searchedData.length > 8 ? 8 : searchedData.length)
       .map((items) => (
         <SearchDrop
+          key={uuidv4()}
           image={searchedData[items].photo}
           name={searchedData[items].name}
           modelNo={searchedData[items].modelNo}
         />
       ));
     display =
-      searchedData.length === 0 && inputSearch !== "" ? (
-        <div style={{ color: "white" }}>No result Found</div>
-      ) : (
+      searchedData.length !== 0 ? (
         <ol className="search__display">{mapSearchData}</ol>
+      ) : (
+        <div style={{ color: "white" }}>No result Found</div>
       );
-=======
-
-  if (searchedData !== undefined) {
-    //Randomly displaying first 8 eight elements
-    const mapSearchData = Object.keys(searchedData).slice(0, (searchedData.length > 8 ? 8 : searchedData.length)).map(items => <SearchDrop key={uuidv4()} image={searchedData[items].photo} name={searchedData[items].name} modelNo={searchedData[items].modelNo} />)
-    display = searchedData.length !== 0 ? <ol className="search__display">{mapSearchData}</ol> : <div style={{ color: 'white' }}>No result Found</div>
->>>>>>> aa60d101d3098126b849da4bb89b744e018e63a0
   }
   if (display.length !== 0) {
     check = true;
   }
   const handleBlur = () => {
-    if (!searchDropFocus) { setFocus(false) }
-  }
+    if (!searchDropFocus) {
+      setFocus(false);
+    }
+  };
   const handleFocus = () => {
-    setFocus(true)
-  }
+    setFocus(true);
+  };
   return (
     <div className="giftheader">
       <nav className="headergift">
@@ -111,9 +95,10 @@ function Header(props) {
         </Link>
         {/* Searchbox */}
         <div className="header__searchgift">
-<<<<<<< HEAD
           <input
             onChange={(e) => setInputSearch(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             type="text"
             value={inputSearch}
             className="header__searchInputgift"
@@ -121,10 +106,6 @@ function Header(props) {
           <Link to={`/giftstore/products/search?query=${inputSearch}`}>
             <SearchIcon className="header__searchIcongift" />
           </Link>
-=======
-          <input onChange={e => setInputSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} type="text" value={inputSearch} className="header__searchInputgift" />
-          <Link to={`/giftstore/products/search?query=${inputSearch}`}><SearchIcon className="header__searchIcongift" /></Link>
->>>>>>> aa60d101d3098126b849da4bb89b744e018e63a0
         </div>
         {/* 3-Links */}
         <div className="header__navgift">
@@ -155,22 +136,23 @@ function Header(props) {
           </Link>
         </div>
       </nav>
-      {focus && <div className="searchDrop" onMouseEnter={() => setSearchdropfocus(true)} onMouseLeave={() => setSearchdropfocus(false)} >
-        {display}
-<<<<<<< HEAD
-        {check && (
-          <Link
-            className="seemore"
-            to={`/giftstore/products/search?query=${inputSearch}`}
-          >
-            See More...
-          </Link>
-        )}
-      </div>
-=======
-        {check && <Link className="seemore" to={`/giftstore/products/search?query=${inputSearch}`}>See More...</Link>}
-      </div>}
->>>>>>> aa60d101d3098126b849da4bb89b744e018e63a0
+      {focus && (
+        <div
+          className="searchDrop"
+          onMouseEnter={() => setSearchdropfocus(true)}
+          onMouseLeave={() => setSearchdropfocus(false)}
+        >
+          {display}
+          {check && (
+            <Link
+              className="seemore"
+              to={`/giftstore/products/search?query=${inputSearch}`}
+            >
+              See More...
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   );
 }
