@@ -52,7 +52,6 @@ function Header(props) {
   }
 
   if (searchedData !== undefined) {
-    //Randomly displaying first 8 eight elements
     const mapSearchData = Object.keys(searchedData)
       .slice(0, searchedData.length > 8 ? 8 : searchedData.length)
       .map((items) => (
@@ -67,8 +66,8 @@ function Header(props) {
       searchedData.length !== 0 ? (
         <ol className="search__display">{mapSearchData}</ol>
       ) : (
-        <div style={{ color: "white" }}>No result Found</div>
-      );
+          <div style={{ color: "white" }}>No result Found</div>
+        );
   }
   if (display.length !== 0) {
     check = true;

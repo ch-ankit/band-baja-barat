@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap'
-import './History.css'
+import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+import "./History.css";
 
 function History({ userId }) {
-    const [history, setHistory] = useState()
+    const [history, setHistory] = useState();
     useEffect(() => {
         async function fetchHistory() {
-            const response = await fetch('http://localhost:9000/giftstore/orders')
+            const response = await fetch(
+                "http://localhost:9000/giftstore/orders"
+            );
             const data = await response.json();
-            setHistory(data.data)
+            setHistory(data.data);
         }
         fetchHistory();
-    }, [])
+    }, []);
     if (history) {
-        const userHistory = Object.keys(history).map(keys => history[keys].userId === userId)
+        const userHistory = Object.keys(history).map(
+            (keys) => history[keys].userId === userId
+        );
     }
     return (
         <div className="history">
