@@ -2,7 +2,7 @@ export const initialState = {
     basket: [
     ],
     user: { userName: 'junushu' },
-    isAdmin: false,
+    isAdmin: true,
 }
 
 export const getBasketTotal = (basket) =>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import ReactStars from "react-rating-stars-component";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -7,13 +6,14 @@ import './Details.css'
 import { useStateValue } from './StateProvider';
 
 function Details(props) {
-    const [{ basket, product, isAdmin, user }, dispatch] = useStateValue()
+    const [{ product, isAdmin, user }, dispatch] = useStateValue()
     const { id, image, description, price, title, rating } = product
-    let [addedQuantity, setAddedQuantity] = useState(1)
-    let [productRating, setproductRating] = useState([])
-    let [userBasket, setUserBasket] = useState([])
-    let [prodRating, setProdRating] = useState(0)
-    let rated = 0.0;
+    const [addedQuantity, setAddedQuantity] = useState(1)
+    const [productRating, setproductRating] = useState([])
+    const [userBasket, setUserBasket] = useState([])
+    const [edit, setEdit] = useState(false)
+    const [prodRating, setProdRating] = useState(0)
+    const [editableDescription, setEditabledescription] = useState(description)
 
     useEffect(() => {
         async function productRating() {
@@ -28,7 +28,7 @@ function Details(props) {
     useEffect(() => {
         async function getBasket() {
             const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${user.userName}`)
-            const { status, data } = await response.json();
+            const { data } = await response.json();
             setUserBasket(data)
         }
         getBasket();
@@ -93,7 +93,6 @@ function Details(props) {
     }
 
     const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
-    if (productRating.length !== 0) { rated = productRating[0].value }
     const star = Object.keys(productRating).map((item) =>
         <ReactStars
             count={5}
@@ -108,10 +107,24 @@ function Details(props) {
                 updateRating(data)
             }}
         />)
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('hello')
+        const response = await fetch('http://localhost:9000/giftstore/product',
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                // body: JSON.stringify()
+            }
+        )
+        setEdit(!edit)
+    }
     return (
         <div className="details">
             <div className="details__body">
-                <img className="details__image" src={image} />
+                <img className="details__image" src={image} alt="product" />
                 <div className="details__description">
                     <h2>{title}</h2>
                     <div className="rating">
@@ -131,7 +144,16 @@ function Details(props) {
                             />)}
                         <span>Average Rating: {rating}</span>
                     </div>
-                    <p>{description}</p>
+                    {edit ?
+                        (
+                            <form className="descriptionForm" onSubmit={handleSubmit}>
+                                <textarea type='text' value={editableDescription} onChange={e => setEditabledescription(e.target.value)} />
+                                <button>Save</button>
+                            </form>
+                        )
+                        :
+                        (<p>{description}</p>)}
+                    {isAdmin && edit ? (<button type='submit' onClick={() => setEdit(!edit)} hidden>Edit</button>) : (<button type='submit' onClick={() => setEdit(!edit)}>Edit</button>)}
                     <p className="price">
                         <small>Rs.</small>
                         <small>{price}</small>

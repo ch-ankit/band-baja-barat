@@ -36,7 +36,7 @@
 }
 .details__image {
     max-width: 40%;
-    object-fit: contain;
+    object-fit: cover;
     margin-left: 20px;
 }
 .details__description {
@@ -54,4 +54,15 @@
 
 .disabled:hover {
     cursor: not-allowed;
+}
+
+.descriptionForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.descriptionForm>button{
+    background-color: #f0c14b;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
 }

@@ -133,7 +133,7 @@ function AddProduct(props) {
                 <img src={viewFile} />
                 <button type="submit" form="productForm">Submit</button>
             </form>
-            {url !== '' && <img src={url} alt='uploaded image' />}
+            {url !== '' && <img src={url} alt='uploaded' />}
         </div>
     );
 }
