@@ -195,7 +195,7 @@ function Details(props) {
                             onClick={() => setEdit(!edit)}
                             hidden
                         >
-                            Edit
+                            Save
                         </button>
                     ) : (
                         <button type="submit" onClick={() => setEdit(!edit)}>
