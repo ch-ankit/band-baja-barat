@@ -4,17 +4,19 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import "./Details.css";
 import { useStateValue } from "./StateProvider";
+import { FormFile } from "react-bootstrap";
 
-function Details(props) {
+function Details({ location }) {
     const [{ product, isAdmin, user }, dispatch] = useStateValue();
     const { id, image, description, price, title, rating } = product;
+    const [details, setDetails] = useState();
     const [addedQuantity, setAddedQuantity] = useState(1);
     const [productRating, setproductRating] = useState([]);
     const [userBasket, setUserBasket] = useState([]);
     const [edit, setEdit] = useState(false);
     const [prodRating, setProdRating] = useState(0);
     const [editableDescription, setEditabledescription] = useState(description);
-
+    const query = location.search.slice(9, location.search.length);
     useEffect(() => {
         async function productRating() {
             const response = await fetch(
@@ -25,6 +27,14 @@ function Details(props) {
                 setproductRating(newRating.data);
             }
         }
+        async function productDetail() {
+            const response = await fetch(
+                `http://localhost:9000/giftstore/products/details?modelNo=${query}`
+            );
+            const { data } = await response.json();
+            setDetails(data);
+        }
+        productDetail();
         productRating();
     }, [prodRating]);
     useEffect(() => {

@@ -24,7 +24,7 @@ function Product(props) {
     return (
         <div className="product">
             <div className="product__info">
-                <Link to={`/products/${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
+                <Link to={`/giftstore/products/details?modelNo=${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
                     <p>{title}</p>
                 </Link>
                 <p className="product__price">
@@ -41,7 +41,7 @@ function Product(props) {
                 />
             </div>
             <div style={{ textDecoration: 'none', color: 'black', height: '200px', marginBottom: '15px' }}>
-                <Link to={`/products/${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
+                <Link to={`/giftstore/products/details?modelNo=${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
                     <img className="image" src={image} alt="product" />
                 </Link>
             </div>

@@ -59,10 +59,14 @@ function App() {
             <div className="headerz"><Header /></div>
             <History />
           </Route>
-          <Route path="/products/:modelNo">
-            <div className="headerz"><Header /></div>
-            <Details />
-          </Route>
+          <Route path="/giftstore/products/details" render={(routeProps) => {
+            return (
+              <div>
+                <div className="headerz"><Header /></div>
+                <Details {...routeProps} />
+              </div>
+            )
+          }} />
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
