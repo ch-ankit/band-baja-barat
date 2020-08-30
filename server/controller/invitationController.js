@@ -92,3 +92,20 @@ exports.updateInvitationDraft = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteInvitationDraft = (req, res, next) => {
+  try {
+    var sql = ` DELETE FROM invitationdraft WHERE eventId = "${req.query.eventId}" `;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({
+          status: ` Invitation of event with ${req.query.eventId}" id deleted `,
+        });
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
