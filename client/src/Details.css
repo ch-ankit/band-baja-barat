@@ -2,11 +2,28 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin-top:80px;
+    height: fit-content;
+    width: 90vw;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .details__body {
     display: flex;
     flex-direction: row;
+}
+.tech__details {
+    display: flex;
+    background-color: white;
+    margin-top: 30px;
+    flex-direction: column;
+    height: fit-content;
+    width: 90vw;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .product__quantity {
     display: flex;
@@ -17,7 +34,7 @@
     display: flex;
     flex-direction: row;
     margin-bottom: inherit;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .product__quantityView > span {
     background-color: wheat;
@@ -33,15 +50,28 @@
     background-color: #f0c14b;
     border: 1px solid;
     border-color: #a88734 #9c7e31 #846a29;
+    max-width: 10vw;
 }
 .details__image {
-    max-width: 40%;
-    object-fit: cover;
-    margin-left: 20px;
+    max-width: 20vw;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10vw;
+    margin-left: 10vw;
+}
+.details__image > img {
+    width: 100%;
+    object-fit: contain;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .details__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     max-width: 50%;
-    margin-left: 10%;
+    margin-left: 0.1vw;
+    margin-bottom: 25px;
 }
 
 .price {
@@ -56,13 +86,20 @@
     cursor: not-allowed;
 }
 
-.descriptionForm{
+.descriptionForm {
     display: flex;
     flex-direction: column;
 }
 
-.descriptionForm>button{
+.descriptionForm > textarea {
+    height: 30vh;
+    width: 40vw;
+    margin-bottom: 15px;
+}
+
+.descriptionForm > button {
     background-color: #f0c14b;
     border: 1px solid;
     border-color: #a88734 #9c7e31 #846a29;
+    max-width: 10vw;
 }
