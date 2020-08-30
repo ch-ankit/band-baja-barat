@@ -5,7 +5,8 @@ router
   .route("/draft")
   .get(invitationController.invitationDraft)
   .post(invitationController.addInvitationDraft)
-  .patch(invitationController.updateInvitationDraft);
+  .patch(invitationController.updateInvitationDraft)
+  .delete(invitationController.deleteInvitationDraft);
 
 router.route("/prototype").get(invitationController.invitationPrototype);
 

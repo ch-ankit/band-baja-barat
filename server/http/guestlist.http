@@ -1,0 +1,19 @@
+GET http://localhost:9000/guestlist
+
+###
+POST http://localhost:9000/guestlist
+Content-Type: application/json
+
+{
+    "eventId":"4",
+    "userName":"junushu"
+}
+
+###
+DELETE http://localhost:9000/guestlist
+Content-Type: application/json
+
+{
+    "eventId":"4",
+    "userName":"junushu"
+}

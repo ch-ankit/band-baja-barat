@@ -39,11 +39,11 @@ exports.bandData = async (req, res, next) => {
 
 exports.userName = async (req, res, next) => {
   try {
-    var sql = `SELECT userName FROM user `;
+    var sql = `SELECT userName FROM user WHERE userName="${req.query.userName}" `;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json("No Host Registered");
-        else res.json({ status: "success", data: rows });
+        if (rows.length == 0) res.json(true);
+        else res.json(false);
       } else {
         res.json({ error: err });
       }

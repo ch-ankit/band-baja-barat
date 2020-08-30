@@ -2,7 +2,12 @@ const mysqlConnection = require("./../connection");
 
 exports.product = async (req, res, next) => {
   try {
-    var sql = `SELECT * FROM giftShop ORDER BY price`;
+    var sql;
+    if (req.query.modelNo) {
+      sql = ` SELECT * FROM giftShop WHERE modelNo = "${req.query.modelNo}" ORDER BY price `;
+    } else {
+      sql = `SELECT * FROM giftShop ORDER BY price`;
+    }
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
         if (rows.length == 0) res.json({ message: "Store Empty", data: [] });
@@ -44,16 +49,38 @@ exports.addProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
-    var sql = ` UPDATE giftShop SET quantity=quantity+${req.body.quantity},price= ${req.body.price} WHERE modelNo = "${req.body.modelNo}"`;
-    mysqlConnection.query(sql, (err) => {
-      if (!err) {
-        res.json(
-          `${req.body.modelNo} quantity updated by ${req.body.quantity} and price is ${req.body.price} `
-        );
-      } else {
-        res.json({ error: err });
+    mysqlConnection.query(
+      `SELECT quantity,price,description FROM giftShop WHERE modelNo = "${req.body.modelNo}"`,
+      (err, rows) => {
+        if (!err) {
+          oldData = rows;
+          var sql = ` UPDATE giftShop SET quantity=${
+            req.body.quantity == undefined
+              ? oldData[0].quantity
+              : quantity + req.body.quantity
+          },
+          price= ${
+            req.body.price == undefined ? oldData[0].price : req.body.price
+          },
+          description = "${
+            req.body.description == undefined
+              ? oldData[0].description
+              : req.body.description
+          }" WHERE modelNo = "${req.body.modelNo}"`;
+          mysqlConnection.query(sql, (err) => {
+            if (!err) {
+              res.json({
+                message: `${req.body.modelNo} quantity updated by ${req.body.quantity} and price is ${req.body.price} `,
+              });
+            } else {
+              res.json({ error: err });
+            }
+          });
+        } else {
+          res.json({ error: err });
+        }
       }
-    });
+    );
   } catch (err) {
     next(err);
   }

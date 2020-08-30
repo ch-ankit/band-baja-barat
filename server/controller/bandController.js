@@ -4,7 +4,7 @@ exports.bandData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.bandName == null) {
-      sql = ` SELECT bandName,profilePhoto,CONCAT(left(description,40),'...') AS description FROM band ORDER BY bandName`;
+      sql = ` SELECT bandName,profilePhoto,description FROM band ORDER BY bandName`;
     } else {
       sql = ` SELECT * FROM band  WHERE bandName = "${req.query.bandName}" `;
     }

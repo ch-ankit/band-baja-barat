@@ -50,7 +50,6 @@ exports.updateHostData = async (req, res, next) => {
       (err, rows) => {
         if (!err) {
           oldhostData = rows;
-          console.log(oldhostData);
           var sql = ` UPDATE host SET 
                   hostName = "${
                     req.body.hostName == undefined

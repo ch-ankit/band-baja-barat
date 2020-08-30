@@ -75,6 +75,16 @@ exports.updateEvent = async (req, res, next) => {
                       req.body.shift == undefined
                         ? oldEventData[0].shift
                         : req.body.shift
+                    }",
+                    hostStatus ="${
+                      req.body.hostStatus == undefined
+                        ? oldEventData[0].hostStatus
+                        : req.body.hostStatus
+                    }",
+                    eventStatus ="${
+                      req.body.eventStatus == undefined
+                        ? oldEventData[0].eventStatus
+                        : req.body.eventStatus
                     }"
                     WHERE id = ${req.body.eventId} `;
           mysqlConnection.query(sql, (err) => {
