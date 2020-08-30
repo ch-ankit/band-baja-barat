@@ -11,9 +11,14 @@ function Details({ location }) {
     const [addedQuantity, setAddedQuantity] = useState(1);
     const [productRating, setproductRating] = useState([]);
     const [userBasket, setUserBasket] = useState([]);
-    const [edit, setEdit] = useState(false);
+    const [editDescription, setEditDescription] = useState(false);
+    const [editPrice, setEditPrice] = useState(false);
+    const [editablePrice, setEditablePrice] = useState(0);
+    const [editQuantiy, setEditQuantity] = useState(false);
+    const [editableQuantity, setEditableQuantity] = useState(0);
     const [prodRating, setProdRating] = useState(0);
     const [editableDescription, setEditabledescription] = useState("");
+    const [updateMessage, setUpdateMessage] = useState('')
     const query = location.search.slice(9, location.search.length);
     useEffect(() => {
         async function productRating() {
@@ -30,8 +35,10 @@ function Details({ location }) {
                 `http://localhost:9000/giftstore/product?modelNo=${query}`
             );
             const { data } = await response.json();
-            let { modelNo, photo, description, price, name, rating } = data[0];
+            let { modelNo, photo, description, price, name, rating, quantity } = data[0];
             setEditabledescription(description);
+            setEditablePrice(price);
+            setEditableQuantity(quantity);
             setDetails({
                 modelNo,
                 photo,
@@ -39,11 +46,12 @@ function Details({ location }) {
                 price,
                 title: name,
                 rating,
+                quantity
             });
         }
         productDetail();
         productRating();
-    }, [prodRating]);
+    }, [prodRating, updateMessage]);
 
     //Fetching Basket of the user
     useEffect(() => {
@@ -153,20 +161,54 @@ function Details({ location }) {
         />
     ));
 
-    //Updating the Product details by the admin
-    const handleSubmit = async (event) => {
+    //Updating the Product description by the admin
+    const handleSubmitDescription = async (event) => {
         event.preventDefault();
-        // const response = await fetch(
-        //     "http://localhost:9000/giftstore/product",
-        //     {
-        //         method: "PATCH",
-        //         headers: {
-        //             "Content-type": "application/json",
-        //         },
-        //         body: JSON.stringify()
-        //     }
-        // );
-        setEdit(!edit);
+        const response = await fetch(
+            "http://localhost:9000/giftstore/product",
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ modelNo: details.modelNo, description: editableDescription })
+            }
+        );
+        const { message } = await response.json();
+        setUpdateMessage(message)
+        setEditDescription(!editDescription);
+    };
+    const handleSubmitPrice = async (event) => {
+        event.preventDefault();
+        const response = await fetch(
+            "http://localhost:9000/giftstore/product",
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ modelNo: details.modelNo, price: editablePrice })
+            }
+        );
+        const { message } = await response.json();
+        setUpdateMessage(message)
+        setEditPrice(!editPrice);
+    };
+    const handleSubmitQuantity = async (event) => {
+        event.preventDefault();
+        const response = await fetch(
+            "http://localhost:9000/giftstore/product",
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ modelNo: details.modelNo, quantity: editableQuantity })
+            }
+        );
+        const { message } = await response.json();
+        setUpdateMessage(message)
+        setEditQuantity(!editQuantiy);
     };
 
 
@@ -204,13 +246,51 @@ function Details({ location }) {
                             <span>Average Rating: {details.rating}</span>
                         </div>
                         <p className="price">
-                            <small>Rs.</small>
-                            <small>{details.price}</small>
+                            <div className="price__display">
+                                {editPrice ? (
+                                    <form
+                                        className="descriptionForm"
+                                        onSubmit={handleSubmitPrice}
+                                    >
+                                        <input
+                                            class="form-control"
+                                            type="number"
+                                            value={editablePrice}
+                                            onChange={(e) =>
+                                                setEditablePrice(e.target.value)
+                                            }
+                                        />
+                                        <button class="btn btn-primary">Save</button>
+                                    </form>
+                                ) : (
+                                        <small style={{ marginRight: '2px' }}>{details.price}</small>
+                                    )}
+                                <small> Store points</small>
+                            </div>
+
+                            {isAdmin &&
+                                (editPrice ? (
+                                    <button
+                                        type="submit"
+                                        onClick={() => setEditPrice(!editPrice)}
+                                        hidden
+                                    >
+                                        Save
+                                    </button>
+                                ) : (
+                                        <button
+                                            class="btn btn-primary"
+                                            type="submit"
+                                            onClick={() => setEditPrice(!editPrice)}
+                                        >
+                                            Edit
+                                        </button>
+                                    ))}
                         </p>
-                        {edit ? (
+                        {editDescription ? (
                             <form
                                 className="descriptionForm"
-                                onSubmit={handleSubmit}
+                                onSubmit={handleSubmitDescription}
                             >
                                 <textarea
                                     class="form-control"
@@ -226,10 +306,10 @@ function Details({ location }) {
                                 <p>{details.description}</p>
                             )}
                         {isAdmin &&
-                            (edit ? (
+                            (editDescription ? (
                                 <button
                                     type="submit"
-                                    onClick={() => setEdit(!edit)}
+                                    onClick={() => setEditDescription(!editDescription)}
                                     hidden
                                 >
                                     Save
@@ -238,7 +318,7 @@ function Details({ location }) {
                                     <button
                                         class="btn btn-primary"
                                         type="submit"
-                                        onClick={() => setEdit(!edit)}
+                                        onClick={() => setEditDescription(!editDescription)}
                                     >
                                         Edit
                                     </button>
@@ -246,13 +326,51 @@ function Details({ location }) {
 
                         <div className="product__quantity">
                             <p>Quantity:</p>
-                            <div className="product__quantityView">
+                            {!isAdmin ? (<div className="product__quantityView">
                                 {removeIcon}
                                 <span>{addedQuantity}</span>
                                 <div onClick={addQuantity}>
                                     <AddIcon />
                                 </div>
-                            </div>
+                            </div>) : (
+                                    editQuantiy ? (
+                                        <form
+                                            className="descriptionForm"
+                                            onSubmit={handleSubmitQuantity}
+                                        >
+                                            <input
+                                                class="form-control"
+                                                type="number"
+                                                value={editableQuantity}
+                                                onChange={(e) =>
+                                                    setEditableQuantity(e.target.value)
+                                                }
+                                            />
+                                            <button class="btn btn-primary">Save</button>
+                                        </form>
+                                    ) : (
+                                            <p>{details.quantity}</p>
+                                        )
+                                )}
+                            {isAdmin &&
+                                (editQuantiy ? (
+                                    <button
+                                        type="submit"
+                                        onClick={() => setEditQuantity(!editQuantiy)}
+                                        hidden
+                                    >
+                                        Add to Stock
+                                    </button>
+                                ) : (
+                                        <button
+                                            class="btn btn-primary"
+                                            type="submit"
+                                            onClick={() => setEditQuantity(!editQuantiy)}
+                                        >
+                                            Edit
+                                        </button>
+                                    ))}
+
                         </div>
                         {!isAdmin && (
                             <button onClick={addToBasket}>Add to Basket</button>
@@ -262,7 +380,19 @@ function Details({ location }) {
             </div>
             <div className="tech__details">
                 Product Description For {details.title}
-                <div className="Description"></div>
+                <div className="Description">
+                    <ol>
+                        <li>Brand: Palsonic Australia</li>
+                        <li>Model no.:TWF70-E12102A03</li>
+                        <li>7kg front load</li>
+                        <li>Digital display</li>
+                        <li>Stainless steel drum</li>
+                        <li>Powder coated metal body</li>
+                        <li>Energy efficiency</li>
+                        <li>Built in heater</li>
+                        <li>Low noise & vibration</li>
+                    </ol>
+                </div>
             </div>
         </div>
     );

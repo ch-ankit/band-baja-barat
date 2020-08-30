@@ -75,7 +75,14 @@
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
     margin-top: 5px;
+}
+
+.price__display {
+    display: flex;
+    margin-right: 2px;
 }
 
 .disabled {
@@ -102,4 +109,9 @@
     border: 1px solid;
     border-color: #a88734 #9c7e31 #846a29;
     max-width: 10vw;
+}
+
+.Description {
+    display: flex;
+    flex-direction: column;
 }
