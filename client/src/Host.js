@@ -2,9 +2,15 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Hauth } from './hostFirebaseConfig.js';
-
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Hostuid } from './redux/action.js';
+import {useHistory} from 'react-router-dom';
 function Host() {
     const [data, setdata] = useState([]);
+    const hostUid = useSelector(state => state.hostUid)
+    const dispatch = useDispatch();
+    const history=useHistory();
     useEffect(() => {
         async function getHostData() {
             const response = await fetch('http://localhost:9000/host?vatNo=771982');
@@ -16,6 +22,7 @@ function Host() {
 
     return (
         <div className='host'>
+            {hostUid ? '' : history.push('/')}
             {console.log(data)}
             {Object.keys(data).map((keys)=>{
                 return(
@@ -23,7 +30,7 @@ function Host() {
                 );
             })}
 
-            <button onClick={()=>Hauth.signOut()}>Log Out</button>
+            <button onClick={()=>{Hauth.signOut(); dispatch(Hostuid(null))}}>Log Out</button>
             
         </div>
     )

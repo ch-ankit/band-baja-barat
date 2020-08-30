@@ -25,4 +25,9 @@ export const UserEmail=(userEmail)=>{
         payload: userEmail
     }
 }
-
+export const Hostuid=(uid)=>{
+    return{
+        type:'Hostuid',
+        payload:uid
+    }
+}

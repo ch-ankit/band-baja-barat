@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { auth } from './firebaseConfig';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreate, UserEmail } from './redux/action.js';
+import { actionCreate, UserEmail, Hostuid } from './redux/action.js';
 import { Hauth } from './hostFirebaseConfig.js';
 
 function MiddlePart() {
@@ -54,7 +54,9 @@ function MiddlePart() {
         });
         Hauth.onAuthStateChanged((authUser)=>{
             if(authUser){
+                dispatch(Hostuid(authUser.uid))
                 sethost(authUser);
+
             }
         })
     
