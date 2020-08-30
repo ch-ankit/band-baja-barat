@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     margin-left: 20px;
+    transition: transform 450ms;
 }
 .exploreCard__image{
     width:350px;
@@ -11,6 +12,7 @@
 }
 
 .exploreCard:hover{
+    transform: scale(1.08);
     background-color: lightgray;
     cursor: pointer;
 }
