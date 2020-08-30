@@ -55,7 +55,7 @@ export default function TemporaryDrawer() {
           <ListItemText primary='My Information' />
         </ListItem>
         <ListItem button >
-          <ListItemText primary='Invitations' />
+          <ListItemText primary='Invitations' onClick={()=>history.push('/invite')}/>
         </ListItem>
         <ListItem button >
           <ListItemText primary='Orders' />

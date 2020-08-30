@@ -29,6 +29,11 @@
     
 }
 
+.middlePart__Nav > h4:hover{
+    color: orange;
+    cursor: pointer;
+}
+
 .middlePart__button{
     width: 30%*inherit;
     border-radius: 75px;
@@ -51,8 +56,5 @@
 }
 .middlePart__button:hover{
     cursor: pointer;
-}
-.middlePart__Nav > h4:hover{
-    background-color: red;
 }
 

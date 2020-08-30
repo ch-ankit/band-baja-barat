@@ -2,9 +2,12 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
 import './UserInfo.css'
+import UserHeader from './UserHeader.js';
 function UserInfo() {
     const UserData = useSelector(state => state.userData) ?? [];
     return (
+        <div>
+            <UserHeader />
         <div className='userInfo'>
             <h1>Hello there</h1>
             {Object.keys(UserData).map((keys)=>{
@@ -26,6 +29,7 @@ function UserInfo() {
                 <p>{UserData[keys].street}-{UserData[keys].provience}, {UserData[keys].city} </p>
                 </div>
             )}) }
+        </div>
         </div>
     )
 }

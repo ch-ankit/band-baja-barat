@@ -20,6 +20,7 @@ import AddProduct from "./AddProduct";
 import SearchDisplay from "./SearchDisplay";
 import { useStateValue } from "./StateProvider";
 import UserInfo from "./UserInfo.js";
+import Host from "./Host.js";
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -45,6 +46,8 @@ function App() {
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
 
           <Route path='/User/userInfo' component={UserInfo} />
+
+          <Route path='/Host' component={Host} />
           {/*Sign up page */}
           <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}
