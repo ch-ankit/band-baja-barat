@@ -20,3 +20,18 @@ Content-Type: application/json
     "specialDish":"khanekura #rekya" ,
     "extra":"khanekura #rekya" 
 }
+
+###
+PATCH http://localhost:9000/menu?
+Content-Type: application/json
+
+{
+    "menuId": 3,
+    "snacks1":"khanekura #changed" ,
+    "snacks2":"khanekura #changed" ,
+    "snacks3":"khanekura #changed" ,
+    "mainDish1":"khanekura #changed" 
+}
+
+###
+DELETE http://localhost:9000/menu?menuId=1

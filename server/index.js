@@ -16,6 +16,7 @@ const invitationRouter = require("./routes/invitation");
 const organizerRouter = require("./routes/organizer");
 const eventRouter = require("./routes/event");
 const guestListRouter = require("./routes/guestList");
+const menuRouter = require("./routes/menu");
 
 app = express();
 app.use(bodyParser.json());
@@ -33,6 +34,7 @@ app.use("/invitation", invitationRouter);
 app.use("/organizer", organizerRouter);
 app.use("/event", eventRouter);
 app.use("/guestlist", guestListRouter);
+app.use("/menu", menuRouter);
 
 // mysqlConnection.query(
 //   "SELECT * FROM user limit 2",

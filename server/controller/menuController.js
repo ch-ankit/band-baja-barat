@@ -3,8 +3,8 @@ const mysqlConnection = require("./../connection");
 
 exports.menu = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM menu WHERE eventId = ${req.query.eventID} `;
-    mysqlConnection.queryy(sql, (err, rows) => {
+    var sql = ` SELECT * FROM menu WHERE eventId = ${req.query.eventId} `;
+    mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
       } else {
@@ -35,9 +35,11 @@ exports.addMenu = (req, res, next) => {
                     "${req.body.specialDish}",
                     "${req.body.extra}"
                 )`;
-    mysqlConnection.queryy(sql, (err, rows) => {
+    mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
-        res.json({ data: rows });
+        res.json({
+          status: `menu added for event with id : ${req.body.eventId} `,
+        });
       } else {
         res.json({ error: err });
       }
@@ -122,9 +124,11 @@ exports.updateMenu = (req, res, next) => {
                           : req.body.extra
                       }"
                       WHERE  id = ${req.body.menuId}`;
-        mysqlConnection.queryy(sql, (err, rows) => {
+        mysqlConnection.query(sql, (err, rows) => {
           if (!err) {
-            res.json({ data: rows });
+            res.json({
+              status: ` menu with id ${req.body.menuId} updated successfully `,
+            });
           } else {
             res.json({ error: err });
           }
@@ -141,7 +145,7 @@ exports.updateMenu = (req, res, next) => {
 exports.deleteMenu = (req, res, next) => {
   try {
     var sql = ` DELETE FROM menu WHERE id = ${req.query.menuId}`;
-    mysqlConnection.queryy(sql, (err, rows) => {
+    mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ status: "deleted sucessfully" });
       } else {
