@@ -1,0 +1,22 @@
+GET http://localhost:9000/menu?eventId=4
+
+###
+POST http://localhost:9000/menu
+Content-Type: application/json
+
+{
+    "eventId": 4,
+    "snacks1":"khanekura #rekya" ,
+    "snacks2":"khanekura #rekya" ,
+    "snacks3":"khanekura #rekya" ,
+    "mainDish1":"khanekura #rekya" ,
+    "mainDish2":"khanekura #rekya" ,
+    "sideDish1":"khanekura #rekya" ,
+    "sideDish2":"khanekura #rekya" ,
+    "desert1":"khanekura #rekya" ,
+    "desert2":"khanekura #rekya" ,
+    "coldDrinks":"khanekura #rekya" ,
+    "drinks":"khanekura #rekya" ,
+    "specialDish":"khanekura #rekya" ,
+    "extra":"khanekura #rekya" 
+}

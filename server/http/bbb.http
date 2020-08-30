@@ -4,4 +4,4 @@ GET http://localhost:9000/bbb/host
 GET http://localhost:9000/bbb/band
 
 ###
-GET http://localhost:9000/bbb/user
+GET http://localhost:9000/bbb/user?userName=jun

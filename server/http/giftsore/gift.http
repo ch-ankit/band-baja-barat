@@ -1,1 +1,6 @@
-GET http://localhost:9000/giftstore/search?value=teri
+GET http://localhost:9000/giftstore/product?
+###
+GET http://localhost:9000/giftstore/product?modelNo=NHP1045
+
+###
+GET http://localhost:9000/giftstore/product?value=teri
