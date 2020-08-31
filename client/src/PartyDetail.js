@@ -11,6 +11,7 @@ import Booking from './Booking.js';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
+import UserHeader from './UserHeader.js';
 function PartyDetail() {
     let name=useParams();
     const [book, setbook] = useState(false);
@@ -29,50 +30,69 @@ function PartyDetail() {
     }, [])
     
     return (
-        <div className="partyDetail">
-            <Carousel className='partyDetail__Carousel'> 
-            {Object.keys(Photo).map((keys)=>{
-                    if(keys < 3){
-                      return(  <Carousel.Item key={keys}>
-                            <img src={Photo[keys].photo}  className='partyDetail__CImage' />
-                            <Carousel.Caption>
-                                {Photo[keys].caption}
-                            </Carousel.Caption>
-                        </Carousel.Item>)
-                    }
-                })}
-            </Carousel>
-            
-            <div className='partyDetail__Detail'>
-            { book ? <div className='partyDetail__booking'><button onClick={()=>setbook(false)}> Home</button><Booking /> </div>:<div className="partyDetail__detailPart">
-                    {Object.keys(data).map((keys)=>{
-                        return(< div keys={keys}>
-                            <div className='partyDetail__title'><h1>{data[keys].hostName} </h1> <button onClick={()=>setbook(true)}>Book now</button>
-                            </div>
-                            {data[keys].description}
-                            <hr/>
-                            <h2><u>Gallery</u></h2>
-                            <div className='partyDetail__gallery'>
+         <div>
+             <UserHeader />
+            {Object.keys(data).map((keys)=>{
+            return(<div className='partyDetail'>
+                <div className='partyDetail__leftPart'>
+                    <div className="partyDetail__infoHeader">
+                        <h3>{data[keys].hostName}</h3>
+                        <p>Wedding venue</p>
+                        <Carousel className='partyDetail__Carousel'>
+                        {Object.keys(Photo).map((keys)=>{
+                        if(keys<3){
+                        return(
+                            <Carousel.Item>
+                                <img src={Photo[keys].photo} className='partyDetail__CImage' />
+                                <Carousel.Caption>
+                                    {Photo[keys].caption}
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        )}})}
+                        </Carousel>
+                        <div className='partyDetail__info1'>
+                            <h6>{data[keys].city}</h6>
+                        </div>
+                        <div className='partyDetail__info2'>
+                            <h6>Price per Plate</h6>
+                        </div>
+                    </div>
+                    <div className='partyDetail__details'>
+                        <h4>About us</h4>
+                        <hr/>
+                        {data[keys].description}
+                    </div>
+                </div>
+                <div className='partyDetail__rightPart'>
+                    <div className='partyDetail__book'>
+                        <h4>Connect with this vendor</h4>
+                        <hr/>
+                        <button className='partyDetail__button'><h2>Book now</h2></button>
+                        <button className='partyDetail__button'><h2>Get Contact Info</h2></button>
+                        <hr/>
+                        <h5>Booked Date</h5>
+                        <ul>
+                            <li>29 September</li>
+                            <li>21 October</li>
+                            <li>09 November</li>
+                            <li>2 December</li>
+                        </ul>
+                    </div>
+                    <div className='partyDetail__Gallery'>
+                            <h4>Top photos</h4>
+                            <hr />
+                            <div className="partyDetail__images">
                                 {Object.keys(Photo).map((keys)=>{
-                                    return(<img key={keys} src={Photo[keys].photo} className='partyDetail__galleryImage' />
-                                    )
+                                    if(keys < 5){
+                                    return(
+                                        <img src={Photo[keys].photo} alt="image"  className='partyDetail__GImage'/>
+                                    );}
                                 })}
                             </div>
-                        </div>
-                        );
-                    })}
-                </div>}
-                <div className="partyDetail__rightPart">
-                    <h2>Booked Date</h2>
-                    <ul>
-                        <li>2020-01-20</li>
-                        <li>2020-10-20</li>
-                        <li>2020-11-10</li>
-                        <li>2020-09-01</li>
-                        <li>2020-01-30</li>
-                    </ul>
+                    </div>
                 </div>
             </div>
+            )})}
         </div>
     )
 }

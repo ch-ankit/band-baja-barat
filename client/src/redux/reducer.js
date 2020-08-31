@@ -27,10 +27,12 @@ export const reducerr=(state=initialState,action)=>{
         
         case 'VatNo':
                 return{
+                    ...state,
                     vatNo:action.payload
                 }
         case 'Hostuid':
             return{
+                ...state,
                 hostUid:action.payload
             }
         default:
