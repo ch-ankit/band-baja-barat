@@ -13,6 +13,7 @@
 .details__body {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 .tech__details {
     display: flex;
@@ -53,16 +54,40 @@
     max-width: 10vw;
 }
 .details__image {
-    height: 50vh;
-    margin-right: 10vw;
-    margin-left: 10vw;
-    overflow: visible;
+    display: flex;
+    justify-content: center;
+    min-width: 40vw;
+}
+.details__image > div {
+    cursor: zoom-in !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    width: 100% !important;
+    height: 50vh !important;
+}
+.details__image > div > img {
+    display: flex !important;
+    object-fit: cover !important;
+    height: 100% !important;
+}
+.details__image > div > div {
+    margin-top: -20px !important;
+    height: auto !important;
+    width: auto !important;
+    z-index: 200 !important;
+}
+
+.details__image > div > div > img {
+    display: flex !important;
+    height: auto !important;
+    width: auto !important;
+    justify-self: center !important;
+    overflow: visible !important;
 }
 .details__image > img {
+    display: flex;
     width: 100%;
-    object-fit: contain;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    object-fit: cover;
 }
 
 .details__image > img:hover {
@@ -73,7 +98,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    max-width: 50%;
+    min-width: 50%;
     margin-left: 0.1vw;
     margin-bottom: 25px;
 }
@@ -130,4 +155,11 @@
 .hovered__photo {
     height: 100vh;
     width: 100%;
+}
+
+.edits {
+    background-color: #f0c14b;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
+    width: 5vw;
 }
