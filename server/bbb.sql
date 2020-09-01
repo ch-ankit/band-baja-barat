@@ -60,6 +60,7 @@ USE bb2;
    price INT ,
    quantity INT ,
    description text ,
+   summary text,
    photo VARCHAR(255) ,
    rating DECIMAL(2,1) DEFAULT 0,
    name VARCHAR(255) ,
@@ -198,6 +199,7 @@ USE bb2;
      price,
      quantity,
      description,
+     summary,
      photo,
      name
    )
@@ -206,6 +208,7 @@ USE bb2;
      2612,
      13,
      'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/215x205.jpg/cc0000/ffffff',
      'Sesame Seed Black'
    ),
@@ -214,6 +217,7 @@ USE bb2;
      2088,
      17,
      'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/205x132.jpg/ff4444/ffffff',
      'Lettuce - Baby Salad Greens'
    ),
@@ -222,6 +226,7 @@ USE bb2;
      1589,
      5,
      'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/214x148.jpg/cc0000/ffffff',
      'Tart - Butter Plain Squares'
    ),
@@ -230,6 +235,7 @@ USE bb2;
      3313,
      20,
      'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/117x231.bmp/dddddd/000000',
      'Sparkling Wine - Rose, Freixenet'
    ),
@@ -238,6 +244,7 @@ USE bb2;
      4104,
      10,
      'Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/180x152.jpg/5fa2dd/ffffff',
      'Fruit Salad Deluxe'
    ),
@@ -246,6 +253,7 @@ USE bb2;
      4311,
      4,
      'Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/126x203.png/5fa2dd/ffffff',
      'Trueblue - Blueberry 12x473ml'
    ),
@@ -254,6 +262,7 @@ USE bb2;
      3121,
      18,
      'Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/130x119.bmp/5fa2dd/ffffff',
      'Plastic Arrow Stir Stick'
    ),
@@ -262,6 +271,7 @@ USE bb2;
      3807,
      11,
      'Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/185x134.jpg/ff4444/ffffff',
      'Bread - Bistro Sour'
    ),
@@ -270,6 +280,7 @@ USE bb2;
      4963,
      7,
      'In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/121x130.bmp/dddddd/000000',
      'Chick Peas - Canned'
    ),
@@ -278,6 +289,7 @@ USE bb2;
      3002,
      5,
      'Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/196x105.png/ff4444/ffffff',
      'Danishes - Mini Raspberry'
    ),
@@ -286,6 +298,7 @@ USE bb2;
      2378,
      19,
      'Integer ac neque. Duis bibendum.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/137x138.png/dddddd/000000',
      'Lobak'
    ),
@@ -294,6 +307,7 @@ USE bb2;
      122,
      16,
      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/103x151.jpg/ff4444/ffffff',
      'Teriyaki Sauce'
    ),
@@ -302,6 +316,7 @@ USE bb2;
      3551,
      4,
      'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/126x123.jpg/5fa2dd/ffffff',
      'Yogurt - Strawberry, 175 Gr'
    ),
@@ -310,6 +325,7 @@ USE bb2;
      1950,
      15,
      'Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/222x198.bmp/5fa2dd/ffffff',
      'Appetizer - Asian Shrimp Roll'
    ),
@@ -318,6 +334,7 @@ USE bb2;
      3573,
      20,
      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/115x196.bmp/cc0000/ffffff',
      'Ecolab Digiclean Mild Fm'
    ),
@@ -326,6 +343,7 @@ USE bb2;
      1944,
      6,
      'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/112x236.png/cc0000/ffffff',
      'Dasheen'
    ),
@@ -334,6 +352,7 @@ USE bb2;
      1647,
      13,
      'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/140x166.png/5fa2dd/ffffff',
      'Cheese Cloth No 100'
    ),
@@ -342,6 +361,7 @@ USE bb2;
      4545,
      7,
      'Duis mattis egestas metus. Aenean fermentum.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/233x227.png/cc0000/ffffff',
      'Sage - Fresh'
    ),
@@ -350,6 +370,7 @@ USE bb2;
      2062,
      2,
      'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/226x166.jpg/dddddd/000000',
      'Milk - 2% 250 Ml'
    ),
@@ -358,6 +379,7 @@ USE bb2;
      3543,
      12,
      'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.',
+     'potatopoteto \n size:lol \n weight: pow \n manufacturer:xyz \n',
      'http://dummyimage.com/150x234.jpg/dddddd/000000',
      'Bread - Sour Sticks With Onion'
    );

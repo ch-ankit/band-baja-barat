@@ -23,13 +23,14 @@ exports.product = async (req, res, next) => {
 
 exports.addProduct = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO giftShop (modelNo,price,quantity,description,photo,name) 
+    var sql = ` INSERT INTO giftShop (modelNo,price,quantity,description,summary,photo,name) 
     VALUES 
     (
       "${req.body.modelNo}",
       ${req.body.price},
       ${req.body.quantity},
       "${req.body.description}",
+      "${req.body.summary}",
       "${req.body.photo}",
       "${req.body.name}"
     )`;
@@ -66,6 +67,11 @@ exports.updateProduct = async (req, res, next) => {
             req.body.description == undefined
               ? oldData[0].description
               : req.body.description
+          }",
+          summary = "${
+            req.body.summary == undefined
+              ? oldData[0].summary
+              : req.body.summary
           }" WHERE modelNo = "${req.body.modelNo}"`;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
