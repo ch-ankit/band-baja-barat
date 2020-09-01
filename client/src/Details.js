@@ -280,13 +280,13 @@ function Details({ location }) {
                             },
                             largeImage: {
                                 src: details.photo,
-                                height: 2000,
-                                width: 1000,
-                                
+                                height: 900,
+                                width: 800,
+
                             },
                             enlargedImageContainerDimensions: {
-                                width: '400%',
-                                height: '330%'
+                                width: '50%',
+                                height: '70%',
                             }
                         }} />
                         {/* <img src={details.photo} alt="product" /> */}
