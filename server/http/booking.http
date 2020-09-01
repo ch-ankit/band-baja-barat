@@ -7,6 +7,6 @@ Content-Type: application/json
 {
     "eventId":4,
     "vatNo":488366,
-    "hallNo":,
-    "expectedGuestNo":,
+    "hallNo":1,
+    "expectedGuestNo":300
 }
