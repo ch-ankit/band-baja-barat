@@ -282,7 +282,11 @@ function Details({ location }) {
                                 src: details.photo,
                                 width: 1000,
                                 height: 1800,
-                                enlargedImageContainerDimensions: { width: '100vw', height: '100vh' }
+                                
+                            },
+                            enlargedImageContainerDimensions: {
+                                width: '400%',
+                                height: '330%'
                             }
                         }} />
                     </div>
