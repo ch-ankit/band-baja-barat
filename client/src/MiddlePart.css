@@ -1,12 +1,11 @@
 .middlePart{
-    background-color: olivedrab;
+    background: url('./images/explore1.jpeg') no-repeat center;
     display: flex;
     align-items: center;
     padding-left: 30px;
     justify-content: space-evenly;
-    background-repeat: no-repeat;
+    position: relative;
     background-size: cover;
-
 }
 .middlePart__card{
     padding-top: 10px;
@@ -27,6 +26,11 @@
     justify-content: space-around;
     border:1px solid black;
     
+}
+
+.middlePart__Nav > h4:hover{
+    color: orange;
+    cursor: pointer;
 }
 
 .middlePart__button{
@@ -51,8 +55,5 @@
 }
 .middlePart__button:hover{
     cursor: pointer;
-}
-.middlePart__Nav > h4:hover{
-    background-color: red;
 }
 

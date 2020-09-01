@@ -8,7 +8,8 @@ function AddProduct(props) {
     const [image, setImage] = useState(null)
     const [name, setName] = useState('')
     const [price, setPrice] = useState(1)
-    const [description, setDescription] = useState('')
+    const [description, setDescription] = useState([])
+    const [summary, setSummary] = useState([])
     const [modelNo, setModelNo] = useState('')
     const [quantity, setQuantity] = useState(1)
     const [url, setUrl] = useState('');
@@ -68,13 +69,15 @@ function AddProduct(props) {
     useEffect(() => {
         if (url !== '') {
             async function addProduct() {
+                const summaryToBackend = summary.split("\u2022").join('')
                 const data = {
                     modelNo: modelNo,
                     price: price,
                     quantity: quantity,
                     description: description,
                     photo: url,
-                    name: name
+                    name: name,
+                    summary: summaryToBackend
                 }
                 const response = await fetch('http://localhost:9000/giftstore/product',
                     {
@@ -92,9 +95,36 @@ function AddProduct(props) {
     }, [url])
 
     const handleSubmit = (evt) => {
+        const helloz = summary[0].split('\n')
+        console.log(helloz)
         evt.preventDefault();
         handleUpload();
     }
+
+    const handleKey = (evt) => {
+        const bullet = "\u2022";
+        const bulletWithSpace = `${bullet} `;
+        const enter = 13;
+        const { keyCode, target } = evt;
+        const { selectionStart, value } = target;
+
+        if (keyCode === enter) {
+            target.value = [...value]
+                .map((c, i) => i === selectionStart - 1
+                    ? `\n${bulletWithSpace}`
+                    : c
+                )
+                .join('');
+            target.selectionStart = selectionStart + bulletWithSpace.length;
+            target.selectionEnd = selectionStart + bulletWithSpace.length;
+            setSummary(target.value)
+        }
+        if (value[0] !== bullet) {
+            target.value = `${bulletWithSpace}${value}`;
+        }
+
+    }
+
     ///////////////////////////////////////
     return (
         <div className="addProduct">
@@ -116,7 +146,12 @@ function AddProduct(props) {
                 </label>
                 <label className="addProduct__description">
                     <span>Description:</span>
-                    <textarea class="form-control" type='text' placeholder='Enter the product Description' value={description} onChange={(event) => setDescription(event.target.value)}
+                    <textarea class="form-control" type='text' placeholder='Enter the product Description' value={description} onChange={(event) => setDescription([event.target.value])}
+                    />
+                </label>
+                <label className="addProduct__description">
+                    <span>Product Summary (In Points):</span>
+                    <textarea class="form-control" type='text' placeholder='Enter the product Description' value={summary} onKeyUp={handleKey} onChange={(event) => setSummary([event.target.value])}
                     />
                 </label>
                 <label className="addProduct__quantity">

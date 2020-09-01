@@ -3,6 +3,7 @@ const initialState={
     vatNo: null,
     userData:null,
     userEmail: null,
+    hostUid:null
 }
 
 export const reducerr=(state=initialState,action)=>{
@@ -26,8 +27,14 @@ export const reducerr=(state=initialState,action)=>{
         
         case 'VatNo':
                 return{
+                    ...state,
                     vatNo:action.payload
                 }
+        case 'Hostuid':
+            return{
+                ...state,
+                hostUid:action.payload
+            }
         default:
             return{ ...state}
     }

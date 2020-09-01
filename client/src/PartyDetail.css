@@ -1,55 +1,82 @@
+.partyDetail__infoHeader > p{
+    color: gray;
+}
+
 .partyDetail__Carousel{
-    width:100%;
-    height:30%;
-    background-color:brown;
     text-align: center;
 }
 
+.partyDetail__leftPart{
+    width:52%;
+}
 .partyDetail__CImage{
-    height:450px;
-    width: 80%;
-    object-fit: contain;
+    width:100%;
+    height:400px
 }
 
-.partyDetail__Detail{
-    display: flex;
-    justify-content: space-between;
+.partyDetail__infoHeader{
+    background-color: white;
+    
 }
 
-.partyDetail__detailPart{
-    flex:0.85;
-    padding-left: 20px;
-    padding-top: 20px;
-    border-right: 1px solid lightgray;
-    padding-right: 20px;
+.partyDetail{
+    padding-top: 30px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-wrap: wrap;
-
+    background-color:lightgray
 }
 
-.partyDetail__detailPart > h2{
-    text-decoration: underline ;
+.partyDetail__details{
+    background-color: white;
+    margin-top: 20px;;
 }
 
 .partyDetail__rightPart{
-    flex:0.15;
-    padding-left: 10px;
-    padding-top: 20px;
-    border-left: 1px solid lightgray;
+    width: 35%;
 }
 
-.partyDetail__galleryImage{
-    width: 300px;
-    height: 250px;
-    margin: 10px 20px;
-}
-
-.partyDetail__booking{
-    flex:0.85
-}
-
-.partyDetail__title{
+.partyDetail__book{
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    padding:10px 0px;
+}
+
+.partyDetail__button{
+    outline: 0 !important;
+    width:90%;
+    margin-top: 15px;
+    background-color: orange;
+    border-radius: 10px;
+    border: 0;
+}
+
+.partyDetail__button:hover{
+    background-color: darkorange;
+}
+
+.partyDetail__book > hr{
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.partyDetail__images{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.partyDetail__GImage{
+    margin: 10px 10px;
+    width:40%;
+    height:100px;
+}
+
+.partyDetail__Gallery{
+    padding-top:15px;
+    margin-top:20px;
+    background-color: white;
 }
