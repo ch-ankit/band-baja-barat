@@ -1,0 +1,102 @@
+.host__infoHeader > p{
+    color: gray;
+}
+
+.host__Carousel{
+    text-align: center;
+}
+
+.host__leftPart{
+    width:52%;
+}
+.host__CImage{
+    width:100%;
+    height:400px
+}
+
+.host__infoHeader{
+    background-color: white;
+    
+}
+
+.host{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color:lightgray
+}
+
+.host__details{
+    background-color: white;
+    margin-top: 20px;;
+}
+
+.host__rightPart{
+    width: 35%;
+}
+
+.host__request{
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    padding:10px 0px;
+}
+
+
+.host__button{
+    outline: 0 !important;
+    width:90%;
+    margin-top: 15px;
+    background-color: orange;
+    border-radius: 10px;
+    border: 0;
+}
+
+.host__button:hover{
+    background-color: darkorange;
+}
+
+.host__book > hr{
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.host__images{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.host__GImage{
+    margin: 10px 10px;
+    width:40%;
+    height:100px;
+}
+
+.host__Gallery{
+    padding-top:15px;
+    margin-top:20px;
+    background-color: white;
+}
+
+.host__fullGallery{
+    margin-top: 20px;
+    background-color: white;
+}
+
+.host__Header{
+    display: flex;
+    background-image:linear-gradient(to left,teal,white);
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;;
+    z-index: 100;
+    padding: 0px 10px;
+}
+
+.host__headerButton{
+    height:70%;
+    border-radius: 50px;
+}

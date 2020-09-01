@@ -64,6 +64,7 @@ function Gallery() {
         
         <div className="Gallery">
             <h1>Gallery</h1>
+            <input type='text' placeholder='Caption' />
             <progress value={Progress} max='100'/>
             <input type='file'  onChange={handleChange} />
             <button onClick={handleUpload}>Upload</button>

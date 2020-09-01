@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core'
 import { auth, storage, db } from './firebaseConfig'
 import firebase from "firebase"
 import './SignUp.css'
+import Header from './HeaderHome'
 function SignUp({ }) {
     const [Address, setAddress] = useState('');
     const [Email, setEmail] = useState("");
@@ -94,6 +95,8 @@ function SignUp({ }) {
             .catch(error => alert(error.message))
     };
     return (
+        <div>
+            <Header />
         <div className="signUp">
             <h1>Sign Up</h1>
             <div className="signUp__nav">
@@ -160,6 +163,7 @@ function SignUp({ }) {
                 </Button>
             </div>
             <img src={Url} alt="image" />
+        </div>
         </div>
     )
 }
