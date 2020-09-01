@@ -131,7 +131,7 @@ function Details({ location }) {
     };
 
     if (details.hasOwnProperty('summary')) {
-        productSummary = details.summary?.split('\n').map(items =>
+        productSummary = details.summary?.slice(0, details.summary.length - 1).split('\n').map(items =>
             <ul>
                 <li>{items}</li>
             </ul>)
@@ -235,7 +235,7 @@ function Details({ location }) {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ modelNo: details.modelNo, summary: editableSummary })
+                body: JSON.stringify({ modelNo: details.modelNo, summary: store })
             }
         );
         const { message } = await response.json();
