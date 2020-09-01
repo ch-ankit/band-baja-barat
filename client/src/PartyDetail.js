@@ -35,6 +35,8 @@ function PartyDetail() {
             {Object.keys(data).map((keys)=>{
             return(<div className='partyDetail'>
                 <div className='partyDetail__leftPart'>
+                    {book? <Booking />: (
+                    <div>
                     <div className="partyDetail__infoHeader">
                         <h3>{data[keys].hostName}</h3>
                         <p>Wedding venue</p>
@@ -62,12 +64,13 @@ function PartyDetail() {
                         <hr/>
                         {data[keys].description}
                     </div>
+                    </div>)}
                 </div>
                 <div className='partyDetail__rightPart'>
                     <div className='partyDetail__book'>
                         <h4>Connect with this vendor</h4>
                         <hr/>
-                        <button className='partyDetail__button'><h2>Book now</h2></button>
+                        <button className='partyDetail__button' onClick={()=>setbook(true)}><h2>Book now</h2></button>
                         <button className='partyDetail__button'><h2>Get Contact Info</h2></button>
                         <hr/>
                         <h5>Booked Date</h5>

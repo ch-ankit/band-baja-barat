@@ -26,7 +26,20 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select event';
+      return (
+        <form className='booking__Event'>
+          <label>Event Name</label>
+          <input type='text' required />
+          <label>Groom Name</label>
+          <input type='text' required />
+          <label>Bride Name</label>
+          <input type='text' required />
+          <label>Event Date</label>
+          <input type='date' required />
+          <label>Shift</label>
+          <input type='text' required />
+        </form>
+      );
     case 1:
       return 'Create menus';
     case 2:

@@ -23,13 +23,14 @@ exports.product = async (req, res, next) => {
 
 exports.addProduct = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO giftShop (modelNo,price,quantity,description,photo,name) 
+    var sql = ` INSERT INTO giftShop (modelNo,price,quantity,description,summary,photo,name) 
     VALUES 
     (
       "${req.body.modelNo}",
       ${req.body.price},
       ${req.body.quantity},
       "${req.body.description}",
+      "${req.body.summary}",
       "${req.body.photo}",
       "${req.body.name}"
     )`;
@@ -58,21 +59,34 @@ exports.updateProduct = async (req, res, next) => {
             req.body.quantity == undefined
               ? oldData[0].quantity
               : oldData[0].quantity + parseInt(req.body.quantity)
-            },
+          },
           price= ${
-            req.body.price == undefined ? oldData[0].price : parseInt(req.body.price)
-            },
+            req.body.price == undefined
+              ? oldData[0].price
+              : parseInt(req.body.price)
+          },
           description = "${
             req.body.description == undefined
               ? oldData[0].description
               : req.body.description
-            }" WHERE modelNo = "${req.body.modelNo}"`;
+          }",
+          summary = "${
+            req.body.summary == undefined
+              ? oldData[0].summary
+              : req.body.summary
+          }" WHERE modelNo = "${req.body.modelNo}"`;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
               res.json({
-                message: `${req.body.modelNo} quantity updated by ${req.body.quantity == undefined
-                  ? oldData[0].quantity
-                  : oldData[0].quantity + parseInt(req.body.quantity)} and price is ${req.body.price == undefined ? oldData[0].price : req.body.price} `,
+                message: `${req.body.modelNo} quantity updated by ${
+                  req.body.quantity == undefined
+                    ? oldData[0].quantity
+                    : oldData[0].quantity + parseInt(req.body.quantity)
+                } and price is ${
+                  req.body.price == undefined
+                    ? oldData[0].price
+                    : req.body.price
+                } `,
               });
             } else {
               res.json({ error: err });

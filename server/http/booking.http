@@ -1,11 +1,11 @@
-GET http://localhost:9000/booking
+GET http://localhost:9000/booking?eventId=2
 
 ###
 POST http://localhost:9000/booking
 Content-Type: application/json
 
 {
-    "eventId":4,
+    "eventId":2,
     "vatNo":488366,
     "hallNo":1,
     "expectedGuestNo":300

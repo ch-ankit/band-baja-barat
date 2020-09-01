@@ -59,7 +59,7 @@
     overflow: visible;
 }
 .details__image > img {
-
+    width: 100%;
     object-fit: contain;
     margin-top: 15px;
     margin-bottom: 15px;

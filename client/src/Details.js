@@ -272,7 +272,7 @@ function Details({ location }) {
             <div className="details">
                 <div className="details__body">
                     <div className="details__image">
-                        <ReactImageMagnify style={{ overflow: 'visible' }} {...{
+                        <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'product image',
                                 isFluidWidth: true,
@@ -280,8 +280,8 @@ function Details({ location }) {
                             },
                             largeImage: {
                                 src: details.photo,
+                                height: 2000,
                                 width: 1000,
-                                height: 1800,
                                 
                             },
                             enlargedImageContainerDimensions: {
@@ -289,6 +289,7 @@ function Details({ location }) {
                                 height: '330%'
                             }
                         }} />
+                        {/* <img src={details.photo} alt="product" /> */}
                     </div>
                     {
                         <div className="details__description">
@@ -351,7 +352,7 @@ function Details({ location }) {
                                         </button>
                                     ) : (
                                             <button
-                                                class="btn btn-primary"
+                                                class="btn btn-primary edits"
                                                 type="submit"
                                                 onClick={() => setEditPrice(!editPrice)}
                                             >
@@ -435,7 +436,7 @@ function Details({ location }) {
                                         </button>
                                     ) : (
                                             <button
-                                                class="btn btn-primary"
+                                                class="btn btn-primary edits"
                                                 type="submit"
                                                 onClick={() => setEditQuantity(!editQuantiy)}
                                             >
