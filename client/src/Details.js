@@ -280,8 +280,8 @@ function Details({ location }) {
                             },
                             largeImage: {
                                 src: details.photo,
-                                height: 900,
-                                width: 800,
+                                height: 1000,
+                                width: 950,
 
                             },
                             enlargedImageContainerDimensions: {
