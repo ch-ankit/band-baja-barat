@@ -5,6 +5,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import ReactImageMagnify from 'react-image-magnify';
 import "./Details.css";
 import { useStateValue } from "./StateProvider";
+//Hello Worldz
 
 function Details({ location }) {
     const [{ isAdmin, user }, dispatch] = useStateValue();
