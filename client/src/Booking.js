@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import './Booking.css'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -26,11 +26,61 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select event';
+      return (
+        <div className='booking__Event'>
+          <label>Event Name</label>
+          <input type='text' />
+          <label>Groom Name</label>
+          <input type='text' />
+          <label>Bride Name</label>
+          <input type='text' />
+          <label>Event Date</label>
+          <input type='date' />
+          <label>Shift</label>
+          <input type='text' />
+        </div>
+      );
     case 1:
-      return 'Create menus';
+      return(
+        <div className='booking__Menus'>
+          <label>Snacks1</label>
+          <input type='text' />
+          <label>Snacks2</label>
+          <input type='text' />
+          <label>Snacks3</label>
+          <input type='text' />
+          <label>mainDish1</label>
+          <input type='text' />
+          <label>mainDish2</label>
+          <input type='text' />
+          <label>SideDish1</label>
+          <input type='text' />
+          <label>SideDish2</label>
+          <input type='text' />
+          <label>Desert1</label>
+          <input type='text' />
+          <label>Desert2</label>
+          <input type='text' />
+          <label>ColdDrinks</label>
+          <input type='text' />
+          <label>Drinks</label>
+          <input type='text' />
+          <label>Special Dish</label>
+          <input type='text' />
+          <label>Extra</label>
+          <input type='text' />
+        </div>
+
+      );
     case 2:
-      return 'This is the bit I really care about!';
+      return(
+        <div className='booking__Book'>
+          <label>Hall Number</label>
+          <input type='number' />
+          <label>Expected Guest Number</label>
+          <input type='number' />
+        </div>
+      );
     default:
       return 'Unknown stepIndex';
   }

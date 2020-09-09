@@ -5,6 +5,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import ReactImageMagnify from 'react-image-magnify';
 import "./Details.css";
 import { useStateValue } from "./StateProvider";
+//Hello Worldz
 
 function Details({ location }) {
     const [{ isAdmin, user }, dispatch] = useStateValue();
@@ -131,7 +132,7 @@ function Details({ location }) {
     };
 
     if (details.hasOwnProperty('summary')) {
-        productSummary = details.summary?.split('\n').map(items =>
+        productSummary = details.summary?.slice(0, details.summary.length - 1).split('\n').map(items =>
             <ul>
                 <li>{items}</li>
             </ul>)
@@ -235,7 +236,7 @@ function Details({ location }) {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ modelNo: details.modelNo, summary: editableSummary })
+                body: JSON.stringify({ modelNo: details.modelNo, summary: store })
             }
         );
         const { message } = await response.json();
@@ -280,9 +281,13 @@ function Details({ location }) {
                             },
                             largeImage: {
                                 src: details.photo,
-                                height: 2000,
-                                width: 1000,
-                                enlargedImageContainerClassName: 'enlarged__container'
+                                height: 1000,
+                                width: 950,
+
+                            },
+                            enlargedImageContainerDimensions: {
+                                width: '50%',
+                                height: '70%',
                             }
                         }} />
                         {/* <img src={details.photo} alt="product" /> */}

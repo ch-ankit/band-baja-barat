@@ -13,12 +13,12 @@ function Party() {
             const allData = await response.json()
             setdata(allData.data)
         }
-        getHostData();
+        getHostData(); 
     }, [])
     return (
         <div>
             <div className="userPage__header">
-                {uid ? <UserHeader /> : <HeaderHome /> }
+                {uid ? <UserHeader /> : <HeaderHome/> }
             </div>
             <div className="party">
                 {Object.keys(data).map((keys)=>{

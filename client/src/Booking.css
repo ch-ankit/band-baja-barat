@@ -1,0 +1,14 @@
+.booking__Event{
+    display: flex;
+    flex-direction: column;
+}
+
+.booking__Menus{
+    display: flex;
+    flex-direction: column;
+}
+
+.booking__Book{
+    display: flex;
+    flex-direction: column;
+}
