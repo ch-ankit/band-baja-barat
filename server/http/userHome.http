@@ -5,3 +5,16 @@ GET http://localhost:9000/userhome/invitationrecieved?userName=junushu
 
 ###
 GET http://localhost:9000/userhome/search?value=d&&key=partypalace
+
+###
+GET http://localhost:9000/userhome/user?userName=junushu
+
+###
+POST http://localhost:9000/userhome/user
+Content-Type: application/json
+
+{
+    "userName":"junushu",
+    "points":40,
+    "mobileNo":"9841-249600"
+}

@@ -19,7 +19,6 @@ Content-Type: application/json
 
 {
     "vatNo":667724,
-    "password":"easynow1",
     "hostName":"yukihia",
     "profilePhoto":"dummyimages",
     "email":"dum2@gmail.com",

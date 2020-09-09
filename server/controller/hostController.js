@@ -115,7 +115,7 @@ exports.updateHostData = async (req, res, next) => {
             }
           });
         } else {
-          console.log(err);
+          res.send(err);
         }
       }
     );
