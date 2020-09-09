@@ -61,36 +61,21 @@
 }
 .details__image > img {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 .details__image {
-    display: flex;
-    justify-content: center;
-    height: 60vh;
-    min-width: 30vw;
+    height: 50vh;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    overflow: visible;
 }
-.details__image > div {
-    display: block !important;
-    cursor: zoom-in !important;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-    align-self: start;
-    width: 300px !important;
-    height: 50vh !important;
+
+.details__Magnify{
+    margin-top: 100px;
 }
-.details__image > div > img {
-    display: flex !important;
-    width: 100%;
-    height: 100% !important;
-}
-.details__image > div > div {
-    margin-top: -20px !important;
-    height: auto !important;
-    width: auto !important;
-    z-index: 200 !important;
-}
+
 
 .details__description {
     display: flex;
