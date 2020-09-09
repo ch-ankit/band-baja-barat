@@ -1,19 +1,19 @@
-.addProduct__price>input::-webkit-inner-spin-button {
+.addProduct__price > input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-.addProduct__price>input[type=number] {
+}
+.addProduct__price > input[type="number"] {
     -moz-appearance: textfield;
 }
-.addProduct__quantity>input::-webkit-inner-spin-button {
+.addProduct__quantity > input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-.addProduct__quantity>input[type=number] {
+}
+.addProduct__quantity > input[type="number"] {
     -moz-appearance: textfield;
 }
 
-.addProduct__form{
+.addProduct__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,13 +21,13 @@
     margin-left: 10%;
 }
 
-.addProduct__form>label{
+.addProduct__form > label {
     display: flex;
     flex-direction: column;
 }
 
-.addProduct__form>label>span{
+.addProduct__form > label > span {
     font-size: 1.2rem;
     font-weight: 400;
-    margin-bottom:5px ;
+    margin-bottom: 5px;
 }

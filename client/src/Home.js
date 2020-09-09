@@ -10,6 +10,7 @@ import Product from "./Product";
 import Header from "./Header";
 import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -39,6 +40,7 @@ function ControlledCarousel() {
 
 function Home(props) {
   const [{ isAdmin }] = useStateValue()
+  const uid = useSelector(state => state.uid)
   let [data, setData] = useState({ data: [] });
   let [newData, setnewData] = useState({ data: [] });
   useEffect(() => {

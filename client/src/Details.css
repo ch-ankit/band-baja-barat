@@ -161,3 +161,14 @@
     border-color: #a88734 #9c7e31 #846a29;
     width: 5vw;
 }
+
+.addBasket {
+    background-color: #f0c14b;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
+    max-width: 10vw;
+}
+
+.basket__control {
+    display: flex;
+}

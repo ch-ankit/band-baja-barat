@@ -23,9 +23,7 @@ function MiddlePart() {
         event.preventDefault();
         auth.signInWithEmailAndPassword(Email, Password)
             .then((authuser) => {
-               
                 history.push("/User");
-
             })
             .catch(error => alert(error.message))
     }
@@ -34,32 +32,32 @@ function MiddlePart() {
         console.log('Hello');
         Hauth.signInWithEmailAndPassword(Email, Password)
             .then((authuser) => {
-               
+
                 history.push("/Host");
 
             })
             .catch(error => alert(error.message))
     }
-    useEffect( ()=>{
+    useEffect(() => {
         auth.onAuthStateChanged((authUser) => {
-            
             if (authUser) {
+                console.log(authUser.email)
                 dispatch(actionCreate(authUser.uid));
                 dispatch(UserEmail(authUser.email));
                 setUser(authUser);
-                
+
             } else {
                 setUser(null);
             }
         });
-        Hauth.onAuthStateChanged((authUser)=>{
-            if(authUser){
+        Hauth.onAuthStateChanged((authUser) => {
+            if (authUser) {
                 dispatch(Hostuid(authUser.uid))
                 sethost(authUser);
 
             }
         })
-    
+
     }, [])
 
     return (
@@ -70,8 +68,8 @@ function MiddlePart() {
                 <div className="middlePart__card">
                     <h1>Log In</h1>
                     <div className="middlePart__Nav">
-                        <h4 style={{color:HColor}} onClick={()=>{setHColor('orange');setUColor('black');setHost(true)}}>Host</h4>
-                        <h4 style={{color:UColor}} onClick={()=>{setHColor('black');setUColor('orange');setHost(false)}}>User</h4>
+                        <h4 style={{ color: HColor }} onClick={() => { setHColor('orange'); setUColor('black'); setHost(true) }}>Host</h4>
+                        <h4 style={{ color: UColor }} onClick={() => { setHColor('black'); setUColor('orange'); setHost(false) }}>User</h4>
                     </div>
 
                     <form className="middlePart__input">
@@ -80,7 +78,7 @@ function MiddlePart() {
                         <label>Password</label>
                         <input type="password" value={Password} onChange={(event) => setPassword(event.target.value)} />
                         <div className="middleButtonPart">
-                            <button className="middlePart__button" type="submit" onClick={Host? SlogIn : logIn}>
+                            <button className="middlePart__button" type="submit" onClick={Host ? SlogIn : logIn}>
                                 Log In
                         </button>
                         </div>

@@ -5,8 +5,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 import './Checkout.css'
 import Subtotal from './Subtotal';
+import { useSelector } from 'react-redux';
 function Checkout(props) {
     const [{ user }, dispatch] = useStateValue();
+    const userData = useSelector(state => state.userData)
+    const { userName } = userData[0]
     let [data, setData] = useState([]);
     const [basketData, setBasketData] = useState([]);
     let [message, setMessage] = useState('')
@@ -14,7 +17,7 @@ function Checkout(props) {
     let basketDataValues = []
     useEffect(() => {
         async function getBasket() {
-            const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${user.userName}`)
+            const response = await fetch(`http://localhost:9000/giftstore/basket?userName=${userName}`)
             const { data } = await response.json()
             setBasketData(data)
         }
@@ -37,7 +40,7 @@ function Checkout(props) {
     }
     const removeFromBasket = async ({ id }) => {
         const dbBody = {
-            userName: user.userName,
+            userName: userName,
             modelNo: id
         }
         const response = await fetch('http://localhost:9000/giftstore/basket',
@@ -65,6 +68,7 @@ function Checkout(props) {
                 quantity={basketDataValues[item].quantity}
                 removeFun={removeFromBasket}
                 renSubtotal={setMsg}
+                userName={userName}
             />
         )
         )

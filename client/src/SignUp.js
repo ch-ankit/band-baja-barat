@@ -57,28 +57,29 @@ function SignUp({ }) {
                                 userName: userName
                             }
                         )*/
-                        async function sign(){
-                            const response=await fetch('http://localhost:9000/signup/user',{
-                                body:JSON.stringify({
-                                    firstName:firstName,
-                                    middleName:middleName,
-                                    lastName:lastName,
-                                    userName:userName,
-                                    email:Email,
-                                    mobileNo:contactInfo,
-                                    street:Street,
-                                    city:City,
-                                    province:Province,
-                                    photo:url
+                        async function sign() {
+                            const response = await fetch('http://localhost:9000/signup/user', {
+                                body: JSON.stringify({
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    userName: userName,
+                                    email: Email,
+                                    mobileNo: contactInfo,
+                                    street: Street,
+                                    city: City,
+                                    provience: Province,
+                                    photo: url
                                 }),
-                                headers:{"Content-type": "application/json"},
+                                headers: { "Content-type": "application/json" },
                                 method: "post"
-                            });}
+                            });
+                        }
                         sign();
                     }));
                 setProgress(0);
                 setimage(null);
-                
+
             }
         );
 
@@ -97,73 +98,73 @@ function SignUp({ }) {
     return (
         <div>
             <Header />
-        <div className="signUp">
-            <h1>Sign Up</h1>
-            <div className="signUp__nav">
-                <h3>User</h3>
-                <h3>Host</h3>
-            </div>
-            <div className="signUp__middlepart">
-                <div className="signUp__input">
-                    <div className='signUp__name'>
-                        <div>
-                        <label>First Name</label><br/>
-                        <input type='text' value={firstName} onChange={(e)=>setfirstName(e.target.value)} required/>
-                        </div>
-                        <div>
-                        <label>Middle Name</label><br/>
-                        <input type='text'value={middleName} onChange={(e)=>setmiddleName(e.target.value)} />
-                        </div>
-                        <div>
-                        <label>Last Name</label><br/>
-                        <input type='text'value={lastName} onChange={(e)=>setlastName(e.target.value)} required/>
-                        </div>
-                        
-                    </div>
-                    <div className="signUp__userPass">
-                        <div>
-                            <label>User Name</label><br/>
-                            <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Password</label><br/>
-                            <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
-                        </div>
-                    </div>
-                    <div className="signUp__contactInfo">
-                        <div>
-                            <label>Email</label><br/>
-                            <input type="email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Contact info</label><br/>
-                            <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
-                        </div>
-                    </div>
-                    <div className="signUp__Address">
-                        <div>
-                            <label>Street</label><br/>
-                            <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
-                        </div>
-                        <div>
-                            <label>City</label><br/>
-                            <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
-                        </div>
-                        <div>
-                            <label>Province</label><br/>
-                            <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
-                        </div>
-                    </div>
-                    <br /><label>Profile Photo</label>
-                    <progress value={Progress} max="100" />
-                    <input type="file" onChange={handleChange} />
+            <div className="signUp">
+                <h1>Sign Up</h1>
+                <div className="signUp__nav">
+                    <h3>User</h3>
+                    <h3>Host</h3>
                 </div>
-                <Button className="signUp__button" onClick={handleSignUp}>
-                    Sign Up
+                <div className="signUp__middlepart">
+                    <div className="signUp__input">
+                        <div className='signUp__name'>
+                            <div>
+                                <label>First Name</label><br />
+                                <input type='text' value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Middle Name</label><br />
+                                <input type='text' value={middleName} onChange={(e) => setmiddleName(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>Last Name</label><br />
+                                <input type='text' value={lastName} onChange={(e) => setlastName(e.target.value)} required />
+                            </div>
+
+                        </div>
+                        <div className="signUp__userPass">
+                            <div>
+                                <label>User Name</label><br />
+                                <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Password</label><br />
+                                <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                        </div>
+                        <div className="signUp__contactInfo">
+                            <div>
+                                <label>Email</label><br />
+                                <input type="email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Contact info</label><br />
+                                <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
+                            </div>
+                        </div>
+                        <div className="signUp__Address">
+                            <div>
+                                <label>Street</label><br />
+                                <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>City</label><br />
+                                <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>Province</label><br />
+                                <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
+                            </div>
+                        </div>
+                        <br /><label>Profile Photo</label>
+                        <progress value={Progress} max="100" />
+                        <input type="file" onChange={handleChange} />
+                    </div>
+                    <Button className="signUp__button" onClick={handleSignUp}>
+                        Sign Up
                 </Button>
+                </div>
+                <img src={Url} alt="image" />
             </div>
-            <img src={Url} alt="image" />
-        </div>
         </div>
     )
 }
