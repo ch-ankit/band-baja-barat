@@ -53,18 +53,22 @@ exports.search = (req, res, next) => {
 };
 
 exports.userCheck = (req, res, next) => {
-  var sql = `SELECT userName FROM user WHERE userName = "${req.query.userName}"`;
-  mysqlConnection.query(sql, (err, rows) => {
-    if (!err) {
-      if (rows.length == 0) {
-        res.send({ data: false });
+  try {
+    var sql = `SELECT userName FROM user WHERE userName = "${req.query.userName}"`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        if (rows.length == 0) {
+          res.json({ data: false });
+        } else {
+          res.json({ data: true });
+        }
       } else {
-        res.send({ data: true });
+        res.json({ error: err });
       }
-    } else {
-      res.json({ error: err });
-    }
-  });
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.updateUsers = (req, res, next) => {
@@ -109,11 +113,11 @@ exports.updateUsers = (req, res, next) => {
             if (!err) {
               res.json("User Data update successful");
             } else {
-              res.send(err);
+              res.json({ error: err });
             }
           });
         } else {
-          res.send(err);
+          res.json({ error: err });
         }
       }
     );

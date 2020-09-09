@@ -162,6 +162,19 @@ exports.addOrder = async (req, res, next) => {
   }
 };
 
+exports.updateOrder = (req, res, next) => {
+  try {
+    var sql = ` UPDATE orders SET orderStatus = '${req.body.status}' WHERE orderNo = ${req.body.orderNo} `;
+    mysqlConnection.query(sql, (err) => {
+      if (!err) {
+        res.json(`status of order changed to ${req.body.status}`);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.deleteOrder = async (req, res, next) => {
   try {
     var sql = ` DELETE FROM orders WHERE orderNo = ${req.query.orderNo}`;
