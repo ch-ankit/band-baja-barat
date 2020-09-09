@@ -1,5 +1,4 @@
 GET http://localhost:9000/host?vatNo=667724
-
 ###
 DELETE http://localhost:9000/host?vatNo=667724
 
@@ -20,3 +19,5 @@ Content-Type: application/json
     "street":"chabahil",
     "provience":"3"
 }
+
+###

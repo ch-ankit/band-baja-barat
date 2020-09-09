@@ -33,11 +33,10 @@ exports.addUser = async (req, res, next) => {
 
 exports.addHost = async (req, res, next) => {
   try {
-    var sql = `INSERT INTO host (vatNo,password,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
+    var sql = `INSERT INTO host (vatNo,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
     VALUES
     (
        ${req.body.vatNo},
-      "${req.body.password}",
       "${req.body.hostName}",
       "${req.body.email}",
       "${req.body.profilePhoto}",
