@@ -110,9 +110,9 @@ function Details({ location }) {
     //Check if the item is on basket and add to the basket
     const addToBasket = async (evt) => {
         evt.preventDefault();
-        let present = false;
-        const invites = Object.keys(invitations).map(items => invitations[items].eventId)
-        present = invites.includes(eventId)
+        let present = true;
+        // const invites = Object.keys(invitations).map(items => invitations[items].eventId)
+        // present = invites.includes(eventId)
         if (!present) {
             alert('Event Id does not match')
             return false

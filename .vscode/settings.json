@@ -12,6 +12,19 @@
             "previewLimit": 50,
             "server": "localhost",
             "username": "root"
+        },
+        {
+            "database": "sql12365010",
+            "driver": "MariaDB",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "SQL connection",
+            "password": "ZaMN4KKmPT",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "sql12.freemysqlhosting.net",
+            "username": "sql12365010"
         }
     ]
 }

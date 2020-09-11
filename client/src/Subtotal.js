@@ -34,6 +34,27 @@ function Subtotal({ basketValues }) {
         if (status === "success") {
             dispatch({ type: "EMPTY_BASKET", items: {} })
             //Fetch to order
+            basketValues.forEach(element => {
+                const values = {
+                    giftId: element.modelNo,
+                    quantity: element.quantity,
+                    price: element.price,
+                    eventId: element.eventId,
+                    userName: userName,
+                    orderedDate: (new Date().getFullYear() + `-${new Date().getMonth() + 1}` + `-${new Date().getDate()}`)
+                }
+                async function postProduct(items) {
+                    await fetch(`http://localhost:9000/giftstore/order`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(items)
+                    })
+                }
+                postProduct(values)
+            })
+
 
             await fetch(`http://localhost:9000/giftstore/basket?checkout=1`, {
                 method: 'DELETE',
