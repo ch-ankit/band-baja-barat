@@ -2,38 +2,44 @@ import React, { useState, useEffect } from 'react';
 import './CheckoutProduct.css'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { useStateValue } from './StateProvider';
 import ReactStars from "react-rating-stars-component";
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateSubtotal } from './redux/action';
 
 
-function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun, renSubtotal, handleFill, userName }) {
-    const [{ user }] = useStateValue()
+function CheckoutProduct({ id, eventId, title, image, price, rating, quantity, removeFun }) {
+    const userData = useSelector(state => state.userData)
+    const { userName } = userData[0]
+    const dispatch = useDispatch()
     let [addedQuantity, setAddedQuantity] = useState(quantity)
+    let newQuantity = 0;
 
     const addQuantity = async () => {
-        let newQuantity = addedQuantity + 1;
+        newQuantity = addedQuantity + 1;
         setAddedQuantity(newQuantity)
-        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
-            userName: user.userName,
+            userName: userName,
             modelNo: id,
+            eventId: eventId,
             quantity: newQuantity
         }
         await fetch('http://localhost:9000/giftstore/basket',
             {
-                method: 'PATCH', headers: { 'Content-type': 'application/json' },
+                method: 'PATCH',
+                headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify(sendBody)
             })
+        dispatch(UpdateSubtotal(`${id} has been set to:${newQuantity}`))
 
     }
 
     const removeQuantity = async () => {
-        let newQuantity = (addedQuantity <= 1) ? 1 : (addedQuantity - 1);
+        newQuantity = (addedQuantity - 1);
         setAddedQuantity(newQuantity)
-        renSubtotal(`${id} has been set to:${newQuantity}`)
         const sendBody = {
-            userName: user.userName,
+            userName: userName,
             modelNo: id,
+            eventId: eventId,
             quantity: newQuantity
         }
         await fetch('http://localhost:9000/giftstore/basket',
@@ -41,11 +47,13 @@ function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun,
                 method: 'PATCH', headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify(sendBody)
             })
+        dispatch(UpdateSubtotal(`${id} has been set to:${newQuantity}`))
+
     }
 
 
 
-    const removeIcon = addedQuantity <= 1 ? <div onClick={removeQuantity} className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
+    const removeIcon = addedQuantity <= 1 ? <div className='disabled'><RemoveIcon /></div> : <div onClick={removeQuantity}><RemoveIcon /></div>
     return (
         <div className="overall">
             <div className="checkoutProduct">
@@ -54,8 +62,8 @@ function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun,
                 <div className="checkoutProduct__info">
                     <p className="checkoutProduct__title">{title}</p>
                     <p className="checkoutProduct__price">
-                        <small>Rs.</small>
                         <strong>{price * addedQuantity}</strong>
+                        <small> Store Points</small>
                     </p>
                     <span>Quantity: <div className="product__quantityView">
                         {removeIcon}
@@ -72,9 +80,10 @@ function CheckoutProduct({ id, title, image, price, rating, quantity, removeFun,
                             isHalf={true}
                         />
                     </div>
-                    <button onClick={() => removeFun({ id })}>Remove from Basket</button>
+                    <button onClick={() => removeFun({ id, eventId })}>Remove from Basket</button>
                 </div>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 'auto', marginTop: 'auto' }}><label htmlFor="event">Event Id:</label><input class="form-control" id="event" disabled value={eventId} /></div>
         </div>
     );
 }

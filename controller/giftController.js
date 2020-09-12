@@ -55,38 +55,32 @@ exports.updateProduct = async (req, res, next) => {
       (err, rows) => {
         if (!err) {
           oldData = rows;
-          var sql = ` UPDATE giftShop SET quantity=${
-            req.body.quantity == undefined
-              ? oldData[0].quantity
-              : oldData[0].quantity + parseInt(req.body.quantity)
-          },
-          price= ${
-            req.body.price == undefined
+          var sql = ` UPDATE giftShop SET quantity=${req.body.quantity == undefined
+            ? oldData[0].quantity
+            : oldData[0].quantity + parseInt(req.body.quantity)
+            },
+          price= ${req.body.price == undefined
               ? oldData[0].price
               : parseInt(req.body.price)
-          },
-          description = "${
-            req.body.description == undefined
+            },
+          description = "${req.body.description == undefined
               ? oldData[0].description
               : req.body.description
-          }",
-          summary = "${
-            req.body.summary == undefined
+            }",
+          summary = "${req.body.summary == undefined
               ? oldData[0].summary
               : req.body.summary
-          }" WHERE modelNo = "${req.body.modelNo}"`;
+            }" WHERE modelNo = "${req.body.modelNo}"`;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
               res.json({
-                message: `${req.body.modelNo} quantity updated by ${
-                  req.body.quantity == undefined
-                    ? oldData[0].quantity
-                    : oldData[0].quantity + parseInt(req.body.quantity)
-                } and price is ${
-                  req.body.price == undefined
+                message: `${req.body.modelNo} quantity updated by ${req.body.quantity == undefined
+                  ? oldData[0].quantity
+                  : oldData[0].quantity + parseInt(req.body.quantity)
+                  } and price is ${req.body.price == undefined
                     ? oldData[0].price
                     : req.body.price
-                } `,
+                  } `,
               });
             } else {
               res.json({ error: err });
@@ -152,7 +146,7 @@ exports.addOrder = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`${req.body.giftId} added to order by ${req.body.userName}`);
+        res.json({ message: `${req.body.giftId} added to order by ${req.body.userName}` });
       } else {
         res.json({ error: err });
       }
@@ -209,10 +203,11 @@ exports.basketData = async (req, res, next) => {
 
 exports.addBasket = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO basket (userName,modelNo,quantity) VALUES (
+    var sql = ` INSERT INTO basket (userName,modelNo,quantity,eventId) VALUES (
       "${req.body.userName}",
       "${req.body.modelNo}",
-       ${req.body.quantity}
+       ${req.body.quantity},
+       ${req.body.eventId}
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
@@ -231,7 +226,7 @@ exports.addBasket = async (req, res, next) => {
 
 exports.updateBasket = async (req, res, next) => {
   try {
-    var sql = ` UPDATE basket SET quantity=${req.body.quantity} WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
+    var sql = ` UPDATE basket SET quantity=${req.body.quantity} WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}' AND eventId=${req.body.eventId}`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("updated in basket");
@@ -249,7 +244,7 @@ exports.deleteBasket = async (req, res, next) => {
     if (req.query.checkout == 1) {
       var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}'`;
     } else {
-      var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}'`;
+      var sql = ` DELETE FROM basket WHERE userName ='${req.body.userName}' AND modelNo= '${req.body.modelNo}' AND eventId=${req.body.eventId}`;
     }
     mysqlConnection.query(sql, (err) => {
       if (!err) {

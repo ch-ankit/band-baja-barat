@@ -5,13 +5,13 @@ router
   .route("/product")
   .get(giftController.product) //complete
   .post(giftController.addProduct) //completed
-  .patch(giftController.updateProduct) //admin + user buy #remaining work
+  .patch(giftController.updateProduct) //completed
   .delete(giftController.deleteProduct); //completed
 
 router
-  .route("/orders") //Whole Remaining
+  .route("/orders") //
   .get(giftController.orderedProduct)
-  .post(giftController.addOrder)
+  .post(giftController.addOrder) //completed
   .delete(giftController.deleteOrder);
 
 router

@@ -1,41 +1,53 @@
-const initialState={
-    uid:null,
+const initialState = {
+    uid: null,
     vatNo: null,
-    userData:null,
+    userData: null,
     userEmail: null,
-    hostUid:null
+    hostUid: null,
+    updateMessage: null,
+    paid: null
 }
 
-export const reducerr=(state=initialState,action)=>{
-    switch (action.type){
+export const reducerr = (state = initialState, action) => {
+    switch (action.type) {
         case 'UserLog':
             return {
                 ...state,
-                uid:action.payload
+                uid: action.payload
             }
         case 'UserData':
-            return{
+            return {
                 ...state,
                 userData: action.payload
             }
-            case 'UserEmail':
-                return{
-                    ...state,
-                    userEmail: action.payload,
-                    
-                }
-        
-        case 'VatNo':
-                return{
-                    ...state,
-                    vatNo:action.payload
-                }
-        case 'Hostuid':
-            return{
+        case 'UserEmail':
+            return {
                 ...state,
-                hostUid:action.payload
+                userEmail: action.payload,
+
+            }
+
+        case 'VatNo':
+            return {
+                ...state,
+                vatNo: action.payload
+            }
+        case 'Hostuid':
+            return {
+                ...state,
+                hostUid: action.payload
+            }
+        case 'UpdateSubtotal':
+            return {
+                ...state,
+                updateMessage: action.message
+            }
+        case 'UpdatePaid':
+            return {
+                ...state,
+                paid: action.data
             }
         default:
-            return{ ...state}
+            return { ...state }
     }
 }

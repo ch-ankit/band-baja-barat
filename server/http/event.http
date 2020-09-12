@@ -5,12 +5,12 @@ POST http://localhost:9000/event
 Content-Type: application/json
 
 {
-    "organizerId": 4,
-    "eventName": "Sanji's wedding",
-    "groomName": "Vinsmoke Sanji",
+    "organizerId": 2,
+    "eventName": "Luffy's wedding",
+    "groomName": "Monkey D. Luffy",
     "brideName": "Boa Hancock",
-    "eventDate": "2020-10-11",
-    "shift": "Night"
+    "eventDate": "2020-10-14",
+    "shift": "Day"
 }
 
 ###

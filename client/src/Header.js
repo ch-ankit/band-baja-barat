@@ -4,7 +4,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "./StateProvider";
 import { v4 as uuidv4 } from "uuid";
-
 import logo from "./images/logo.png";
 import SearchDrop from "./SearchDrop";
 import "./Header.css";
@@ -12,7 +11,9 @@ import { useSelector } from "react-redux";
 
 function Header(props) {
     const userData = useSelector(state => state.userData)
-    const { userName, points } = userData[0]
+    const paid = useSelector(state => state.paid)
+    const { userName, email } = userData[0]
+    const [userPoints, setUserPoints] = useState(0)
     const [{ basket }] = useStateValue();
     const [inputSearch, setInputSearch] = useState("");
     const [focus, setFocus] = useState(false);
@@ -22,6 +23,21 @@ function Header(props) {
     let totalItems = 0;
     let display = [];
     let check = false;
+    useEffect(() => {
+        async function getUserData() {
+            const response = await fetch('http://localhost:9000/login/user', {
+                body: JSON.stringify({
+                    email: email
+                }),
+                headers: { "Content-type": "application/json" },
+                method: "post"
+            });
+            const { data } = await response.json();
+            setUserPoints(data[0].points)
+        }
+        getUserData();
+    }, [paid])
+
     useEffect(() => {
         async function getBasket() {
             const response = await fetch(
@@ -114,7 +130,7 @@ function Header(props) {
                 {/* 3-Links */}
                 <div className="header__navgift">
                     <div className="header__optiongift header__linkgift">
-                        <span className="header__optionLineOnegift">{points}</span>
+                        <span className="header__optionLineOnegift">{userPoints}</span>
                         <span className="header__optionLineTwogift">
                             Store Points
                         </span>

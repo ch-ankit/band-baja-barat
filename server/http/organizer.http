@@ -1,11 +1,11 @@
-GET http://localhost:9000/organizer?userName=mrshmi
+GET http://localhost:9000/organizer?userName=chankit
 
 ###
 POST http://localhost:9000/organizer
 Content-Type: application/json
 
 {
-    "userName":"mrshmi"
+    "userName":"chankit"
 }
 ###
 DELETE http://localhost:9000/organizer
