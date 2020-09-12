@@ -9,6 +9,13 @@ import PartyD from './PartyD.js';
 import UserD from './UserD.js';
 import ZoneD from './ZoneD.js';
 import { useSelector } from 'react-redux';
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxPopover,
+    ComboboxList,
+    ComboboxOption,
+  } from "@reach/combobox";
 function UserHeader() {
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState(PartyD);
@@ -51,19 +58,10 @@ function UserHeader() {
                         <option value='User'>User</option>
                         <option value='Band'>Band</option>
                     </select>
-                    <input type='search' onChange={updateSearch} value={search} />
+                    <Combobox>
+                        <ComboboxInput placeholder='Search' />
+                    </Combobox>
                     <SearchIcon className="userHeader__icon" /><br />
-                </div>
-                <div className="userHeader__suggestion">
-                    {drop?
-                    <ul>
-                        <li>Babin</li>
-                        {filter.map((PP)=>{
-                            return <li>
-                                {PP.name}<br/>
-                                </li>
-                        })}
-                    </ul> : ''}
                 </div>
             </div>
             <div className="userHeader__right">
