@@ -53,7 +53,7 @@ export default function SimpleMap(){
   if(!isLoaded) return "Map is loading";
   return (
   <div>
-    <Search />
+    {/* <Search /> */}
     <GoogleMap
     mapContainerStyle={mapContainerStyle}
     center={center}
@@ -149,14 +149,7 @@ function Search({ panTo }) {
           disabled={!ready}
           placeholder="Search your location"
         />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" ?
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              )): console.log(status)}
-          </ComboboxList>
-        </ComboboxPopover>
+        
       </Combobox>
     </div>
   );
