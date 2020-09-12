@@ -7,7 +7,7 @@ exports.invitationRecieved = (req, res, next) => {
       if (!err) {
         res.json({ data: rows });
       } else {
-        res.json({ error: err });
+        res.json({ error: err, data: [] });
       }
     });
   } catch (err) {
@@ -53,18 +53,22 @@ exports.search = (req, res, next) => {
 };
 
 exports.userCheck = (req, res, next) => {
-  var sql = `SELECT userName FROM user WHERE userName = "${req.query.userName}"`;
-  mysqlConnection.query(sql, (err, rows) => {
-    if (!err) {
-      if (rows.length == 0) {
-        res.send({ data: false });
+  try {
+    var sql = `SELECT userName FROM user WHERE userName = "${req.query.userName}"`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        if (rows.length == 0) {
+          res.json({ data: false });
+        } else {
+          res.json({ data: true });
+        }
       } else {
-        res.send({ data: true });
+        res.json({ error: err });
       }
-    } else {
-      res.json({ error: err });
-    }
-  });
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.updateUsers = (req, res, next) => {
@@ -77,43 +81,43 @@ exports.updateUsers = (req, res, next) => {
           oldData = rows;
           var sql = ` UPDATE user SET 
                   points = ${
-                    req.body.points == undefined
-                      ? oldData[0].points
-                      : req.body.points
-                  },
+            req.body.points == undefined
+              ? oldData[0].points
+              : req.body.points
+            },
                   mobileNo = "${
-                    req.body.mobileNo == undefined
-                      ? oldData[0].mobileNo
-                      : req.body.mobileNo
-                  }",
+            req.body.mobileNo == undefined
+              ? oldData[0].mobileNo
+              : req.body.mobileNo
+            }",
                   street = "${
-                    req.body.street == undefined
-                      ? oldData[0].street
-                      : req.body.street
-                  }",
+            req.body.street == undefined
+              ? oldData[0].street
+              : req.body.street
+            }",
                   city = "${
-                    req.body.city == undefined ? oldData[0].city : req.body.city
-                  }",
+            req.body.city == undefined ? oldData[0].city : req.body.city
+            }",
                   provience = "${
-                    req.body.provience == undefined
-                      ? oldData[0].provience
-                      : req.body.provience
-                  }",
+            req.body.provience == undefined
+              ? oldData[0].provience
+              : req.body.provience
+            }",
                   photo = "${
-                    req.body.photo == undefined
-                      ? oldData[0].photo
-                      : req.body.photo
-                  }"
+            req.body.photo == undefined
+              ? oldData[0].photo
+              : req.body.photo
+            }"
                   WHERE userName = "${req.body.userName}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
-              res.json("User Data update successful");
+              res.json({ status: "success", message: "User Data update successful" });
             } else {
-              res.send(err);
+              res.json({ error: err });
             }
           });
         } else {
-          res.send(err);
+          res.json({ error: err });
         }
       }
     );

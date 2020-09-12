@@ -1,3 +1,7 @@
+.overall {
+    display: flex;
+    justify-content: space-evenly;
+}
 .checkoutProduct {
     display: flex;
     margin-top: 20px;
@@ -25,4 +29,19 @@
 .checkoutProduct__title {
     font-size: 17px;
     font-weight: 800;
+}
+
+.event__id {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+.event__id > form > input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.event__id > form > input[type="number"] {
+    -moz-appearance: textfield;
 }

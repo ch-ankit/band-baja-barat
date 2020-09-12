@@ -8,9 +8,12 @@ import { v4 as uuidv4 } from "uuid";
 import logo from "./images/logo.png";
 import SearchDrop from "./SearchDrop";
 import "./Header.css";
+import { useSelector } from "react-redux";
 
 function Header(props) {
-    const [{ basket, user }] = useStateValue();
+    const userData = useSelector(state => state.userData)
+    const { userName, points } = userData[0]
+    const [{ basket }] = useStateValue();
     const [inputSearch, setInputSearch] = useState("");
     const [focus, setFocus] = useState(false);
     const [basketData, setBasketData] = useState([]);
@@ -22,7 +25,7 @@ function Header(props) {
     useEffect(() => {
         async function getBasket() {
             const response = await fetch(
-                `http://localhost:9000/giftstore/basket?userName=${user.userName}`
+                `http://localhost:9000/giftstore/basket?userName=${userName}`
             );
             const { data } = await response.json();
             setBasketData(data);
@@ -66,8 +69,8 @@ function Header(props) {
             searchedData.length !== 0 ? (
                 <ol className="search__display">{mapSearchData}</ol>
             ) : (
-                <div style={{ color: "white" }}>No result Found</div>
-            );
+                    <div style={{ color: "white" }}>No result Found</div>
+                );
     }
     if (display.length !== 0) {
         check = true;
@@ -111,7 +114,7 @@ function Header(props) {
                 {/* 3-Links */}
                 <div className="header__navgift">
                     <div className="header__optiongift header__linkgift">
-                        <span className="header__optionLineOnegift">100</span>
+                        <span className="header__optionLineOnegift">{points}</span>
                         <span className="header__optionLineTwogift">
                             Store Points
                         </span>

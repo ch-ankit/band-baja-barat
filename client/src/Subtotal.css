@@ -29,3 +29,17 @@
     border-color: #abb734 #9c7e31 #846a29;
     color: #111;
 }
+
+.disabled__subtotal {
+    background-color: lightgray !important;
+    border-radius: 2px;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+    margin-top: 10px;
+    color: #111;
+}
+
+.disabled__subtotal:hover {
+    cursor: not-allowed;
+}
