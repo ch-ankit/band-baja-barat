@@ -1,52 +1,156 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-import Button from 'react-bootstrap/Button'
-import './GoogleMap.css'
-import { useState } from 'react';
+import React from 'react'
+import {GoogleMap, Marker, InfoWindow, useLoadScript} from '@react-google-maps/api'
 import { useEffect } from 'react';
- 
-const AnyReactComponent = ({ text }) => <div>
-    <Button style={{width:'10px',fontSize:'10px',display:'flex',alignContent:'flex-start'}}>{text}</Button>
-  </div>
- 
-function SimpleMap(){
-  const [data, setdata] = useState([]);
+import { useState } from 'react';
+import { useRef } from 'react';
+import { useCallback } from 'react';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import './GoogleMap.css'
+const mapContainerStyle={
+  width:'100vw',
+  height: '100vh'
+}
+const center = { 
+  lat :27.717245, 
+  lng:85.323959 
+}
+const libraries=["places"];
+export default function SimpleMap(){
+  const [data, setdata] = useState([])
+  const [Selected, setSelected] = useState(null)
   useEffect(() => {
-      async function getHostData() {
-          const response = await fetch('http://localhost:9000/userhome');
-          const {data} = await response.json();
-          setdata({data});
-      }
-      getHostData();
-  }, [])
-  const [center,setCenter]=useState({
-    lat: 27.6758528,
-    lng: 85.3671936,
-  });
-  const [zoom, setzoom] = useState(14);
-    return (
-      // Important! Always set the container height explicitly
-      <div className="googleMap">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyA7TVORrDdi2WUm4l2GSkWIVqyq8AovX7U'}}
-          defaultCenter={center}
-          defaultZoom={zoom}
-        >
-        {Object.keys(data).map((keys)=>{
-          return(
-            <AnyReactComponent
-            text={data[keys].hostName}
-            lat={data[keys].latitude}
-            lng={data[keys].longitude}
-            
+    async function getHostData() {
+        const response = await fetch('http://localhost:9000/userhome');
+        const {data} = await response.json();
+        setdata({data}.data);
+    }
+    getHostData();
+}, [])
+  const {isLoaded,loadError}=useLoadScript({
+    googleMapsApiKey: "AIzaSyBEbdwDIlO8ETUQve_lDZBMN9e0q1EY-M4",
+    libraries
+  }
+  );
+  const mapRef=useRef();
+  const onMapLoad=useCallback((map)=>{
+    mapRef.current=map;
+  },[]);
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+  if(loadError) return 'Error loading map';
+  if(!isLoaded) return "Map is loading";
+  return (
+  <div>
+    {/* <Search /> */}
+    <GoogleMap
+    mapContainerStyle={mapContainerStyle}
+    center={center}
+    zoom={10}
+    onLoad={onMapLoad}
+    >
+      {console.log(data)}
+      {Object.keys(data).map((keys)=>{
+        return(
+          <Marker key={keys} 
+            position={{
+              lat:parseFloat(data[keys].latitude),
+              lng:parseFloat(data[keys].longitude)
+            }}
+            onClick={()=>{
+              setSelected(data[keys])
+            }}
           />
-          );
-        })}
           
-        </GoogleMapReact>
-      </div>
-    );
+        )
+      })}
+      {Selected ? (<InfoWindow
+              position={{
+                lat:parseFloat(Selected.latitude),
+                lng:parseFloat(Selected.longitude)
+              }}
+              onCloseClick={()=>setSelected(null)}
+            >
+              <p>{Selected.hostName}</p>
+            </InfoWindow> ): null}
+    </GoogleMap>
+  </div>
+  )
+
+}
+function Locate({ panTo }) {
+  return (
+    <button
+      className="locate"
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            panTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null
+        );
+      }}
+    >
+      <img src="/compass.svg" alt="compass" />
+    </button>
+  );
 }
 
- 
-export default SimpleMap;
+function Search({ panTo }) {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions:{
+      location: { lat: () => 27.717245, lng: () => 85.323959 },
+      radius: 100 * 1000,
+    },
+  });
+  const handleInput = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSelect = async (address) => {
+    setValue(address, false);
+    clearSuggestions();
+
+    try {
+      const results = await getGeocode({ address });
+      const { lat, lng } = await getLatLng(results[0]);
+      panTo({ lat, lng });
+    } catch (error) {
+      console.log("😱 Error: ", error);
+    }
+  };
+
+  return (
+    <div className="search">
+      <Combobox onSelect={handleSelect}>
+        <ComboboxInput
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Search your location"
+        />
+        
+      </Combobox>
+    </div>
+  );
+}

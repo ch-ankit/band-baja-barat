@@ -1,3 +1,14 @@
-.googleMap{
-    height: 585px;
+.search{
+    position: fixed;
+    top: 0;
+    left: 40%;
+    z-index: 100;
+}
+
+.locate{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+
 }

@@ -9,35 +9,49 @@ import PartyD from './PartyD.js';
 import UserD from './UserD.js';
 import ZoneD from './ZoneD.js';
 import { useSelector } from 'react-redux';
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxPopover,
+    ComboboxList,
+    ComboboxOption,
+  } from "@reach/combobox";
+import { useEffect } from 'react';
 function UserHeader() {
     const [drawer, setDrawer] = useState(false);
-    const [Data, setData] = useState(PartyD);
+    const [Data, setData] = useState('partypalace');
     const [search, setsearch] = useState('');
-    const [drop, setdrop] = useState(false)
+    const [drop, setdrop] = useState(false);
+    const [searchData, setsearchData] = useState([])
     const UserData = useSelector(state => state.userData ?? [])
     const handleChange=(e)=>{
         switch(e.target.value){
             case 'Party Palace':
-                setData(PartyD)
+                setData('partypalace')
+                setsearch('')
                 break;
             case 'User':
-                setData(UserD);
+                setData('user');
+                setsearch('')
                 break;
-            case 'Zone':
-                setData(ZoneD);
+            case 'Band':
+                setData('band');
+                setsearch('')
                 break;
 
         }
     }
-    const updateSearch=(event)=>{
-        setdrop(true);
-        setsearch(event.target.value.substr(0,20));
-    }
-    let filter=Data?.filter(
-        (PartyPalace)=>{
-            return PartyPalace.name.toLowerCase().indexOf(search.toLowerCase()) != -1;
+    useEffect(() => {
+        async function getsearchData() {
+            const response = await fetch(`http://localhost:9000/userhome/search?value=${search}&&key=${Data}`)
+            const allData = await response.json();
+            setsearchData(allData.data ?? []);
         }
-        );
+        getsearchData();
+        
+    }, [search])
+    
+    
     return (
         <div className="userHeader">
             <div className="userHeader__logo">
@@ -51,19 +65,19 @@ function UserHeader() {
                         <option value='User'>User</option>
                         <option value='Band'>Band</option>
                     </select>
-                    <input type='search' onChange={updateSearch} value={search} />
+                    <Combobox className="userHeader__searchInput" >
+                        <ComboboxInput value={search} onChange={(e)=>{setsearch(e.target.value)}} placeholder='Search' style={{width:'100%'}} />
+                        <ComboboxPopover className='userHeader__searchPopover'>
+                            {Object.keys(searchData).map((keys)=>{
+                               return( <ComboboxList>
+                                    {Data=='partypalace' ? searchData[keys].hostName : null}
+                                    {Data=='user' ? searchData[keys].name: null}
+                                    {Data=='band' ? searchData[keys].Name: null}
+                                </ComboboxList>)
+                            })}
+                        </ComboboxPopover>
+                    </Combobox>
                     <SearchIcon className="userHeader__icon" /><br />
-                </div>
-                <div className="userHeader__suggestion">
-                    {drop?
-                    <ul>
-                        <li>Babin</li>
-                        {filter.map((PP)=>{
-                            return <li>
-                                {PP.name}<br/>
-                                </li>
-                        })}
-                    </ul> : ''}
                 </div>
             </div>
             <div className="userHeader__right">

@@ -301,21 +301,22 @@ function Details({ location }) {
             <div className="details">
                 <div className="details__body">
                     <div className="details__image">
-                        <ReactImageMagnify {...{
+                        <ReactImageMagnify className="details__Magnify" style={{overflow:'visible'}} {...{
                             smallImage: {
                                 alt: 'product image',
                                 isFluidWidth: true,
                                 src: details.photo,
+                                className:'smallImages'
                             },
                             largeImage: {
                                 src: details.photo,
-                                height: 1000,
-                                width: 950,
+                                height: 2000,
+                                width: 1000,
 
                             },
                             enlargedImageContainerDimensions: {
-                                width: '50%',
-                                height: '70%',
+                                width: '390%',
+                                height: '330%',
                             }
                         }} />
                         {/* <img src={details.photo} alt="product" /> */}

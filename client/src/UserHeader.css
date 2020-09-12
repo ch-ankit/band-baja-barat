@@ -67,5 +67,14 @@
     width:10% !important;
 }
 .userHeader__select{
-    border: 0;;
+    border: 0;
+}
+
+.userHeader__searchInput{
+    flex: 1;
+}
+
+.userHeader__searchPopover{
+    background-color: aqua;
+    z-index: 100;
 }

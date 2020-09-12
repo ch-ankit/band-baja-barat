@@ -8,6 +8,7 @@ import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
 import { Provider } from "react-redux"
 import { Store } from './redux/store'
+import SimpleMap from "./GoogleMap.js";
 
 
 ReactDOM.render(
