@@ -106,7 +106,7 @@ exports.updateEvent = async (req, res, next) => {
 
 exports.deleteEvent = (req, res, next) => {
   try {
-    var sql = ` DELETE FROM guestlist WHERE eventId = ${req.query.eventId} `;
+    var sql = ` DELETE FROM guestList WHERE eventId = ${req.query.eventId} `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         var sql = ` DELETE FROM orders WHERE eventId = ${req.query.eventId} `;

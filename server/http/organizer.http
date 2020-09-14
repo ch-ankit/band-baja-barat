@@ -1,19 +1,11 @@
-<<<<<<< HEAD
-GET http://localhost:9000/organizer?userName=Demented
-=======
 GET http://localhost:9000/organizer?userName=chankit
->>>>>>> 450adefbf33a3458b501d5cbe26097b38f470de6
 
 ###
 POST http://localhost:9000/organizer
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
-    "userName":"Demented"
-=======
     "userName":"chankit"
->>>>>>> 450adefbf33a3458b501d5cbe26097b38f470de6
 }
 ###
 DELETE http://localhost:9000/organizer

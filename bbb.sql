@@ -129,18 +129,12 @@ CREATE TABLE organizer
       (id)
  );
 
-<<<<<<< HEAD
- CREATE TABLE guestlist (
-   id BIGINT AUTO_INCREMENT,
-   userName VARCHAR(255) ,
-=======
       CREATE TABLE guestList
       (
         id BIGINT
         AUTO_INCREMENT,
    userName VARCHAR
         (255) ,
->>>>>>> 450adefbf33a3458b501d5cbe26097b38f470de6
    eventId INT ,
    PRIMARY KEY
         (id),
@@ -152,7 +146,7 @@ CREATE TABLE organizer
         (id)
  );
 
-        CREATE TABLE hostphoto
+        CREATE TABLE hostPhoto
         (
           id INT
           AUTO_INCREMENT,
@@ -168,7 +162,7 @@ CREATE TABLE organizer
           (vatNo)
  );
 
-          CREATE TABLE invitationprotoype
+          CREATE TABLE invitationPrototype
           (
             id INT
             AUTO_INCREMENT,
@@ -181,7 +175,7 @@ CREATE TABLE organizer
             (id)
  );
 
-            CREATE TABLE invitationdraft
+            CREATE TABLE invitationDraft
             (
               id INT
               AUTO_INCREMENT,
@@ -190,15 +184,12 @@ CREATE TABLE organizer
               (255),
    backgroundImage2 VARCHAR
               (255),
-   prototypeId INT,
+   draft text,
    PRIMARY KEY
               (id),
    FOREIGN KEY
               (eventId) REFERENCES event
               (id),
-   FOREIGN KEY
-              (prototypeId) REFERENCES invitationprotoype
-              (id)
  );
 
               CREATE TABLE menu
@@ -569,7 +560,7 @@ CREATE TABLE organizer
                     ( 'Junu', 'Himanshu', null, 'junushu', 20, 'junushu@gmail.com', 'https://robohash.org/nullacumquevoluptatem.jpg?size=250x250&set=set1', '+977-9841533375', 'Nepalganj', 'Narayangadh', 6);
 
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (1, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
@@ -583,7 +574,7 @@ CREATE TABLE organizer
  Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
  Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'http://dummyimage.com/157x151.png/ff4444/ffffff', 'http://dummyimage.com/245x211.jpg/5fa2dd/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (2, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
@@ -593,7 +584,7 @@ CREATE TABLE organizer
  Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
  Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'http://dummyimage.com/250x184.bmp/dddddd/000000', 'http://dummyimage.com/218x216.jpg/dddddd/000000');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (3, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
@@ -607,7 +598,7 @@ CREATE TABLE organizer
  Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
  Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 'http://dummyimage.com/122x227.bmp/cc0000/ffffff', 'http://dummyimage.com/206x248.jpg/ff4444/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (4, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
@@ -618,7 +609,7 @@ CREATE TABLE organizer
  Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
  Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 'http://dummyimage.com/158x197.jpg/ff4444/ffffff', 'http://dummyimage.com/220x211.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (5, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
@@ -630,7 +621,7 @@ CREATE TABLE organizer
  Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
  Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 'http://dummyimage.com/163x224.jpg/ff4444/ffffff', 'http://dummyimage.com/202x200.jpg/5fa2dd/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (6, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.
@@ -639,7 +630,7 @@ CREATE TABLE organizer
  Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.
  Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 'http://dummyimage.com/180x131.jpg/ff4444/ffffff', 'http://dummyimage.com/208x247.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (7, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
@@ -649,7 +640,7 @@ CREATE TABLE organizer
  Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
  Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'http://dummyimage.com/118x187.bmp/5fa2dd/ffffff', 'http://dummyimage.com/222x245.jpg/dddddd/000000');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (8, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
@@ -658,7 +649,7 @@ CREATE TABLE organizer
  Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
  In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 'http://dummyimage.com/181x220.png/dddddd/000000', 'http://dummyimage.com/217x222.jpg/ff4444/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (9, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
@@ -671,7 +662,7 @@ CREATE TABLE organizer
  Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
  Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 'http://dummyimage.com/143x185.bmp/5fa2dd/ffffff', 'http://dummyimage.com/219x228.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (10, 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
@@ -769,163 +760,163 @@ CREATE TABLE organizer
  Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.
  Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 'https://picsum.photos/200/300?random=8', '+977 9861-989498', 'ccreddon9@biglobe.ne.jp', 'Gograha', 'Butwal', 1, 28.683359, 80.608063);
 
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (1, 406820, 'https://picsum.photos/200/300?random=7', 'Pellentesque viverra pede ac diam.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (2, 771982, 'https://picsum.photos/200/300?random=2', 'Nulla ut erat id mauris vulputate elementum.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (3, 830058, 'https://picsum.photos/200/300?random=5', 'In est risus, auctor sed, tristique in, tempus sit amet, sem.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (4, 571317, 'https://picsum.photos/200/300?random=1', 'Phasellus in felis.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (5, 990441, 'https://picsum.photos/200/300?random=7', 'Donec quis orci eget orci vehicula condimentum.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (6, 493744, 'https://picsum.photos/200/300?random=6', 'Duis aliquam convallis nunc.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (7, 488366, 'https://picsum.photos/200/300?random=3', 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (8, 458869, 'https://picsum.photos/200/300?random=2', 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (9, 202698, 'https://picsum.photos/200/300?random=9', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (10, 455238, 'https://picsum.photos/200/300?random=3', 'Proin at turpis a pede posuere nonummy.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (11, 406820, 'https://picsum.photos/200/300?random=7', 'Quisque id justo sit amet sapien dignissim vestibulum.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (12, 771982, 'https://picsum.photos/200/300?random=5', 'Nulla nisl.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (13, 830058, 'https://picsum.photos/200/300?random=9', 'Morbi a ipsum.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (14, 571317, 'https://picsum.photos/200/300?random=8', 'Pellentesque ultrices mattis odio.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (15, 990441, 'https://picsum.photos/200/300?random=2', 'In hac habitasse platea dictumst.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (16, 493744, 'https://picsum.photos/200/300?random=5', 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (17, 488366, 'https://picsum.photos/200/300?random=5', 'Nulla nisl.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (18, 458869, 'https://picsum.photos/200/300?random=9', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (19, 202698, 'https://picsum.photos/200/300?random=2', 'Pellentesque viverra pede ac diam.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (20, 455238, 'https://picsum.photos/200/300?random=8', 'Suspendisse potenti.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (21, 406820, 'https://picsum.photos/200/300?random=9', 'Morbi porttitor lorem id ligula.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (22, 771982, 'https://picsum.photos/200/300?random=6', 'Nam dui.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (23, 830058, 'https://picsum.photos/200/300?random=6', 'Sed accumsan felis.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (24, 571317, 'https://picsum.photos/200/300?random=7', 'Nulla suscipit ligula in lacus.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (25, 990441, 'https://picsum.photos/200/300?random=2', 'Donec vitae nisi.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (26, 493744, 'https://picsum.photos/200/300?random=5', 'Cras pellentesque volutpat dui.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (27, 488366, 'https://picsum.photos/200/300?random=1', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (28, 458869, 'https://picsum.photos/200/300?random=3', 'Curabitur convallis.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (29, 202698, 'https://picsum.photos/200/300?random=9', 'Maecenas pulvinar lobortis est.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (30, 455238, 'https://picsum.photos/200/300?random=6', 'Nulla tempus.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (31, 406820, 'https://picsum.photos/200/300?random=3', 'Vivamus vel nulla eget eros elementum pellentesque.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (32, 771982, 'https://picsum.photos/200/300?random=3', 'Maecenas rhoncus aliquam lacus.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (33, 830058, 'https://picsum.photos/200/300?random=8', 'Integer tincidunt ante vel ipsum.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (34, 571317, 'https://picsum.photos/200/300?random=5', 'Nam nulla.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (35, 990441, 'https://picsum.photos/200/300?random=8', 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (36, 493744, 'https://picsum.photos/200/300?random=8', 'In hac habitasse platea dictumst.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (37, 488366, 'https://picsum.photos/200/300?random=3', 'Nulla mollis molestie lorem.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (38, 458869, 'https://picsum.photos/200/300?random=3', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (39, 202698, 'https://picsum.photos/200/300?random=6', 'Integer a nibh.');
-                  insert into hostphoto
+                  insert into hostPhoto
                     (id, vatNo, photo, caption)
                   values
                     (40, 455238, 'https://picsum.photos/200/300?random=7', 'Praesent blandit.');

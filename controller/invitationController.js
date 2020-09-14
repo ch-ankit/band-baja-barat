@@ -2,7 +2,7 @@ const mysqlConnection = require("./../connection");
 
 exports.invitationPrototype = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM invitationprotoype `;
+    var sql = ` SELECT * FROM invitationPrototype `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -17,7 +17,7 @@ exports.invitationPrototype = (req, res, next) => {
 
 exports.invitationDraft = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM invitationdraft WHERE eventId = "${req.query.eventId}" `;
+    var sql = ` SELECT * FROM invitationDraft WHERE eventId = "${req.query.eventId}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -32,7 +32,7 @@ exports.invitationDraft = (req, res, next) => {
 
 exports.addInvitationDraft = (req, res, next) => {
   try {
-    var sql = ` INSERT INTO invitationdraft (eventId,backgroundImage1,backgroundImage2,draft) VALUES (
+    var sql = ` INSERT INTO invitationDraft (eventId,backgroundImage1,backgroundImage2,draft) VALUES (
       ${req.body.eventId},
       "${req.body.backgroundImage1}",
       "${req.body.backgroundImage2}",
@@ -54,12 +54,12 @@ exports.updateInvitationDraft = async (req, res, next) => {
   try {
     var oldDraftData = [];
     mysqlConnection.query(
-      `SELECT * FROM invitationdraft WHERE eventId=${req.body.eventId}`,
+      `SELECT * FROM invitationDraft WHERE eventId=${req.body.eventId}`,
       (err, rows) => {
         if (!err) {
           oldDraftData = rows;
           console.log(oldDraftData);
-          var sql = ` UPDATE invitationdraft SET 
+          var sql = ` UPDATE invitationDraft SET 
                   draft = "${
                     req.body.draft == undefined
                       ? oldDraftData[0].draft
@@ -95,7 +95,7 @@ exports.updateInvitationDraft = async (req, res, next) => {
 
 exports.deleteInvitationDraft = (req, res, next) => {
   try {
-    var sql = ` DELETE FROM invitationdraft WHERE eventId = "${req.query.eventId}" `;
+    var sql = ` DELETE FROM invitationDraft WHERE eventId = "${req.query.eventId}" `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({

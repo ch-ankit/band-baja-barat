@@ -34,7 +34,7 @@ app.use("/userhome", userHomeRouter);
 app.use("/invitation", invitationRouter);
 app.use("/organizer", organizerRouter);
 app.use("/event", eventRouter);
-app.use("/guestlist", guestListRouter);
+app.use("/guestList", guestListRouter);
 app.use("/menu", menuRouter);
 app.use("/booking", bookingRouter);
 
