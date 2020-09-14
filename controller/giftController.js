@@ -120,7 +120,7 @@ exports.orderedProduct = async (req, res, next) => {
     if (req.query.userName == "admin") {
       sql = ` SELECT orderNo,giftId,quantity,price,orderStatus,o.eventId,userName,orderedDate,eventName,CONCAT(street,' ',city,'-',provience) AS location,eventDate FROM orders o INNER JOIN event e ON o.eventId = e.id INNER JOIN booking b ON e.id = b.eventId NATURAL JOIN host ORDER BY eventDate`;
     } else
-      sql = ` SELECT orderNo,giftId,quantity,price,orderStatus,eventId,userName,orderedDate,eventName FROM orders INNER JOIN event e ON o.eventId = e.id WHERE userName="${req.query.userName}" ORDER BY eventDate`;
+      sql = ` SELECT orderNo,giftId,quantity,price,orderStatus,eventId,userName,orderedDate,eventName FROM orders o INNER JOIN event e ON o.eventId = e.id WHERE userName="${req.query.userName}" ORDER BY eventDate`;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
         if (rows.length == 0) res.json({ message: "No order placed yet", data: [] });

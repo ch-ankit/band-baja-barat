@@ -11,7 +11,18 @@
 }
 
 .products__display {
-    margin-left: 20px;
     align-self: flex-start;
-    width: 70%;
+    width: 90%;
+    margin: 20px;
+}
+
+.products__displayad {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history__ad {
+    max-height: 30vh;
+    margin-top: -10px;
 }

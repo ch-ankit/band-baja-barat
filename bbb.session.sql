@@ -1,0 +1,2 @@
+SELECT vatNo
+FROM host;

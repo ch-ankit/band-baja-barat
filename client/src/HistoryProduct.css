@@ -1,35 +1,29 @@
 .overall {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
     margin-bottom: 20px;
+    justify-content: first baseline;
     background-color: white;
-    width: 100%;
 }
 .history {
     display: flex;
+    flex-direction: row;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .history__image {
     object-fit: contain;
-    margin-left: 10px;
+    margin-left: 40px;
     margin-top: auto;
     margin-bottom: auto;
-    width: 180px;
+    max-width: 180px;
     height: 180px;
 }
 
 .history__info {
+    margin-left: 40px;
     padding-left: 20px;
-}
-
-.history__info > button {
-    background: #f0c14b;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: #a88734 #9c7e31 #846a29;
-    color: #111;
 }
 
 .history__title {
@@ -42,4 +36,15 @@
     height: fit-content;
     align-content: center;
     align-self: center;
+}
+
+.status__display {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.ordered__by {
+    display: flex;
+    position: static;
+    font-weight: 600;
 }

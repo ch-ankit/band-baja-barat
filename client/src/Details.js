@@ -29,6 +29,7 @@ function Details({ location }) {
     const [editSummary, setEditSummary] = useState(false)
     const [editableSummary, setEditablesummary] = useState("");
     const [invitations, setInvitations] = useState([])
+    const [invitedEventId, setInvitedEventId] = useState('')
 
 
 
@@ -295,18 +296,23 @@ function Details({ location }) {
         }
 
     }
+    const handleChange = (event) => {
+        setInvitedEventId(event.target.value)
+    }
+
+    const selectEvent = Object.keys(invitations).map(items => <option value={invitations[items].eventId}>{invitations[items].eventName}</option>)
 
     return (
         <div>
             <div className="details">
                 <div className="details__body">
                     <div className="details__image">
-                        <ReactImageMagnify className="details__Magnify" style={{overflow:'visible'}} {...{
+                        <ReactImageMagnify className="details__Magnify" style={{ overflow: 'visible' }} {...{
                             smallImage: {
                                 alt: 'product image',
                                 isFluidWidth: true,
                                 src: details.photo,
-                                className:'smallImages'
+                                className: 'smallImages'
                             },
                             largeImage: {
                                 src: details.photo,
@@ -480,7 +486,10 @@ function Details({ location }) {
                                 <button form="eventIdForm" type="submit" className="addBasket">Add to Basket</button>
                                 <div className="event__id">
                                     <form id="eventIdForm" onSubmit={addToBasket}>
-                                        <input data-toggle="popover" title="Please fill out this field" class="form-control" type="number" validate placeholder="Event id" onChange={(evt) => setEventId(evt.target.value)} value={eventId} required />
+                                        {/* <select value={"Choose an event"} class="custom-select" onChange={handleChange}>
+                                            {selectEvent}
+                                        </select> After invitations select gift for that */}
+                                        <input className="form-control" data-toggle="tooltip" title="Please fill out this field" type="number" validate placeholder="Event id" onChange={(evt) => setEventId(evt.target.value)} value={eventId} required />
                                     </form>
                                 </div>
                             </div>

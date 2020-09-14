@@ -29,7 +29,7 @@ function History({ userId }) {
         fetchData();
         fetchHistory();
     }, [message]);
-    if (history.length !== 0) {
+    if (history !== undefined && history.length !== 0) {
         history.forEach(element => {
             const index = Object.keys(data).findIndex(items => data[items].modelNo === element.giftId)
             index !== -1 && orders.push({ ...element, image: data[index].photo, rating: data[index].rating, name: data[index].name })
@@ -52,10 +52,14 @@ function History({ userId }) {
             status={orders[items].orderStatus}
             occasion={orders[items].eventName}
             msgFunction={setMsg}
+            deliveryDate={orders[items].eventDate}
+            location={orders[items].location}
+            userName={orders[items].userName}
         />)
     return (
         <div className="historz">
-            {history.length === 0 ? (
+            <img className="history__ad" src="https://laz-img-cdn.alicdn.com/images/ims-web/TB1os6RgSslXu8jSZFuXXXg7FXa.jpg_1200x1200Q100.jpg" alt="history__ad" />
+            {history !== undefined && history.length === 0 ? (
                 <div>
                     <h2>Your have not bought any gifts</h2>
                     <p>
@@ -67,9 +71,7 @@ function History({ userId }) {
                         <h2 className="History__title">Your History</h2>
                     </div>
                 )}
-            <div className="products__display">
-                {display}
-            </div>
+            <div className="products__display">{display}</div>
         </div>
     );
 }
