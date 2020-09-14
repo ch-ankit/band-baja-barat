@@ -17,7 +17,7 @@ exports.hostData = async (req, res, next) => {
             var sql = `SELECT hallNo,capacity FROM hostHalls WHERE vatNo = ${req.query.vatNo}`;
             mysqlConnection.query(sql, (err, rows1) => {
               if (!err) {
-                var sql = `SELECT photo,caption FROM hostphoto WHERE vatNo = ${req.query.vatNo}`;
+                var sql = `SELECT photo,caption FROM hostPhoto WHERE vatNo = ${req.query.vatNo}`;
                 mysqlConnection.query(sql, (err, rows2) => {
                   if (!err) {
                     res.json({ rows, rows1, rows2 });
@@ -126,7 +126,7 @@ exports.updateHostData = async (req, res, next) => {
 
 exports.deleteHostData = async (req, res, next) => {
   try {
-    var sql = ` DELETE FROM  hostphoto WHERE vatNo = ${req.query.vatNo} `;
+    var sql = ` DELETE FROM  hostPhoto WHERE vatNo = ${req.query.vatNo} `;
     var sql1 = ` DELETE FROM  hosthalls WHERE vatNo = ${req.query.vatNo} `;
     var sql2 = ` DELETE FROM  host WHERE vatNo = ${req.query.vatNo} `;
 
@@ -171,7 +171,7 @@ exports.addHalls = async (req, res, next) => {
 
 exports.addPhoto = async (req, res, next) => {
   try {
-    var sql = `INSERT INTO hostphoto (vatNo,caption,photo) VALUES (${req.body.vatNo},"${req.body.caption}","${req.body.photo}") `;
+    var sql = `INSERT INTO hostPhoto (vatNo,caption,photo) VALUES (${req.body.vatNo},"${req.body.caption}","${req.body.photo}") `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("photo uploaded sucesfully");
@@ -201,7 +201,7 @@ exports.updateHalls = async (req, res, next) => {
 
 exports.deletePhoto = async (req, res, next) => {
   try {
-    var sql = `DELETE FROM hostphoto WHERE photo ="${req.body.photo} AND vatNo = "${req.body.vatNo}" `;
+    var sql = `DELETE FROM hostPhoto WHERE photo ="${req.body.photo} AND vatNo = "${req.body.vatNo}" `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("photo deleted sucesfully");
