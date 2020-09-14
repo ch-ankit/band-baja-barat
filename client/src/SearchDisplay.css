@@ -1,28 +1,36 @@
-.searchPage{
+.searchPage {
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
 }
-.searcheditems{
+.searcheditems {
     display: flex;
     flex-wrap: wrap;
 }
 
-.searchPage>span{
+.searchPage > span {
     color: teal;
     margin-left: auto;
     margin-right: auto;
-    margin-top:0.2%;
+    margin-top: 0.2%;
     font-weight: 600;
     font-style: oblique;
     font-size: 20px;
 }
 
-.searcheditems>span{
+.searcheditems > span {
     color: black;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top:10%;
+    margin-top: 10%;
     font-weight: 600;
     font-size: 20px;
+}
+
+.headerz {
+    width: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 100;
 }

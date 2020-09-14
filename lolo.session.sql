@@ -1,1 +1,3 @@
-SELECT orderNo,giftId,quantity,price,orderStatus,o.eventId,userName,orderedDate,eventName,CONCAT(street,' ',city,'-',provience) AS location,eventDate FROM orders o INNER JOIN event e ON o.eventId = e.id INNER JOIN booking b ON e.id = b.eventId NATURAL JOIN host ORDER BY eventDate
+SELECT *
+FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId
+Natural JOIN user  WHERE userName = 'Demented'

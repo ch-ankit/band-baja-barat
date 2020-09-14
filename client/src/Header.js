@@ -85,8 +85,7 @@ function Header(props) {
             searchedData.length !== 0 ? (
                 <ol className="search__display">{mapSearchData}</ol>
             ) : (
-                    <div style={{ color: "white" }}>No result Found</div>
-                );
+                    inputSearch !== '' && <div style={{ color: "white" }}>No result Found</div>);
     }
     if (display.length !== 0) {
         check = true;
@@ -170,7 +169,8 @@ function Header(props) {
                 >
                     {display}
                     {check && (
-                        <Link
+                        (inputSearch !== '' && searchedData.length !== 0) &&
+                        < Link
                             className="seemore"
                             to={`/giftstore/products/search?query=${inputSearch}`}
                         >
@@ -178,8 +178,9 @@ function Header(props) {
                         </Link>
                     )}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 
