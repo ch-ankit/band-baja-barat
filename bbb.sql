@@ -99,7 +99,7 @@ USE bb2;
    FOREIGN KEY (eventId) REFERENCES event (id)
  );
 
- CREATE TABLE guestList (
+ CREATE TABLE guestlist (
    id BIGINT AUTO_INCREMENT,
    userName VARCHAR(255) ,
    eventId INT ,
