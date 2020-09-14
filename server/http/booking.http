@@ -1,4 +1,4 @@
-GET http://localhost:9000/booking?eventId=2
+GET http://localhost:9000/booking?eventId=5
 
 ###
 POST http://localhost:9000/booking

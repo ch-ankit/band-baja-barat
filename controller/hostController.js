@@ -1,3 +1,4 @@
+const { json } = require("express");
 const mysqlConnection = require("./../connection");
 
 exports.hostData = async (req, res, next) => {
@@ -216,7 +217,7 @@ exports.deletePhoto = async (req, res, next) => {
 
 exports.pendingRequests = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='pending' AND  vatNo = "${req.query.hostId}"`;
+    var sql = `  SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='PENDING' AND  vatNo = ${req.query.vatNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -231,7 +232,7 @@ exports.pendingRequests = (req, res, next) => {
 
 exports.approvedRequests = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='approved' AND  vatNo = "${req.query.hostId}"`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN userWHERE hostStatus= 'APPROVED' AND  vatNo = "${req.query.hostId}"`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -246,7 +247,22 @@ exports.approvedRequests = (req, res, next) => {
 
 exports.upcomingEvent = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='approved' AND  vatNo = "${req.query.hostId}" AND DATEDIFF(CURDATE(), eventDate) BETWEEN 0 AND 7`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user WHERE hostStatus= 'APPROVED' AND  vatNo = "${req.query.hostId}" AND DATEDIFF(CURDATE(), eventDate) BETWEEN 0 AND 7`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({ data: rows });
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.bookedDate = (req, res, next) => {
+  try {
+    var sql = ` SELECT eventDate FROM booking INNER JOIN event e ON e.id = eventId WHERE hostStatus =  'APPROVED' AND month(eventDate)= ${req.query.month} AND year(eventDate)=${req.query.year} AND vatNo = ${req.query.vatNo} AND hallNo = ${req.query.hallNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

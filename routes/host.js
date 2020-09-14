@@ -17,4 +17,12 @@ router
   .post(hostController.addHalls)
   .patch(hostController.updateHalls);
 
+router.route("/requests").get(hostController.pendingRequests);
+
+router.route("/approved").get(hostController.approvedRequests);
+
+router.route("/upcoming").get(hostController.upcomingEvent);
+
+router.route("/bookeddates").get(hostController.bookedDate);
+
 module.exports = router;
