@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'
+import Header from "./Header"
 import Product from "./Product";
 import './SearchDisplay.css'
 
@@ -58,9 +59,10 @@ function SearchDisplay({ location }) {
     }
     return (
         <div className="searchPage">
+            <div className="headerz"><Header /></div>
             <span>Search result for "{searchQuery}"</span>
             <div className="searcheditems">
-                {searchedData.length !== 0 ? displaySearched : <span><span role="img" aria-label="emoji">💥💥</span> No such products found in Store!! <span role="img" aria-label="emoji">💥💥</span></span>}
+                {searchedData !== undefined && searchedData.length !== 0 ? displaySearched : <span><span role="img" aria-label="emoji">💥💥</span> No such products found in Store!! <span role="img" aria-label="emoji">💥💥</span></span>}
             </div>
         </div>
     );

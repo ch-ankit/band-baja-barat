@@ -1,4 +1,4 @@
-GET http://localhost:9000/giftstore/orders?userName=kshitzahi
+GET http://localhost:9000/giftstore/orders?userName=chankit
 
 ###
 POST http://localhost:9000/giftstore/orders
