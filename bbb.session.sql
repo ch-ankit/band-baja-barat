@@ -1,1 +1,0 @@
-SELECT eventName,hostName,hallNo,eventDate,shift,expectedGuestNo FROM booking b  INNER JOIN event e ON b.eventId= e.id INNER JOIN host h ON b.vatNo = h.vatNo WHERE h.vatNo = "${req.query.vatNo}" AND eventDate > CURDATE()

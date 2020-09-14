@@ -189,7 +189,7 @@ CREATE TABLE organizer
               (id),
    FOREIGN KEY
               (eventId) REFERENCES event
-              (id),
+              (id)
  );
 
               CREATE TABLE menu

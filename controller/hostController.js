@@ -213,3 +213,48 @@ exports.deletePhoto = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.pendingRequests = (req, res, next) => {
+  try {
+    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='pending' AND  vatNo = "${req.query.hostId}"`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({ data: rows });
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.approvedRequests = (req, res, next) => {
+  try {
+    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='approved' AND  vatNo = "${req.query.hostId}"`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({ data: rows });
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.upcomingEvent = (req, res, next) => {
+  try {
+    var sql = ` SELECT * FROM booking  NATURAL JOIN event WHERE hostStatus='approved' AND  vatNo = "${req.query.hostId}" AND DATEDIFF(CURDATE(), eventDate) BETWEEN 0 AND 7`;
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        res.json({ data: rows });
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
