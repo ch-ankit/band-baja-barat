@@ -123,7 +123,7 @@ function Details({ location }) {
             let prevQuantity = 0;
             if (userBasket.length !== 0) {
                 const index = Object.keys(userBasket).findIndex(
-                    (item) => userBasket[item].modelNo === details.modelNo
+                    (item) => userBasket[item].modelNo === details.modelNo && userBasket[item].eventId === details.eventId
                 );
                 index === -1 ? (name = "POST") : (name = "PATCH");
                 index === -1

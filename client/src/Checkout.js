@@ -13,7 +13,6 @@ function Checkout(props) {
     let [data, setData] = useState([]);
     const [basketData, setBasketData] = useState([]);
     let [message, setMessage] = useState('')
-    let [msgSubtotal, setMsgsubtotal] = useState('')
     let basketDataValues = []
     useEffect(() => {
         async function getBasket() {
@@ -28,20 +27,21 @@ function Checkout(props) {
         }
         fetchData();
         getBasket()
-    }, [message, msgSubtotal])
+    }, [message, userData])
+
+
     if (basketData.length !== 0) {
         basketData.forEach(element => {
-            const index = Object.keys(data).findIndex(product => element.modelNo === data[product].modelNo)
-            basketDataValues.push({ ...data[index], quantity: element.quantity })
+            const index = Object.keys(data).findIndex(product => (element.modelNo === data[product].modelNo))
+            basketDataValues.push({ ...data[index], quantity: element.quantity, eventId: element.eventId })
         })
     }
-    const setMsg = (message) => {
-        setMsgsubtotal(message)
-    }
-    const removeFromBasket = async ({ id }) => {
+
+    const removeFromBasket = async ({ id, eventId }) => {
         const dbBody = {
             userName: userName,
-            modelNo: id
+            modelNo: id,
+            eventId: eventId
         }
         const response = await fetch('http://localhost:9000/giftstore/basket',
             {
@@ -66,8 +66,8 @@ function Checkout(props) {
                 price={basketDataValues[item].price}
                 rating={basketDataValues[item].rating}
                 quantity={basketDataValues[item].quantity}
+                eventId={basketDataValues[item].eventId}
                 removeFun={removeFromBasket}
-                renSubtotal={setMsg}
                 userName={userName}
             />
         )
@@ -97,7 +97,7 @@ function Checkout(props) {
             </div>
             {(basketDataValues[0] !== undefined) &&
                 <div className="checkout__right">
-                    <Subtotal basketValues={basketDataValues} message={msgSubtotal} />
+                    <Subtotal data={data} message={message} />
                 </div>
             }
 
