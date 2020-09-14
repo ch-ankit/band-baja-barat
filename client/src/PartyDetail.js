@@ -23,7 +23,7 @@ function PartyDetail() {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
             const allData = await response.json();
-            setdata(allData.rows);
+            setdata(allData.rows ?? []);
             setPhoto(allData.rows2);
             console.log(data)
         }
@@ -74,7 +74,13 @@ function PartyDetail() {
                         <button className='partyDetail__button' onClick={()=>setbook(true)}><h2>Book now</h2></button>
                         <button className='partyDetail__button' onClick={()=>setcontact(true)}><h2>Get Contact Info</h2></button>
                         <hr/>
-                        {contact? (<div></div>) :(<div>
+                        {contact? (<div>
+                            <h5>Contact Info</h5>
+                            <ul>
+                        <li>{data[keys].contactInfo}</li>
+                        <li>{data[keys].email}</li>
+                            </ul>
+                        </div>) :(<div>
                         <h5>Booked Date</h5>
                         <ul>
                             <li>29 September</li>
