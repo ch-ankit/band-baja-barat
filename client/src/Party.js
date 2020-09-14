@@ -11,7 +11,7 @@ function Party() {
         async function getHostData() {
             const response = await fetch('http://localhost:9000/host');
             const allData = await response.json()
-            setdata(allData.data)
+            setdata(allData.data ?? [])
         }
         getHostData(); 
     }, [])

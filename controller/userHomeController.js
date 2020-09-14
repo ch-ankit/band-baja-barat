@@ -36,7 +36,7 @@ exports.search = (req, res, next) => {
     if (req.query.key == "partypalace")
       sql = ` SELECT hostName, CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}"  `;
     else if (req.query.key == "user")
-      sql = ` SELECT concat(firstName,' ',CASE WHEN (middleName != NULL) THEN middleName ELSE' 'END,lastName) AS name, CONCAT(street,',',city,',',provience) AS location FROM user WHERE userName REGEXP "${req.query.value}"`;
+      sql = ` SELECT concat(firstName,' ',CASE WHEN (middleName != NULL) THEN middleName ELSE' 'END,lastName) AS name, CONCAT(street,',',city,',',provience) AS location FROM user WHERE firstName REGEXP "${req.query.value}" OR lastName REGEXP "${req.query.value}"`;
     else if (req.query.key == "band")
       sql = ` SELECT bandName AS Name FROM band WHERE bandName REGEXP "${req.query.value}" `;
     mysqlConnection.query(sql, (err, rows) => {

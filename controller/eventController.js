@@ -4,9 +4,9 @@ exports.event = (req, res, next) => {
   try {
     var sql;
     if (req.query.organizerId) {
-      sql = ` SELECT e.id,eventName,CONCAT(groomName," ","WEDS"," ",brideName) AS agenda,eventDate,shift,eventStatus,hostStatus,CONCAT((DATEDIFF(eventDate,CURDATE())),' '',DAYS') AS 'Event In',eventStatus,hostStatus FROM event e INNER JOIN organizer o ON organizerId= o.id WHERE organizerId = "${req.query.organizerId}" `;
+      sql = ` SELECT e.id,eventName,CONCAT(groomName," ","WEDS"," ",brideName) AS agenda,eventDate,shift,eventStatus,hostStatus,CONCAT((DATEDIFF(eventDate,CURDATE())),' '',DAYS') AS 'Event In',eventStatus,hostStatus FROM event e INNER JOIN organizer o ON organizerId= o.id WHERE organizerId = "${req.query.organizerId}" ORDER BY e.id DESC `;
     } else {
-      sql = ` SELECT e.id,eventName,eventStatus,hostStatus,userName,eventDate,CONCAT((DATEDIFF(eventDate,CURDATE()),' '',DAYS') AS 'Event In' FROM event e INNER JOIN organizer o ON organizerId= o.id`;
+      sql = ` SELECT e.id,eventName,eventStatus,hostStatus,userName,eventDate,CONCAT((DATEDIFF(eventDate,CURDATE()),' '',DAYS') AS 'Event In' FROM event e INNER JOIN organizer o ON organizerId= o.id ORDER BY e.id DESC`;
     }
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {

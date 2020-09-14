@@ -18,6 +18,7 @@ function PartyDetail() {
     const vatNo=useSelector(state=>state.vatNo);
     const [Photo, setPhoto] = useState([]);
     const [data, setdata] = useState([]);
+    const [contact, setcontact] = useState(false)
     useEffect(() => {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
@@ -71,15 +72,19 @@ function PartyDetail() {
                         <h4>Connect with this vendor</h4>
                         <hr/>
                         <button className='partyDetail__button' onClick={()=>setbook(true)}><h2>Book now</h2></button>
-                        <button className='partyDetail__button'><h2>Get Contact Info</h2></button>
+                        <button className='partyDetail__button' onClick={()=>setcontact(true)}><h2>Get Contact Info</h2></button>
                         <hr/>
+                        {contact? (<div></div>) :(<div>
                         <h5>Booked Date</h5>
                         <ul>
                             <li>29 September</li>
                             <li>21 October</li>
                             <li>09 November</li>
                             <li>2 December</li>
-                        </ul>
+                        </ul></div>)}
+                    </div>
+                    <div className='partyDetail__googleMap'>
+                        <iframe src={`https://maps.google.com/maps?q= ${data[keys].latitude}, ${data[keys].longitude}&z=15&output=embed`} width="100%" height="200px" frameborder="0" style={{border:"0"}}></iframe>
                     </div>
                     <div className='partyDetail__Gallery'>
                             <h4>Top photos</h4>
@@ -94,6 +99,7 @@ function PartyDetail() {
                             </div>
                     </div>
                 </div>
+                
             </div>
             )})}
         </div>

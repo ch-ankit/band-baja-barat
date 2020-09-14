@@ -61,7 +61,7 @@ export default function SimpleMap(){
     onLoad={onMapLoad}
     >
       {console.log(data)}
-      {Object.keys(data).map((keys)=>{
+      {Object.keys(data ??[]).map((keys)=>{
         return(
           <Marker key={keys} 
             position={{
