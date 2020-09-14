@@ -11,5 +11,5 @@ router
   .route("/user")
   .get(userHomeController.userCheck)
   .post(userHomeController.updateUsers);
-
+router.route("/myevents").get(userHomeController.myEvents);
 module.exports = router;
