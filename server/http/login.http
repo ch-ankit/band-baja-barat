@@ -20,12 +20,12 @@ POST http://localhost:9000/login/host
 content-type: application/json
 
 {
-    "email": "406820"
+    "email": "dum2@gmail.com"
 }
 
 ###
 
-POST http://localhost:9000/signup/host
+POST http://localhost:9000/signup/user
 Content-Type: application/json
 
 {

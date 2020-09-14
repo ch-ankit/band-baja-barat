@@ -129,18 +129,12 @@ CREATE TABLE organizer
       (id)
  );
 
-<<<<<<< HEAD
- CREATE TABLE guestlist (
-   id BIGINT AUTO_INCREMENT,
-   userName VARCHAR(255) ,
-=======
       CREATE TABLE guestList
       (
         id BIGINT
         AUTO_INCREMENT,
    userName VARCHAR
         (255) ,
->>>>>>> 450adefbf33a3458b501d5cbe26097b38f470de6
    eventId INT ,
    PRIMARY KEY
         (id),
@@ -168,7 +162,7 @@ CREATE TABLE organizer
           (vatNo)
  );
 
-          CREATE TABLE invitationprotoype
+          CREATE TABLE invitationPrototype
           (
             id INT
             AUTO_INCREMENT,
@@ -181,7 +175,7 @@ CREATE TABLE organizer
             (id)
  );
 
-            CREATE TABLE invitationdraft
+            CREATE TABLE invitationDraft
             (
               id INT
               AUTO_INCREMENT,
@@ -190,15 +184,12 @@ CREATE TABLE organizer
               (255),
    backgroundImage2 VARCHAR
               (255),
-   prototypeId INT,
+   draft text,
    PRIMARY KEY
               (id),
    FOREIGN KEY
               (eventId) REFERENCES event
               (id),
-   FOREIGN KEY
-              (prototypeId) REFERENCES invitationprotoype
-              (id)
  );
 
               CREATE TABLE menu
@@ -569,7 +560,7 @@ CREATE TABLE organizer
                     ( 'Junu', 'Himanshu', null, 'junushu', 20, 'junushu@gmail.com', 'https://robohash.org/nullacumquevoluptatem.jpg?size=250x250&set=set1', '+977-9841533375', 'Nepalganj', 'Narayangadh', 6);
 
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (1, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
@@ -583,7 +574,7 @@ CREATE TABLE organizer
  Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
  Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'http://dummyimage.com/157x151.png/ff4444/ffffff', 'http://dummyimage.com/245x211.jpg/5fa2dd/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (2, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
@@ -593,7 +584,7 @@ CREATE TABLE organizer
  Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
  Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'http://dummyimage.com/250x184.bmp/dddddd/000000', 'http://dummyimage.com/218x216.jpg/dddddd/000000');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (3, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
@@ -607,7 +598,7 @@ CREATE TABLE organizer
  Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
  Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 'http://dummyimage.com/122x227.bmp/cc0000/ffffff', 'http://dummyimage.com/206x248.jpg/ff4444/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (4, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
@@ -618,7 +609,7 @@ CREATE TABLE organizer
  Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
  Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 'http://dummyimage.com/158x197.jpg/ff4444/ffffff', 'http://dummyimage.com/220x211.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (5, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
@@ -630,7 +621,7 @@ CREATE TABLE organizer
  Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
  Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 'http://dummyimage.com/163x224.jpg/ff4444/ffffff', 'http://dummyimage.com/202x200.jpg/5fa2dd/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (6, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.
@@ -639,7 +630,7 @@ CREATE TABLE organizer
  Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.
  Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 'http://dummyimage.com/180x131.jpg/ff4444/ffffff', 'http://dummyimage.com/208x247.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (7, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
@@ -649,7 +640,7 @@ CREATE TABLE organizer
  Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
  Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'http://dummyimage.com/118x187.bmp/5fa2dd/ffffff', 'http://dummyimage.com/222x245.jpg/dddddd/000000');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (8, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
@@ -658,7 +649,7 @@ CREATE TABLE organizer
  Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
  In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 'http://dummyimage.com/181x220.png/dddddd/000000', 'http://dummyimage.com/217x222.jpg/ff4444/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (9, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
@@ -671,7 +662,7 @@ CREATE TABLE organizer
  Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
  Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 'http://dummyimage.com/143x185.bmp/5fa2dd/ffffff', 'http://dummyimage.com/219x228.jpg/cc0000/ffffff');
 
-                  insert into invitationprotoype
+                  insert into invitationPrototype
                     (id, draft, photo1, photo2)
                   values
                     (10, 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.

@@ -2,7 +2,7 @@ const mysqlConnection = require("./../connection");
 
 exports.invitationRecieved = (req, res, next) => {
   try {
-    var sql = ` SELECT eventId FROM guestlist WHERE userName = "${req.query.userName}"`;
+    var sql = ` SELECT eventId FROM guestList WHERE userName = "${req.query.userName}"`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -81,37 +81,40 @@ exports.updateUsers = (req, res, next) => {
           oldData = rows;
           var sql = ` UPDATE user SET 
                   points = ${
-            req.body.points == undefined
-              ? oldData[0].points
-              : req.body.points
-            },
+                    req.body.points == undefined
+                      ? oldData[0].points
+                      : req.body.points
+                  },
                   mobileNo = "${
-            req.body.mobileNo == undefined
-              ? oldData[0].mobileNo
-              : req.body.mobileNo
-            }",
+                    req.body.mobileNo == undefined
+                      ? oldData[0].mobileNo
+                      : req.body.mobileNo
+                  }",
                   street = "${
-            req.body.street == undefined
-              ? oldData[0].street
-              : req.body.street
-            }",
+                    req.body.street == undefined
+                      ? oldData[0].street
+                      : req.body.street
+                  }",
                   city = "${
-            req.body.city == undefined ? oldData[0].city : req.body.city
-            }",
+                    req.body.city == undefined ? oldData[0].city : req.body.city
+                  }",
                   provience = "${
-            req.body.provience == undefined
-              ? oldData[0].provience
-              : req.body.provience
-            }",
+                    req.body.provience == undefined
+                      ? oldData[0].provience
+                      : req.body.provience
+                  }",
                   photo = "${
-            req.body.photo == undefined
-              ? oldData[0].photo
-              : req.body.photo
-            }"
+                    req.body.photo == undefined
+                      ? oldData[0].photo
+                      : req.body.photo
+                  }"
                   WHERE userName = "${req.body.userName}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
-              res.json({ status: "success", message: "User Data update successful" });
+              res.json({
+                status: "success",
+                message: "User Data update successful",
+              });
             } else {
               res.json({ error: err });
             }

@@ -1,19 +1,19 @@
-GET http://localhost:9000/guestlist
+GET http://localhost:9000/guestList?eventId=6
 
 ###
-POST http://localhost:9000/guestlist
+POST http://localhost:9000/guestList
 Content-Type: application/json
 
 {
-    "eventId":"4",
+    "eventId":"6",
     "userName":"junushu"
 }
 
 ###
-DELETE http://localhost:9000/guestlist
+DELETE http://localhost:9000/guestList
 Content-Type: application/json
 
 {
-    "eventId":"4",
+    "eventId":"6",
     "userName":"junushu"
 }
