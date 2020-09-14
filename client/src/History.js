@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from "react-redux";
 import "./History.css";
 import HistoryProducts from "./HistoryProducts";
 
 function History({ userId }) {
     const userData = useSelector(state => state.userData)
+    const admin = useSelector(state => state.isAdmin)
     const { userName } = userData[0]
     const [data, setData] = useState([]);
     const [history, setHistory] = useState([]);
     const [message, setMessage] = useState('')
     let orders = [];
     useEffect(() => {
+        const historyUrl = admin ? "http://localhost:9000/giftstore/orders?userName=admin" : `http://localhost:9000/giftstore/orders?userName=${userName}`
         async function fetchHistory() {
             const response = await fetch(
-                `http://localhost:9000/giftstore/orders?userName=${userName}`
+                historyUrl
             );
             const { data } = await response.json();
             setHistory(data);
@@ -38,6 +40,7 @@ function History({ userId }) {
     }
     const display = Object.keys(orders).map(items =>
         <HistoryProducts
+            key={uuidv4()}
             orderNo={orders[items].orderNo}
             rating={orders[items].rating}
             title={orders[items].name}

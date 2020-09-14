@@ -163,7 +163,7 @@ exports.updateOrder = (req, res, next) => {
     var sql = ` UPDATE orders SET orderStatus = '${req.body.status}' WHERE orderNo = ${req.body.orderNo} `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`status of order changed to ${req.body.status}`);
+        res.json({ message: `${req.body.orderNo} status of order changed to ${req.body.status}` });
       }
     });
   } catch (err) {

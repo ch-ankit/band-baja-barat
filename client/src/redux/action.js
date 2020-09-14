@@ -39,9 +39,15 @@ export const UpdateSubtotal = (message) => {
     }
 }
 export const UpdatePaid = (value) => {
-    console.log(value)
     return {
         type: 'UpdatePaid',
         data: value
+    }
+}
+
+export const SetAdmin = (value) => {
+    return {
+        type: 'SetAdmin',
+        result: value
     }
 }
