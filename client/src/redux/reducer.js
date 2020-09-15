@@ -6,11 +6,8 @@ const initialState = {
     hostUid: null,
     updateMessage: null,
     paid: null,
-<<<<<<< HEAD
-    eventData:null
-=======
+    eventData: null,
     isAdmin: null,
->>>>>>> cb258e42a40294cc790f2c9109485ec5900edd2c
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -33,7 +30,7 @@ export const reducerr = (state = initialState, action) => {
 
             }
         case 'EventData':
-            return{
+            return {
                 ...state,
                 eventData: action.payload
             }

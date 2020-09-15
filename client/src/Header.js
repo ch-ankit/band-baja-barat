@@ -10,7 +10,7 @@ import "./Header.css";
 import { useSelector } from "react-redux";
 
 function Header(props) {
-    const userData = useSelector(state => state.userData)
+    const { userData, isAdmin } = useSelector(state => state)
     const paid = useSelector(state => state.paid)
     const { userName, email } = userData[0]
     const [userPoints, setUserPoints] = useState(0)
@@ -142,23 +142,23 @@ function Header(props) {
                         </div>
                     </Link>
 
-                    <Link to="/giftstore/addpoints" className="header__linkgift">
+                    {!isAdmin && <Link to="/giftstore/addpoints" className="header__linkgift">
                         <div className="header__optiongift">
                             <span className="header__optionLineTwogift">
                                 Add Credits
                             </span>
                         </div>
-                    </Link>
+                    </Link>}
 
                     {/* Basket Icon/ Items inside basket */}
-                    <Link to="/checkout" className="header__linkgift">
+                    {!isAdmin && <Link to="/checkout" className="header__linkgift">
                         <div className="header__optionBasketgift">
                             <ShoppingBasketIcon />
                             <span className="header__optionLineTwogift header__basketCountgift">
                                 {totalItems}
                             </span>
                         </div>
-                    </Link>
+                    </Link>}
                 </div>
             </nav>
             {focus && (

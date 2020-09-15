@@ -26,7 +26,7 @@ function UserPage() {
             const allData = await response.json();
             dispatch(UserData(allData.data));
 
-            if (email === 'akgunner6@gmail.com') {
+            if (email === 'akgunneawr6@gmail.com') {
                 dispatch(SetAdmin(true))
             } else {
                 dispatch(SetAdmin(false))

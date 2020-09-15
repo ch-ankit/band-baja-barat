@@ -9,7 +9,9 @@ import { useSelector } from "react-redux";
 //Hello Worldz
 
 function Details({ location }) {
-    const [{ isAdmin, user }, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
+    const isAdmin = useSelector(state => state.isAdmin)
+    console.log(isAdmin)
     const [eventId, setEventId] = useState()
 
     const userData = useSelector(state => state.userData);

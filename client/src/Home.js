@@ -39,8 +39,7 @@ function ControlledCarousel() {
 }
 
 function Home(props) {
-  const [{ isAdmin }] = useStateValue()
-  const uid = useSelector(state => state.uid)
+  const { uid, isAdmin } = useSelector(state => state)
   let [data, setData] = useState({ data: [] });
   let [newData, setnewData] = useState({ data: [] });
   useEffect(() => {
