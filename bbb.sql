@@ -97,7 +97,7 @@ CREATE TABLE organizer
     (255),
    brideName VARCHAR
     (255),
-   eventDate DATE,
+   eventDate DATE ,
    shift VARCHAR
     (255),
    eventStatus VARCHAR
@@ -243,7 +243,7 @@ CREATE TABLE organizer
    eventId INT ,
    userName VARCHAR
                   (255) ,
-   orderedDate DATE,
+   orderedDate DATE ,
    PRIMARY KEY
                   (orderNo),
    FOREIGN KEY

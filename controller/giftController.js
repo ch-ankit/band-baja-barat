@@ -55,38 +55,32 @@ exports.updateProduct = async (req, res, next) => {
       (err, rows) => {
         if (!err) {
           oldData = rows;
-          var sql = ` UPDATE giftShop SET quantity=${
-            req.body.quantity == undefined
-              ? oldData[0].quantity
-              : oldData[0].quantity + parseInt(req.body.quantity)
-          },
-          price= ${
-            req.body.price == undefined
+          var sql = ` UPDATE giftShop SET quantity=${req.body.quantity == undefined
+            ? oldData[0].quantity
+            : oldData[0].quantity + parseInt(req.body.quantity)
+            },
+          price= ${req.body.price == undefined
               ? oldData[0].price
               : parseInt(req.body.price)
-          },
-          description = "${
-            req.body.description == undefined
+            },
+          description = "${req.body.description == undefined
               ? oldData[0].description
               : req.body.description
-          }",
-          summary = "${
-            req.body.summary == undefined
+            }",
+          summary = "${req.body.summary == undefined
               ? oldData[0].summary
               : req.body.summary
-          }" WHERE modelNo = "${req.body.modelNo}"`;
+            }" WHERE modelNo = "${req.body.modelNo}"`;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
               res.json({
-                message: `${req.body.modelNo} quantity updated by ${
-                  req.body.quantity == undefined
-                    ? oldData[0].quantity
-                    : oldData[0].quantity + parseInt(req.body.quantity)
-                } and price is ${
-                  req.body.price == undefined
+                message: `${req.body.modelNo} quantity updated by ${req.body.quantity == undefined
+                  ? oldData[0].quantity
+                  : oldData[0].quantity + parseInt(req.body.quantity)
+                  } and price is ${req.body.price == undefined
                     ? oldData[0].price
                     : req.body.price
-                } `,
+                  } `,
               });
             } else {
               res.json({ error: err });
@@ -124,11 +118,12 @@ exports.orderedProduct = async (req, res, next) => {
   try {
     var sql;
     if (req.query.userName == "admin") {
-      sql = ` SELECT * FROM orders `;
-    } else sql = ` SELECT * FROM orders WHERE userName="${req.query.userName}"`;
+      sql = ` SELECT orderNo,giftId,quantity,price,orderStatus,o.eventId,userName,orderedDate,eventName,CONCAT(street,' ',city,'-',provience) AS location,eventDate FROM orders o INNER JOIN event e ON o.eventId = e.id INNER JOIN booking b ON e.id = b.eventId NATURAL JOIN host ORDER BY eventDate`;
+    } else
+      sql = ` SELECT orderNo,giftId,quantity,price,orderStatus,eventId,userName,orderedDate,eventName FROM orders o INNER JOIN event e ON o.eventId = e.id WHERE userName="${req.query.userName}" ORDER BY eventDate`;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
-        if (rows.length == 0) res.json("No order placed yet");
+        if (rows.length == 0) res.json({ message: "No order placed yet", data: [] });
         else res.json({ status: "success", data: rows });
       } else {
         res.json({ error: err });
@@ -169,7 +164,7 @@ exports.updateOrder = (req, res, next) => {
     var sql = ` UPDATE orders SET orderStatus = '${req.body.status}' WHERE orderNo = ${req.body.orderNo} `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`status of order changed to ${req.body.status}`);
+        res.json({ message: `${req.body.orderNo} status of order changed to ${req.body.status}` });
       }
     });
   } catch (err) {
@@ -182,7 +177,7 @@ exports.deleteOrder = async (req, res, next) => {
     var sql = ` DELETE FROM orders WHERE orderNo = ${req.query.orderNo}`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json(`orderNo ${req.query.orderNo}  order deleted`);
+        res.json({ message: `orderNo ${req.query.orderNo} order deleted` });
       } else {
         res.json({ error: err });
       }

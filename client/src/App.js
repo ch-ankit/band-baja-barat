@@ -21,8 +21,12 @@ import SearchDisplay from "./SearchDisplay";
 import { useStateValue } from "./StateProvider";
 import UserInfo from "./UserInfo.js";
 import Host from "./Host.js";
+<<<<<<< HEAD
 import BookingStatus from "./BookingStatus.js";
 import EventDetail from "./EventDetail.js";
+=======
+import Payment from "./Payment";
+>>>>>>> cb258e42a40294cc790f2c9109485ec5900edd2c
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -76,6 +80,7 @@ function App() {
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
+          <Route exact path={`/giftstore/addpoints`} render={(routeProps) => <Payment {...routeProps} />} />
         </Switch>
       </div>
     </Router >

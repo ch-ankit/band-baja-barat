@@ -4,7 +4,7 @@ import SimpleMap from './GoogleMap'
 import './UserPage.css'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { UserData } from './redux/action'
+import { SetAdmin, UserData } from './redux/action'
 import { useDispatch } from 'react-redux'
 import Map from './Map'
 
@@ -25,6 +25,12 @@ function UserPage() {
             });
             const allData = await response.json();
             dispatch(UserData(allData.data));
+
+            if (email === 'akgunner6@gmail.com') {
+                dispatch(SetAdmin(true))
+            } else {
+                dispatch(SetAdmin(false))
+            }
 
         }
         getUserData();

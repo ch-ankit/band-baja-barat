@@ -1,3 +1,28 @@
-.history{
-    margin-top:80px;
+.historz {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.History__title {
+    margin-right: 10px !important;
+    padding: 10px !important;
+    border-bottom: 1px solid lightgray !important;
+}
+
+.products__display {
+    align-self: flex-start;
+    width: 90%;
+    margin: 20px;
+}
+
+.products__displayad {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history__ad {
+    max-height: 30vh;
+    margin-top: -10px;
 }

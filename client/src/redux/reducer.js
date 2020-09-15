@@ -6,7 +6,11 @@ const initialState = {
     hostUid: null,
     updateMessage: null,
     paid: null,
+<<<<<<< HEAD
     eventData:null
+=======
+    isAdmin: null,
+>>>>>>> cb258e42a40294cc790f2c9109485ec5900edd2c
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -14,7 +18,8 @@ export const reducerr = (state = initialState, action) => {
         case 'UserLog':
             return {
                 ...state,
-                uid: action.payload
+                uid: action.payload,
+                isAdmin: false
             }
         case 'UserData':
             return {
@@ -41,7 +46,8 @@ export const reducerr = (state = initialState, action) => {
         case 'Hostuid':
             return {
                 ...state,
-                hostUid: action.payload
+                hostUid: action.payload,
+                isAdmin: false
             }
         case 'UpdateSubtotal':
             return {
@@ -52,6 +58,11 @@ export const reducerr = (state = initialState, action) => {
             return {
                 ...state,
                 paid: action.data
+            }
+        case 'SetAdmin':
+            return {
+                ...state,
+                isAdmin: action.result
             }
         default:
             return { ...state }
