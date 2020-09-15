@@ -78,3 +78,15 @@
     background-color: aqua;
     z-index: 100;
 }
+
+.userHeader__rightButton{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userHeader__rightButton > p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -21,6 +21,8 @@ import SearchDisplay from "./SearchDisplay";
 import { useStateValue } from "./StateProvider";
 import UserInfo from "./UserInfo.js";
 import Host from "./Host.js";
+import BookingStatus from "./BookingStatus.js";
+import EventDetail from "./EventDetail.js";
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -46,8 +48,8 @@ function App() {
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
 
           <Route path='/User/userInfo' component={UserInfo} />
-
-          <Route path='/Host' component={Host} />
+          <Route path='/bookingstatus' component={BookingStatus} />
+          <Route exact path='/Host' component={Host} />
           {/*Sign up page */}
           <Route exact path='/Signup' component={SignUp} />
           {/* Gift Store Routes */}
@@ -70,6 +72,7 @@ function App() {
               </div>
             )
           }} />
+          <Route path='/host/events' render={(props)=><EventDetail {...props}/>} />
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />

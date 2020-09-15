@@ -5,7 +5,8 @@ const initialState = {
     userEmail: null,
     hostUid: null,
     updateMessage: null,
-    paid: null
+    paid: null,
+    eventData:null
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -25,6 +26,11 @@ export const reducerr = (state = initialState, action) => {
                 ...state,
                 userEmail: action.payload,
 
+            }
+        case 'EventData':
+            return{
+                ...state,
+                eventData: action.payload
             }
 
         case 'VatNo':

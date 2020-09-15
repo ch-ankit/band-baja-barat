@@ -18,7 +18,7 @@ function DetailCard({image,name,details,path,vatno}) {
                 <img src={image} alt={name} className="detailCard__image" />
             <div className="detailCard__detail">
                 <h2>{name}</h2>
-                <p>{details?? ''.substr(0,250)} <Link to={uid ?`/partypalace/${name}`:'/SignUp'} onClick={addVatNo}>...See More</Link></p>
+                <p>{details?? ''.substr(0,150)} <Link to={uid ?`/partypalace/${name}`:'/SignUp'} onClick={addVatNo}>...See More</Link></p>
             </div>            
         </div>
     )

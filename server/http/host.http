@@ -30,4 +30,4 @@ GET  http://localhost:9000/host/approved?vatNo=771982
 GET  http://localhost:9000/host/upcoming?vatNo=771982
 
 ###
-GET  http://localhost:9000/host/bookeddates?vatNo=771982
+GET  http://localhost:9000/host/bookeddates?vatNo=771982&&month=9&&year=2020&&hallNo=1

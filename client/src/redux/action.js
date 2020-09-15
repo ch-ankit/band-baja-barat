@@ -6,6 +6,12 @@ export const actionCreate = (uid) => {
     }
 }
 
+export const EventData=(data)=>{
+    return{
+        type: 'EventData',
+        payload: data
+    }
+}
 export const actionvatNo = (vatNo) => {
     return {
         type: 'VatNo',

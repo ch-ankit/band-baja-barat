@@ -85,18 +85,19 @@
     background-color: white;
 }
 
-.host__Header{
-    display: flex;
-    background-image:linear-gradient(to left,teal,white);
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;;
-    z-index: 100;
-    padding: 0px 10px;
-}
+
 
 .host__headerButton{
     height:70%;
     border-radius: 50px;
+}
+
+.host__upcomingEvents{
+    margin-top:20px;
+    background-color: white;
+}
+
+.host__approvedEvents{
+    margin-top:20px;
+    background-color: white;
 }

@@ -1,0 +1,8 @@
+.bookingStatus__list{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    background-color: green;
+}
+
+

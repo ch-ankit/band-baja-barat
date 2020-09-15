@@ -4,9 +4,12 @@ import Accordion from 'react-bootstrap/Accordion'
 
 import Card from 'react-bootstrap/Card'
 import './comp1.css'
+import UserHeader from '../UserHeader.js'
 class Invite extends React.Component{
     render(){
         return(
+            <div>
+            <UserHeader />
             <div id='inv' style={{paddingLeft:'350px'}}>
                 <Accordion style={{width:'600px'}}>
                     <Card>
@@ -21,6 +24,7 @@ class Invite extends React.Component{
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
+            </div>
             </div>
         );
     }

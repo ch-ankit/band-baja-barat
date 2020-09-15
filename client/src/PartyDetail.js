@@ -72,7 +72,7 @@ function PartyDetail() {
                         <h4>Connect with this vendor</h4>
                         <hr/>
                         <button className='partyDetail__button' onClick={()=>setbook(true)}><h2>Book now</h2></button>
-                        <button className='partyDetail__button' onClick={()=>setcontact(true)}><h2>Get Contact Info</h2></button>
+                        <button className='partyDetail__button' onClick={()=>setcontact(!contact)}><h2>Get Contact Info</h2></button>
                         <hr/>
                         {contact? (<div>
                             <h5>Contact Info</h5>

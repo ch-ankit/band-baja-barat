@@ -1,6 +1,8 @@
 GET http://localhost:9000/event?organizerId=1
 
 ###
+GET http://localhost:9000/userhome/myevents?userName=Demented
+
 POST http://localhost:9000/event
 Content-Type: application/json
 
@@ -21,8 +23,11 @@ PATCH http://localhost:9000/event
 Content-Type: application/json
 
 {
-    "eventId": 5,
+    "eventId": 10,
+    "eventStatus":"UPCOMING",
+    "hostStatus":"APPROVED",
     "brideName": "Nico Robin",
-    "eventDate": "2020-09-11",
+    "eventDate": "2020-09-19",
     "shift": "Day"
 }
+

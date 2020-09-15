@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function getSteps() {
-  return ['Create Event', 'Create Menus', 'Complete booking','Draft Invitation'];
+  return ['Create Event', 'Create Menus', 'Complete booking'];
 }
 
 
@@ -76,6 +76,7 @@ const vatNo=useSelector(state=>state.vatNo);
                                 method: "post"
                             });}
           event();
+          console.log(EventDate)
           async function getEventId(){
             const response=await fetch('http://localhost:9000/event?organizerId=1');
             const data= await response.json();

@@ -1,4 +1,4 @@
-GET http://localhost:9000/organizer?userName=chankit
+GET http://localhost:9000/organizer?userName=Demented
 
 ###
 POST http://localhost:9000/organizer

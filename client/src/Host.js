@@ -17,13 +17,18 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import {Hauth} from './hostFirebaseConfig'
 import { useDispatch } from 'react-redux';
-import { Hostuid } from './redux/action.js';
+import { Hostuid, EventData } from './redux/action.js';
 import {useHistory} from 'react-router-dom'
+import EventDetail from './EventDetail.js';
+import HostHeader from './HostHeader.js';
 function Host() {
     const history=useHistory();
     const [book, setbook] = useState(false);
     const [Photo, setPhoto] = useState([]);
     const [data, setdata] = useState([]);
+    const [RequestData, setRequestData] = useState([]);
+    const [UpcomingData, setUpcomingData] = useState([]);
+    const [ApprovedData, setApprovedData] = useState([]);
     const hostUid = useSelector(state => state.hostUid);
     const dispatch=useDispatch();
     useEffect(() => {
@@ -36,14 +41,31 @@ function Host() {
         }
         getHostData();
     }, [])
+    useEffect(() => {
+        async function getRequestData() {
+            const response = await fetch("http://localhost:9000/host/requests?vatNo=771982")
+            const allData = await response.json();
+            setRequestData(allData.data)
+        }
+        getRequestData();
+        async function getUpcomingData() {
+            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=771982")
+            const allData = await response.json();
+            setUpcomingData(allData.data)
+        }
+        getUpcomingData();
+        async function getApprovedData() {
+            const response = await fetch("http://localhost:9000/host/approved?vatNo=771982")
+            const allData = await response.json();
+            setApprovedData(allData.data)
+        }
+        getApprovedData();
+    }, [data])
     
     return (
          <div>
             {hostUid ? '' : history.push('/')}
-            <div className='host__Header'>
-                <h1>BBB</h1>
-                <button onClick={()=>{Hauth.signOut(); dispatch(Hostuid(null))}} className='host__headerButton'>Log Out</button>
-            </div>
+            <HostHeader />
             {Object.keys(data).map((keys)=>{
             return(<div className='host'>
                 <div className='host__leftPart'>
@@ -86,21 +108,50 @@ function Host() {
                     <div className='host__request'>
                         <h4>Requested</h4>
                         <List>
-                            <ListItem button>
+                            {Object.keys(RequestData).map((keys)=>{
+                                return(
+                                <Link to='host/events'>
+                                <ListItem button key={keys} onClick={()=>dispatch(EventData(RequestData[keys]))}>
                                 <ListItemText>
-                                    Request1
+                                    {RequestData[keys].eventName}
                                 </ListItemText>
                             </ListItem>
-                            <ListItem button>
+                            </Link>
+                                )
+                            })
+                        }
+                        </List>
+                    </div>
+                    <div className='host__upcomingEvents'>
+                        <h4>Upcoming Events</h4>
+                        <List>
+                            {Object.keys(UpcomingData).map((keys)=>{
+                                return(
+                                <Link to='host/events'>
+                                <ListItem button key={keys} onClick={()=>dispatch(EventData(UpcomingData[keys]))} >
                                 <ListItemText>
-                                    Request1
+                                    {UpcomingData[keys].eventName}
                                 </ListItemText>
                             </ListItem>
-                            <ListItem button>
+                            </Link>
+                                )
+                            })
+                        }
+                        </List>
+                    </div>
+                    <div className='host__approvedEvents'>
+                        <h4>Approved Events</h4>
+                        <List>
+                            {Object.keys(ApprovedData).map((keys)=>{
+                                return(
+                                <ListItem button key={keys}>
                                 <ListItemText>
-                                    Request1
+                                    {ApprovedData[keys].eventName}
                                 </ListItemText>
                             </ListItem>
+                                )
+                            })
+                        }
                         </List>
                     </div>
                     <div className='host__Gallery'>
