@@ -325,7 +325,6 @@ function Details({ location }) {
                                 height: '330%',
                             }
                         }} />
-                        {/* <img src={details.photo} alt="product" /> */}
                     </div>
 
                     <div className="details__description">
@@ -485,10 +484,9 @@ function Details({ location }) {
                             <div className="basket__control">
                                 <button form="eventIdForm" type="submit" className="addBasket">Add to Basket</button>
                                 <div className="event__id">
-                                    <form id="eventIdForm" onSubmit={addToBasket}>
+                                    <form id="eventIdForm" onSubmit={addToBasket} onInvalid={(e) => e.target.setCustomValidity("You cannot leave this blank!!")}>
                                         {/* <select value={"Choose an event"} class="custom-select" onChange={handleChange}>
-                                            {selectEvent}
-                                        </select> After invitations select gift for that */}
+                                        </select> */}
                                         <input className="form-control" data-toggle="tooltip" title="Please fill out this field" type="number" validate placeholder="Event id" onChange={(evt) => setEventId(evt.target.value)} value={eventId} required />
                                     </form>
                                 </div>

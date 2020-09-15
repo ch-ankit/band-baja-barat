@@ -10,10 +10,10 @@ GET http://localhost:9000/userhome/search?value=a&&key=partypalace
 GET http://localhost:9000/userhome/user?userName=junushu
 
 ###
-POST http://localhost:9000/userhome/user
+PATCH  http://localhost:9000/userhome/user
 Content-Type: application/json
 
 {
-    "userName":"junushu",
+    "userName":"chankit",
     "points":30
 }

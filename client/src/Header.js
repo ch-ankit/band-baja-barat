@@ -142,7 +142,7 @@ function Header(props) {
                         </div>
                     </Link>
 
-                    <Link to="/addPoints" className="header__linkgift">
+                    <Link to="/giftstore/addpoints" className="header__linkgift">
                         <div className="header__optiongift">
                             <span className="header__optionLineTwogift">
                                 Add Credits

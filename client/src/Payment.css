@@ -1,0 +1,43 @@
+.payment__giftstore {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(
+        to left,
+        rgba(100, 0, 100, 0.5),
+        rgba(255, 0, 0, 1)
+    );
+}
+
+.payment__giftstore > h3 {
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.payment__button {
+    margin-top: 100px;
+    background-color: #5c2d91;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+
+.payment__header {
+    width: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 100;
+}
+
+.payment__storeLogo {
+    background-color: white;
+    width: 100px;
+    height: 50px;
+    margin-bottom: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: auto;
+    object-fit: contain;
+}

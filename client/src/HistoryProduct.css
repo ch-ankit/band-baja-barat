@@ -4,6 +4,11 @@
     margin-bottom: 20px;
     justify-content: first baseline;
     background-color: white;
+    transition: transform 450ms;
+}
+
+.overall:hover {
+    transform: scale(1.08);
 }
 .history {
     display: flex;

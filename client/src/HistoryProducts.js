@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactStars from "react-rating-stars-component";
 import { useSelector } from 'react-redux';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
@@ -35,7 +35,9 @@ function HistoryProducts({ orderNo, status, rating, title, image, price, userNam
         <option value="DELAYED">DELAYED</option>
         <option value="CANCELLED">CANCELLED</option>
     </select>)
+
     let conditionalStyle;
+    let adminStyle;
     if (status === "DELIVERED") {
         conditionalStyle = { border: '1px solid teal', padding: '0.5rem', display: 'flex', flexDirection: 'row' }
     } else if (status === "PROCESSING") {
@@ -45,11 +47,19 @@ function HistoryProducts({ orderNo, status, rating, title, image, price, userNam
     } else if (getEventDay < 7) {
         conditionalStyle = { border: '1px solid orange', padding: '0.5rem', display: 'flex', flexDirection: 'row' }
     } else {
-        conditionalStyle = { border: '1px solid lightgray', padding: '0.5rem', display: 'flex', flexDirection: 'row' }
+        conditionalStyle = {}
+    }
+
+    if (admin === true && status === "DELIVERED" && getEventDay < 5) {
+        adminStyle = { border: '2px solid green' }
+    } else if (admin === true && status !== "DELIVERED" && getEventDay < 5) {
+        adminStyle = { border: '2px solid orange' }
+    } else {
+        adminStyle = {}
     }
 
     return (
-        <div className="overall">
+        <div style={adminStyle} className="overall">
             {admin && <div className="ordered__by" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-placement="bottom" title="Username">Ordered By: {userName}</div>}
             <div className="history">
                 <img className="history__image" src={image} alt="" />
