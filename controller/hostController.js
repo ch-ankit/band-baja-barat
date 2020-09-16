@@ -217,7 +217,7 @@ exports.deletePhoto = async (req, res, next) => {
 
 exports.pendingRequests = (req, res, next) => {
   try {
-    var sql = `  SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='PENDING' AND  vatNo = ${req.query.vatNo}`;
+    var sql = `  SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN menu m ON m.eventId = e.id INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='PENDING' AND  vatNo = ${req.query.vatNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -232,7 +232,7 @@ exports.pendingRequests = (req, res, next) => {
 
 exports.approvedRequests = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user WHERE hostStatus= 'APPROVED' AND  vatNo = ${req.query.vatNo}`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN menu m ON m.eventId = e.id INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user WHERE hostStatus= 'APPROVED' AND  vatNo = ${req.query.vatNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -247,7 +247,7 @@ exports.approvedRequests = (req, res, next) => {
 
 exports.upcomingEvent = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user WHERE hostStatus= 'APPROVED' AND  vatNo = ${req.query.vatNo} AND DATEDIFF(eventDate ,CURDATE()) BETWEEN 0 AND 7`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN menu m ON m.eventId = e.id INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user WHERE hostStatus= 'APPROVED' AND  vatNo = ${req.query.vatNo} AND DATEDIFF(eventDate ,CURDATE()) BETWEEN 0 AND 7`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
