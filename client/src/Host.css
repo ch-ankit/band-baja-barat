@@ -8,6 +8,7 @@
 
 .host__leftPart{
     width:52%;
+
 }
 .host__CImage{
     width:100%;
@@ -34,6 +35,10 @@
 
 .host__rightPart{
     width: 35%;
+    position: -webkit-sticky; /* Safari & IE */
+    position: sticky;
+    top: 0;
+    overflow: auto;
 }
 
 .host__request{
@@ -41,6 +46,7 @@
     background-color: white;
     align-items: center;
     padding:10px 0px;
+
 }
 
 

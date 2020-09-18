@@ -23,6 +23,22 @@ function EventDetail() {
     history.push('/host');
 
 }
+const rejectStatus=()=>{
+    alert('Hello')
+    async function rejectStatus1(){
+        fetch('http://localhost:9000/event',{
+            body: JSON.stringify({
+                "eventId":eventData.eventId,
+                "hostStatus":"REJECTED"
+        }),
+        headers: { "Content-type": "application/json" },
+        method:'PATCH'});
+        alert('Hello')
+}
+rejectStatus1();
+history.push('/host');
+
+}
     return (
         <div>
             <HostHeader />
@@ -41,7 +57,7 @@ function EventDetail() {
                 <div className='eventDetail__eventTime'>
                     <div>
                         <label>Event Date</label><br />
-                        {eventData.eventDate}
+                        {eventData.eventDate.slice(0,10)}
                     </div>
                     <div>
                         <label>Expected Guest No</label><br />
@@ -54,7 +70,7 @@ function EventDetail() {
                 </div>
                     {eventData.hostStatus=='APPROVED' ? '' :<div className='eventDetail__buttons'>
                         <button className='eventDetail__Accept' onClick={updateStatus}>Accept</button>
-                        <button className='eventDetail__Reject'>Reject</button>
+                        <button className='eventDetail__Reject' onClick={rejectStatus}>Reject</button>
                     </div>}
             </div>
             

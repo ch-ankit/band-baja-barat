@@ -10,14 +10,24 @@ function Gallery() {
     const [Url, setUrl] = useState('');
     const [image, setimage] = useState(null);
     const [Email, setEmail] = useState('');
-    useEffect(()=>{
-        db.collection('gallery').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-          setposts(snapshot.docs.map(doc=>({
-            id: doc.id,
-            post: doc.data(),
-          }) ));
-        })
-      },[]);
+    const [Photo, setPhoto] = useState(null)
+    // useEffect(()=>{
+    //     db.collection('gallery').orderBy("timestamp","desc").onSnapshot(snapshot=>{
+    //       setposts(snapshot.docs.map(doc=>({
+    //         id: doc.id,
+    //         post: doc.data(),
+    //       }) ));
+    //     })
+    //   },[]);
+    useEffect(() => {
+        async function getHostData() {
+            const response = await fetch('http://localhost:9000/host?vatNo=771982');
+            const allData = await response.json();
+            setPhoto(allData.rows2);
+           
+        }
+        getHostData();
+    }, [])
 
       const handleUpload=()=>{
         const uploadTask=storage.ref(`images/${image.name}`).put(image);
@@ -71,9 +81,9 @@ function Gallery() {
 
             <div className='gallery__images'>
             {console.log(posts)}
-            {posts.map(({id,post})=>(
+            {Object.keys(Photo ?? []).map((keys)=>(
         
-        <img key={id} src={post.imgUrl} className='gallery__imageCard' />
+        <img key={keys} src={Photo[keys].photo} className='gallery__imageCard' />
       ))}
             </div>
         </div>

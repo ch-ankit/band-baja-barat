@@ -87,7 +87,7 @@ function UserHeader() {
                 {Object.keys(UserData).map((keys)=>{
                     return (
                         <div className='userHeader__rightButton'>
-                            <p>{UserData[keys].points}</p>
+                            {UserData[keys].points}
                             <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
                         </div>
                     )

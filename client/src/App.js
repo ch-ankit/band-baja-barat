@@ -21,12 +21,9 @@ import SearchDisplay from "./SearchDisplay";
 import { useStateValue } from "./StateProvider";
 import UserInfo from "./UserInfo.js";
 import Host from "./Host.js";
-<<<<<<< HEAD
 import BookingStatus from "./BookingStatus.js";
 import EventDetail from "./EventDetail.js";
-=======
 import Payment from "./Payment";
->>>>>>> cb258e42a40294cc790f2c9109485ec5900edd2c
 
 function App() {
   const [{ searchQuery }] = useStateValue();

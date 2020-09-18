@@ -26,5 +26,6 @@
       "username": "sql12365010",
       "password": "ZaMN4KKmPT"
     }
-  ]
+  ],
+  "deno.enable": false
 }
