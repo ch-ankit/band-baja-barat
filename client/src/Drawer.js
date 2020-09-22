@@ -10,9 +10,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from "@material-ui/core/Avatar"
 import './Drawer.css'
-import {auth} from "./firebaseConfig"
-import {useHistory} from "react-router-dom"
-import {useDispatch} from 'react-redux'
+import { auth } from "./firebaseConfig"
+import { useHistory } from "react-router-dom"
+import { useDispatch } from 'react-redux'
 import { actionCreate } from './redux/action.js';
 import { useSelector } from 'react-redux';
 const useStyles = makeStyles({
@@ -23,15 +23,15 @@ const useStyles = makeStyles({
     width: 'auto',
   },
 });
-export default function TemporaryDrawer() {
-  const Userdata=useSelector(state=>state.userData)
-  const dispatch=useDispatch();
+export default function TemporaryDrawer({ isGiftStore }) {
+  const Userdata = useSelector(state => state.userData)
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: true,
   });
-  const history=useHistory();
-  
+  const history = useHistory();
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -51,27 +51,31 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button  onClick={()=>history.push('/User/userInfo')}>
+        {isGiftStore && <ListItem button onClick={() => history.push('/User')}>
+          <ListItemText primary='Homepage' />
+        </ListItem>}
+        <ListItem button onClick={() => history.push('/User/userInfo')}>
           <ListItemText primary='My Information' />
         </ListItem>
         <ListItem button >
-          <ListItemText primary='Invitations' onClick={()=>history.push('/invite')}/>
+          <ListItemText primary='Invitations' onClick={() => history.push('/invite')} />
         </ListItem>
         <ListItem button >
-          <ListItemText primary='Booking Status' onClick={()=>history.push('/bookingstatus')}/>
+          <ListItemText primary='Booking Status' onClick={() => history.push('/bookingstatus')} />
         </ListItem>
-        <ListItem button >
-          <ListItemText primary='Orders' />
-        </ListItem>
+        {!isGiftStore && <ListItem button >
+          <ListItemText primary='Orders' onClick={() => history.push('/history')} />
+        </ListItem>}
       </List>
       <Divider />
       <List>
-        {[ 'Log Out'].map((text, index) => (
-          <ListItem button key={text} onClick={()=>{auth.signOut();
+        {['Log Out'].map((text, index) => (
+          <ListItem button key={text} onClick={() => {
+            auth.signOut();
             dispatch(actionCreate(null));
             history.push('/');
           }}>
-            
+
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -81,23 +85,23 @@ export default function TemporaryDrawer() {
 
   return (
     <div className="drawer">
-        <React.Fragment key={'left'}>
-          <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
-            <div className="drawer__items">
+      <React.Fragment key={'left'}>
+        <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+          <div className="drawer__items">
             <h1 className="drawer__header">BBB</h1>
-            {Object.keys(Userdata).map((keys)=>{
-              return(
+            {Object.keys(Userdata).map((keys) => {
+              return (
                 <>
-                <Avatar src={Userdata[keys].photo} alt={Userdata[keys].userName} className="drawer__Avatar"/>
-                <br/><h4>{Userdata[keys].userName}</h4>
+                  <Avatar src={Userdata[keys].photo} alt={Userdata[keys].userName} className="drawer__Avatar" />
+                  <br /><h4>{Userdata[keys].userName}</h4>
                 </>
               )
             })}
-            
+
             {list('left')}
-            </div>
-          </Drawer>
-        </React.Fragment>
+          </div>
+        </Drawer>
+      </React.Fragment>
 
     </div>
   );
