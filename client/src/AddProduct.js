@@ -4,7 +4,7 @@ import { storage, db } from './firebaseConfig'
 import firebase from "firebase"
 
 
-function AddProduct(props) {
+function AddProduct({ history }) {
     const [image, setImage] = useState(null)
     const [name, setName] = useState('')
     const [price, setPrice] = useState(1)
@@ -69,7 +69,11 @@ function AddProduct(props) {
     useEffect(() => {
         if (url !== '') {
             async function addProduct() {
-                const summaryToBackend = summary.split("\u2022").join('')
+                console.log(summary)
+                let summaryToBackend;
+                if (summary) {
+                    summaryToBackend = summary[0].split("\u2022").join('')
+                }
                 const data = {
                     modelNo: modelNo,
                     price: price,
@@ -91,12 +95,11 @@ function AddProduct(props) {
                 console.log(message)
             }
             addProduct();
+            setTimeout(() => history.push('/giftstore'), 1000)
         }
     }, [url])
 
     const handleSubmit = (evt) => {
-        const helloz = summary[0].split('\n')
-        console.log(helloz)
         evt.preventDefault();
         handleUpload();
     }
@@ -124,7 +127,9 @@ function AddProduct(props) {
         }
 
     }
-
+    const displayImage = viewFile !== null && <div style={{ display: "flex", justifyContent: "center", backgroundColor: "white", width: "100%", height: "40vh", marginBottom: "60px" }}>
+        <img src={viewFile} style={{ marginTop: "auto", marginBottom: "auto", height: "200px", width: "300px", objectFit: "contain" }} />
+    </div>
     ///////////////////////////////////////
     return (
         <div className="addProduct">
@@ -144,14 +149,14 @@ function AddProduct(props) {
                     <input class="form-control" type='text' placeholder='Enter the Model number' value={modelNo} onChange={(event) => setModelNo(event.target.value)}
                     />
                 </label>
-                <label className="addProduct__description">
+                <label className="addProduct__description" style={{ height: "30vh" }}>
                     <span>Description:</span>
-                    <textarea class="form-control" type='text' placeholder='Enter the product Description' value={description} onChange={(event) => setDescription([event.target.value])}
+                    <textarea class="form-control" style={{ height: "100%" }} type='text' placeholder='Enter the product Description' value={description} onChange={(event) => setDescription([event.target.value])}
                     />
                 </label>
-                <label className="addProduct__description">
+                <label className="addProduct__description" style={{ height: "40vh" }}>
                     <span>Product Summary (In Points):</span>
-                    <textarea class="form-control" type='text' placeholder='Enter the product Description' value={summary} onKeyUp={handleKey} onChange={(event) => setSummary([event.target.value])}
+                    <textarea class="form-control" style={{ height: "100%" }} type='text' placeholder='Enter the product Description' value={summary} onKeyUp={handleKey} onChange={(event) => setSummary([event.target.value])}
                     />
                 </label>
                 <label className="addProduct__quantity">
@@ -160,13 +165,13 @@ function AddProduct(props) {
                 </label>
                 {progress !== 0 && <progress max="100" value={progress} />}
                 <input type="file" onChange={handleChange} accept='image/*' id="inputButton" hidden />
-                <button type="button">
+                <button className="btn btn-primary" style={{ marginBottom: "10px", width: "150px" }} type="button">
                     <label htmlFor="inputButton">
                         Select Image
                     </label>
                 </button>
-                <img src={viewFile} />
-                <button type="submit" form="productForm">Submit</button>
+                {displayImage}
+                <button className="btn btn-primary" style={{ width: "30vw", marginBottom: "40px" }} type="submit" form="productForm">Submit</button>
             </form>
             {url !== '' && <img src={url} alt='uploaded' />}
         </div>
