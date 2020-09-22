@@ -25,6 +25,19 @@
       "database": "sql12365010",
       "username": "sql12365010",
       "password": "ZaMN4KKmPT"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": " db4free.net",
+      "port": 3306,
+      "driver": "MariaDB",
+      "name": "newhosting",
+      "database": "bandbaajabarat",
+      "username": "haribahadur",
+      "password": "sFHLvBGj4eDn3g5"
     }
   ],
   "deno.enable": false
