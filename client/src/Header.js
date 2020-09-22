@@ -7,10 +7,13 @@ import { v4 as uuidv4 } from "uuid";
 import logo from "./images/logo.png";
 import SearchDrop from "./SearchDrop";
 import "./Header.css";
+import TemporaryDrawer from "./Drawer";
+import Avatar from '@material-ui/core/Avatar'
 import { useSelector } from "react-redux";
 
 function Header(props) {
     const { userData, isAdmin } = useSelector(state => state)
+    const [drawer, setDrawer] = useState(false);
     const paid = useSelector(state => state.paid)
     const { userName, email } = userData[0]
     const [userPoints, setUserPoints] = useState(0)
@@ -20,6 +23,7 @@ function Header(props) {
     const [basketData, setBasketData] = useState([]);
     const [searchedData, setSearchedData] = useState([]);
     const [searchDropFocus, setSearchdropfocus] = useState(false);
+    const UserData = useSelector(state => state.userData ?? [])
     let totalItems = 0;
     let display = [];
     let check = false;
@@ -160,6 +164,17 @@ function Header(props) {
                         </div>
                     </Link>}
                 </div>
+                {Object.keys(UserData).map((keys) => {
+                    return (
+                        <div className='userHeader__rightButton'>
+                            {UserData[keys].points}
+                            <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
+                        </div>
+                    )
+
+                })}
+
+                {drawer ? <TemporaryDrawer /> : ''}
             </nav>
             {focus && (
                 <div

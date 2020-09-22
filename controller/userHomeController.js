@@ -17,11 +17,7 @@ exports.invitationRecieved = (req, res, next) => {
 
 exports.mapPointer = (req, res, next) => {
   try {
-<<<<<<< HEAD
-    var sql = ` SELECT hostName,latitude,longitude FROM host  `;
-=======
     var sql = ` SELECT hostName,vatNo,latitude,longitude FROM host  where status = 'APPROVED' `;
->>>>>>> f5809457f073b3637e736f71b3ad76c5580c8eff
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -38,11 +34,7 @@ exports.search = (req, res, next) => {
   try {
     var sql;
     if (req.query.key == "partypalace")
-<<<<<<< HEAD
-      sql = ` SELECT hostName, CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}"  `;
-=======
       sql = ` SELECT hostName, longitude,latitude,vatNo,CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}" AND status= 'APPROVED'  `;
->>>>>>> f5809457f073b3637e736f71b3ad76c5580c8eff
     else if (req.query.key == "user")
       sql = ` SELECT concat(firstName,' ',CASE WHEN (middleName != NULL) THEN middleName ELSE' 'END,lastName) AS name, CONCAT(street,',',city,',',provience) AS location FROM user WHERE firstName REGEXP "${req.query.value}" OR lastName REGEXP "${req.query.value}"`;
     else if (req.query.key == "band")
