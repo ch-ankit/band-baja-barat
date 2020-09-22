@@ -3,7 +3,7 @@ const mysqlConnection = require("../connection");
 exports.hostData = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      `SELECT hostName,profilePhoto,description FROM host WHERE status = 'VERIFIED' ORDER BY hostname`,
+      `SELECT hostName,profilePhoto,description FROM host WHERE status = 'APPROVED' ORDER BY hostname`,
       (err, rows, fields) => {
         if (!err) {
           if (rows.length == 0)

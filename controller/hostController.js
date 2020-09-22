@@ -5,9 +5,9 @@ exports.hostData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.vatNo == null) {
-      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'VERIFIED' ORDER BY hostname `;
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'APPROVED' ORDER BY hostname `;
     } else {
-      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'VERIFIED' `;
+      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'APPROVED' `;
     }
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
