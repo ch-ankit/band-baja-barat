@@ -5,9 +5,9 @@ exports.hostData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.vatNo == null) {
-      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  ORDER BY hostname `;
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'VERIFIED' ORDER BY hostname `;
     } else {
-      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" `;
+      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'VERIFIED' `;
     }
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
@@ -96,6 +96,11 @@ exports.updateHostData = async (req, res, next) => {
                     req.body.provience == undefined
                       ? oldhostData[0].provience
                       : req.body.provience
+                  }",
+                  status = "${
+                    req.body.status == undefined
+                      ? oldhostData[0].status
+                      : req.body.status
                   }",
                   latitude = "${
                     req.body.latitude == undefined

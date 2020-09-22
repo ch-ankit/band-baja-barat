@@ -1,1 +1,0 @@
-SELECT * FROM booking INNER JOIN event e ON e.id = eventId  INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='APPROVED' AND  vatNo = 771982
