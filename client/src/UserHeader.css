@@ -1,4 +1,4 @@
-.userHeader{
+.userHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7,86 +7,89 @@
     top: 0;
     z-index: 100 !important;
     height: 50px;
-    background-image:linear-gradient(to left,teal,white);
+    background-image: linear-gradient(to left, teal, white);
 }
-.userHeader__right{
+.userHeader__right {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
 }
-.userHeader__logo{
+.userHeader__logo {
     color: orange;
     margin-left: 10px;
-    width:min-content;
+    width: min-content;
 }
-.userHeader__link{
+.userHeader__link {
     text-decoration: none;
-    color:black;
-    padding-right:10px;
+    color: black;
+    padding-right: 10px;
 }
 
-.userHeader__link:hover{
+.userHeader__link:hover {
     color: orange;
     cursor: pointer;
     text-decoration: none;
 }
-.userHeader__icon:hover{
+.userHeader__icon:hover {
     color: orange !important;
     cursor: pointer;
 }
-.userHeader__right >h4.selected{
+.userHeader__right > h4.selected {
     color: orange;
 }
 
-.userHeader__search{
+.userHeader__search {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 40%;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
 }
-.userHeader__input{
+.userHeader__input {
     display: flex;
     align-items: center;
     width: 100%;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
 }
 
-.userHeader__suggestion{
+.userHeader__suggestion {
     overflow-y: visible;
 }
 
-.userHeader__input > input{
-    flex:1;
-    border:0;
+.userHeader__input > input {
+    flex: 1;
+    border: 0;
 }
-.userHeader__icon{
+.userHeader__icon {
     border-left: 1px solid lightgray;
     background-color: lightgray;
-    width:10% !important;
+    width: 10% !important;
 }
-.userHeader__select{
+.userHeader__select {
     border: 0;
 }
 
-.userHeader__searchInput{
+.userHeader__searchInput {
     flex: 1;
 }
 
-.userHeader__searchPopover{
+.userHeader__searchPopover {
     background-color: aqua;
     z-index: 100;
 }
 
-.userHeader__rightButton{
+.userHeader__rightButton {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.userHeader__rightButton > p{
+.userHeader__rightButton > p {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.menu__admin:hover {
+    cursor: pointer;
 }

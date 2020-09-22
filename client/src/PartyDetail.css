@@ -1,87 +1,103 @@
-.partyDetail__infoHeader > p{
+.partyDetail__infoHeader > p {
     color: gray;
 }
 
-.partyDetail__Carousel{
+.partyDetail__Carousel {
     text-align: center;
 }
 
-.partyDetail__leftPart{
-    width:52%;
+.partyDetail__leftPart {
+    width: 52%;
 }
-.partyDetail__CImage{
-    width:100%;
-    height:400px
+.partyDetail__CImage {
+    width: 100%;
+    height: 400px;
 }
 
-.partyDetail__infoHeader{
+.partyDetail__infoHeader {
     background-color: white;
-    
 }
 
-.partyDetail{
+.partyDetail {
     padding-top: 30px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background-color:lightgray
+    background-color: lightgray;
 }
 
-.partyDetail__details{
+.partyDetail__details {
     background-color: white;
-    margin-top: 20px;;
+    margin-top: 20px;
 }
 
-.partyDetail__rightPart{
+.partyDetail__rightPart {
     width: 35%;
 }
 
-.partyDetail__book{
+.partyDetail__book {
     display: flex;
     width: 100%;
     flex-direction: column;
     background-color: white;
     align-items: center;
-    padding:10px 0px;
+    padding: 10px 0px;
 }
 
-.partyDetail__button{
+.partyDetail__button {
     outline: 0 !important;
-    width:90%;
+    width: 90%;
     margin-top: 15px;
     background-color: orange;
     border-radius: 10px;
     border: 0;
 }
 
-.partyDetail__button:hover{
+.partyDetail__button:hover {
     background-color: darkorange;
 }
 
-.partyDetail__book > hr{
+.partyDetail__book > hr {
     width: 100%;
     background-color: lightgrey;
 }
 
-.partyDetail__images{
+.partyDetail__images {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.partyDetail__GImage{
+.partyDetail__GImage {
     margin: 10px 10px;
-    width:40%;
-    height:100px;
+    width: 40%;
+    height: 100px;
 }
 
-.partyDetail__Gallery{
-    padding-top:15px;
-    margin-top:20px;
+.partyDetail__Gallery {
+    padding-top: 15px;
+    margin-top: 20px;
     background-color: white;
 }
 
-.partyDetail__googleMap{
-    width:100%;
+.partyDetail__googleMap {
+    width: 100%;
     margin-top: 20px;
+}
+
+.adminHost__accept {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    width: 80%;
+}
+
+.adminHost__accept > p {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 15px;
+    font-weight: 600;
 }

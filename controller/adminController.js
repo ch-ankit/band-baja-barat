@@ -38,3 +38,45 @@ exports.productsReorderRequired = (req, res, next) => {
     next(err);
   }
 };
+
+exports.hostData = async (req, res, next) => {
+  try {
+    var sql;
+    if (req.query.vatNo == null) {
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'PENDING' ORDER BY hostname `;
+    } else {
+      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'PENDING' `;
+    }
+    mysqlConnection.query(sql, (err, rows) => {
+      if (!err) {
+        if (rows.length == 0) {
+          res.json("No Host Registered");
+        } else {
+          if (req.query.vatNo) {
+            var sql = `SELECT hallNo,capacity FROM hostHalls WHERE vatNo = ${req.query.vatNo}`;
+            mysqlConnection.query(sql, (err, rows1) => {
+              if (!err) {
+                var sql = `SELECT photo,caption FROM hostPhoto WHERE vatNo = ${req.query.vatNo}`;
+                mysqlConnection.query(sql, (err, rows2) => {
+                  if (!err) {
+                    res.json({ rows, rows1, rows2 });
+                  } else {
+                    res.json({ error: err });
+                  }
+                });
+              } else {
+                res.json({ error: err });
+              }
+            });
+          } else {
+            res.json({ status: "success", data: rows });
+          }
+        }
+      } else {
+        res.json({ error: err });
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 });
 export default function TemporaryDrawer({ isGiftStore }) {
   const Userdata = useSelector(state => state.userData)
+  const admin = useSelector(state => state.isAdmin)
   const dispatch = useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -51,18 +52,18 @@ export default function TemporaryDrawer({ isGiftStore }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {isGiftStore && <ListItem button onClick={() => history.push('/User')}>
+        {isGiftStore && <ListItem button onClick={() => admin ? history.push('/admin') : history.push('/User')}>
           <ListItemText primary='Homepage' />
         </ListItem>}
-        <ListItem button onClick={() => history.push('/User/userInfo')}>
+        {!admin && <ListItem button onClick={() => history.push('/User/userInfo')}>
           <ListItemText primary='My Information' />
-        </ListItem>
-        <ListItem button >
+        </ListItem>}
+        {!admin && <ListItem button >
           <ListItemText primary='Invitations' onClick={() => history.push('/invite')} />
-        </ListItem>
-        <ListItem button >
+        </ListItem>}
+        {!admin && <ListItem button >
           <ListItemText primary='Booking Status' onClick={() => history.push('/bookingstatus')} />
-        </ListItem>
+        </ListItem>}
         {!isGiftStore && <ListItem button >
           <ListItemText primary='Orders' onClick={() => history.push('/history')} />
         </ListItem>}
@@ -89,14 +90,18 @@ export default function TemporaryDrawer({ isGiftStore }) {
         <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
           <div className="drawer__items">
             <h1 className="drawer__header">BBB</h1>
-            {Object.keys(Userdata).map((keys) => {
+            {!admin ? Object.keys(Userdata).map((keys) => {
               return (
                 <>
                   <Avatar src={Userdata[keys].photo} alt={Userdata[keys].userName} className="drawer__Avatar" />
                   <br /><h4>{Userdata[keys].userName}</h4>
                 </>
+
               )
-            })}
+            }) : <>
+                <Avatar src='https://pngimage.net/wp-content/uploads/2018/05/admin-logo-png-6.png' alt='admin' className="drawer__Avatar" />
+                <br />
+              </>}
 
             {list('left')}
           </div>
