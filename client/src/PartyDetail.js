@@ -71,8 +71,8 @@ function PartyDetail() {
                     <div className='partyDetail__book'>
                         <h4>Connect with this vendor</h4>
                         <hr/>
-                        <button className='partyDetail__button' onClick={()=>setbook(true)}><h2>Book now</h2></button>
-                        <button className='partyDetail__button' onClick={()=>setcontact(!contact)}><h2>Get Contact Info</h2></button>
+                        <button className='partyDetail__button' onClick={()=>setbook(!book)}>{book?(<h2>Host page</h2>):(<h2>Book now</h2>)}</button>
+                        <button className='partyDetail__button' onClick={()=>setcontact(!contact)}>{contact?(<h2>Booked Date</h2>):(<h2>Get Contact Info</h2>)}</button>
                         <hr/>
                         {contact? (<div>
                             <h5>Contact Info</h5>

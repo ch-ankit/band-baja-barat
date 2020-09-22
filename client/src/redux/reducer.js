@@ -8,6 +8,7 @@ const initialState = {
     paid: null,
     eventData:null,
     isAdmin: null,
+    center:null
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -30,7 +31,7 @@ export const reducerr = (state = initialState, action) => {
 
             }
         case 'EventData':
-            return{
+            return {
                 ...state,
                 eventData: action.payload
             }
@@ -60,6 +61,11 @@ export const reducerr = (state = initialState, action) => {
             return {
                 ...state,
                 isAdmin: action.result
+            }
+        case 'Center':
+            return{
+                ...state,
+                center: action.payload
             }
         default:
             return { ...state }

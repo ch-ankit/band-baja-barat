@@ -66,7 +66,7 @@ function Host() {
          <div>
             {hostUid ? '' : history.push('/')}
             <HostHeader />
-            {Object.keys(data).map((keys)=>{
+            {Object.keys(data ?? []).map((keys)=>{
             return(<div className='host'>
                 <div className='host__leftPart'>
                     {book? <Booking />: (

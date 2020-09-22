@@ -8,7 +8,7 @@ import PopResult from "./PopResult";
 import PartyD from './PartyD.js';
 import UserD from './UserD.js';
 import ZoneD from './ZoneD.js';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     Combobox,
     ComboboxInput,
@@ -17,6 +17,8 @@ import {
     ComboboxOption,
   } from "@reach/combobox";
 import { useEffect } from 'react';
+import { List, ListItem,ListItemText } from '@material-ui/core';
+import { Center } from './redux/action';
 function UserHeader() {
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState('partypalace');
@@ -24,6 +26,7 @@ function UserHeader() {
     const [drop, setdrop] = useState(false);
     const [searchData, setsearchData] = useState([])
     const UserData = useSelector(state => state.userData ?? [])
+    const dispatch=useDispatch();
     const handleChange=(e)=>{
         switch(e.target.value){
             case 'Party Palace':
@@ -51,7 +54,19 @@ function UserHeader() {
         
     }, [search])
     
-    
+    function searching(data){
+        alert('Hi')
+        switch(Data){
+            case 'partypalace':
+                alert('Hello there')
+                dispatch(Center(data))
+                break;
+            case 'User':
+                break;
+            case 'Band':
+                break;
+        }
+    }
     return (
         <div className="userHeader">
             <div className="userHeader__logo">
@@ -69,11 +84,13 @@ function UserHeader() {
                         <ComboboxInput value={search} onChange={(e)=>{setsearch(e.target.value)}} placeholder='Search' style={{width:'100%'}} />
                         <ComboboxPopover className='userHeader__searchPopover'>
                             {Object.keys(searchData).map((keys)=>{
-                               return( <ComboboxList>
-                                    {Data=='partypalace' ? searchData[keys].hostName : null}
+                               return( <List>
+                                    <ListItem button onClick={()=>searching(searchData[keys])}>{Data=='partypalace' ? searchData[keys].hostName : null}
                                     {Data=='user' ? searchData[keys].name: null}
                                     {Data=='band' ? searchData[keys].Name: null}
-                                </ComboboxList>)
+                                    </ListItem>
+                                    
+                                </List>)
                             })}
                         </ComboboxPopover>
                     </Combobox>

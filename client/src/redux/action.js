@@ -57,3 +57,13 @@ export const SetAdmin = (value) => {
         result: value
     }
 }
+
+export const Center=(value)=>{
+    return{
+        type:'Center',
+        payload:{
+            lat:value.latitude,
+            lng:value.longitude
+        }
+    }
+}

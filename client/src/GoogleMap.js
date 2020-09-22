@@ -16,6 +16,10 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import './GoogleMap.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { actionvatNo } from './redux/action';
+import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 const mapContainerStyle={
   width:'100vw',
   height: '100vh'
@@ -26,8 +30,10 @@ const center = {
 }
 const libraries=["places"];
 export default function SimpleMap(){
+  const centre = useSelector(state => state.center)
   const [data, setdata] = useState([])
   const [Selected, setSelected] = useState(null)
+  const dispatch=useDispatch()
   useEffect(() => {
     async function getHostData() {
         const response = await fetch('http://localhost:9000/userhome');
@@ -51,6 +57,9 @@ export default function SimpleMap(){
   }, []);
   if(loadError) return 'Error loading map';
   if(!isLoaded) return "Map is loading";
+  function addVatNo(vatno){
+    dispatch(actionvatNo(vatno))
+}
   return (
   <div>
     {/* <Search /> */}
@@ -61,6 +70,7 @@ export default function SimpleMap(){
     onLoad={onMapLoad}
     >
       {console.log(data)}
+      <Locate panTo={panTo} />
       {Object.keys(data ??[]).map((keys)=>{
         return(
           <Marker key={keys} 
@@ -82,7 +92,10 @@ export default function SimpleMap(){
               }}
               onCloseClick={()=>setSelected(null)}
             >
+              <div>
               <p>{Selected.hostName}</p>
+              <Link to={`/partypalace/${Selected.hostName}`}><button onClick={()=>addVatNo(Selected.vatNo)}>See more</button></Link>
+              </div>
             </InfoWindow> ): null}
     </GoogleMap>
   </div>
@@ -105,7 +118,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="/compass.svg" alt="compass" />
+      <GpsFixedIcon className='googleMap__icon'/>
     </button>
   );
 }

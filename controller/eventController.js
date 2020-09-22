@@ -69,7 +69,9 @@ exports.updateEvent = async (req, res, next) => {
                         : req.body.groomName
                     }",
                     eventDate = "${
-                      req.body.eventDate ?? oldEventData[0].eventDate
+                      req.body.eventDate== undefined 
+                      ? oldEventData[0].eventDate
+                      : req.body.eventDate
                     }",
                     shift = "${
                       req.body.shift == undefined

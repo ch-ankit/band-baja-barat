@@ -7,8 +7,13 @@
 
 .locate{
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 65px;
+    left: 0;
     z-index: 100;
+    background-color: transparent;
 
+}
+
+.googleMap__icon:hover{
+    color: blue !important;
 }

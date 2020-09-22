@@ -1,0 +1,145 @@
+import React from 'react'
+import { Button } from '@material-ui/core'
+
+function HostSignUp() {
+    const handleChange = (e) => {
+        e.preventDefault();
+        if (e.target.files[0]) {
+            setimage(e.target.files[0]);
+            console.log(image)
+        }
+
+    }
+    const handleUpload = () => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(progress);
+            },
+            (error) => {
+                console.log(error);
+                alert(error.message);
+            },
+            () => {
+                storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then((url => {
+                        alert('hello')
+                        setUrl(url);
+                        console.log(url);
+                        /*db.collection("images").add(
+                            {
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                                imgUrl: url,
+                                userName: userName
+                            }
+                        )*/
+                        async function sign() {
+                            const response = await fetch('http://localhost:9000/signup/user', {
+                                body: JSON.stringify({
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    userName: userName,
+                                    email: Email,
+                                    mobileNo: contactInfo,
+                                    street: Street,
+                                    city: City,
+                                    provience: Province,
+                                    photo: url
+                                }),
+                                headers: { "Content-type": "application/json" },
+                                method: "post"
+                            });
+                        }
+                        sign();
+                    }));
+                setProgress(0);
+                setimage(null);
+
+            }
+        );
+
+    }
+    const handleSignUp = (event) => {
+        event.preventDefault();
+        auth.createUserWithEmailAndPassword(Email, Password)
+            .then((authUser) => {
+                authUser.user.updateProfile({
+                    displayName: userName
+                });
+                handleUpload();
+            })
+            .catch(error => alert(error.message))
+    };
+    return (
+        <div className='hostSignUp'>
+            <div className="signUp__input">
+                        <div className='signUp__name'>
+                            <div>
+                                <label>First Name</label><br />
+                                <input type='text' value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Middle Name</label><br />
+                                <input type='text' value={middleName} onChange={(e) => setmiddleName(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>Last Name</label><br />
+                                <input type='text' value={lastName} onChange={(e) => setlastName(e.target.value)} required />
+                            </div>
+
+                        </div>
+                        <div className="signUp__userPass">
+                            <div>
+                                <label>User Name</label><br />
+                                <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Password</label><br />
+                                <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                        </div>
+                        <div className="signUp__contactInfo">
+                            <div>
+                                <label>Email</label><br />
+                                <input type="email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Contact info</label><br />
+                                <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
+                            </div>
+                        </div>
+                        <div className="signUp__Address">
+                            <div>
+                                <label>Street</label><br />
+                                <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>City</label><br />
+                                <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
+                            </div>
+                            <div>
+                                <label>Province</label><br />
+                                <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
+                            </div>
+                        </div>
+                        <br /><label>Profile Photo</label>
+                        <progress value={Progress} max="100" />
+                        <input type="file" onChange={handleChange} />
+                    </div>
+                    <Button className="signUp__button" onClick={handleSignUp}>
+                        Sign Up
+                </Button>
+                </div>            
+        </div>
+    )
+}
+
+export default HostSignUp

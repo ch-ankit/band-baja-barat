@@ -14,6 +14,7 @@ function UserPage() {
     const history = useHistory();
     const [data, setdata] = useState([]);
     const dispatch = useDispatch();
+    const Center = useSelector(state => state.center)
     useEffect(() => {
         async function getUserData() {
             const response = await fetch('http://localhost:9000/login/user', {
@@ -26,7 +27,7 @@ function UserPage() {
             const allData = await response.json();
             dispatch(UserData(allData.data));
 
-            if (email === 'akgunner6@gmail.com') {
+            if (email === 'akgunneawr6@gmail.com') {
                 dispatch(SetAdmin(true))
             } else {
                 dispatch(SetAdmin(false))
@@ -42,7 +43,7 @@ function UserPage() {
                 <UserHeader />
             </div>
             <div className="userPage__rest">
-                <SimpleMap />
+                <SimpleMap Centerr={Center} />
             </div>
         </div>
     )

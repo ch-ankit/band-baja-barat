@@ -73,7 +73,7 @@ function App() {
               </div>
             )
           }} />
-          <Route path='/host/events' render={(props)=><EventDetail {...props}/>} />
+          <Route path='/host/events' render={(props) => <EventDetail {...props} />} />
           <Route exact path="/giftstore" render={() => <Home />} />
           <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
