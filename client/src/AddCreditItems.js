@@ -1,8 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddCreditItems.css'
+import { v4 as uuidv4 } from 'uuid'
 import KhaltiCheckout from "khalti-checkout-web";
+import { useSelector } from 'react-redux';
 
 function AddCreditItems(props) {
+    const userData = useSelector(state => state.userData)
+    const { userName, email } = userData[0]
+    const [points, setPoints] = useState(0)
+    const [userPoints, setUserPoints] = useState(0)
+    useEffect(() => {
+        async function getPoints() {
+            const response = await fetch(`http://localhost:9000/login/user`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            })
+            const { data } = await response.json()
+            const { points } = data[0]
+            setUserPoints(points)
+        }
+        getPoints()
+    }, [points])
     const coins = [
         { storePoints: 10000, price: 100000 },
         { storePoints: 9000, price: 90000 },
@@ -18,24 +39,43 @@ function AddCreditItems(props) {
         { storePoints: 100, price: 1000 },
     ]
     const [value, setValue] = useState(coins[0].price)
-    const options = Object.keys(coins).map(items => <option value={coins[items].price}>{coins[items].storePoints}</option>)
-    const handleChange = (evt) => {
-        setValue(evt.target.value)
-    }
+    const [pointToAdd, setPointToAdd] = useState(0)
+    const options = Object.keys(coins).map(items => <option key={uuidv4()} value={coins[items].price}>{coins[items].storePoints}</option>)
+
     let config = {
         // replace this key with yours
-        "publicKey": "test_public_key_dc78e3fd24cb34cd89123aee8a5569",
+        "publicKey": "test_public_key_3dfbf001a2144170ad9c0007c1d3c778",
         "productIdentity": "1234567890",
-        "productName": "Drogon",
-        "productUrl": "http://gameofthrones.com/buy/Dragons",
+        "productName": `Points brought from store ${value}`,
+        "productUrl": "https://www.snopes.com/tachyon/2020/07/coins_fran_trudeau_flickr.jpg",
         "eventHandler": {
             onSuccess(payload) {
                 // hit merchant api for initiating verfication
-                console.log(payload);
+                async function addPaid(payload) {
+                    const updatedPoint = parseInt(value / 10) + userPoints
+                    const response = await fetch(`http://localhost:9000/userhome/user`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify({ userName: userName, points: updatedPoint })
+                    })
+                    const { detail, tries_remaining } = payload
+                    if (detail !== undefined) {
+                        alert(`${detail}. Tries remaining :${tries_remaining}`)
+                    }
+                    setTimeout(() => {
+                        alert('Payment Successful!!')
+                        window.location.reload()
+                    }, 1000)
+                }
+                addPaid(payload);
+                console.log(payload)
             },
             // onError handler is optional
             onError(error) {
                 // handle errors
+
                 console.log(error);
             },
             onClose() {
@@ -63,7 +103,7 @@ function AddCreditItems(props) {
                 <img className="image" src="https://www.snopes.com/tachyon/2020/07/coins_fran_trudeau_flickr.jpg" alt="coins" />
             </div>
             Select Store Points:
-            <select value={value} className="custom-select" onChange={handleChange}>
+            <select value={value} className="custom-select" onChange={(evt) => setValue(evt.target.value)}>
                 {options}
             </select>
             <button className="payment__button" onClick={() => handleClick(value)}>Pay With Khalti</button>
