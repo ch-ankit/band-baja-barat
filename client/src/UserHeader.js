@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar'
 import './UserHeader.css'
@@ -18,7 +18,7 @@ import {
   } from "@reach/combobox";
 import { useEffect } from 'react';
 import { List, ListItem,ListItemText } from '@material-ui/core';
-import { Center } from './redux/action';
+import { Center, actionvatNo } from './redux/action';
 function UserHeader() {
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState('partypalace');
@@ -27,6 +27,7 @@ function UserHeader() {
     const [searchData, setsearchData] = useState([])
     const UserData = useSelector(state => state.userData ?? [])
     const dispatch=useDispatch();
+    const history=useHistory();
     const handleChange=(e)=>{
         switch(e.target.value){
             case 'Party Palace':
@@ -55,15 +56,15 @@ function UserHeader() {
     }, [search])
     
     function searching(data){
-        alert('Hi')
         switch(Data){
             case 'partypalace':
-                alert('Hello there')
-                dispatch(Center(data))
+                history.push(`/partypalace/${data.hostName}`);
+                dispatch(actionvatNo(data.vatNo))
                 break;
             case 'User':
                 break;
-            case 'Band':
+            case 'band':
+                history.push(`/bands/${data.Name}`);
                 break;
         }
     }

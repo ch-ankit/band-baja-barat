@@ -27,8 +27,20 @@ function BookingStatus() {
             <List>
                 {console.log(data)}
             {Object.keys(data).map((keys)=>{
+                let Conditionstyle;
+                switch(data[keys].hostStatus){
+                        case 'PENDING':
+                            Conditionstyle= {backgroundColor:'white',marginTop: '15px'}
+                            break;
+                        case 'APPROVED':
+                            Conditionstyle= {backgroundColor:'green',marginTop: '15px'}
+                                break;
+                        default:
+                            Conditionstyle= {backgroundColor:'red',marginTop: '15px'}
+                    }
+                
                 return(
-                <ListItem button className='bookingStatus__list' style={{backgroundColor:'green',marginTop:'15px'}}>
+                <ListItem button className='bookingStatus__list' style={Conditionstyle}>
                     <ListItem key={keys} >
                         {data[keys].eventName}
                     </ListItem>

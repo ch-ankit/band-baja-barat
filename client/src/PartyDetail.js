@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 import UserHeader from './UserHeader.js';
+import ReactCalender from './ReactCalender';
 function PartyDetail() {
     let name=useParams();
     const [book, setbook] = useState(false);
@@ -82,12 +83,8 @@ function PartyDetail() {
                             </ul>
                         </div>) :(<div>
                         <h5>Booked Date</h5>
-                        <ul>
-                            <li>29 September</li>
-                            <li>21 October</li>
-                            <li>09 November</li>
-                            <li>2 December</li>
-                        </ul></div>)}
+                            <ReactCalender className='partyDetail__bookedDate' />
+                        </div>)}
                     </div>
                     <div className='partyDetail__googleMap'>
                         <iframe src={`https://maps.google.com/maps?q= ${data[keys].latitude}, ${data[keys].longitude}&z=15&output=embed`} width="100%" height="200px" frameborder="0" style={{border:"0"}}></iframe>

@@ -13,7 +13,8 @@ function EventDetail() {
             fetch('http://localhost:9000/event',{
                 body: JSON.stringify({
                     "eventId":eventData.eventId,
-                    "hostStatus":"APPROVED"
+                    "hostStatus":"APPROVED",
+                    "eventDate":eventData.eventDate.slice(0,10)
             }),
             headers: { "Content-type": "application/json" },
             method:'PATCH'});
@@ -24,12 +25,12 @@ function EventDetail() {
 
 }
 const rejectStatus=()=>{
-    alert('Hello')
     async function rejectStatus1(){
         fetch('http://localhost:9000/event',{
             body: JSON.stringify({
                 "eventId":eventData.eventId,
-                "hostStatus":"REJECTED"
+                "hostStatus":"REJECTED",
+                "eventDate":eventData.eventDate.slice(0,10)
         }),
         headers: { "Content-type": "application/json" },
         method:'PATCH'});
