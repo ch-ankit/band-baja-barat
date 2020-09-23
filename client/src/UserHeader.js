@@ -79,8 +79,6 @@ function UserHeader() {
                 <div className='userHeader__input'>
                     <select className="userHeader__select" onChange={handleChange}>
                         <option value="Party Palace">PartyPalace</option>
-                        <option value='Zone'>Zone</option>
-                        <option value='User'>User</option>
                         <option value='Band'>Band</option>
                     </select>
                     <Combobox className="userHeader__searchInput" >

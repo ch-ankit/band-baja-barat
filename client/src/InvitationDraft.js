@@ -4,26 +4,29 @@ import Accordion from 'react-bootstrap/Accordion'
 
 import Card from 'react-bootstrap/Card'
 import './InvitationDraft.css'
+import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
 class InvitationDraft extends React.Component{
     constructor(props){
+        console.log(props.eventData)
         super(props);
         this.state={
             GFather:'',
             GMother:'',
             BFather:'',
             BMother:'',
-            eventID:''
+            eventData:props.eventData
         }
         this.eventDetails=this.eventDetails.bind(this);
     }
-    eventDetails(e) {
-
+    async eventDetails() {
+        
     }
     
     render(){
         return(
             <div>
-                <input type='number' placeholder='eventID' value={this.state.eventID} onBlur={this.eventDetails} />
+                <input type='number' placeholder='eventID' value={this.state.eventData.eventId} onBlur={this.eventDetails} />
                 <input type='text' placeholder="Groom's Father Name" onChange={(e)=>{this.setState({GFather:e.target.value})}} value={this.state.GFather}/>
                 <input type='text' placeholder="Groom's Mother Name" onChange={(e)=>{this.setState({GMother:e.target.value})}} value={this.state.GMother} />
                 <input type='text' placeholder="Bride's Father Name" onChange={(e)=>{this.setState({BFather:e.target.value})}} value={this.state.BFather} />
@@ -39,7 +42,12 @@ class InvitationDraft extends React.Component{
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey='0'>
                             <Card.Body id='invite'>
-                              <p> Grooms name son of {this.state.GFather} and {this.state.GMother}</p>
+                              <p> {this.state.eventData.groomName} son of {this.state.GFather} and {this.state.GMother}</p>
+                              <h4>Weds</h4>
+                              <p> {this.state.eventData.brideName} son of {this.state.BFather} and {this.state.BMother}</p> 
+                                <div>
+                                    
+                                </div>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -49,4 +57,7 @@ class InvitationDraft extends React.Component{
         );
     }
 }
-export default InvitationDraft;
+const mapStateToProps = state => ({
+    eventData: state.eventData
+  });
+export default connect(mapStateToProps)(InvitationDraft);
