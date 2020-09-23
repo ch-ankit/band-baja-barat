@@ -38,6 +38,7 @@ CREATE TABLE host
   provience VARCHAR(255),
   latitude VARCHAR(255),
   longitude VARCHAR(255),
+  status VARCHAR(355) DEFAULT 'PENDING',
   PRIMARY KEY (vatNo)
 );
 

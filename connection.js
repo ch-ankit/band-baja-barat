@@ -11,7 +11,7 @@ var mysqlConnection = mysql.createConnection({
   // password: "ZaMN4KKmPT",
   // database: "sql12365010",
   // port: "3306",
-  // multipleStatements: true,
+  multipleStatements: true,
 });
 
 mysqlConnection.connect((err) => {

@@ -33,7 +33,7 @@ function Host() {
     const dispatch=useDispatch();
     useEffect(() => {
         async function getHostData() {
-            const response = await fetch('http://localhost:9000/host?vatNo=771982');
+            const response = await fetch('http://localhost:9000/host?email=presentator7@gmail.com');
             const allData = await response.json();
             setdata(allData.rows);
             setPhoto(allData.rows2);

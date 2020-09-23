@@ -15,7 +15,7 @@ import {
     ComboboxPopover,
     ComboboxList,
     ComboboxOption,
-  } from "@reach/combobox";
+} from "@reach/combobox";
 import { useEffect } from 'react';
 import { List, ListItem,ListItemText } from '@material-ui/core';
 import { Center, actionvatNo } from './redux/action';
@@ -52,7 +52,7 @@ function UserHeader() {
             setsearchData(allData.data ?? []);
         }
         getsearchData();
-        
+
     }, [search])
     
     function searching(data){
@@ -82,15 +82,15 @@ function UserHeader() {
                         <option value='Band'>Band</option>
                     </select>
                     <Combobox className="userHeader__searchInput" >
-                        <ComboboxInput value={search} onChange={(e)=>{setsearch(e.target.value)}} placeholder='Search' style={{width:'100%'}} />
+                        <ComboboxInput value={search} onChange={(e) => { setsearch(e.target.value) }} placeholder='Search' style={{ width: '100%' }} />
                         <ComboboxPopover className='userHeader__searchPopover'>
-                            {Object.keys(searchData).map((keys)=>{
-                               return( <List>
-                                    <ListItem button onClick={()=>searching(searchData[keys])}>{Data=='partypalace' ? searchData[keys].hostName : null}
-                                    {Data=='user' ? searchData[keys].name: null}
-                                    {Data=='band' ? searchData[keys].Name: null}
+                            {Object.keys(searchData).map((keys) => {
+                                return (<List>
+                                    <ListItem button onClick={() => searching(searchData[keys])}>{Data == 'partypalace' ? searchData[keys].hostName : null}
+                                        {Data == 'user' ? searchData[keys].name : null}
+                                        {Data == 'band' ? searchData[keys].Name : null}
                                     </ListItem>
-                                    
+
                                 </List>)
                             })}
                         </ComboboxPopover>
@@ -102,7 +102,7 @@ function UserHeader() {
                 <Link to='/Party' className="userHeader__link">Party Palaces</Link>
                 <Link to='/Band' className="userHeader__link">Bands</Link>
                 <Link to='/giftstore' className="userHeader__link">Gift Store</Link>
-                {Object.keys(UserData).map((keys)=>{
+                {Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>
                             {UserData[keys].points}
@@ -111,8 +111,8 @@ function UserHeader() {
                     )
 
                 })}
-                
-                {drawer ? <TemporaryDrawer /> : ''}
+
+                {drawer ? <TemporaryDrawer isGiftStore={false} /> : ''}
             </div>
         </div>
     )

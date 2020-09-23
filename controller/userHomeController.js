@@ -17,7 +17,7 @@ exports.invitationRecieved = (req, res, next) => {
 
 exports.mapPointer = (req, res, next) => {
   try {
-    var sql = ` SELECT hostName,vatNo,latitude,longitude FROM host  `;
+    var sql = ` SELECT hostName,vatNo,latitude,longitude FROM host  where status = 'APPROVED' `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -34,7 +34,7 @@ exports.search = (req, res, next) => {
   try {
     var sql;
     if (req.query.key == "partypalace")
-      sql = ` SELECT hostName, longitude,latitude,vatNo,CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}"  `;
+      sql = ` SELECT hostName, longitude,latitude,vatNo,CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}" AND status= 'APPROVED'  `;
     else if (req.query.key == "user")
       sql = ` SELECT concat(firstName,' ',CASE WHEN (middleName != NULL) THEN middleName ELSE' 'END,lastName) AS name, CONCAT(street,',',city,',',provience) AS location FROM user WHERE firstName REGEXP "${req.query.value}" OR lastName REGEXP "${req.query.value}"`;
     else if (req.query.key == "band")
@@ -78,12 +78,12 @@ exports.updateUsers = (req, res, next) => {
       `SELECT * FROM user WHERE userName="${req.body.userName}"`,
       (err, rows) => {
         if (!err) {
-          console.log(req.body.points)
+          console.log(req.body.points);
           oldData = rows;
           var sql = ` UPDATE user SET 
                   points = ${req.body.points == undefined
               ? oldData[0].points
-              : oldData[0].points + parseInt(req.body.points)
+              : parseInt(req.body.points)
             },
                   mobileNo = "${req.body.mobileNo == undefined
               ? oldData[0].mobileNo

@@ -1,0 +1,4 @@
+GET http://localhost:9000/admin/reorederrequired
+
+###
+GET http://localhost:9000/admin/pendingrequest
