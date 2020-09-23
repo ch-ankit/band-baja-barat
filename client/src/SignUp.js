@@ -4,6 +4,7 @@ import { auth, storage, db } from './firebaseConfig'
 import firebase from "firebase"
 import './SignUp.css'
 import Header from './HeaderHome'
+import HostSignUp from './HostSignUp'
 function SignUp({ }) {
     const [Address, setAddress] = useState('');
     const [Email, setEmail] = useState("");
@@ -19,6 +20,7 @@ function SignUp({ }) {
     const [firstName, setfirstName] = useState('');
     const [middleName, setmiddleName] = useState('');
     const [lastName, setlastName] = useState('');
+    const [Hostsign, setHostsign] = useState(false);
     const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files[0]) {
@@ -101,10 +103,11 @@ function SignUp({ }) {
             <div className="signUp">
                 <h1>Sign Up</h1>
                 <div className="signUp__nav">
-                    <h3>User</h3>
-                    <h3>Host</h3>
+                    <h3 onClick={()=>setHostsign(false)}>User</h3>
+                    <h3 onClick={()=>setHostsign(true)}>Host</h3>
                 </div>
-                <div className="signUp__middlepart">
+                {Hostsign ? <HostSignUp /> :
+                (<div className="signUp__middlepart">
                     <div className="signUp__input">
                         <div className='signUp__name'>
                             <div>
@@ -162,7 +165,7 @@ function SignUp({ }) {
                     <Button className="signUp__button" onClick={handleSignUp}>
                         Sign Up
                 </Button>
-                </div>
+                </div>)}
                 <img src={Url} alt="image" />
             </div>
         </div>

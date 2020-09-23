@@ -1,7 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@material-ui/core'
+import { Hstorage, Hauth } from './hostFirebaseConfig';
+import {
+    GoogleMap,
+    useLoadScript,
+    Marker,
+    InfoWindow,
+  } from "@react-google-maps/api";
+  import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+  } from "use-places-autocomplete";
+  import mapStyles from "./mapStyles";
 
 function HostSignUp() {
+    const [Street, setStreet] = useState('');
+    const [City, setCity] = useState('');
+    const [Province, setProvince] = useState('');
+    const [image, setimage] = useState(null);
+    const [Progress, setProgress] = useState(0);
+    const [Url, setUrl] = useState(null)
+    const [hostName, sethostName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('')
+    const [contactInfo, setcontactInfo] = useState('');
+    const [vatNo, setvatNo] = useState('')
+    const [Markers, setMarkers] = useState([])
+    const [selected, setSelected] = React.useState(null);
+    const [latitude, setlatitude] = useState('');
+    const [longitude, setlongitude] = useState('')
+
+    const libraries = ["places"];
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: "AIzaSyA7TVORrDdi2WUm4l2GSkWIVqyq8AovX7U",
+        libraries,
+      });
+    const mapContainerStyle = {
+        height: "50vh",
+        width: "100vw",
+      };
+      const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+      const options = {
+        styles: mapStyles,
+        disableDefaultUI: true,
+        zoomControl: true,
+      };
+      const center = {
+        lat: 43.6532,
+        lng: -79.3832,
+      };
     const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files[0]) {
@@ -10,8 +60,16 @@ function HostSignUp() {
         }
 
     }
+    const onMapClick = React.useCallback((e) => {
+        setMarkers(
+          [{
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+          }],
+        );
+      }, []);
     const handleUpload = () => {
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        const uploadTask = Hstorage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
             "state_changed",
             (snapshot) => {
@@ -25,7 +83,7 @@ function HostSignUp() {
                 alert(error.message);
             },
             () => {
-                storage
+                Hstorage
                     .ref("images")
                     .child(image.name)
                     .getDownloadURL()
@@ -40,23 +98,27 @@ function HostSignUp() {
                                 userName: userName
                             }
                         )*/
+                        alert('Hello world')
                         async function sign() {
-                            const response = await fetch('http://localhost:9000/signup/user', {
+                            alert('yes')
+                            const response = await fetch('http://localhost:9000/signup/host', {
                                 body: JSON.stringify({
-                                    firstName: firstName,
-                                    middleName: middleName,
-                                    lastName: lastName,
-                                    userName: userName,
-                                    email: Email,
-                                    mobileNo: contactInfo,
-                                    street: Street,
-                                    city: City,
-                                    provience: Province,
-                                    photo: url
+                                    "vatNo":{vatNo},
+                                    "hostName":{hostName},
+                                    "profilePhoto":{url},
+                                    "email":{Email},
+                                    "contactInfo":{contactInfo},
+                                    "latitude":{latitude},
+                                    "longitude":{longitude},
+                                    "totalHalls":3,
+                                    "city":{City},
+                                    "street":{Street},
+                                    "provience":{Province}
                                 }),
                                 headers: { "Content-type": "application/json" },
                                 method: "post"
                             });
+                            console.log(response)
                         }
                         sign();
                     }));
@@ -69,10 +131,10 @@ function HostSignUp() {
     }
     const handleSignUp = (event) => {
         event.preventDefault();
-        auth.createUserWithEmailAndPassword(Email, Password)
+        Hauth.createUserWithEmailAndPassword(Email, Password)
             .then((authUser) => {
                 authUser.user.updateProfile({
-                    displayName: userName
+                    displayName: hostName
                 });
                 handleUpload();
             })
@@ -81,25 +143,14 @@ function HostSignUp() {
     return (
         <div className='hostSignUp'>
             <div className="signUp__input">
-                        <div className='signUp__name'>
-                            <div>
-                                <label>First Name</label><br />
-                                <input type='text' value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
-                            </div>
-                            <div>
-                                <label>Middle Name</label><br />
-                                <input type='text' value={middleName} onChange={(e) => setmiddleName(e.target.value)} />
-                            </div>
-                            <div>
-                                <label>Last Name</label><br />
-                                <input type='text' value={lastName} onChange={(e) => setlastName(e.target.value)} required />
-                            </div>
-
-                        </div>
                         <div className="signUp__userPass">
                             <div>
-                                <label>User Name</label><br />
-                                <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
+                                <label>Host Name</label><br />
+                                <input type="text" value={hostName} onChange={(e) => sethostName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Vat Number</label><br />
+                                <input type="number" value={vatNo} onChange={(e) => setvatNo(e.target.value)} required />
                             </div>
                             <div>
                                 <label>Password</label><br />
@@ -115,6 +166,17 @@ function HostSignUp() {
                                 <label>Contact info</label><br />
                                 <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
                             </div>
+                        </div>
+                        <div style={{display:'flex',justifyContent:'space-between'}}>
+                            <div>
+                                <label>Latitude</label><br/>
+                                <input type='number' />
+                            </div>
+                            <div>
+                                <label>Longitude</label><br/>
+                                <input type='number' />
+                            </div>
+
                         </div>
                         <div className="signUp__Address">
                             <div>
@@ -137,8 +199,8 @@ function HostSignUp() {
                     <Button className="signUp__button" onClick={handleSignUp}>
                         Sign Up
                 </Button>
+                
                 </div>            
-        </div>
     )
 }
 

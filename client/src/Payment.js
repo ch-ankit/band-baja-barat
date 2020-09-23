@@ -1,7 +1,6 @@
 import React from 'react';
 import AddCreditItems from './AddCreditItems';
 import Header from './Header'
-import logo from "./images/logo.png";
 import './Payment.css'
 
 function Payment(props) {

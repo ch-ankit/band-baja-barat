@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar'
 import './UserHeader.css'
@@ -15,11 +15,13 @@ import {
     ComboboxPopover,
     ComboboxList,
     ComboboxOption,
-  } from "@reach/combobox";
+} from "@reach/combobox";
 import { useEffect } from 'react';
-import { List, ListItem,ListItemText } from '@material-ui/core';
-import { Center } from './redux/action';
+import { Center, actionvatNo } from './redux/action';
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 function UserHeader() {
+    const admin = useSelector(state => state.isAdmin)
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState('partypalace');
     const [search, setsearch] = useState('');
@@ -27,6 +29,7 @@ function UserHeader() {
     const [searchData, setsearchData] = useState([])
     const UserData = useSelector(state => state.userData ?? [])
     const dispatch=useDispatch();
+    const history=useHistory();
     const handleChange=(e)=>{
         switch(e.target.value){
             case 'Party Palace':
@@ -51,19 +54,19 @@ function UserHeader() {
             setsearchData(allData.data ?? []);
         }
         getsearchData();
-        
+
     }, [search])
     
     function searching(data){
-        alert('Hi')
         switch(Data){
             case 'partypalace':
-                alert('Hello there')
-                dispatch(Center(data))
+                history.push(`/partypalace/${data.hostName}`);
+                dispatch(actionvatNo(data.vatNo))
                 break;
             case 'User':
                 break;
-            case 'Band':
+            case 'band':
+                history.push(`/bands/${data.Name}`);
                 break;
         }
     }
@@ -81,15 +84,15 @@ function UserHeader() {
                         <option value='Band'>Band</option>
                     </select>
                     <Combobox className="userHeader__searchInput" >
-                        <ComboboxInput value={search} onChange={(e)=>{setsearch(e.target.value)}} placeholder='Search' style={{width:'100%'}} />
+                        <ComboboxInput value={search} onChange={(e) => { setsearch(e.target.value) }} placeholder='Search' style={{ width: '100%' }} />
                         <ComboboxPopover className='userHeader__searchPopover'>
-                            {Object.keys(searchData).map((keys)=>{
-                               return( <List>
-                                    <ListItem button onClick={()=>searching(searchData[keys])}>{Data=='partypalace' ? searchData[keys].hostName : null}
-                                    {Data=='user' ? searchData[keys].name: null}
-                                    {Data=='band' ? searchData[keys].Name: null}
+                            {Object.keys(searchData).map((keys) => {
+                                return (<List>
+                                    <ListItem button onClick={() => searching(searchData[keys])}>{Data == 'partypalace' ? searchData[keys].hostName : null}
+                                        {Data == 'user' ? searchData[keys].name : null}
+                                        {Data == 'band' ? searchData[keys].Name : null}
                                     </ListItem>
-                                    
+
                                 </List>)
                             })}
                         </ComboboxPopover>
@@ -101,7 +104,7 @@ function UserHeader() {
                 <Link to='/Party' className="userHeader__link">Party Palaces</Link>
                 <Link to='/Band' className="userHeader__link">Bands</Link>
                 <Link to='/giftstore' className="userHeader__link">Gift Store</Link>
-                {Object.keys(UserData).map((keys)=>{
+                {!admin ? Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>
                             {UserData[keys].points}
@@ -109,9 +112,11 @@ function UserHeader() {
                         </div>
                     )
 
-                })}
-                
-                {drawer ? <TemporaryDrawer /> : ''}
+                }) : <div className='userHeader__rightButton'>
+                        <MenuIcon className="menu__admin btn" style={{ padding: '4px', width: '30px', height: '30px', borderRadius: '4px', backgroundColor: "#3063A5", color: 'white' }} onClick={() => setDrawer(!drawer)} />
+                    </div>}
+
+                {drawer ? <TemporaryDrawer isGiftStore={false} /> : ''}
             </div>
         </div>
     )

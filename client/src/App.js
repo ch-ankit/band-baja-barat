@@ -24,6 +24,8 @@ import Host from "./Host.js";
 import BookingStatus from "./BookingStatus.js";
 import EventDetail from "./EventDetail.js";
 import Payment from "./Payment";
+import AdminDisplay from "./AdminDisplay";
+import InvitationDraft from "./InvitationDraft";
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -44,10 +46,11 @@ function App() {
             {/*explore*/}
           </Route>
           <Route path="/Party" component={Party} />
+          <Route path="/invitationDraft" component={InvitationDraft} />
           <Route path="/Band" component={Band} />
           <Route path='/bands/:band' children={<BandDetail />} />
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
-
+          <Route exact path='/admin/partypalace/:party' children={<PartyDetail />} />
           <Route path='/User/userInfo' component={UserInfo} />
           <Route path='/bookingstatus' component={BookingStatus} />
           <Route exact path='/Host' component={Host} />
@@ -75,9 +78,10 @@ function App() {
           }} />
           <Route path='/host/events' render={(props) => <EventDetail {...props} />} />
           <Route exact path="/giftstore" render={() => <Home />} />
-          <Route exact path="/giftstore/product/add" render={() => <AddProduct />} />
+          <Route exact path="/giftstore/product/add" render={(routeProps) => <AddProduct {...routeProps} />} />
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
           <Route exact path={`/giftstore/addpoints`} render={(routeProps) => <Payment {...routeProps} />} />
+          <Route exact path={`/admin`} render={(routeProps) => <AdminDisplay />} />
         </Switch>
       </div>
     </Router >

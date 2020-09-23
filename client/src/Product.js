@@ -3,10 +3,12 @@ import './Product.css'
 import ReactStars from "react-rating-stars-component";
 import { useStateValue } from './StateProvider';
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 function Product(props) {
     const { id, title, price, rating, image, quantity, description, removeFun } = props
-    let [{ isAdmin }, dispatch] = useStateValue();
+    let [{ }, dispatch] = useStateValue();
+    const admin = useSelector(state => state.isAdmin)
     const addProductDetail = () => {
         dispatch({
             type: 'ADD_PRODUCTS',
@@ -45,7 +47,7 @@ function Product(props) {
                     <img className="image" src={image} alt="product" />
                 </Link>
             </div>
-            {isAdmin && <button onClick={() => removeFun({ modelNo: id })}>Remove Gift</button>}
+            {admin && <button onClick={() => removeFun({ modelNo: id })}>Remove Gift</button>}
         </div >
     );
 }

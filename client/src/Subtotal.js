@@ -65,7 +65,7 @@ function Subtotal({ data, message }) {
         }
         const response = await fetch('http://localhost:9000/userhome/user',
             {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                     'Content-type': 'application/json'
                 },
@@ -81,7 +81,7 @@ function Subtotal({ data, message }) {
                     quantity: element.quantity,
                     price: element.price,
                     eventId: element.eventId,
-                    orderStatus: 'shipping',
+                    orderStatus: 'SHIPPING',
                     userName: userName,
                     orderedDate: (new Date().getFullYear() + `-${new Date().getMonth() + 1}` + `-${new Date().getDate()}`)
                 }

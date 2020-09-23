@@ -1,21 +1,20 @@
-.giftheader{
+.giftheader {
     display: flex;
     flex-direction: column;
     top: 0;
     position: sticky;
     z-index: 100;
 }
-.searchDrop{
+.searchDrop {
     display: flex;
     flex-direction: column;
-    background-color:rgba(0,0,0,0.8);
-    margin-top:-20px;
-    margin-left:140px;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: -20px;
+    margin-left: 140px;
     justify-self: center;
     z-index: 200;
     max-width: 900px;
 }
-
 
 .headergift {
     background-color: #131921;
@@ -91,17 +90,23 @@
     margin-left: 10px;
 }
 
-.search__display{
+.search__display {
     display: flex;
     flex-flow: column;
     z-index: 100;
 }
 
-.seemore{
-    padding-bottom:15px;
+.seemore {
+    padding-bottom: 15px;
     color: white !important;
-    margin-left:40px;
+    margin-left: 40px;
     font: 15px;
     font-weight: 600;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.userHeader__rightButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
