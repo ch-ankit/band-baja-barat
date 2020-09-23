@@ -8,14 +8,14 @@ import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
 import { Provider } from "react-redux"
 import { Store } from './redux/store'
-import SimpleMap from "./GoogleMap.js";
+
 
 
 ReactDOM.render(
   <Provider store={Store}>
     <StateProvider initialState={initialState} reducer={reducer}>
       <React.StrictMode>
-        <App />
+        <App/>
       </React.StrictMode>
     </StateProvider>
   </Provider>

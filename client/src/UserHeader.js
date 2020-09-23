@@ -17,9 +17,11 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 import { useEffect } from 'react';
-import { List, ListItem,ListItemText } from '@material-ui/core';
 import { Center, actionvatNo } from './redux/action';
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 function UserHeader() {
+    const admin = useSelector(state => state.isAdmin)
     const [drawer, setDrawer] = useState(false);
     const [Data, setData] = useState('partypalace');
     const [search, setsearch] = useState('');
@@ -102,7 +104,7 @@ function UserHeader() {
                 <Link to='/Party' className="userHeader__link">Party Palaces</Link>
                 <Link to='/Band' className="userHeader__link">Bands</Link>
                 <Link to='/giftstore' className="userHeader__link">Gift Store</Link>
-                {Object.keys(UserData).map((keys) => {
+                {!admin ? Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>
                             {UserData[keys].points}
@@ -110,7 +112,9 @@ function UserHeader() {
                         </div>
                     )
 
-                })}
+                }) : <div className='userHeader__rightButton'>
+                        <MenuIcon className="menu__admin btn" style={{ padding: '4px', width: '30px', height: '30px', borderRadius: '4px', backgroundColor: "#3063A5", color: 'white' }} onClick={() => setDrawer(!drawer)} />
+                    </div>}
 
                 {drawer ? <TemporaryDrawer isGiftStore={false} /> : ''}
             </div>

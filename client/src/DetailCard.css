@@ -1,21 +1,21 @@
-.detailCard{
+.detailCard {
     display: flex;
     background-color: lightgray;
     margin-top: 20px;
     margin-bottom: 20px;
-    width:70%;
+    width: 100%;
     border-radius: 25px;
     align-items: center;
     transition: transform 450ms;
 }
 
-.detailCard:hover{
-    transform: scale(1.08)
+.detailCard:hover {
+    transform: scale(1.08);
 }
-.detailCard__image{
-    width:250px;
-    height:200px;
+.detailCard__image {
+    width: 250px;
+    height: 200px;
     object-fit: contain;
 }
-.detailCard__detail{
+.detailCard__detail {
 }
