@@ -12,46 +12,6 @@
       "previewLimit": 50,
       "server": "localhost",
       "username": "root"
-    },
-    {
-      "mysqlOptions": {
-        "authProtocol": "default"
-      },
-      "previewLimit": 50,
-      "server": "sql12.freemysqlhosting.net",
-      "port": 3306,
-      "driver": "MariaDB",
-      "name": "lolo",
-      "database": "sql12365010",
-      "username": "sql12365010",
-      "password": "ZaMN4KKmPT"
-    },
-    {
-<<<<<<< HEAD
-      "database": "bandbaajabarat",
-      "driver": "MariaDB",
-      "mysqlOptions": {
-        "authProtocol": "default"
-      },
-      "name": "bbb",
-      "password": "sFHLvBGj4eDn3g5",
-      "port": 3306,
-      "previewLimit": 50,
-      "server": "db4free.net",
-      "username": "haribahadur"
-=======
-      "mysqlOptions": {
-        "authProtocol": "default"
-      },
-      "previewLimit": 50,
-      "server": " db4free.net",
-      "port": 3306,
-      "driver": "MariaDB",
-      "name": "newhosting",
-      "database": "bandbaajabarat",
-      "username": "haribahadur",
-      "password": "sFHLvBGj4eDn3g5"
->>>>>>> 02cf17cc5819d8ec10a2a847b2dff091ae294031
     }
   ],
   "deno.enable": false
