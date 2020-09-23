@@ -31,13 +31,13 @@
         "authProtocol": "default"
       },
       "previewLimit": 50,
-      "server": " db4free.net",
+      "server": "sql200.epizy.com",
       "port": 3306,
       "driver": "MariaDB",
-      "name": "newhosting",
-      "database": "bandbaajabarat",
-      "username": "haribahadur",
-      "password": "sFHLvBGj4eDn3g5"
+      "name": "infinity",
+      "password": "EGGfXW3nXMZ9Axa",
+      "username": "epiz_26798741",
+      "database": "epiz_26798741_bandbaajabarat"
     }
   ],
   "deno.enable": false
