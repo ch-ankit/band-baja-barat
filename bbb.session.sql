@@ -1,2 +1,1 @@
-SELECT vatNo
-FROM host;
+select * from hoST

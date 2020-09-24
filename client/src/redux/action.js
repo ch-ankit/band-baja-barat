@@ -31,6 +31,12 @@ export const UserEmail = (userEmail) => {
         payload: userEmail
     }
 }
+export const HostEmail = (hostEmail) => {
+    return {
+        type: 'HostEmail',
+        payload: hostEmail
+    }
+}
 export const Hostuid = (uid) => {
     return {
         type: 'Hostuid',

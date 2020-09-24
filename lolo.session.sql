@@ -1,0 +1,1 @@
+select eventDate from event

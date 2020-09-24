@@ -18,8 +18,8 @@ POST http://localhost:9000/signup/host
 Content-Type: application/json
 
 {
-    "vatNo":667724,
-    "hostName":"yukihia",
+    "vatNo":667344,
+    "hostName":"KKU PP",
     "profilePhoto":"dummyimages",
     "email":"dum2@gmail.com",
     "contactInfo":"04122456",

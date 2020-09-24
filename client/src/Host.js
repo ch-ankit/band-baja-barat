@@ -30,14 +30,22 @@ function Host() {
     const [UpcomingData, setUpcomingData] = useState([]);
     const [ApprovedData, setApprovedData] = useState([]);
     const hostUid = useSelector(state => state.hostUid);
+    const hostEmail=useSelector(state=>state.hostEmail);
     const dispatch=useDispatch();
     useEffect(() => {
         async function getHostData() {
-            const response = await fetch('http://localhost:9000/host?vatNo=771982');
+            const response = await fetch('http://localhost:9000/login/host',{
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify({
+                    'email':hostEmail
+                })
+            });
             const allData = await response.json();
             setdata(allData.rows);
             setPhoto(allData.rows2);
-            console.log(data)
         }
         getHostData();
     }, [])

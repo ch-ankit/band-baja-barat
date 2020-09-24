@@ -1,4 +1,4 @@
-GET http://localhost:9000/event?organizerId=2
+GET http://localhost:9000/event?organizerId=1
 
 ###
 GET http://localhost:9000/userhome/myevents?userName=Demented
@@ -11,23 +11,23 @@ Content-Type: application/json
     "eventName": "Luffy's wedding",
     "groomName": "Monkey D. Luffy",
     "brideName": "Boa Hancock",
-    "eventDate": "2020-10-14",
+    "eventDate": "2020-9-28",
     "shift": "Day"
 }
 
 ###
-DELETE http://localhost:9000/event?eventId=8
+DELETE http://localhost:9000/event?eventId=10
 
 ###
 PATCH http://localhost:9000/event
 Content-Type: application/json
 
 {
-    "eventId": 10,
+    "eventId": 2,
     "eventStatus":"UPCOMING",
-    "hostStatus":"APPROVED",
+    "hostStatus":"PENDING",
     "brideName": "Nico Robin",
-    "eventDate": "2020-09-19",
+    "eventDate": "2020-09-28",
     "shift": "Day"
 }
 

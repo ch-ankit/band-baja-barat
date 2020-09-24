@@ -124,6 +124,23 @@ function PartyDetail() {
                         <h5>Booked Date</h5>
                             <ReactCalender className='partyDetail__bookedDate' />
                         </div>)}
+                        <div className='partyDetail__googleMap'>
+                    <iframe src={`https://maps.google.com/maps?q= ${data[keys].latitude}, ${data[keys].longitude}&z=15&output=embed`} width="100%" height="200px" frameborder="0" style={{ border: "0" }}></iframe>
+                </div>
+                <div className='partyDetail__Gallery'>
+                    <h4>Top photos</h4>
+                    <hr />
+                    <div className="partyDetail__images">
+                        {Object.keys(Photo).map((keys) => {
+                            if (keys < 5) {
+                                return (
+                                    <img src={Photo[keys].photo} alt="image" className='partyDetail__GImage' />
+                                );
+                            }
+                        })}
+                    
+                </div>
+            </div>
                     </div>
                 </div>
            
