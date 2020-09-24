@@ -34,6 +34,7 @@ function PartyDetail() {
     const [contact, setcontact] = useState(false)
     const [pending, setPending] = useState([])
     const [pendingPhoto, setPendingPhoto] = useState([])
+    const [status, setStatus] = useState('')
     useEffect(() => {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
@@ -50,6 +51,7 @@ function PartyDetail() {
             const allData = await response.json()
             setPending(allData.rows ?? [])
             setPendingPhoto(allData.rows2);
+            setStatus(allData.rows[0].status)
         }
         pendingHost();
     }, [])
@@ -122,11 +124,11 @@ function PartyDetail() {
                         </ul>
                     </div>) : (<div>
                         <h5>Booked Date</h5>
-                            <ReactCalender className='partyDetail__bookedDate' />
-                        </div>)}
-                    </div>
+                        <ReactCalender className='partyDetail__bookedDate' />
+                    </div>)}
                 </div>
-           
+            </div>
+
 
         </div>
         )
@@ -203,10 +205,11 @@ function PartyDetail() {
                 )
             })
         )
+
     return (
         <div>
             <UserHeader />
-            {admin && (
+            {(admin && status === "PENDING") && (
                 <div className='adminHost__accept'>
                     <p>The Party Palace has requested to be a part of our application:</p>
                     <Button

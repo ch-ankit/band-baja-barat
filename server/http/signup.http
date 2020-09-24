@@ -23,12 +23,11 @@ Content-Type: application/json
     "profilePhoto":"dummyimages",
     "email":"dum2@gmail.com",
     "contactInfo":"04122456",
-    "latitude":"112",
-    "longitude":"221",
+    "latitude":112,
+    "longitude":221,
     "totalHalls":3,
     "city":"kathmandu",
     "street":"chabahil",
     "provience":"3"
 }
-
 
