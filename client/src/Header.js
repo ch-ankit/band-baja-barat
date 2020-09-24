@@ -10,6 +10,8 @@ import "./Header.css";
 import TemporaryDrawer from "./Drawer";
 import Avatar from '@material-ui/core/Avatar'
 import { useSelector } from "react-redux";
+import MenuIcon from '@material-ui/icons/Menu';
+
 
 function Header(props) {
     const { userData, isAdmin } = useSelector(state => state)
@@ -164,14 +166,17 @@ function Header(props) {
                         </div>
                     </Link>}
                 </div>
-                {Object.keys(UserData).map((keys) => {
+                {!isAdmin ? Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>
+                            {UserData[keys].points}
                             <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
                         </div>
                     )
 
-                })}
+                }) : <div className='userHeader__rightButton'>
+                        <MenuIcon className="menu__admin btn" style={{ padding: '4px', width: '30px', height: '30px', borderRadius: '4px', backgroundColor: "#3063A5", color: 'white' }} onClick={() => setDrawer(!drawer)} />
+                    </div>}
 
                 {drawer ? <TemporaryDrawer isGiftStore={true} /> : ''}
             </nav>

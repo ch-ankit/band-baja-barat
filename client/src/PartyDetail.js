@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
 }));
-function PartyDetail() {
+function PartyDetail({ history }) {
     let name = useParams();
     const classes = useStyles();
     const admin = useSelector(state => state.isAdmin)
@@ -55,22 +55,24 @@ function PartyDetail() {
         }
         pendingHost();
     }, [])
-    const handleApprove = async (evt) => {
+    const handleApprove = async () => {
         await fetch(`http://localhost:9000/host`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ status: 'APPROVED' })
+            body: JSON.stringify({ vatNo: pending[0].vatNo, status: 'APPROVED' })
         })
+        setTimeout(() => window.location.reload(), 1000)
     }
-    const handleDelete = async (evt) => {
+    const handleDelete = async () => {
         await fetch(`http://localhost:9000/host?vatNo=${vatNo}`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json'
             }
         })
+        history.push('/admin')
     }
 
     const display = !admin ? Object.keys(data).map((keys) => {
