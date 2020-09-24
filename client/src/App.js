@@ -50,7 +50,7 @@ function App() {
           <Route path="/Band" component={Band} />
           <Route path='/bands/:band' children={<BandDetail />} />
           <Route exact path='/partypalace/:party' children={<PartyDetail />} />
-          <Route exact path='/admin/partypalace/:party' children={<PartyDetail />} />
+          <Route exact path='/admin/partypalace/:party' render={(routeProps) => <PartyDetail {...routeProps} />} />
           <Route path='/User/userInfo' component={UserInfo} />
           <Route path='/bookingstatus' component={BookingStatus} />
           <Route exact path='/Host' component={Host} />

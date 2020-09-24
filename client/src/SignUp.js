@@ -21,10 +21,13 @@ function SignUp({ }) {
     const [middleName, setmiddleName] = useState('');
     const [lastName, setlastName] = useState('');
     const [Hostsign, setHostsign] = useState(false);
+    const [viewFile, setViewFile] = useState(null);
+
     const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files[0]) {
             setimage(e.target.files[0]);
+            setViewFile(URL.createObjectURL(e.target.files[0]))
             console.log(image)
         }
 
@@ -103,70 +106,70 @@ function SignUp({ }) {
             <div className="signUp">
                 <h1>Sign Up</h1>
                 <div className="signUp__nav">
-                    <h3 onClick={()=>setHostsign(false)}>User</h3>
-                    <h3 onClick={()=>setHostsign(true)}>Host</h3>
+                    <h3 onClick={() => setHostsign(false)}>User</h3>
+                    <h3 onClick={() => setHostsign(true)}>Host</h3>
                 </div>
                 {Hostsign ? <HostSignUp /> :
-                (<div className="signUp__middlepart">
-                    <div className="signUp__input">
-                        <div className='signUp__name'>
-                            <div>
-                                <label>First Name</label><br />
-                                <input type='text' value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
-                            </div>
-                            <div>
-                                <label>Middle Name</label><br />
-                                <input type='text' value={middleName} onChange={(e) => setmiddleName(e.target.value)} />
-                            </div>
-                            <div>
-                                <label>Last Name</label><br />
-                                <input type='text' value={lastName} onChange={(e) => setlastName(e.target.value)} required />
-                            </div>
+                    (<div className="signUp__middlepart">
+                        <div className="signUp__input">
+                            <div className='signUp__name'>
+                                <div>
+                                    <label>First Name</label><br />
+                                    <input type='text' value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
+                                </div>
+                                <div>
+                                    <label>Middle Name</label><br />
+                                    <input type='text' value={middleName} onChange={(e) => setmiddleName(e.target.value)} />
+                                </div>
+                                <div>
+                                    <label>Last Name</label><br />
+                                    <input type='text' value={lastName} onChange={(e) => setlastName(e.target.value)} required />
+                                </div>
 
+                            </div>
+                            <div className="signUp__userPass">
+                                <div>
+                                    <label>User Name</label><br />
+                                    <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
+                                </div>
+                                <div>
+                                    <label>Password</label><br />
+                                    <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
+                                </div>
+                            </div>
+                            <div className="signUp__contactInfo">
+                                <div>
+                                    <label>Email</label><br />
+                                    <input type="email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
+                                </div>
+                                <div>
+                                    <label>Contact info</label><br />
+                                    <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
+                                </div>
+                            </div>
+                            <div className="signUp__Address">
+                                <div>
+                                    <label>Street</label><br />
+                                    <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
+                                </div>
+                                <div>
+                                    <label>City</label><br />
+                                    <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
+                                </div>
+                                <div>
+                                    <label>Province</label><br />
+                                    <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
+                                </div>
+                            </div>
+                            <br /><label>Profile Photo</label>
+                            <progress value={Progress} max="100" />
+                            <input type="file" onChange={handleChange} />
+                            {viewFile !== null && <div style={{ backgroundColor: 'white', height: '500px' }}><img src={viewFile} style={{ display: 'flex', marginTop: 'auto', marginBottom: 'auto', justifyContent: 'center', height: "300px", width: "300px" }} alt="host" /></div>}
                         </div>
-                        <div className="signUp__userPass">
-                            <div>
-                                <label>User Name</label><br />
-                                <input type="text" value={userName} onChange={(e) => setuserName(e.target.value)} required />
-                            </div>
-                            <div>
-                                <label>Password</label><br />
-                                <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
-                            </div>
-                        </div>
-                        <div className="signUp__contactInfo">
-                            <div>
-                                <label>Email</label><br />
-                                <input type="email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
-                            </div>
-                            <div>
-                                <label>Contact info</label><br />
-                                <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
-                            </div>
-                        </div>
-                        <div className="signUp__Address">
-                            <div>
-                                <label>Street</label><br />
-                                <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
-                            </div>
-                            <div>
-                                <label>City</label><br />
-                                <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
-                            </div>
-                            <div>
-                                <label>Province</label><br />
-                                <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
-                            </div>
-                        </div>
-                        <br /><label>Profile Photo</label>
-                        <progress value={Progress} max="100" />
-                        <input type="file" onChange={handleChange} />
-                    </div>
-                    <Button className="signUp__button" onClick={handleSignUp}>
-                        Sign Up
+                        <Button className="signUp__button" onClick={handleSignUp}>
+                            Sign Up
                 </Button>
-                </div>)}
-                <img src={Url} alt="image" />
+                    </div>)}
             </div>
         </div>
     )

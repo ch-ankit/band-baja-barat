@@ -33,6 +33,7 @@ exports.addUser = async (req, res, next) => {
 
 exports.addHost = async (req, res, next) => {
   try {
+    console.log(req.body)
     var sql = `INSERT INTO host (vatNo,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
     VALUES
     (
@@ -45,8 +46,8 @@ exports.addHost = async (req, res, next) => {
       "${req.body.street}",
       "${req.body.city}",
       "${req.body.provience}",
-      "${req.body.latitude}",
-      "${req.body.longitude}"
+      ${req.body.latitude},
+      ${req.body.longitude}
 )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {

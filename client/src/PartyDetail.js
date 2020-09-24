@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
 }));
-function PartyDetail() {
+function PartyDetail({ history }) {
     let name = useParams();
     const classes = useStyles();
     const admin = useSelector(state => state.isAdmin)
@@ -34,6 +34,7 @@ function PartyDetail() {
     const [contact, setcontact] = useState(false)
     const [pending, setPending] = useState([])
     const [pendingPhoto, setPendingPhoto] = useState([])
+    const [status, setStatus] = useState('')
     useEffect(() => {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
@@ -50,25 +51,28 @@ function PartyDetail() {
             const allData = await response.json()
             setPending(allData.rows ?? [])
             setPendingPhoto(allData.rows2);
+            setStatus(allData.rows[0].status)
         }
         pendingHost();
     }, [])
-    const handleApprove = async (evt) => {
+    const handleApprove = async () => {
         await fetch(`http://localhost:9000/host`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ status: 'APPROVED' })
+            body: JSON.stringify({ vatNo: pending[0].vatNo, status: 'APPROVED' })
         })
+        setTimeout(() => window.location.reload(), 1000)
     }
-    const handleDelete = async (evt) => {
+    const handleDelete = async () => {
         await fetch(`http://localhost:9000/host?vatNo=${vatNo}`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json'
             }
         })
+        history.push('/admin')
     }
 
     const display = !admin ? Object.keys(data).map((keys) => {
@@ -122,6 +126,7 @@ function PartyDetail() {
                         </ul>
                     </div>) : (<div>
                         <h5>Booked Date</h5>
+<<<<<<< HEAD
                             <ReactCalender className='partyDetail__bookedDate' />
                         </div>)}
                         <div className='partyDetail__googleMap'>
@@ -142,8 +147,13 @@ function PartyDetail() {
                 </div>
             </div>
                     </div>
+=======
+                        <ReactCalender className='partyDetail__bookedDate' />
+                    </div>)}
+>>>>>>> 2e3e85564ee9f6cff4e5fc6d897b97f4074da2ad
                 </div>
-           
+            </div>
+
 
         </div>
         )
@@ -220,10 +230,11 @@ function PartyDetail() {
                 )
             })
         )
+
     return (
         <div>
             <UserHeader />
-            {admin && (
+            {(admin && status === "PENDING") && (
                 <div className='adminHost__accept'>
                     <p>The Party Palace has requested to be a part of our application:</p>
                     <Button
