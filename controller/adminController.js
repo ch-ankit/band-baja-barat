@@ -43,9 +43,9 @@ exports.hostData = async (req, res, next) => {
   try {
     var sql;
     if (req.query.vatNo == null) {
-      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'PENDING' ORDER BY hostname `;
+      sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host ORDER BY hostname `;
     } else {
-      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'PENDING' `;
+      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}"`;
     }
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {

@@ -23,6 +23,7 @@ import EventDetail from './EventDetail.js';
 import HostHeader from './HostHeader.js';
 function Host() {
     const history = useHistory();
+    const userData = useSelector(state => state.userData)
     const [book, setbook] = useState(false);
     const [Photo, setPhoto] = useState([]);
     const [data, setdata] = useState([]);
@@ -33,7 +34,13 @@ function Host() {
     const dispatch = useDispatch();
     useEffect(() => {
         async function getHostData() {
-            const response = await fetch('http://localhost:9000/host?email=presentator7@gmail.com');
+            const response = await fetch(`http://localhost:9000/login/host`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ email: 'hello@gmail.com' })
+            });
             const allData = await response.json();
             setdata(allData.rows);
             setPhoto(allData.rows2);
