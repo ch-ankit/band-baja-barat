@@ -126,7 +126,6 @@ function PartyDetail({ history }) {
                         </ul>
                     </div>) : (<div>
                         <h5>Booked Date</h5>
-<<<<<<< HEAD
                             <ReactCalender className='partyDetail__bookedDate' />
                         </div>)}
                         <div className='partyDetail__googleMap'>
@@ -147,11 +146,7 @@ function PartyDetail({ history }) {
                 </div>
             </div>
                     </div>
-=======
-                        <ReactCalender className='partyDetail__bookedDate' />
-                    </div>)}
->>>>>>> 2e3e85564ee9f6cff4e5fc6d897b97f4074da2ad
-                </div>
+                
             </div>
 
 

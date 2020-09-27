@@ -3,6 +3,8 @@ GET http://localhost:9000/event?organizerId=1
 ###
 GET http://localhost:9000/userhome/myevents?userName=Demented
 
+###
+
 POST http://localhost:9000/event
 Content-Type: application/json
 

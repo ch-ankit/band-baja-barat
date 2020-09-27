@@ -2,7 +2,7 @@ const mysqlConnection = require("./../connection");
 
 exports.invitationRecieved = (req, res, next) => {
   try {
-    var sql = ` SELECT eventId FROM guestList WHERE userName = "${req.query.userName}"`;
+    var sql = ` SELECT * FROM guestList g INNER JOIN invitationDraft i ON i.eventId = g.eventId INNER JOIN event e ON g.eventId = e.id WHERE userName = "${req.query.userName}"`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
@@ -81,28 +81,34 @@ exports.updateUsers = (req, res, next) => {
           console.log(req.body.points);
           oldData = rows;
           var sql = ` UPDATE user SET 
-                  points = ${req.body.points == undefined
-              ? oldData[0].points
-              : parseInt(req.body.points)
-            },
-                  mobileNo = "${req.body.mobileNo == undefined
-              ? oldData[0].mobileNo
-              : req.body.mobileNo
-            }",
-                  street = "${req.body.street == undefined
-              ? oldData[0].street
-              : req.body.street
-            }",
-                  city = "${req.body.city == undefined ? oldData[0].city : req.body.city
-            }",
-                  provience = "${req.body.provience == undefined
-              ? oldData[0].provience
-              : req.body.provience
-            }",
-                  photo = "${req.body.photo == undefined
-              ? oldData[0].photo
-              : req.body.photo
-            }"
+                  points = ${
+                    req.body.points == undefined
+                      ? oldData[0].points
+                      : parseInt(req.body.points)
+                  },
+                  mobileNo = "${
+                    req.body.mobileNo == undefined
+                      ? oldData[0].mobileNo
+                      : req.body.mobileNo
+                  }",
+                  street = "${
+                    req.body.street == undefined
+                      ? oldData[0].street
+                      : req.body.street
+                  }",
+                  city = "${
+                    req.body.city == undefined ? oldData[0].city : req.body.city
+                  }",
+                  provience = "${
+                    req.body.provience == undefined
+                      ? oldData[0].provience
+                      : req.body.provience
+                  }",
+                  photo = "${
+                    req.body.photo == undefined
+                      ? oldData[0].photo
+                      : req.body.photo
+                  }"
                   WHERE userName = "${req.body.userName}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
@@ -126,7 +132,7 @@ exports.updateUsers = (req, res, next) => {
 
 exports.myEvents = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE userName = '${req.query.userName}'`;
+    var sql = ` SELECT e.*,b.*,hostName,CONCAT(street,' ',city,' ',provience) AS location FROM booking b INNER JOIN event e ON e.id = eventId INNER JOIN host h ON h.vatNo = b.vatNo INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE userName = '${req.query.userName}'`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

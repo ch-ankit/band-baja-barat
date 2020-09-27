@@ -22,12 +22,7 @@ import {useHistory} from 'react-router-dom'
 import EventDetail from './EventDetail.js';
 import HostHeader from './HostHeader.js';
 function Host() {
-<<<<<<< HEAD
     const history=useHistory();
-=======
-    const history = useHistory();
-    const userData = useSelector(state => state.userData)
->>>>>>> 2e3e85564ee9f6cff4e5fc6d897b97f4074da2ad
     const [book, setbook] = useState(false);
     const [Photo, setPhoto] = useState([]);
     const [data, setdata] = useState([]);
