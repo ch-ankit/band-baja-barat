@@ -4,7 +4,7 @@ exports.event = (req, res, next) => {
   try {
     var sql;
     if (req.query.organizerId) {
-      sql = ` SELECT e.id,eventName,CONCAT(groomName," ","WEDS"," ",brideName) AS agenda,eventDate,shift,eventStatus,hostStatus,CONCAT((DATEDIFF(eventDate,CURDATE())),' '',DAYS') AS 'Event In',eventStatus,hostStatus FROM event e INNER JOIN organizer o ON organizerId= o.id WHERE organizerId = "${req.query.organizerId}" ORDER BY e.id DESC `;
+      sql = ` SELECT e.id,eventName,CONCAT(groomName," ","WEDS"," ",brideName) AS agenda,eventDate,shift,eventStatus,hostStatus,CONCAT((DATEDIFF(eventDate,CURDATE())),' '',DAYS') AS 'Event In' FROM event e INNER JOIN organizer o ON organizerId= o.id WHERE organizerId = "${req.query.organizerId}" ORDER BY e.id DESC `;
     } else {
       sql = ` SELECT e.id,eventName,eventStatus,hostStatus,userName,eventDate,CONCAT((DATEDIFF(eventDate,CURDATE()),' '',DAYS') AS 'Event In' FROM event e INNER JOIN organizer o ON organizerId= o.id ORDER BY e.id DESC`;
     }
@@ -49,9 +49,9 @@ exports.updateEvent = async (req, res, next) => {
       `SELECT * FROM event WHERE id=${req.body.eventId}`,
       (err, rows) => {
         if (!err) {
-          console.log(rows)
+          console.log(rows);
           oldEventData = rows;
-          console.log(oldEventData)
+          console.log(oldEventData);
           var sql = ` UPDATE event SET 
                     eventName = "${
                       req.body.eventName == undefined
@@ -69,9 +69,9 @@ exports.updateEvent = async (req, res, next) => {
                         : req.body.groomName
                     }",
                     eventDate = "${
-                      req.body.eventDate== undefined 
-                      ? oldEventData[0].eventDate
-                      : req.body.eventDate
+                      req.body.eventDate == undefined
+                        ? oldEventData[0].eventDate
+                        : req.body.eventDate
                     }",
                     shift = "${
                       req.body.shift == undefined

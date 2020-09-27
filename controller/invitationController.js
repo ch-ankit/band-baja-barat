@@ -32,11 +32,19 @@ exports.invitationDraft = (req, res, next) => {
 
 exports.addInvitationDraft = (req, res, next) => {
   try {
-    var sql = ` INSERT INTO invitationDraft (eventId,backgroundImage1,backgroundImage2,draft) VALUES (
+    var sql = ` INSERT INTO invitationDraft 
+    (eventId,backgroundImage1,backgroundImage2,draft,groomFather,groomMother,brideMother,brideFather,honorableMention1,honorableMention2)
+     VALUES (
       ${req.body.eventId},
       "${req.body.backgroundImage1}",
       "${req.body.backgroundImage2}",
-      "${req.body.draft}"
+      "${req.body.draft}",
+      "${req.body.groomFather}",
+      "${req.body.groomMother}",
+      "${req.body.brideMother}",
+      "${req.body.brideFather}",
+      "${req.body.honorableMention1}",
+      "${req.body.honorableMention2}"
     )`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
@@ -74,7 +82,13 @@ exports.updateInvitationDraft = async (req, res, next) => {
                     req.body.backgroundimage1 == undefined
                       ? oldDraftData[0].backgroundimage1
                       : req.body.backgroundimage1
-                  }"
+                  }",
+                  groomFather="${req.body.groomFather}",
+                  "${req.body.groomMother}",
+                  "${req.body.brideMother}",
+                  "${req.body.brideFather}",
+                  "${req.body.honorableMention1}",
+                  "${req.body.honorableMention2}"
                   WHERE eventId = ${req.body.eventId} `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {

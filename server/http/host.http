@@ -7,20 +7,22 @@ PATCH http://localhost:9000/host
 Content-Type: application/json
 
 {
-    "vatNo":667724,
-    "profilePhoto":"dummyimages2",
-    "description":"dummy party palace for trial",
-    "email":"dum22@gmail.com",
-    "contactInfo":"041-22456",
-    "latitude":"77",
-    "longitude":"22",
-    "totalHalls":2,
-    "city":"kathmandu",
-    "street":"chabahil",
-    "provience":"3"
+    "vatNo":830058,
+    "profilePhoto":"C:/Users/nbhn3/Downloads/photo/p1"
 }
 
 ###
+ UPDATE host set profilePhoto = "C:\Users\nbhn3\Downloads\photo\p1" WHERE vatNo =830058
+571317
+455238
+771982
+667724
+406820
+202698
+990441
+458869
+488366
+493744
 GET  http://localhost:9000/host/requests?vatNo=771982
 
 ###
