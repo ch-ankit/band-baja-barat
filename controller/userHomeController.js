@@ -36,7 +36,7 @@ exports.search = (req, res, next) => {
     if (req.query.key == "partypalace")
       sql = ` SELECT hostName, longitude,latitude,vatNo,CONCAT(street,",",city,",",provience) AS location FROM host WHERE hostName REGEXP "${req.query.value}" AND status= 'APPROVED'  `;
     else if (req.query.key == "user")
-      sql = ` SELECT concat(firstName,' ',CASE WHEN (middleName != NULL) THEN middleName ELSE' 'END,lastName) AS name, CONCAT(street,',',city,',',provience) AS location FROM user WHERE firstName REGEXP "${req.query.value}" OR lastName REGEXP "${req.query.value}"`;
+      sql = ` SELECT userName, CONCAT(street,',',city,',',provience) AS location FROM user WHERE userName REGEXP "${req.query.value}"`;
     else if (req.query.key == "band")
       sql = ` SELECT bandName AS Name FROM band WHERE bandName REGEXP "${req.query.value}" `;
     mysqlConnection.query(sql, (err, rows) => {
@@ -132,7 +132,7 @@ exports.updateUsers = (req, res, next) => {
 
 exports.myEvents = (req, res, next) => {
   try {
-    var sql = ` SELECT e.*,b.*,hostName,CONCAT(street,' ',city,' ',provience) AS location FROM booking b INNER JOIN event e ON e.id = eventId INNER JOIN host h ON h.vatNo = b.vatNo INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE userName = '${req.query.userName}'`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE userName = '${req.query.userName}'`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

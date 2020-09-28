@@ -1,0 +1,12 @@
+.guestList__SearchItem{
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.guestList__icon:hover{
+    color: green !important;
+}
+.guestList__Deleteicon:hover{
+    color: red !important;
+}
+

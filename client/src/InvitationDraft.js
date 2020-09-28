@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion'
 
 import Card from 'react-bootstrap/Card'
 import './InvitationDraft.css'
-import { useHistory } from 'react-router-dom'
+import { useHistory,Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import UserHeader from './UserHeader'
 import { EventData } from './redux/action'
@@ -25,8 +25,11 @@ class InvitationDraft extends React.Component{
     async draftInvitation(){
         const response = await fetch('http://localhost:9000/invitation/draft',{
             body:JSON.stringify({
-                "eventId":this,state.eventData.eventId,
-                "G"
+                "eventId":this.state.eventData.eventId,
+                "groomFather":this.state.GFather,
+                "groomMother":this.state.GMother,
+                "brideFather":this.state.BFather,
+                "brideMother":this.state.BMother,
             }),
             method: 'POST',
             headers:{
@@ -66,7 +69,7 @@ class InvitationDraft extends React.Component{
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-                <button onClick={}>OK</button>
+                <Link to='/guestList'><button onClick={this.draftInvitation}>OK</button></Link>
             </div>
             </div>
         );
