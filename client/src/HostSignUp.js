@@ -100,9 +100,7 @@ function HostSignUp() {
                                 userName: userName
                             }
                         )*/
-                        alert('Hello world')
                         async function sign() {
-                            alert('yes')
                             const response = await fetch('http://localhost:9000/signup/host', {
                                 body: JSON.stringify({
                                     vatNo: vatNo,
@@ -121,6 +119,7 @@ function HostSignUp() {
                                 method: "post"
                             });
                             console.log(response)
+                            alert("Signup Complete!!")
                         }
                         sign();
                     }));
@@ -173,11 +172,11 @@ function HostSignUp() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <label>Latitude</label><br />
-                        <input type='number' step="any" />
+                        <input type='number' step="any" onChange={(evt) => setlatitude(evt.target.value)} />
                     </div>
                     <div>
                         <label>Longitude</label><br />
-                        <input type='number' step="anys" />
+                        <input type='number' step="any" onChange={(evt) => setlongitude(evt.target.value)} />
                     </div>
 
                 </div>

@@ -14,10 +14,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 
 function Header(props) {
-    const { userData, isAdmin } = useSelector(state => state)
+    const userData = useSelector(state => state.userData ?? [])
+    const { isAdmin } = useSelector(state => state)
     const [drawer, setDrawer] = useState(false);
     const paid = useSelector(state => state.paid)
-    const { userName, email } = userData[0]
+    const { userName, email } = userData[0] ?? ''
+    const uid = useSelector(state => state.uid)
     const [userPoints, setUserPoints] = useState(0)
     const [{ basket }] = useStateValue();
     const [inputSearch, setInputSearch] = useState("");
@@ -30,29 +32,33 @@ function Header(props) {
     let display = [];
     let check = false;
     useEffect(() => {
-        async function getUserData() {
-            const response = await fetch('http://localhost:9000/login/user', {
-                body: JSON.stringify({
-                    email: email
-                }),
-                headers: { "Content-type": "application/json" },
-                method: "post"
-            });
-            const { data } = await response.json();
-            setUserPoints(data[0].points)
+        if (uid) {
+            async function getUserData() {
+                const response = await fetch('http://localhost:9000/login/user', {
+                    body: JSON.stringify({
+                        email: email
+                    }),
+                    headers: { "Content-type": "application/json" },
+                    method: "post"
+                });
+                const { data } = await response.json();
+                setUserPoints(data[0].points)
+            }
+            getUserData();
         }
-        getUserData();
     }, [paid])
 
     useEffect(() => {
-        async function getBasket() {
-            const response = await fetch(
-                `http://localhost:9000/giftstore/basket?userName=${userName}`
-            );
-            const { data } = await response.json();
-            setBasketData(data);
+        if (uid) {
+            async function getBasket() {
+                const response = await fetch(
+                    `http://localhost:9000/giftstore/basket?userName=${userName}`
+                );
+                const { data } = await response.json();
+                setBasketData(data);
+            }
+            getBasket();
         }
-        getBasket();
     }, [basket]);
 
     useEffect(() => {
@@ -133,13 +139,13 @@ function Header(props) {
                     </Link>
                 </div>
                 {/* 3-Links */}
-                <div className="header__navgift">
-                    <div className="header__optiongift header__linkgift">
+                {uid && <div className="header__navgift">
+                    {!isAdmin && <div className="header__optiongift header__linkgift">
                         <span className="header__optionLineOnegift">{userPoints}</span>
                         <span className="header__optionLineTwogift">
                             Store Points
                         </span>
-                    </div>
+                    </div>}
                     <Link to="/history" className="header__linkgift">
                         <div className="header__optiongift">
                             <span className="header__optionLineTwogift">
@@ -165,11 +171,10 @@ function Header(props) {
                             </span>
                         </div>
                     </Link>}
-                </div>
-                {!isAdmin ? Object.keys(UserData).map((keys) => {
+                </div>}
+                {!isAdmin ? uid && Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>
-                            {UserData[keys].points}
                             <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
                         </div>
                     )

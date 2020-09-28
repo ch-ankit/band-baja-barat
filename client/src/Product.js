@@ -9,6 +9,7 @@ function Product(props) {
     const { id, title, price, rating, image, quantity, description, removeFun } = props
     let [{ }, dispatch] = useStateValue();
     const admin = useSelector(state => state.isAdmin)
+    const uid = useSelector(state => state.uid)
     const addProductDetail = () => {
         dispatch({
             type: 'ADD_PRODUCTS',
@@ -26,7 +27,7 @@ function Product(props) {
     return (
         <div className="product">
             <div className="product__info">
-                <Link to={`/giftstore/products/details?modelNo=${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
+                <Link to={uid ? `/giftstore/products/details?modelNo=${id}` : '/SignUp'} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
                     <p>{title}</p>
                 </Link>
                 <p className="product__price">
@@ -43,7 +44,7 @@ function Product(props) {
                 />
             </div>
             <div style={{ textDecoration: 'none', color: 'black', height: '200px', marginBottom: '15px' }}>
-                <Link to={`/giftstore/products/details?modelNo=${id}`} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
+                <Link to={uid ? `/giftstore/products/details?modelNo=${id}` : '/SignUp'} style={{ textDecoration: 'none', color: 'black' }} onClick={addProductDetail}>
                     <img className="image" src={image} alt="product" />
                 </Link>
             </div>

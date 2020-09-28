@@ -5,7 +5,7 @@ POST http://localhost:9000/organizer
 Content-Type: application/json
 
 {
-    "userName":"Demented"
+    "userName":"mda"
 }
 ###
 DELETE http://localhost:9000/organizer

@@ -20,7 +20,7 @@ POST http://localhost:9000/login/host
 content-type: application/json
 
 {
-    "email": "hello@gmail.com"
+    "email": "babinpalace@gmail.com"
 }
 
 ###
