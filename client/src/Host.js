@@ -44,7 +44,8 @@ function Host() {
                 })
             });
             const allData = await response.json();
-            setdata(allData.rows);
+            console.log(allData.data)
+            setdata(allData.data);
             setPhoto(allData.rows2);
         }
         getHostData();

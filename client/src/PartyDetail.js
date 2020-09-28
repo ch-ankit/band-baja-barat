@@ -35,6 +35,7 @@ function PartyDetail({ history }) {
     const [pending, setPending] = useState([])
     const [pendingPhoto, setPendingPhoto] = useState([])
     const [status, setStatus] = useState('')
+    const date=new Date()
     useEffect(() => {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);

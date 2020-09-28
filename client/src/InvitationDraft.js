@@ -50,7 +50,7 @@ class InvitationDraft extends React.Component{
                 <input type='text' placeholder="Honorable Mentions" onChange={(e)=>{this.setState({honorableMention:e.target.value})}} value={this.state.honorableMention} />
 ￼            <div id='inv' style={{paddingLeft:'350px'}}>
                 <Accordion style={{width:'600px'}}>
-                    <Card>
+                    <Card>{console.log(this.state.eventData)}
                         <Accordion.Toggle eventKey='0'>
                             <Card.Header id='invit'>
                                 Name: Babin Khatri
