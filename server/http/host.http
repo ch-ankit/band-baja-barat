@@ -1,4 +1,4 @@
-GET http://localhost:9000/host?vatNo=667724
+GET http://localhost:9000/host?vatNo=789456
 ###
 DELETE http://localhost:9000/host?vatNo=667724
 
@@ -23,7 +23,8 @@ Content-Type: application/json
 458869
 488366
 493744
-GET  http://localhost:9000/host/requests?vatNo=771982
+###
+GET  http://localhost:9000/host/requests?vatNo=789456
 
 ###
 GET  http://localhost:9000/host/approved?vatNo=771982

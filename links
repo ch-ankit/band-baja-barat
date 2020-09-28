@@ -1,0 +1,22 @@
+//Party Palace
+UPDATE host SET profilePhoto="https://www.slicejob.com/upload/property/65/402.jpg" WHERE vatNo=830058 
+UPDATE host SET profilePhoto="https://media-cdn.tripadvisor.com/media/photo-m/1280/15/71/c6/34/hotel-shanker.jpg" WHERE vatNo=571317 
+UPDATE host SET profilePhoto="https://cf.bstatic.com/images/hotel/max1024x768/139/139382203.jpg" WHERE vatNo=455238 
+UPDATE host SET profilePhoto="https://i.pinimg.com/originals/04/61/cd/0461cd6ba78ed0e43882d214c408b068.jpg" WHERE vatNo=771982 
+UPDATE host SET profilePhoto="https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/a7/7a/e3/radisson-hotel-kathmandu.jpg" WHERE vatNo=406820 
+UPDATE host SET profilePhoto="https://cf.bstatic.com/images/hotel/max1024x768/131/131443698.jpg" WHERE vatNo=202698 
+UPDATE host SET profilePhoto="https://r1imghtlak.mmtcdn.com/c55e92b6833a11e79a9b025f77df004f.jpg?&output-quality=75&downsize=520:350&crop=520:350;2,0&output-format=jpg" WHERE vatNo=990441 
+UPDATE host SET profilePhoto="https://suvadin.com/uploads/info/2018/02/1517994847_avataar-kathmandu-hotel.jpg" WHERE vatNo=458869 
+UPDATE host SET profilePhoto="https://himalayan-windows.com/wp-content/uploads/2016/06/Potala-Palace-feature-image.jpg" WHERE vatNo=488366 
+UPDATE host SET profilePhoto="" WHERE vatNo=493744 
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	

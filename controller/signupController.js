@@ -34,10 +34,9 @@ exports.addUser = async (req, res, next) => {
 exports.addHost = async (req, res, next) => {
   try {
     console.log(req.body)
-    var sql = `INSERT INTO host (vatNo,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
-    VALUES
-    (
-       ${req.body.vatNo},
+    var sql =
+      `INSERT INTO host (vatNo,hostName,email,profilePhoto,totalHalls,contactInfo,street,city,provience,latitude,longitude)
+    VALUES (${parseInt(req.body.vatNo)},
       "${req.body.hostName}",
       "${req.body.email}",
       "${req.body.profilePhoto}",
@@ -48,12 +47,13 @@ exports.addHost = async (req, res, next) => {
       "${req.body.provience}",
       ${req.body.latitude},
       ${req.body.longitude}
-)`;
+    )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("HOST Sign up successful");
       } else {
         res.json({ error: err });
+        console.log(err)
       }
     });
   } catch (err) {

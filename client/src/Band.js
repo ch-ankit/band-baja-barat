@@ -161,15 +161,18 @@ function Band() {
                                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15px' }}>
                                     <label className="mobile__number">
                                         <span>Contact:</span>
-                                        <input class="form-control form-control-md" type='number' placeholder='Enter Your Mobile Number' value={mobileNo} onChange={(event) => setMobileNo(event.target.value.substring(0, 10))} required />
+                                        <input class="form-control form-control-md" type='number' placeholder='Enter Mobile Number' value={mobileNo} onChange={(event) => setMobileNo(event.target.value.substring(0, 10))} required />
                                     </label>
                                     <label>
                                         <span>Email</span>
-                                        <input class="form-control form-control-md" placeholder="Enter your E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                        <input class="form-control form-control-md" placeholder="Enter E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                     </label>
                                 </div>
                             </div>
-                            <button className="btn btn-primary" style={{ width: "20vw", marginTop: "20px" }} type="submit" form="bandForm">Submit</button>
+                            <div style={{ display: 'flex' }}>
+                                <button className="btn btn-primary" style={{ width: "20vw", marginTop: "20px" }} type="submit" form="bandForm">Submit</button>
+                                <button className="btn btn-primary" style={{ width: "20vw", marginTop: "20px", marginLeft: '20px' }} onClick={() => setAddClick(false)} >Close</button>
+                            </div>
                         </div>
                     </form>}
                 {Object.keys(data).map((keys) => {

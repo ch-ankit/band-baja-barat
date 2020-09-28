@@ -8,10 +8,10 @@ import { useStateValue } from "./StateProvider";
 import { useSelector } from "react-redux";
 //Hello Worldz
 
-function Details({ location }) {
+function Details({ location, history }) {
     const [{ user }, dispatch] = useStateValue();
     const isAdmin = useSelector(state => state.isAdmin)
-    console.log(isAdmin)
+    const uid = useSelector(state => state.uid)
     const [eventId, setEventId] = useState()
 
     const userData = useSelector(state => state.userData);
@@ -137,7 +137,7 @@ function Details({ location }) {
                 userName: userName,
                 modelNo: details.modelNo,
                 quantity: addedQuantity + prevQuantity,
-                eventId: eventId
+                eventId: invitedEventId
             };
             await fetch("http://localhost:9000/giftstore/basket", {
                 method: name,
@@ -298,14 +298,18 @@ function Details({ location }) {
         }
 
     }
-    const handleChange = (event) => {
-        setInvitedEventId(event.target.value)
+
+    const selectEvent = Object.keys(invitations).map(items => <option value={invitations[items].eventId}>{invitations[items].eventId}:   {invitations[items].eventName}</option>)
+    let invitedEvents;
+    const handleFocus = () => {
+        invitedEvents = Object.keys(invitations).map(items => <div value={invitations[items].eventId}>
+            <span>{invitations[items].eventId}</span>
+            <span>{invitations[items].eventName}</span>
+        </div>)
     }
-
-    const selectEvent = Object.keys(invitations).map(items => <option value={invitations[items].eventId}>{invitations[items].eventName}</option>)
-
     return (
         <div>
+            {!uid && history.push('/SignUp')}
             <div className="details">
                 <div className="details__body">
                     <div className="details__image">
@@ -487,9 +491,8 @@ function Details({ location }) {
                                 <button form="eventIdForm" type="submit" className="addBasket">Add to Basket</button>
                                 <div className="event__id">
                                     <form id="eventIdForm" onSubmit={addToBasket} onInvalid={(e) => e.target.setCustomValidity("You cannot leave this blank!!")}>
-                                        {/* <select value={"Choose an event"} class="custom-select" onChange={handleChange}>
-                                        </select> */}
-                                        <input className="form-control" data-toggle="tooltip" title="Please fill out this field" type="number" validate placeholder="Event id" onChange={(evt) => setEventId(evt.target.value)} value={eventId} required />
+                                        <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" type="number" placeholder="Event id" value={invitedEventId} onFocus={handleFocus} />
+                                        {invitedEvents}
                                     </form>
                                 </div>
                             </div>

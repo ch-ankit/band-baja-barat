@@ -93,7 +93,7 @@ function HistoryProducts({ orderNo, status, rating, title, image, price, userNam
                 )
                     : <div style={conditionalStyle}>{status}{(status !== "DELIVERED" && getEventDay < 7) && (<div data-toggle="tooltip" data-placement="bottom" title="The event is approaching soon"><PriorityHighIcon style={{ color: 'orange' }} /></div>)}</div>
                 }</div>
-            { !admin && (compare > 3 ? <button className="btn btn-primary cancle__button" data-toggle="tooltip" data-placement="bottom" title="The order was placed more than 3 days ago" disabled>Cancel order</button> : <button className="btn btn-primary cancle__button" onClick={removeOrder}>Cancel order</button>)}
+            { !admin && ((compare > 3 && status === "DELIVERED") ? <button className="btn btn-primary cancle__button" style={{ backgroundColor: 'grey' }} data-toggle="tooltip" data-placement="bottom" title="The order was placed more than 3 days ago" disabled>Cancel order</button> : <button className="btn btn-primary cancle__button" onClick={removeOrder}>Cancel order</button>)}
         </div >
     );
 }

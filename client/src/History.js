@@ -7,6 +7,7 @@ import HistoryProducts from "./HistoryProducts";
 function History({ userId }) {
     const userData = useSelector(state => state.userData)
     const admin = useSelector(state => state.isAdmin)
+    const uid = useSelector(state => state.uid)
     const { userName } = userData[0]
     const [data, setData] = useState([]);
     const [history, setHistory] = useState([]);

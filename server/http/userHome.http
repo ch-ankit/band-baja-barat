@@ -1,7 +1,7 @@
 GET http://localhost:9000/userhome
 
 ###
-GET http://localhost:9000/userhome/invitationrecieved?userName=junushu
+GET http://localhost:9000/userhome/invitationrecieved?userName=mda
 
 ###
 GET http://localhost:9000/userhome/search?value=a&&key=partypalace
