@@ -32,7 +32,9 @@ function Details({ location, history }) {
     const [editableSummary, setEditablesummary] = useState("");
     const [invitations, setInvitations] = useState([])
     const [invitedEventId, setInvitedEventId] = useState('')
-
+    const [enterFocus, setEnterFocus] = useState(false)
+    const [focus, setInviteFocus] = useState(false)
+    const [inviteEventName, setInviteEventName] = useState('')
 
 
     const query = location.search.slice(9, location.search.length);
@@ -80,7 +82,7 @@ function Details({ location, history }) {
         }
         productDetail();
         productRating();
-    }, [prodRating, updateMessage]);
+    }, [prodRating, updateMessage, query]);
 
     //Fetching Basket of the user
     useEffect(() => {
@@ -113,53 +115,44 @@ function Details({ location, history }) {
     //Check if the item is on basket and add to the basket
     const addToBasket = async (evt) => {
         evt.preventDefault();
-        let present = true;
-        // const invites = Object.keys(invitations).map(items => invitations[items].eventId)
-        // present = invites.includes(eventId)
-        if (!present) {
-            alert('Event Id does not match')
-            return false
+        let totalPrice = addedQuantity * details.price;
+        let name = "POST";
+        let prevQuantity = 0;
+        if (userBasket.length !== 0) {
+            const index = Object.keys(userBasket).findIndex(
+                (item) => userBasket[item].modelNo === details.modelNo && userBasket[item].eventId === details.eventId
+            );
+            index === -1 ? (name = "POST") : (name = "PATCH");
+            index === -1
+                ? (prevQuantity = 0)
+                : (prevQuantity = userBasket[index].quantity);
         }
-        else {
-            let totalPrice = addedQuantity * details.price;
-            let name = "POST";
-            let prevQuantity = 0;
-            if (userBasket.length !== 0) {
-                const index = Object.keys(userBasket).findIndex(
-                    (item) => userBasket[item].modelNo === details.modelNo && userBasket[item].eventId === details.eventId
-                );
-                index === -1 ? (name = "POST") : (name = "PATCH");
-                index === -1
-                    ? (prevQuantity = 0)
-                    : (prevQuantity = userBasket[index].quantity);
-            }
-            const basketToDb = {
-                userName: userName,
-                modelNo: details.modelNo,
-                quantity: addedQuantity + prevQuantity,
-                eventId: invitedEventId
-            };
-            await fetch("http://localhost:9000/giftstore/basket", {
-                method: name,
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify(basketToDb),
-            }).then((res) => {
-                res.json();
-                console.log(res);
-            });
-            dispatch({
-                type: "ADD_TO_BASKET",
-                item: {
-                    id: details.id,
-                    title: details.title,
-                    image: details.image,
-                    price: totalPrice,
-                    rating: details.rating,
-                    quantity: addedQuantity,
-                },
-            });
-            setAddedQuantity(1);
-        }
+        const basketToDb = {
+            userName: userName,
+            modelNo: details.modelNo,
+            quantity: addedQuantity + prevQuantity,
+            eventId: invitedEventId
+        };
+        await fetch("http://localhost:9000/giftstore/basket", {
+            method: name,
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(basketToDb),
+        }).then((res) => {
+            res.json();
+            console.log(res);
+        });
+        dispatch({
+            type: "ADD_TO_BASKET",
+            item: {
+                id: details.id,
+                title: details.title,
+                image: details.image,
+                price: totalPrice,
+                rating: details.rating,
+                quantity: addedQuantity,
+            },
+        });
+        setAddedQuantity(1);
     };
 
     if (details.hasOwnProperty('summary')) {
@@ -298,14 +291,28 @@ function Details({ location, history }) {
         }
 
     }
-
-    const selectEvent = Object.keys(invitations).map(items => <option value={invitations[items].eventId}>{invitations[items].eventId}:   {invitations[items].eventName}</option>)
     let invitedEvents;
+    if (invitations !== undefined && invitations[0] !== undefined && invitations.length !== 0) {
+        invitedEvents = Object.keys(invitations).map(items =>
+            <div style={{ zIndex: '500', display: 'flex', width: '100%', cursor: 'pointer', backgroundColor: ' rgba(255, 255, 255, 0.5)', marginBottom: '3px' }}>
+                <span value={invitations[items].eventId} style={{ marginLeft: '10px' }} onClick={(evt) => { setInviteFocus(false); setInvitedEventId(invitations[items].eventId); setInviteEventName(invitations[items].eventName) }}>{invitations[items].eventId}</span>
+                <span value={invitations[items].eventId} style={{ marginLeft: '70px' }} onClick={(evt) => { setInviteFocus(false); setInvitedEventId(invitations[items].eventId); setInviteEventName(invitations[items].eventName) }}>{invitations[items].eventName}</span>
+            </div>)
+    }
     const handleFocus = () => {
-        invitedEvents = Object.keys(invitations).map(items => <div value={invitations[items].eventId}>
-            <span>{invitations[items].eventId}</span>
-            <span>{invitations[items].eventName}</span>
-        </div>)
+        setInviteFocus(true)
+        setEnterFocus(false)
+    }
+    const handleBlur = () => {
+        if (!enterFocus) {
+            setInviteFocus(false)
+        }
+    }
+    let displayText;
+    if (invitedEventId && inviteEventName) {
+        displayText = `${invitedEventId}.   ${inviteEventName}`
+    } else {
+        displayText = ''
     }
     return (
         <div>
@@ -332,7 +339,6 @@ function Details({ location, history }) {
                             }
                         }} />
                     </div>
-
                     <div className="details__description">
                         <h2>{details.title}</h2>
                         <div className="rating">
@@ -491,8 +497,16 @@ function Details({ location, history }) {
                                 <button form="eventIdForm" type="submit" className="addBasket">Add to Basket</button>
                                 <div className="event__id">
                                     <form id="eventIdForm" onSubmit={addToBasket} onInvalid={(e) => e.target.setCustomValidity("You cannot leave this blank!!")}>
-                                        <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" type="number" placeholder="Event id" value={invitedEventId} onFocus={handleFocus} />
-                                        {invitedEvents}
+                                        <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" value={displayText} onBlur={handleBlur} onFocus={handleFocus} />
+                                        <div style={{ position: 'relative' }}>
+                                            {focus && <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: ' rgba(255, 255, 255, 0.5)', borderBottom: '1px solid black' }}>
+                                                <span>Event Id</span>
+                                                <span>Event Name</span>
+                                            </div>}
+                                            {focus && <div style={{ position: 'absolute' }} onMouseEnter={() => setEnterFocus(true)} onMouseLeave={() => setEnterFocus(false)}>
+                                                {invitedEvents}
+                                            </div>}
+                                        </div>
                                     </form>
                                 </div>
                             </div>

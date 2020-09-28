@@ -3,10 +3,10 @@ import './SearchDrop.css'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function SearchDrop({ image, name, modelNo }) {
+function SearchDrop({ image, name, modelNo, newFun }) {
     const uid = useSelector(state => state.uid)
     return (
-        <Link className="searchdrop" to={uid ? `/giftstore/products/details?modelNo=${modelNo}` : '/SignUp'}>
+        <Link className="searchdrop" to={uid ? `/giftstore/products/details?modelNo=${modelNo}` : '/SignUp'} onClick={() => newFun()}>
             <img className="searchdrop__image" src={image} alt='product' />
             <span>{name}</span>
         </Link>

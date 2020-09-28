@@ -33,7 +33,7 @@ function Checkout(props) {
     if (basketData.length !== 0) {
         basketData.forEach(element => {
             const index = Object.keys(data).findIndex(product => (element.modelNo === data[product].modelNo))
-            basketDataValues.push({ ...data[index], quantity: element.quantity, eventId: element.eventId })
+            basketDataValues.push({ ...data[index], quantity: element.quantity, eventId: element.eventId, eventName: element.eventName })
         })
     }
 
@@ -69,6 +69,7 @@ function Checkout(props) {
                 eventId={basketDataValues[item].eventId}
                 removeFun={removeFromBasket}
                 userName={userName}
+                eventName={basketDataValues[item].eventName}
             />
         )
         )
