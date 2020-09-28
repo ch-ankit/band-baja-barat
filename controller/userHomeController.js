@@ -132,7 +132,7 @@ exports.updateUsers = (req, res, next) => {
 
 exports.myEvents = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE userName = '${req.query.userName}'`;
+    var sql = `  SELECT b.*,e.*,h.hostName,concat(h.street,' ',h.city,' ',h.provience) AS location FROM booking b INNER JOIN host h on h.vatNo=b.vatNo INNER JOIN event e ON e.id = eventId INNER JOIN organizer o ON o.id = e.organizerId INNER JOIN user u ON u.userName = o.userName WHERE u.userName='${req.body.userName}'`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });
