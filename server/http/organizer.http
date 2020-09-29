@@ -8,4 +8,7 @@ Content-Type: application/json
     "userName":"mda"
 }
 ###
-DELETE http://localhost:9000/organizer
+DELETE http://localhost:9000/organizer?id=1
+
+###
+Get http://localhost:9000/userhome/myevents?userName=Demented

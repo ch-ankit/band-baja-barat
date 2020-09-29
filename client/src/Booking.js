@@ -56,6 +56,7 @@ export default function Booking() {
   const vatNo = useSelector(state => state.vatNo);
   const userData=useSelector(state=>state.userData);
   const [organizerId, setorganizerId] = useState(null)
+  const [Dummy, setDummy] = useState(true)
 
   const handleNext = () => {
     switch (activeStep) {
@@ -67,7 +68,7 @@ export default function Booking() {
           async function event() {
             const response = await fetch('http://localhost:9000/event', {
               body: JSON.stringify({
-                "organizerId": 4,
+                "organizerId": organizerId,
                 "eventName": EventName,
                 "groomName": GroomName,
                 "brideName": BrideName,
@@ -81,8 +82,10 @@ export default function Booking() {
           event();
           console.log(EventDate)
           async function getEventId() {
-            const response = await fetch('http://localhost:9000/event?organizerId=4');
-            const { data } = await response.json();
+            const response = await fetch(`http://localhost:9000/event?organizerId=${organizerId}`);
+            console.log(response)
+            const {data } = await response.json();
+            console.log(data)
             setEventId(data[0].id);
           }
           getEventId();
@@ -155,10 +158,21 @@ export default function Booking() {
     async function getOrganizerId() {
       const response=await fetch(`http://localhost:9000/organizer?userName=${userData[0].userName}`)
       const data=await response.json();
-      setorganizerId(data.data[0].id);
+      setorganizerId(data.data[0].id );
     }
     getOrganizerId()
-  },[])
+  },[Dummy])
+
+  async function becomeOrganizer() {
+    const response = await fetch('http://localhost:9000/organizer',{
+      method:'POST',
+      headers:{"Content-type":"application/json"},
+      body:JSON.stringify({
+        "userName":userData[0].userName
+      })
+    })
+    setDummy(!Dummy);
+  }
 
   return (
     <div>
@@ -201,7 +215,7 @@ export default function Booking() {
         <div>
           <h1>Become an organizer</h1>
           <p>You have to be an organizer to organize an event</p>
-          <button>Become Organizer</button>
+          <button onClick={becomeOrganizer}>Become Organizer</button>
         </div>
       )  }
       </div>

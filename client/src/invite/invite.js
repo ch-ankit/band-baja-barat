@@ -14,7 +14,7 @@ class Invite extends React.Component {
         }
     }
     async componentDidMount() {
-        const response = await fetch('http://localhost:9000/userhome/invitationrecieved?userName=mda');
+        const response = await fetch(`http://localhost:9000/userhome/invitationrecieved?userName=Demented`);
         const data = await response.json();
         this.setState({
             invitation: data.data

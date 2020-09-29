@@ -40,14 +40,14 @@ function Host() {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: hostEmail
+                    email: "dimlock1@nature.com"
                 })
             });
             const allData = await response.json();
             setdata(allData.data ?? []);
         }
         async function getPhotos() {
-            const response = await fetch('http://localhost:9000/host/vatNo=789456');
+            const response = await fetch('http://localhost:9000/host/vatNo=771982');
             const allData = await response.json();
             setPhoto(allData.rows2 ?? []);
         }
@@ -56,19 +56,19 @@ function Host() {
     }, [hostEmail])
     useEffect(() => {
         async function getRequestData() {
-            const response = await fetch("http://localhost:9000/host/requests?vatNo=789456")
+            const response = await fetch("http://localhost:9000/host/requests?vatNo=771982")
             const allData = await response.json();
             setRequestData(allData.data ?? [])
         }
         getRequestData();
         async function getUpcomingData() {
-            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=789456'")
+            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=771982'")
             const allData = await response.json();
             setUpcomingData(allData.data ?? [])
         }
         getUpcomingData();
         async function getApprovedData() {
-            const response = await fetch("http://localhost:9000/host/approved?vatNo=789456'")
+            const response = await fetch("http://localhost:9000/host/approved?vatNo=771982'")
             const allData = await response.json();
             setApprovedData(allData.data ?? [])
         }

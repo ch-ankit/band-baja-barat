@@ -14,15 +14,14 @@ function BookingStatus() {
     const admin=useSelector(state=>state.admin1);
     const history=useHistory();
     const dispatch=useDispatch();
+    alert(Username)
     useEffect(() => {
         async function getBookingData() {
-            const response = await fetch(`http://localhost:9000/userhome/myevents?userName=${Username}`);
+            const response = await fetch(`http://localhost:9000/userhome/myevents?userName=Presentator39`);
             const allData = await response.json();
             setdata(allData.data)
         }
-        getBookingData();
-   
-        
+        getBookingData(); 
     }, [])
     const invitationDraft=(eventData)=>{
         if(eventData.hostStatus=="APPROVED"){
