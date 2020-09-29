@@ -18,16 +18,19 @@ POST http://localhost:9000/signup/host
 Content-Type: application/json
 
 {
-    "vatNo":667344,
-    "hostName":"KKU PP",
-    "profilePhoto":"dummyimages",
-    "email":"dum2@gmail.com",
-    "contactInfo":"04122456",
+    "vatNo":773311,
+    "hostName":"ANKIT's PP",
+    "profilePhoto":"https://www.alicereceptions.com/uploads/topics/15725870118729.jpg",
+    "email":"lol@gmail.com",
+    "contactInfo":"04121156",
     "latitude":112,
     "longitude":221,
     "totalHalls":3,
     "city":"kathmandu",
     "street":"chabahil",
-    "provience":"3"
+    "provience":"3",
+    "hall1":100,
+    "hall2":200,
+    "hall3":500
 }
 

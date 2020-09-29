@@ -27,6 +27,7 @@ import Payment from "./Payment";
 import AdminDisplay from "./AdminDisplay";
 import InvitationDraft from "./InvitationDraft";
 import GuestList from "./GuestList";
+import EventInfo from './EventInfo'
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -59,6 +60,7 @@ function App() {
           <Route exact path='/Signup' component={SignUp} />
 
           <Route path='/guestList' component={GuestList} />
+          <Route path='/eventInfo' component={EventInfo} />
           {/* Gift Store Routes */}
           <Route path="/checkout">
             <div className="headerz"><Header /></div>

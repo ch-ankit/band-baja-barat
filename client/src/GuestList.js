@@ -5,6 +5,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import './GuestList.css'
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
+import UserHeader from './UserHeader'
 
 function GuestList() {
     const [search, setsearch] = useState('')
@@ -58,10 +59,13 @@ function GuestList() {
 
     }, [search])
     return (
+        <div>
+        <UserHeader />
         <div className='guestList'>
-            <h1>Hwllo</h1>
-            <Combobox className="userHeader__searchInput" >
-                        <ComboboxInput value={search} onChange={(e) => { setsearch(e.target.value) }} placeholder='Search' style={{ width: '50%' }} />
+            <h1>Guest List</h1>
+            <div className='guestList__combo'>
+            <Combobox className="guestList__searchInput" >
+                        <ComboboxInput value={search} onChange={(e) => { setsearch(e.target.value) }} placeholder='Search' style={{ width: '100%' }} />
                         <ComboboxPopover className='userHeader__searchPopover'>
                             {Object.keys(searchData).map((keys) => {
                                 return (<List>
@@ -80,6 +84,8 @@ function GuestList() {
                                 </List>)
                             })}
                     </div>
+                    </div>
+        </div>
         </div>
     )
 }

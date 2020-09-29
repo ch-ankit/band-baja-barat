@@ -1,0 +1,12 @@
+.userGallery__images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin:40px 0px;
+}
+
+.userGallery__imageCard{
+    width:300px;
+    height: 300px;
+    object-fit: contain;
+}

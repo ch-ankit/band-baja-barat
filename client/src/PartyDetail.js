@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import UserHeader from './UserHeader.js';
 import ReactCalender from './ReactCalender';
+import UserGallery from './UserGallery'
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -36,7 +37,8 @@ function PartyDetail({ history }) {
     const [pendingPhoto, setPendingPhoto] = useState([])
     const [status, setStatus] = useState('')
     const [bookedDate,setbookedDate]=useState([]);
-    const date=new Date()
+    const date=new Date();
+
     useEffect(() => {
         async function getHostData() {
             const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
@@ -100,17 +102,27 @@ function PartyDetail({ history }) {
                                     }
                                 })}
                             </Carousel>
-                            <div className='partyDetail__info1'>
-                                <h6>{data[keys].city}</h6>
-                            </div>
-                            <div className='partyDetail__info2'>
-                                <h6>Price per Plate</h6>
+                            <div className='partyDetail__info'>
+                                <div>
+                                    <div className='partyDetail__info1'>
+                                        <h6>{data[keys].city}</h6>
+                                    </div>
+                                    <div className='partyDetail__info2'>
+                                        <h6>Price per Plate</h6>
+                                    </div>
+                                </div>
+                                <div className='partyDetail__info3'>
+                                <h6>Total Halls:{data[keys].totalHalls}</h6>
+                                </div>
                             </div>
                         </div>
                         <div className='partyDetail__details'>
                             <h4>About us</h4>
                             <hr />
                             {data[keys].description}
+                        </div>
+                        <div className='partyDetail__userGallery'>
+                            <UserGallery />
                         </div>
                     </div>)}
             </div>

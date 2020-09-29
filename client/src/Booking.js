@@ -84,9 +84,9 @@ export default function Booking() {
           async function getEventId() {
             const response = await fetch(`http://localhost:9000/event?organizerId=${organizerId}`);
             console.log(response)
-            const {data } = await response.json();
+            const data = await response.json();
             console.log(data)
-            setEventId(data[0].id);
+            data.data[0]==[] ? setEventId(null) :setEventId(data.data[0].id);
           }
           getEventId();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -158,7 +158,8 @@ export default function Booking() {
     async function getOrganizerId() {
       const response=await fetch(`http://localhost:9000/organizer?userName=${userData[0].userName}`)
       const data=await response.json();
-      setorganizerId(data.data[0].id );
+      console.log(data)
+      data.status=="Not registered" ? setorganizerId(null) : setorganizerId(data.data[0].id);
     }
     getOrganizerId()
   },[Dummy])

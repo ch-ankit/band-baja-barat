@@ -9,4 +9,17 @@
 .guestList__Deleteicon:hover{
     color: red !important;
 }
+.guestList{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guestList__combo{
+    width: 100%;
+}
+.guestList__searchInput{
+    width:50%
+}
 

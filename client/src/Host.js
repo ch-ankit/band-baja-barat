@@ -21,6 +21,7 @@ import { Hostuid, EventData } from './redux/action.js';
 import { useHistory } from 'react-router-dom'
 import EventDetail from './EventDetail.js';
 import HostHeader from './HostHeader.js';
+import {actionvatNo} from './redux/action.js'
 function Host() {
     const history = useHistory();
     const [book, setbook] = useState(false);
@@ -32,6 +33,7 @@ function Host() {
     const hostUid = useSelector(state => state.hostUid);
     const hostEmail = useSelector(state => state.hostEmail);
     const dispatch = useDispatch();
+    const [vatNo, setvatNo] = useState(null)
     useEffect(() => {
         async function getHostData() {
             const response = await fetch('http://localhost:9000/login/host', {
@@ -45,35 +47,40 @@ function Host() {
             });
             const allData = await response.json();
             setdata(allData.data ?? []);
-        }
-        async function getPhotos() {
-            const response = await fetch('http://localhost:9000/host/vatNo=771982');
-            const allData = await response.json();
-            setPhoto(allData.rows2 ?? []);
-        }
-        getPhotos();
+            setvatNo(allData.data[0].vatNo);
+            dispatch(actionvatNo(allData.data[0].vatNo))
+        } 
         getHostData();
-    }, [hostEmail])
+    }, [])
+    //Hardcoded
     useEffect(() => {
+        
+        
         async function getRequestData() {
-            const response = await fetch("http://localhost:9000/host/requests?vatNo=771982")
+            const response = await fetch(`http://localhost:9000/host/requests?vatNo=${vatNo}`)
             const allData = await response.json();
             setRequestData(allData.data ?? [])
         }
         getRequestData();
         async function getUpcomingData() {
-            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=771982'")
+            const response = await fetch(`http://localhost:9000/host/upcoming?vatNo=${vatNo}`)
             const allData = await response.json();
             setUpcomingData(allData.data ?? [])
         }
         getUpcomingData();
         async function getApprovedData() {
-            const response = await fetch("http://localhost:9000/host/approved?vatNo=771982'")
+            const response = await fetch(`http://localhost:9000/host/approved?vatNo=${vatNo}`)
             const allData = await response.json();
             setApprovedData(allData.data ?? [])
         }
         getApprovedData();
-    }, [data])
+        async function hello(){
+                const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
+                const data=await response.json();
+                setPhoto(data.rows2); 
+        }
+        hello();
+    }, [vatNo])
     console.log(data, Photo)
     return (
         <div>
@@ -87,8 +94,9 @@ function Host() {
                                 <div className="host__infoHeader">
                                     <h3>{data[keys].hostName}</h3>
                                     <p>Wedding venue</p>
+                                    {console.log(Photo)}
                                     <Carousel className='host__Carousel'>
-                                        {Object.keys(Photo).map((keys) => {
+                                        {Object.keys(Photo ?? []).map((keys) => {
                                             if (keys < 3) {
                                                 return (
                                                     <Carousel.Item>
@@ -173,7 +181,7 @@ function Host() {
                             <h4>Top photos</h4>
                             <hr />
                             <div className="host__images">
-                                {Object.keys(Photo).map((keys) => {
+                                {Object.keys(Photo ?? []).map((keys) => {
                                     if (keys < 5) {
                                         return (
                                             <img src={Photo[keys].photo} alt="image" className='host__GImage' />

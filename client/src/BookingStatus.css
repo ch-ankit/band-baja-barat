@@ -1,8 +1,23 @@
 .bookingStatus__list{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     margin-top: 15px;
     background-color: green;
 }
 
+.bookingStatus__item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.bookingStatus__icon{
+    padding-right: 10px !important;
+    font-size: 40px !important;
+}
+
+.bookingStatus__icon:hover{
+    cursor: pointer;
+    color:orange !important
+}
 

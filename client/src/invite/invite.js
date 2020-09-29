@@ -5,17 +5,21 @@ import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import './comp1.css'
 import UserHeader from '../UserHeader.js'
+import { connect } from 'react-redux'
 class Invite extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            invitation: []
+            invitation: [],
+            userName:props.userName
         }
     }
+    //Hardcoded
     async componentDidMount() {
-        const response = await fetch(`http://localhost:9000/userhome/invitationrecieved?userName=Demented`);
+        const response = await fetch(`http://localhost:9000/userhome/invitationrecieved?userName=${this.state.userName}`);
         const data = await response.json();
+        console.log(data)
         this.setState({
             invitation: data.data
         })
@@ -55,4 +59,7 @@ class Invite extends React.Component {
         );
     }
 }
-export default Invite;
+const mapStateToProps = state => ({
+    userName: state.userData[0].userName
+  });
+export default connect(mapStateToProps)(Invite);
