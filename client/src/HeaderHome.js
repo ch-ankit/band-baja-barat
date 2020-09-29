@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./HeaderHome.css"
 import { Link } from 'react-router-dom'
 import HelpIcon from '@material-ui/icons/Help';
+import { useDispatch } from 'react-redux';
+import { AdminLog } from './redux/action';
 function Header() {
     const [Sign, setSign] = React.useState(false)
+    const dispatch = useDispatch();
+    const [adminLog, setAdminLog] = useState(false)
+    let count = 0;
+    const handleClick = () => {
+        count += 1;
+        count === 5 && setAdminLog(true)
+        if (adminLog) {
+            dispatch(AdminLog(adminLog))
+        }
+    }
     return (
         <div className="header">
             <div className="header__logo">
-                <h1>BBB</h1>
+                <h1 onClick={handleClick}>BBB</h1>
             </div>
             <div className="header__right">
                 <Link to='/' className="header__link">Home</Link>

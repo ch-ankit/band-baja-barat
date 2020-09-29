@@ -31,8 +31,7 @@ function Product(props) {
                     <p>{title}</p>
                 </Link>
                 <p className="product__price">
-                    <small>Rs.</small>
-                    <small>{price}</small>
+                    <small>{price} store points</small>
                 </p>
                 <ReactStars
                     count={5}

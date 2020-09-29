@@ -1,1 +1,0 @@
-select eventDate from event

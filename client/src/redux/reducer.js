@@ -6,10 +6,11 @@ const initialState = {
     hostUid: null,
     updateMessage: null,
     paid: null,
-    eventData:null,
+    eventData: null,
     isAdmin: null,
-    center:null,
-    hostEmail:null
+    center: null,
+    hostEmail: null,
+    adminLog: false
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -17,8 +18,7 @@ export const reducerr = (state = initialState, action) => {
         case 'UserLog':
             return {
                 ...state,
-                uid: action.payload,
-                isAdmin: false
+                uid: action.payload
             }
         case 'UserData':
             return {
@@ -31,12 +31,12 @@ export const reducerr = (state = initialState, action) => {
                 userEmail: action.payload,
 
             }
-            case 'HostEmail':
-                return {
-                    ...state,
-                    hostEmail: action.payload,
-    
-                }
+        case 'HostEmail':
+            return {
+                ...state,
+                hostEmail: action.payload,
+
+            }
         case 'EventData':
             return {
                 ...state,
@@ -70,9 +70,14 @@ export const reducerr = (state = initialState, action) => {
                 isAdmin: action.result
             }
         case 'Center':
-            return{
+            return {
                 ...state,
                 center: action.payload
+            }
+        case 'AdminLog':
+            return {
+                ...state,
+                adminLog: action.value
             }
         default:
             return { ...state }

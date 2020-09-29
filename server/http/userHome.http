@@ -14,6 +14,6 @@ PATCH  http://localhost:9000/userhome/user
 Content-Type: application/json
 
 {
-    "userName":"chankit",
-    "points":30
+    "userName":"Luffy",
+    "photo":" https://firebasestorage.googleapis.com/v0/b/sem-4-e2fd7.appspot.com/o/images%2Fnar%20meme.jpg?alt=media&token=127aef9b-d06b-418c-9717-bc252abdc1c8"
 }
