@@ -11,6 +11,7 @@ import TemporaryDrawer from "./Drawer";
 import Avatar from '@material-ui/core/Avatar'
 import { useSelector } from "react-redux";
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 
 
 function Header(props) {
@@ -177,6 +178,7 @@ function Header(props) {
                         </div>
                     </Link>}
                 </div>}
+                {!uid && <Link to='/' style={{ marginRight: '10px', padding: '0.5rem' }}><HomeIcon /></Link>}
                 {!isAdmin ? uid && Object.keys(UserData).map((keys) => {
                     return (
                         <div className='userHeader__rightButton'>

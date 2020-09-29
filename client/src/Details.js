@@ -115,6 +115,9 @@ function Details({ location, history }) {
     //Check if the item is on basket and add to the basket
     const addToBasket = async (evt) => {
         evt.preventDefault();
+        if (invitations.length === 0) {
+            alert('You are not invited to any events!!')
+        }
         let totalPrice = addedQuantity * details.price;
         let name = "POST";
         let prevQuantity = 0;
@@ -497,12 +500,12 @@ function Details({ location, history }) {
                                 <button form="eventIdForm" type="submit" className="addBasket">Add to Basket</button>
                                 <div className="event__id">
                                     <form id="eventIdForm" onSubmit={addToBasket} onInvalid={(e) => e.target.setCustomValidity("You cannot leave this blank!!")}>
-                                        <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" value={displayText} onBlur={handleBlur} onFocus={handleFocus} />
+                                        {invitations.length === 0 ? <input placeholder="Sorry No Invitations" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" disabled /> : <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" value={displayText} onBlur={handleBlur} onFocus={handleFocus} />}
                                         <div style={{ position: 'relative' }}>
-                                            {focus && <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: ' rgba(255, 255, 255, 0.5)', borderBottom: '1px solid black' }}>
+                                            {focus && (invitations.length !== 0 && <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: ' rgba(255, 255, 255, 0.5)', borderBottom: '1px solid black' }}>
                                                 <span>Event Id</span>
                                                 <span>Event Name</span>
-                                            </div>}
+                                            </div>)}
                                             {focus && <div style={{ position: 'absolute' }} onMouseEnter={() => setEnterFocus(true)} onMouseLeave={() => setEnterFocus(false)}>
                                                 {invitedEvents}
                                             </div>}
