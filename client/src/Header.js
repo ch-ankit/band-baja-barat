@@ -33,7 +33,7 @@ function Header(props) {
     let display = [];
     let check = false;
     useEffect(() => {
-        if (uid) {
+        if (uid && !isAdmin) {
             async function getUserData() {
                 const response = await fetch('http://localhost:9000/login/user', {
                     body: JSON.stringify({

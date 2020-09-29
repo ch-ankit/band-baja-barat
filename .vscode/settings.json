@@ -12,6 +12,19 @@
       "previewLimit": 50,
       "server": "localhost",
       "username": "root"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "sql12.freemysqlhosting.net",
+      "port": 3306,
+      "driver": "MariaDB",
+      "name": "onlinebbb",
+      "database": "sql12367859",
+      "username": "sql12367859",
+      "password": "btxdmIHSkp"
     }
   ],
   "deno.enable": false

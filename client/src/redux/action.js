@@ -6,8 +6,8 @@ export const actionCreate = (uid) => {
     }
 }
 
-export const EventData=(data)=>{
-    return{
+export const EventData = (data) => {
+    return {
         type: 'EventData',
         payload: data
     }
@@ -64,12 +64,19 @@ export const SetAdmin = (value) => {
     }
 }
 
-export const Center=(value)=>{
-    return{
-        type:'Center',
-        payload:{
-            lat:value.latitude,
-            lng:value.longitude
+export const Center = (value) => {
+    return {
+        type: 'Center',
+        payload: {
+            lat: value.latitude,
+            lng: value.longitude
         }
+    }
+}
+
+export const AdminLog = (value) => {
+    return {
+        type: 'AdminLog',
+        value: value
     }
 }

@@ -297,7 +297,7 @@ function Details({ location, history }) {
     let invitedEvents;
     if (invitations !== undefined && invitations[0] !== undefined && invitations.length !== 0) {
         invitedEvents = Object.keys(invitations).map(items =>
-            <div style={{ zIndex: '500', display: 'flex', width: '100%', cursor: 'pointer', backgroundColor: ' rgba(255, 255, 255, 0.5)', marginBottom: '3px' }}>
+            <div style={{ zIndex: '500', display: 'flex', width: '16.5vw', cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'white', marginBottom: '3px' }}>
                 <span value={invitations[items].eventId} style={{ marginLeft: '10px' }} onClick={(evt) => { setInviteFocus(false); setInvitedEventId(invitations[items].eventId); setInviteEventName(invitations[items].eventName) }}>{invitations[items].eventId}</span>
                 <span value={invitations[items].eventId} style={{ marginLeft: '70px' }} onClick={(evt) => { setInviteFocus(false); setInvitedEventId(invitations[items].eventId); setInviteEventName(invitations[items].eventName) }}>{invitations[items].eventName}</span>
             </div>)
@@ -502,7 +502,7 @@ function Details({ location, history }) {
                                     <form id="eventIdForm" onSubmit={addToBasket} onInvalid={(e) => e.target.setCustomValidity("You cannot leave this blank!!")}>
                                         {invitations.length === 0 ? <input placeholder="Sorry No Invitations" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" disabled /> : <input placeholder="Select an Event" className="form-control" data-toggle="tooltip" title="Please fill out this field" required type="text" value={displayText} onBlur={handleBlur} onFocus={handleFocus} />}
                                         <div style={{ position: 'relative' }}>
-                                            {focus && (invitations.length !== 0 && <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: ' rgba(255, 255, 255, 0.5)', borderBottom: '1px solid black' }}>
+                                            {focus && (invitations.length !== 0 && <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.8)', borderBottom: '1px solid white' }}>
                                                 <span>Event Id</span>
                                                 <span>Event Name</span>
                                             </div>)}

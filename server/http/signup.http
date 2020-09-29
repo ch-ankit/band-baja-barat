@@ -2,14 +2,14 @@ POST http://localhost:9000/signup/user
 Content-Type: application/json
 
 {
-    "firstName": "Ritchie",
-    "lastName": "MacVagh",
-    "middleName": "",
-    "userName": "Nischal Bhandari",
-    "email": "khatribabin39@gmail.com",
-    "mobileNo": 2147483647,
-    "street": "Pepper Wood",
-    "city": "Bęczarka",
+    "firstName": "Luffy",
+    "lastName": "Monkey",
+    "middleName": "D.",
+    "userName": "Luffy",
+    "email": "pirateking@gmail.com",
+    "mobileNo": 9856213470,
+    "street": "Windmill Village",
+    "city": "East Blue",
     "provience": "5"
 }
 

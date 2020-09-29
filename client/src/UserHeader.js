@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar'
@@ -28,10 +28,10 @@ function UserHeader() {
     const [drop, setdrop] = useState(false);
     const [searchData, setsearchData] = useState([])
     const UserData = useSelector(state => state.userData ?? [])
-    const dispatch=useDispatch();
-    const history=useHistory();
-    const handleChange=(e)=>{
-        switch(e.target.value){
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const handleChange = (e) => {
+        switch (e.target.value) {
             case 'Party Palace':
                 setData('partypalace')
                 setsearch('')
@@ -56,9 +56,9 @@ function UserHeader() {
         getsearchData();
 
     }, [search])
-    
-    function searching(data){
-        switch(Data){
+
+    function searching(data) {
+        switch (Data) {
             case 'partypalace':
                 history.push(`/partypalace/${data.hostName}`);
                 dispatch(actionvatNo(data.vatNo))
@@ -73,7 +73,7 @@ function UserHeader() {
     return (
         <div className="userHeader">
             <div className="userHeader__logo">
-                <h1><Link to="/User" className="userHeader__link">BBB</Link></h1>
+                <h1><Link to={admin ? "/admin" : "/User"} className="userHeader__link">BBB</Link></h1>
             </div>
             <div className="userHeader__search">
                 <div className='userHeader__input'>
