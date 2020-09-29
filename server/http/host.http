@@ -1,4 +1,4 @@
-GET http://localhost:9000/host?vatNo=789456
+GET http://localhost:9000/host?vatNo=773311
 ###
 DELETE http://localhost:9000/host?vatNo=667724
 
@@ -12,18 +12,6 @@ Content-Type: application/json
 }
 
 ###
- UPDATE host set profilePhoto = "C:\Users\nbhn3\Downloads\photo\p1" WHERE vatNo =830058
-571317
-455238
-771982
-667724
-406820
-202698
-990441
-458869
-488366
-493744
-###
 GET  http://localhost:9000/host/requests?vatNo=789456
 
 ###
@@ -33,4 +21,4 @@ GET  http://localhost:9000/host/approved?vatNo=771982
 GET  http://localhost:9000/host/upcoming?vatNo=771982
 
 ###
-GET  http://localhost:9000/host/bookeddates?vatNo=771982&&month=9&&year=2020&&hallNo=2
+GET  http://localhost:9000/host/bookeddates?vatNo=789456

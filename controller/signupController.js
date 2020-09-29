@@ -50,7 +50,43 @@ exports.addHost = async (req, res, next) => {
     )`;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        res.json("HOST Sign up successful");
+        if (req.body.hall1) {
+          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}) `;
+        }
+        if (req.body.hall2) {
+          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
+          (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}) `;
+        }
+        if (req.body.hall3) {
+          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
+          (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
+          (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}) `;
+        }
+        if (req.body.hall4) {
+          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
+          (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
+          (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}),
+          (4,${parseInt(req.body.vatNo)},${parseInt(req.body.hall4)})`;
+        }
+        if (req.body.hall5) {
+          sql = `INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
+          (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
+          (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}),
+          (4,${parseInt(req.body.vatNo)},${parseInt(req.body.hall4)}),
+          (5,${parseInt(req.body.vatNo)},${parseInt(req.body.hall5)}) `;
+        }
+        mysqlConnection.query(sql, (err) => {
+          if (!err) {
+            res.json("HOST Sign up successful");
+          } else {
+            res.json({ error: err });
+          }
+        });
       } else {
         res.json({ error: err });
         console.log(err)
@@ -60,3 +96,6 @@ exports.addHost = async (req, res, next) => {
     next(err);
   }
 };
+
+
+

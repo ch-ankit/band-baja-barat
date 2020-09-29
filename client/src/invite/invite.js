@@ -13,6 +13,7 @@ class Invite extends React.Component {
             invitation: []
         }
     }
+    //Hardcoded
     async componentDidMount() {
         const response = await fetch('http://localhost:9000/userhome/invitationrecieved?userName=mda');
         const data = await response.json();

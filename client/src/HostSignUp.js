@@ -30,6 +30,12 @@ function HostSignUp() {
     const [latitude, setlatitude] = useState('');
     const [longitude, setlongitude] = useState('')
     const [viewFile, setViewFile] = useState(null);
+    const [hallNo, setHallNo] = useState('')
+    const [hall1, setHall1] = useState('')
+    const [hall2, setHall2] = useState('')
+    const [hall3, setHall3] = useState('')
+    const [hall4, setHall4] = useState('')
+    const [hall5, setHall5] = useState('')
 
     const libraries = ["places"];
     const { isLoaded, loadError } = useLoadScript({
@@ -101,6 +107,36 @@ function HostSignUp() {
                             }
                         )*/
                         async function sign() {
+                            let capacity1, capacity2, capacity3, capacity4, capacity5 = null;
+                            switch (parseInt(hallNo)) {
+                                case 5:
+                                    capacity1 = hall1;
+                                    capacity2 = hall2;
+                                    capacity3 = hall3;
+                                    capacity4 = hall4;
+                                    capacity5 = hall5;
+                                    break;
+                                case 4:
+                                    capacity1 = hall1;
+                                    capacity2 = hall2;
+                                    capacity3 = hall3;
+                                    capacity4 = hall4;
+                                    break;
+                                case 3:
+                                    capacity1 = hall1;
+                                    capacity2 = hall2;
+                                    capacity3 = hall3;
+                                    break;
+                                case 2:
+                                    capacity1 = hall1;
+                                    capacity2 = hall2;
+                                    break;
+                                case 1:
+                                    capacity1 = hall1;
+                                    break;
+                                default:
+                                    break;
+                            }
                             const response = await fetch('http://localhost:9000/signup/host', {
                                 body: JSON.stringify({
                                     vatNo: vatNo,
@@ -113,7 +149,13 @@ function HostSignUp() {
                                     totalHalls: 3,
                                     city: City,
                                     street: Street,
-                                    provience: Province
+                                    provience: Province,
+                                    hallNo: hallNo,
+                                    hall1: capacity1,
+                                    hall2: capacity2,
+                                    hall3: capacity3,
+                                    hall4: capacity4,
+                                    hall5: capacity5
                                 }),
                                 headers: { "Content-type": "application/json" },
                                 method: "post"
@@ -141,7 +183,114 @@ function HostSignUp() {
             })
             .catch(error => alert(error.message))
     };
-    console.log(viewFile)
+    let hallDisplay;
+    if (hallNo == 5) {
+        hallDisplay = <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 1 Capacity:</label>
+                <input type="number" value={hall1} onChange={(e) => setHall1(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 2 Capacity:</label>
+                <input type="number" value={hall2} onChange={(e) => setHall2(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 3 Capacity:</label>
+                <input type="number" value={hall3} onChange={(e) => setHall3(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 4 Capacity:</label>
+                <input type="number" value={hall4} onChange={(e) => setHall4(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 5 Capacity:</label>
+                <input type="number" value={hall5} onChange={(e) => setHall5(e.target.value)} />
+            </div>
+        </div>
+    } else if (hallNo == 4) {
+        hallDisplay = <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 1 Capacity:</label>
+                <input type="number" value={hall1} onChange={(e) => setHall1(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 2 Capacity:</label>
+                <input type="number" value={hall2} onChange={(e) => setHall2(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 3 Capacity:</label>
+                <input type="number" value={hall3} onChange={(e) => setHall3(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 4 Capacity:</label>
+                <input type="number" value={hall4} onChange={(e) => setHall4(e.target.value)} />
+            </div>
+        </div>
+    } else if (hallNo == 3) {
+
+        hallDisplay = <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 1 Capacity:</label>
+                <input type="number" value={hall1} onChange={(e) => setHall1(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 2 Capacity:</label>
+                <input type="number" value={hall2} onChange={(e) => setHall2(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 3 Capacity:</label>
+                <input type="number" value={hall3} onChange={(e) => setHall3(e.target.value)} />
+            </div>
+        </div>
+    } else if (hallNo == 2) {
+
+        hallDisplay = <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 1 Capacity:</label>
+                <input type="number" value={hall1} onChange={(e) => setHall1(e.target.value)} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label>Hall 2 Capacity:</label>
+                <input type="number" value={hall2} onChange={(e) => setHall2(e.target.value)} />
+            </div>
+        </div>
+    } else {
+        hallDisplay = <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label>Hall 1 Capacity:</label>
+            <input type="number" value={hall1} onChange={(e) => setHall1(e.target.value)} />
+        </div>
+    }
+    let capacity1, capacity2, capacity3, capacity4, capacity5 = null;
+    switch (hallNo) {
+        case 5:
+            capacity1 = hall1;
+            capacity2 = hall2;
+            capacity3 = hall3;
+            capacity4 = hall4;
+            capacity5 = hall5;
+            break;
+        case 4:
+            capacity1 = hall1;
+            capacity2 = hall2;
+            capacity3 = hall3;
+            capacity4 = hall4;
+            break;
+        case 3:
+            capacity1 = hall1;
+            capacity2 = hall2;
+            capacity3 = hall3;
+            break;
+        case 2:
+            capacity1 = hall1;
+            capacity2 = hall2;
+            break;
+        case 1:
+            capacity1 = hall1;
+            break;
+        default:
+            break;
+    }
+    console.log(capacity1, capacity2, capacity3, capacity4, capacity5)
     return (
         <div className='hostSignUp'>
             <div className="signUp__input">
@@ -193,6 +342,22 @@ function HostSignUp() {
                         <label>Province</label><br />
                         <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
                     </div>
+                </div>
+                <div className="signup__halls">
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <label>Hall Numbers</label>
+                        <input type="number" value={hallNo} max={5} onChange={(e) => {
+                            if (e.target.value > 5) {
+                                setHallNo(5)
+                            }
+                            else if (e.target.value < 1) {
+                                setHallNo(1)
+                            } else {
+                                setHallNo(e.target.value)
+                            }
+                        }} />
+                    </div>
+                    {hallNo !== null && hallDisplay}
                 </div>
                 <br /><label>Profile Photo</label>
                 <progress value={Progress} max="100" />
