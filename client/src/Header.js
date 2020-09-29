@@ -81,6 +81,9 @@ function Header(props) {
             totalItems = totalItems + element.quantity;
         });
     }
+    const newFun = () => {
+        setFocus(false)
+    }
 
     if (searchedData !== undefined) {
         const mapSearchData = Object.keys(searchedData)
@@ -91,6 +94,7 @@ function Header(props) {
                     image={searchedData[items].photo}
                     name={searchedData[items].name}
                     modelNo={searchedData[items].modelNo}
+                    newFun={newFun}
                 />
             ));
         display =
@@ -110,6 +114,7 @@ function Header(props) {
     const handleFocus = () => {
         setFocus(true);
     };
+
     return (
         <div className="giftheader">
             <nav className="headergift">

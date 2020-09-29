@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UpdateSubtotal } from './redux/action';
 
 
-function CheckoutProduct({ id, eventId, title, image, price, rating, quantity, removeFun }) {
+function CheckoutProduct({ id, eventId, title, image, price, rating, quantity, removeFun, eventName }) {
     const userData = useSelector(state => state.userData)
     const { userName } = userData[0]
     const dispatch = useDispatch()
@@ -83,7 +83,7 @@ function CheckoutProduct({ id, eventId, title, image, price, rating, quantity, r
                     <button onClick={() => removeFun({ id, eventId })}>Remove from Basket</button>
                 </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 'auto', marginTop: 'auto' }}><label htmlFor="event">Event Id:</label><input class="form-control" id="event" disabled value={eventId} /></div>
+            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 'auto', marginTop: 'auto' }}><label htmlFor="event">Event Id:</label><input class="form-control" id="event" disabled value={`${eventId}.  ${eventName}`} /></div>
         </div>
     );
 }

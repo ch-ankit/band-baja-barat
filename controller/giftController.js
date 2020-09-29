@@ -189,7 +189,7 @@ exports.deleteOrder = async (req, res, next) => {
 
 exports.basketData = async (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM basket WHERE userName = "${req.query.userName}" `;
+    var sql = ` SELECT b.*, e.eventName FROM basket b INNER JOIN event e  ON e.id=b.eventId WHERE userName = "${req.query.userName}" `;
     mysqlConnection.query(sql, (err, rows, fields) => {
       if (!err) {
         if (rows.length == 0)
