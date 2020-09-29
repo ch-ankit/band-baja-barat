@@ -13,3 +13,6 @@ Content-Type: application/json
     "backgroundimage1":"image1",
     "backgroundimage2":"image2"
 }
+
+###
+GET http://localhost:9000/userhome/search?value=vads&&key=User

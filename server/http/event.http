@@ -1,4 +1,4 @@
-GET http://localhost:9000/event?organizerId=4
+GET http://localhost:9000/event?organizerId=1
 
 ###
 GET http://localhost:9000/userhome/myevents?userName=Demented

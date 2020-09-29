@@ -1,5 +1,6 @@
 GET http://localhost:9000/booking?eventId=5
-
+###
+Get http://localhost:9000/userhome/myevents?userName=Demented
 ###
 POST http://localhost:9000/booking
 Content-Type: application/json

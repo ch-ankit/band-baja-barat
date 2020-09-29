@@ -267,7 +267,7 @@ exports.upcomingEvent = (req, res, next) => {
 
 exports.bookedDate = (req, res, next) => {
   try {
-    var sql = ` SELECT eventDate FROM booking INNER JOIN event e ON e.id = eventId WHERE hostStatus =  'APPROVED' AND month(eventDate)= ${req.query.month} AND year(eventDate)=${req.query.year} AND vatNo = ${req.query.vatNo} AND hallNo = ${req.query.hallNo}`;
+    var sql = ` SELECT eventDate,hallNo FROM booking INNER JOIN event e ON e.id = eventId WHERE hostStatus =  'APPROVED' AND month(eventDate)= ${req.query.month} AND year(eventDate)=${req.query.year} AND vatNo = ${req.query.vatNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

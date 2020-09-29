@@ -1,4 +1,4 @@
-GET http://localhost:9000/guestList?eventId=6
+GET http://localhost:9000/guestList?eventId=3
 
 ###
 POST http://localhost:9000/guestList

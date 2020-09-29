@@ -56,12 +56,6 @@ function PartyDetail({ history }) {
             setStatus(allData.rows[0].status)
         }
         pendingHost();
-        async function bookedDate() {
-            const response = await fetch(`http://localhost:9000/host/bookeddates?vatNo=${vatNo}&&month=${date.getMonth()}&&year=${date.getFullYear()}&&hallNo=2`)
-            const allData = await response.json()
-            setbookedDate(allData.data);
-        }
-        bookedDate();
     }, [])
 
     const handleApprove = async () => {
@@ -164,7 +158,6 @@ function PartyDetail({ history }) {
     }) : (
             Object.keys(pending).map((keys) => {
                 return (<div className='partyDetail'>
-                    {console.log()}
                     <div className='partyDetail__leftPart'>
                         {book ? !admin && <Booking /> : (
                             <div>
