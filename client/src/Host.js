@@ -46,6 +46,7 @@ function Host() {
             const allData = await response.json();
             setdata(allData.data ?? []);
         }
+        //Hardcoded
         async function getPhotos() {
             const response = await fetch('http://localhost:9000/host/vatNo=789456');
             const allData = await response.json();
@@ -54,6 +55,7 @@ function Host() {
         getPhotos();
         getHostData();
     }, [hostEmail])
+    //Hardcoded
     useEffect(() => {
         async function getRequestData() {
             const response = await fetch("http://localhost:9000/host/requests?vatNo=789456")
@@ -62,13 +64,13 @@ function Host() {
         }
         getRequestData();
         async function getUpcomingData() {
-            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=789456'")
+            const response = await fetch("http://localhost:9000/host/upcoming?vatNo=789456")
             const allData = await response.json();
             setUpcomingData(allData.data ?? [])
         }
         getUpcomingData();
         async function getApprovedData() {
-            const response = await fetch("http://localhost:9000/host/approved?vatNo=789456'")
+            const response = await fetch("http://localhost:9000/host/approved?vatNo=789456")
             const allData = await response.json();
             setApprovedData(allData.data ?? [])
         }
