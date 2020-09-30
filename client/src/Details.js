@@ -15,7 +15,8 @@ function Details({ location, history }) {
     const [eventId, setEventId] = useState()
 
     const userData = useSelector(state => state.userData);
-    const { userName } = userData[0];
+    let userName;
+    if (!isAdmin) { userName = userData[0]; }
     const [details, setDetails] = useState({});
     const [addedQuantity, setAddedQuantity] = useState(1);
     const [productRating, setproductRating] = useState([]);
@@ -323,7 +324,7 @@ function Details({ location, history }) {
             <div className="details">
                 <div className="details__body">
                     <div className="details__image">
-                        <ReactImageMagnify className="details__Magnify" style={{ overflow: 'visible' }} {...{
+                        <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'product image',
                                 isFluidWidth: true,
@@ -426,7 +427,7 @@ function Details({ location, history }) {
                                 <button class="btn btn-primary">Save</button>
                             </form>
                         ) : (
-                                <p>{details.description}</p>
+                                <pre style={{ display: 'flex', flexWrap: 'wrap', whiteSpace: 'pre-wrap', textAlign: 'left' }}>{details.description}</pre>
                             )}
                         {isAdmin &&
                             (editDescription ? (
@@ -472,7 +473,7 @@ function Details({ location, history }) {
                                             <button class="btn btn-primary">Save</button>
                                         </form>
                                     ) : (
-                                            <p>{details.quantity}</p>
+                                            <p >{details.quantity}</p>
                                         )
                                 )}
                             {isAdmin &&

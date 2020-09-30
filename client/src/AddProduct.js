@@ -52,6 +52,31 @@ function AddProduct({ history }) {
                         alert('hello')
                         setUrl(url);
                         console.log(url);
+                        async function addProduct() {
+                            console.log(summary)
+                            let summaryToBackend = summary[0].split("\u2022").join('').split(`"`).join(`'`)
+                            let descriptionToBacked = description[0].split(`"`).join(`'`)
+                            console.log(descriptionToBacked, summaryToBackend)
+                            const data = {
+                                modelNo: modelNo,
+                                price: price,
+                                quantity: quantity,
+                                description: descriptionToBacked,
+                                photo: url,
+                                name: name,
+                                summary: summaryToBackend
+                            }
+                            const response = await fetch('http://localhost:9000/giftstore/product',
+                                {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-type': 'application/json'
+                                    },
+                                    body: JSON.stringify(data)
+                                })
+                            const { message, error } = await response.json();
+                            console.log(message, error)
+                        }
                         db.collection("images").add(
                             {
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -59,46 +84,16 @@ function AddProduct({ history }) {
                                 modelNo: modelNo
                             }
                         )
+                        addProduct();
                     }));
                 setProgress(0);
+                setViewFile(null);
                 setImage(null);
+                setTimeout(() => history.push('/giftstore'), 1000)
             }
         );
 
     }
-    useEffect(() => {
-        if (url !== '') {
-            async function addProduct() {
-                console.log(summary)
-                let summaryToBackend;
-                if (summary) {
-                    summaryToBackend = summary[0].split("\u2022").join('')
-                }
-                const data = {
-                    modelNo: modelNo,
-                    price: price,
-                    quantity: quantity,
-                    description: description,
-                    photo: url,
-                    name: name,
-                    summary: summaryToBackend
-                }
-                const response = await fetch('http://localhost:9000/giftstore/product',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                const { message } = await response.json();
-                console.log(message)
-            }
-            addProduct();
-            setTimeout(() => history.push('/giftstore'), 1000)
-        }
-    }, [url])
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
         handleUpload();
@@ -136,17 +131,17 @@ function AddProduct({ history }) {
             <form className="addProduct__form" id="productForm" onSubmit={handleSubmit}>
                 <label className="addProduct__title" >
                     <span>Name:</span>
-                    <input class="form-control form-control-lg" value={name} onChange={(event) => {
+                    <input required class="form-control form-control-lg" value={name} onChange={(event) => {
                         setName(event.target.value)
                     }} type='text' placeholder='Name of product' />
                 </label>
                 <label className="addProduct__price">
                     <span>Price:</span>
-                    <input class="form-control" type='number' placeholder='Price' min="0" value={price} onChange={(event) => setPrice(event.target.valueAsNumber)} />
+                    <input required class="form-control" type='number' placeholder='Price' min="0" value={price} onChange={(event) => setPrice(event.target.valueAsNumber)} />
                 </label>
                 <label className="addProduct__modelNo">
                     <span>Model Number:</span>
-                    <input class="form-control" type='text' placeholder='Enter the Model number' value={modelNo} onChange={(event) => setModelNo(event.target.value)}
+                    <input required class="form-control" type='text' placeholder='Enter the Model number' value={modelNo} onChange={(event) => setModelNo(event.target.value)}
                     />
                 </label>
                 <label className="addProduct__description" style={{ height: "30vh" }}>
@@ -161,10 +156,10 @@ function AddProduct({ history }) {
                 </label>
                 <label className="addProduct__quantity">
                     <span>Quantity:</span>
-                    <input class="form-control" type='number' placeholder='Quantity' min="1" value={quantity} onChange={(event) => setQuantity(event.target.valueAsNumber)} />
+                    <input required class="form-control" type='number' placeholder='Quantity' min="1" value={quantity} onChange={(event) => setQuantity(event.target.valueAsNumber)} />
                 </label>
                 {progress !== 0 && <progress max="100" value={progress} />}
-                <input type="file" onChange={handleChange} accept='image/*' id="inputButton" hidden />
+                <input required type="file" onChange={handleChange} accept='image/*' id="inputButton" hidden />
                 <button className="btn btn-primary" style={{ marginBottom: "10px", width: "150px" }} type="button">
                     <label htmlFor="inputButton">
                         Select Image
@@ -173,7 +168,6 @@ function AddProduct({ history }) {
                 {displayImage}
                 <button className="btn btn-primary" style={{ width: "30vw", marginBottom: "40px" }} type="submit" form="productForm">Submit</button>
             </form>
-            {url !== '' && <img src={url} alt='uploaded' />}
         </div>
     );
 }

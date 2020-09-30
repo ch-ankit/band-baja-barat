@@ -1,1 +1,0 @@
-UPDATE host set status="APPROVED" where vatNo=773311
