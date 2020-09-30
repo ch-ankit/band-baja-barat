@@ -46,6 +46,7 @@ exports.hostData = async (req, res, next) => {
 exports.updateHostData = async (req, res, next) => {
   try {
     var oldhostData = [];
+    console.log(req.body.vatNo)
     mysqlConnection.query(
       `SELECT * FROM host WHERE vatNo=${req.body.vatNo}`,
       (err, rows) => {

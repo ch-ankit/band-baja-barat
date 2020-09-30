@@ -38,6 +38,7 @@ function PartyDetail({ history }) {
     const [status, setStatus] = useState('')
     const [bookedDate,setbookedDate]=useState([]);
     const date=new Date();
+    const [Halls, setHalls] = useState([]);
 
     useEffect(() => {
         async function getHostData() {
@@ -45,6 +46,7 @@ function PartyDetail({ history }) {
             const allData = await response.json();
             setdata(allData.rows ?? []);
             setPhoto(allData.rows2);
+            setHalls(allData.rows1)
             console.log(data)
         }
         getHostData();
@@ -112,14 +114,28 @@ function PartyDetail({ history }) {
                                     </div>
                                 </div>
                                 <div className='partyDetail__info3'>
-                                <h6>Total Halls:{data[keys].totalHalls}</h6>
+                                <h6>Total Halls:{data[keys].totalHalls + 1}</h6>
                                 </div>
                             </div>
                         </div>
                         <div className='partyDetail__details'>
                             <h4>About us</h4>
                             <hr />
-                            {data[keys].description}
+                            <pre style={{whiteSpace:'pre-wrap'}}>{data[keys].description}</pre>
+                        </div>
+                        <div className='partyDetail__halls'>
+                            <h4>Halls</h4>
+                            <hr />
+                            <div className='partyDetail__hallDetail'>  
+                            {Object.keys(Halls).map((keys)=>{
+                              return( 
+                                   <div>
+                                    Hall No :{Halls[keys].hallNo} <br />
+                                    Capacity:{Halls[keys].capacity}
+                                    </div>)
+                                
+                            })}
+                            </div>
                         </div>
                         <div className='partyDetail__userGallery'>
                             <UserGallery />

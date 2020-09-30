@@ -34,6 +34,8 @@ function Host() {
     const hostEmail = useSelector(state => state.hostEmail);
     const dispatch = useDispatch();
     const [vatNo, setvatNo] = useState(null)
+    const [Edit, setEdit] = useState(false)
+    const [description, setdescription] = useState('')
     useEffect(() => {
         async function getHostData() {
             const response = await fetch('http://localhost:9000/login/host', {
@@ -42,7 +44,7 @@ function Host() {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: "dimlock1@nature.com"
+                    email:hostEmail
                 })
             });
             const allData = await response.json();
@@ -51,7 +53,7 @@ function Host() {
             dispatch(actionvatNo(allData.data[0].vatNo))
         } 
         getHostData();
-    }, [])
+    }, [hostEmail])
     //Hardcoded
     useEffect(() => {
         
@@ -82,6 +84,17 @@ function Host() {
         hello();
     }, [vatNo])
     console.log(data, Photo)
+    async function updateHost(){
+        const response = await fetch('http://localhost:9000/host',{
+            method:'PATCH',
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+                'vatNo':vatNo,
+                'description':description
+            })
+        })
+        alert('Hello')
+    }
     return (
         <div>
             {hostUid ? '' : history.push('/')}
@@ -117,9 +130,9 @@ function Host() {
                                     </div>
                                 </div>
                                 <div className='host__details'>
-                                    <h4>About us</h4>
+                                    <h4>About us</h4> {Edit ? <button onClick={()=>{setEdit(!Edit);updateHost()}}>Change</button> : <button onClick={()=>{setEdit(!Edit);setdescription(data[keys].description)}}>Edit</button>}
                                     <hr />
-                                    {data[keys].description}
+                                    {Edit ? <textarea value={description} onChange={(e)=>{setdescription(e.target.value)}} style={{width:'100%',height:'440px'}}></textarea>:<pre style={{whiteSpace:'pre-wrap'}}>{data[keys].description}</pre>}
                                 </div>
 
                                 <div className='host__fullGallery'>

@@ -20,7 +20,7 @@ POST http://localhost:9000/login/host
 content-type: application/json
 
 {
-    "email": "babinpalace@gmail.com"
+    "email": "dimlock1@nature.com"
 }
 
 ###
@@ -41,3 +41,6 @@ Content-Type: application/json
     "city": "Bęczarka",
     "provience": "5"
 }
+
+###
+Get http://localhost:9000/userhome/myevents?userName=Demented

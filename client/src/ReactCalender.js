@@ -18,8 +18,8 @@ function ReactCalender() {
             return {
                 Id: keys,
                 Subject: `Wedding, hallNo=${bookedDate[keys].hallNo}`,
-                StartTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, bookedDate[keys].eventDate.slice(8,10)),
-                EndTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1),
+                StartTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1),
+                EndTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+2),
                 IsAllDay: true
             }
         })]

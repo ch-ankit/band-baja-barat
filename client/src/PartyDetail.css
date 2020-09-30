@@ -79,6 +79,16 @@
     margin-top: 20px;
     background-color: white;
 }
+.partyDetail__halls {
+    padding-top: 15px;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.partyDetail__hallDetail{
+    display: flex;
+    justify-content: space-around;
+}
 
 .partyDetail__googleMap {
     width: 100%;

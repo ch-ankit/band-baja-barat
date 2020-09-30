@@ -42,7 +42,7 @@ function Band() {
         async function getBandData() {
             const response = await fetch('http://localhost:9000/bbb/band');
             const allData = await response.json()
-            setdata(allData.data)
+            setdata(allData.data ?? [])
         }
         getBandData();
     }, [])

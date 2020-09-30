@@ -1,16 +1,16 @@
 const mysql = require("mysql");
 
 var mysqlConnection = mysql.createConnection({
-  // host: "localhost",
-  // user: "root",
-  // password: "b@bin6139@",
-  // database: "bb2",
-  // port: "3306",
-  host: "sql12.freemysqlhosting.net",
-  user: "sql12367859",
-  password: "btxdmIHSkp",
-  database: "sql12367859",
+  host: "localhost",
+  user: "root",
+  password: "b@bin6139@",
+  database: "bb2",
   port: "3306",
+  // host: "sql12.freemysqlhosting.net",
+  // user: "sql12367859",
+  // password: "btxdmIHSkp",
+  // database: "sql12367859",
+  // port: "3306",
   multipleStatements: true,
 });
 

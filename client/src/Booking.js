@@ -85,8 +85,8 @@ export default function Booking() {
             const response = await fetch(`http://localhost:9000/event?organizerId=${organizerId}`);
             console.log(response)
             const data = await response.json();
-            console.log(data)
-            data.data[0]==[] ? setEventId(null) :setEventId(data.data[0].id);
+            alert(await data.data[0].id)
+            data.data[0].id==null ? setEventId(null) :setEventId(data.data[0].id);
           }
           getEventId();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
