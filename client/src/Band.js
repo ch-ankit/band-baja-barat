@@ -42,7 +42,7 @@ function Band() {
         async function getBandData() {
             const response = await fetch('http://localhost:9000/bbb/band');
             const allData = await response.json()
-            setdata(allData.data)
+            setdata(allData.data ?? [])
         }
         getBandData();
     }, [])
@@ -92,24 +92,29 @@ function Band() {
                             }
                         )
                         async function addBand() {
-                            await fetch('http://localhost:9000/band', {
+                            const bandDescriptionToBackend = bandDescription[0].split(`"`).join(`'`)
+                            console.log(bandDescriptionToBackend)
+                            const response = await fetch('http://localhost:9000/band', {
                                 method: 'POST',
                                 headers: {
                                     'Content-type': 'application/json'
                                 },
                                 body: JSON.stringify({
                                     bandName: name,
-                                    description: bandDescription,
+                                    description: bandDescriptionToBackend,
                                     profilePhoto: url,
                                     contactInfo: mobileNo,
                                     email: email
                                 })
                             })
+                            const { error } = await response.json()
+                            console.log(error)
                             setTimeout(() => window.location.reload(), 1000)
                         }
                         addBand()
                     }));
                 setProgress(0);
+                setViewFile(null);
                 setImage(null);
             }
         );
@@ -154,7 +159,7 @@ function Band() {
                                     </label>
                                     <label style={{ height: "20vh" }}>
                                         <span>Description of Band:</span>
-                                        <textarea class="form-control" style={{ height: "100%" }} type='text' placeholder='Description...' value={bandDescription} onChange={(event) => setBandDescription(event.target.value)}
+                                        <textarea class="form-control" style={{ height: "100%" }} type='text' placeholder='Description...' value={bandDescription} onChange={(event) => setBandDescription([event.target.value])}
                                             required />
                                     </label>
                                 </div>

@@ -54,7 +54,7 @@
     max-width: 10vw;
 }
 .details__image {
-    height: 50vh;
+    height: 20vh;
     margin-right: 10vw;
     margin-left: 10vw;
     overflow: visible;
@@ -62,20 +62,17 @@
 .details__image > img {
     width: 100%;
     object-fit: contain;
-    margin-top: 15px;
     margin-bottom: 15px;
 }
 .details__image {
     height: 50vh;
     margin-right: 10vw;
     margin-left: 10vw;
-    overflow: visible;
 }
 
-.details__Magnify{
+.details__Magnify {
     margin-top: 100px;
 }
-
 
 .details__description {
     display: flex;
