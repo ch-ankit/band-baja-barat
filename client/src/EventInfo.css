@@ -1,0 +1,23 @@
+
+.eventInfo{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.eventInfo__coupleDetail{
+    display: flex;
+    width:50%;
+    justify-content: space-between;
+}
+
+.eventInfo__eventTime{
+    margin-top: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}

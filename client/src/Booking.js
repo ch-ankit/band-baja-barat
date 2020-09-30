@@ -6,7 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './Booking.css'
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +54,9 @@ export default function Booking() {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const vatNo = useSelector(state => state.vatNo);
-  const userData = useSelector(state => state.userData);
+  const userData=useSelector(state=>state.userData);
   const [organizerId, setorganizerId] = useState(null)
+  const [Dummy, setDummy] = useState(true)
 
   const handleNext = () => {
     switch (activeStep) {
@@ -67,7 +68,7 @@ export default function Booking() {
           async function event() {
             const response = await fetch('http://localhost:9000/event', {
               body: JSON.stringify({
-                "organizerId": 4,
+                "organizerId": organizerId,
                 "eventName": EventName,
                 "groomName": GroomName,
                 "brideName": BrideName,
@@ -81,9 +82,11 @@ export default function Booking() {
           event();
           console.log(EventDate)
           async function getEventId() {
-            const response = await fetch('http://localhost:9000/event?organizerId=4');
-            const { data } = await response.json();
-            setEventId(data[0].id);
+            const response = await fetch(`http://localhost:9000/event?organizerId=${organizerId}`);
+            console.log(response)
+            const data = await response.json();
+            console.log(data)
+            data.data[0]==[] ? setEventId(null) :setEventId(data.data[0].id);
           }
           getEventId();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -151,61 +154,73 @@ export default function Booking() {
   const handleReset = () => {
     setActiveStep(0);
   };
-  useEffect(() => {
+  useEffect(()=>{
     async function getOrganizerId() {
-      const response = await fetch(`http://localhost:9000/organizer?userName=${userData[0].userName}`)
-      const data = await response.json();
-      setorganizerId(data.data[0].id);
+      const response=await fetch(`http://localhost:9000/organizer?userName=${userData[0].userName}`)
+      const data=await response.json();
+      console.log(data)
+      data.status=="Not registered" ? setorganizerId(null) : setorganizerId(data.data[0].id);
     }
     getOrganizerId()
-  }, [])
+  },[Dummy])
+
+  async function becomeOrganizer() {
+    const response = await fetch('http://localhost:9000/organizer',{
+      method:'POST',
+      headers:{"Content-type":"application/json"},
+      body:JSON.stringify({
+        "userName":userData[0].userName
+      })
+    })
+    setDummy(!Dummy);
+  }
 
   return (
     <div>
       {console.log(organizerId)}
-      {organizerId ?
-        (<div className={classes.root}>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+    {organizerId ?
+    (<div className={classes.root}>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <div>
+        {activeStep === steps.length ? (
           <div>
-            {activeStep === steps.length ? (
+            <Typography className={classes.instructions}>All steps completed</Typography>
+            <Button onClick={handleReset}>Reset</Button>
+          </div>
+        ) : (
+            <div>
+              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
               <div>
-                <Typography className={classes.instructions}>All steps completed</Typography>
-                <Button onClick={handleReset}>Reset</Button>
-              </div>
-            ) : (
-                <div>
-                  <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                  <div>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      className={classes.backButton}
-                    >
-                      Back
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Back
               </Button>
-                    <Button variant="contained" color="primary" disabled={Condition} onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                  </div>
-                </div>
-              )}
-          </div>
-        </div>)
-        : (
-          <div>
-            <h1>Become an organizer</h1>
-            <p>You have to be an organizer to organize an event</p>
-            <button>Become Organizer</button>
-          </div>
-        )}
-    </div>
-  );
+                <Button variant="contained" color="primary" disabled={Condition} onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          )}
+      </div>
+    </div>)
+      : (
+        <div>
+          <h1>Become an organizer</h1>
+          <p>You have to be an organizer to organize an event</p>
+          <button onClick={becomeOrganizer}>Become Organizer</button>
+        </div>
+      )  }
+      </div>
+      );
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {

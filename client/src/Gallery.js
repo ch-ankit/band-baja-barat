@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { db, storage, auth } from './firebaseConfig'
 import firebase from 'firebase'
 import './Gallery.css'
+import {useSelector} from 'react-redux'
 
 function Gallery() {
     const [Progress, setProgress] = useState(0);
@@ -11,6 +12,9 @@ function Gallery() {
     const [image, setimage] = useState(null);
     const [Email, setEmail] = useState('');
     const [Photo, setPhoto] = useState(null)
+    const vatNo = useSelector(state => state.vatNo)
+    const [Caption, setCaption] = useState('')
+    const [Dummy, setDummy] = useState(false)
     // useEffect(()=>{
     //     db.collection('gallery').orderBy("timestamp","desc").onSnapshot(snapshot=>{
     //       setposts(snapshot.docs.map(doc=>({
@@ -22,13 +26,13 @@ function Gallery() {
     //Hardcoded
     useEffect(() => {
         async function getHostData() {
-            const response = await fetch('http://localhost:9000/host?vatNo=771982');
+            const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
             const allData = await response.json();
             setPhoto(allData.rows2 ?? []);
 
         }
         getHostData();
-    }, [])
+    }, [Dummy])
 
     const handleUpload = () => {
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -52,14 +56,21 @@ function Gallery() {
                     .then((url => {
                         setUrl(url);
                         console.log(url);
-                        db.collection("gallery").add(
-                            {
-                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                                imgUrl: url
-                            }
-                        )
+                        async function addPhoto(params) {
+                            const response = await fetch('http://localhost:9000/host/addphoto',{
+                                method:'POST',
+                                headers: {"Content-Type":"application/json"},
+                                body:JSON.stringify({
+                                    "vatNo":vatNo,
+                                    "caption":Caption,
+                                    'photo':url
+                                })
+                            })    
+                        }
+                        addPhoto();
                     }));
                 setProgress(0);
+                setDummy(!Dummy);
                 setimage(null);
             }
         );
@@ -75,7 +86,7 @@ function Gallery() {
 
         <div className="Gallery">
             <h1>Gallery</h1>
-            <input type='text' placeholder='Caption' />
+            <input type='text' placeholder='Caption' value={Caption} onChange={(e)=>setCaption(e.target.value)} />
             <progress value={Progress} max='100' />
             <input type='file' onChange={handleChange} />
             <button onClick={handleUpload}>Upload</button>

@@ -8,6 +8,9 @@ import './BookingStatus.css'
 import UserHeader from './UserHeader.js';
 import { useHistory } from 'react-router-dom';
 import { EventData } from './redux/action';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import InfoIcon from '@material-ui/icons/Info';
+import GroupIcon from '@material-ui/icons/Group';
 function BookingStatus() {
     const [data, setdata] = useState([])
     const Username=useSelector(state => state.userData[0].userName)
@@ -18,16 +21,27 @@ function BookingStatus() {
         async function getBookingData() {
             const response = await fetch(`http://localhost:9000/userhome/myevents?userName=${Username}`);
             const allData = await response.json();
+            console.log(allData)
             setdata(allData.data)
         }
-        getBookingData();
-   
-        
+        getBookingData(); 
     }, [])
     const invitationDraft=(eventData)=>{
         if(eventData.hostStatus=="APPROVED"){
         dispatch(EventData(eventData));
         history.push('/invitationDraft');
+        }
+    }
+    const guestList=(eventData)=>{
+        if(eventData.hostStatus=="APPROVED"){
+        dispatch(EventData(eventData));
+        history.push('/guestList');
+        }
+    }
+    const eventInfo=(eventData)=>{
+        if(eventData.hostStatus=="APPROVED"){
+        dispatch(EventData(eventData));
+        history.push('/eventInfo');
         }
     }
     return (
@@ -52,9 +66,14 @@ function BookingStatus() {
                     }
                 
                 return(
-                <ListItem button className='bookingStatus__list' style={Conditionstyle}>
-                    <ListItem key={keys} onClick={()=>{invitationDraft(data[keys])}} >
+                <ListItem className='bookingStatus__list' style={Conditionstyle}>
+                    <ListItem key={keys}  className='bookingStatus__item'>
                         {data[keys].eventName}
+                        <div className='bookingStatus__icons'>
+                            <DraftsIcon onClick={()=>{invitationDraft(data[keys])}} className='bookingStatus__icon' />
+                            <GroupIcon onClick={()=>{guestList(data[keys])}} className='bookingStatus__icon' />
+                            <InfoIcon onClick={()=>{eventInfo(data[keys])}} className='bookingStatus__icon' />
+                        </div>
                     </ListItem>
                 </ListItem>
                 )
