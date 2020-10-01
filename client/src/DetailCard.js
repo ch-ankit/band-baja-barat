@@ -1,6 +1,6 @@
 import React from 'react'
 import "./DetailCard.css"
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { actionvatNo } from './redux/action'
@@ -12,10 +12,11 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
         dispatch(actionvatNo(vatno))
     }
     const dispatch = useDispatch();
+    const history=useHistory()
     switch (path) {
         case '/party':
             return (
-                <div className="detailCard">
+                <div className="detailCard" onClick={()=>{history.push(`/partypalace/${name}`);addVatNo()}}>
                     {admin ? <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>
                         <img src={image} alt={name} className="detailCard__image" />
                     </Link> :
@@ -39,7 +40,7 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
             )
         case '/bands':
             return (
-                <div className="detailCard">
+                <div className="detailCard" onClick={()=>{history.push(`/admin/partypalace/${name}`)}}>
                     <img src={image} alt={name} style={{ width: '400px', height: '230px' }} />
                     <div className="detailCard__detail">
                         <h2>{name}</h2>

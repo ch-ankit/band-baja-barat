@@ -8,6 +8,8 @@ function EventDetail() {
     const eventData=useSelector(state => state.eventData);
     console.log(eventData);
     const history=useHistory();
+    const datae=new Date(eventData.eventDate);
+    alert(datae)
     const updateStatus=()=>{
         alert('Hello')
         async function updateStatus1(){
@@ -15,7 +17,7 @@ function EventDetail() {
                 body: JSON.stringify({
                     "eventId":eventData.eventId,
                     "hostStatus":"APPROVED",
-                    "eventDate":eventData.eventDate.slice(0,10)
+                    "eventDate":datae
             }),
             headers: { "Content-type": "application/json" },
             method:'PATCH'});
@@ -31,7 +33,7 @@ const rejectStatus=()=>{
             body: JSON.stringify({
                 "eventId":eventData.eventId,
                 "hostStatus":"REJECTED",
-                "eventDate":eventData.eventDate.slice(0,10)
+                "eventDate":datae
         }),
         headers: { "Content-type": "application/json" },
         method:'PATCH'});
@@ -60,7 +62,7 @@ history.push('/host');
                                 <td>{eventData.groomName}</td>
                                 <td>{eventData.brideName}</td>
                                 <td>{eventData.expectedGuestNo}</td>
-                                <td>{eventData.eventDate}</td>
+                                <td>{datae.toString().slice()}</td>
                                 <td>{eventData.hallNo}</td>
                                 <td>{eventData.shift}</td>
                             </tr>
