@@ -7,7 +7,7 @@ exports.hostData = async (req, res, next) => {
     if (req.query.vatNo == null) {
       sql = ` SELECT hostName,profilePhoto, CONCAT (street,city,provience) AS location,description,vatNo FROM host  WHERE status= 'APPROVED' ORDER BY hostname `;
     } else {
-      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" AND status= 'APPROVED' `;
+      sql = ` SELECT * FROM host  WHERE vatNo = "${req.query.vatNo}" s' `;
     }
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
@@ -46,61 +46,73 @@ exports.hostData = async (req, res, next) => {
 exports.updateHostData = async (req, res, next) => {
   try {
     var oldhostData = [];
-    console.log(req.body.vatNo)
+    console.log(req.body.vatNo);
     mysqlConnection.query(
       `SELECT * FROM host WHERE vatNo=${req.body.vatNo}`,
       (err, rows) => {
         if (!err) {
           oldhostData = rows;
           var sql = ` UPDATE host SET 
-                  hostName = "${req.body.hostName == undefined
-              ? oldhostData[0].hostName
-              : req.body.hostName
-            }",
-                  totalHalls = ${req.body.totalHalls == undefined
-              ? oldhostData[0].totalHalls
-              : req.body.totalHalls
-            },
-                  description = "${req.body.description == undefined
-              ? oldhostData[0].description
-              : req.body.description
-            }",
-                  profilePhoto = "${req.body.profilePhoto == undefined
-              ? oldhostData[0].profilePhoto
-              : req.body.profilePhoto
-            }",
-                  contactInfo = "${req.body.contactInfo == undefined
-              ? oldhostData[0].contactInfo
-              : req.body.contactInfo
-            }",
-                  email = "${req.body.email == undefined
-              ? oldhostData[0].email
-              : req.body.email
-            }",
-                  street = "${req.body.street == undefined
-              ? oldhostData[0].street
-              : req.body.street
-            }",
-                  city = "${req.body.city == undefined
-              ? oldhostData[0].city
-              : req.body.city
-            }",
-                  provience = "${req.body.provience == undefined
-              ? oldhostData[0].provience
-              : req.body.provience
-            }",
-                  status = "${req.body.status == undefined
-              ? oldhostData[0].status
-              : req.body.status
-            }",
-                  latitude = "${req.body.latitude == undefined
-              ? oldhostData[0].latitude
-              : req.body.latitude
-            }",
-                  longitude = "${req.body.longitude == undefined
-              ? oldhostData[0].longitude
-              : req.body.longitude
-            }"
+                  hostName = "${
+                    req.body.hostName == undefined
+                      ? oldhostData[0].hostName
+                      : req.body.hostName
+                  }",
+                  totalHalls = ${
+                    req.body.totalHalls == undefined
+                      ? oldhostData[0].totalHalls
+                      : req.body.totalHalls
+                  },
+                  description = "${
+                    req.body.description == undefined
+                      ? oldhostData[0].description
+                      : req.body.description
+                  }",
+                  profilePhoto = "${
+                    req.body.profilePhoto == undefined
+                      ? oldhostData[0].profilePhoto
+                      : req.body.profilePhoto
+                  }",
+                  contactInfo = "${
+                    req.body.contactInfo == undefined
+                      ? oldhostData[0].contactInfo
+                      : req.body.contactInfo
+                  }",
+                  email = "${
+                    req.body.email == undefined
+                      ? oldhostData[0].email
+                      : req.body.email
+                  }",
+                  street = "${
+                    req.body.street == undefined
+                      ? oldhostData[0].street
+                      : req.body.street
+                  }",
+                  city = "${
+                    req.body.city == undefined
+                      ? oldhostData[0].city
+                      : req.body.city
+                  }",
+                  provience = "${
+                    req.body.provience == undefined
+                      ? oldhostData[0].provience
+                      : req.body.provience
+                  }",
+                  status = "${
+                    req.body.status == undefined
+                      ? oldhostData[0].status
+                      : req.body.status
+                  }",
+                  latitude = "${
+                    req.body.latitude == undefined
+                      ? oldhostData[0].latitude
+                      : req.body.latitude
+                  }",
+                  longitude = "${
+                    req.body.longitude == undefined
+                      ? oldhostData[0].longitude
+                      : req.body.longitude
+                  }"
                   WHERE vatNo = ${req.body.vatNo} `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
