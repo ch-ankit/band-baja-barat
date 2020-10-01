@@ -86,7 +86,7 @@ export default function Booking() {
             console.log(response)
             const data = await response.json();
             alert(await data.data[0].id)
-            data.data[0].id==null ? setEventId(null) :setEventId(data.data[0].id);
+            data.data ==null ? setEventId(null) :setEventId(data.data[0].id);
           }
           getEventId();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);

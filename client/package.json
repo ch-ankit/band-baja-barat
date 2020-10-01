@@ -16,7 +16,7 @@
     "bootstrap": "^4.5.2",
     "colorette": "^1.2.0",
     "date-fns": "^2.16.1",
-    "firebase": "^7.18.0",
+    "firebase": "^7.21.1",
     "google-map-react": "^2.0.8",
     "khalti-checkout-web": "^2.0.5",
     "react": "^16.13.1",

@@ -14,12 +14,12 @@ function ReactCalender() {
     const year=date.getFullYear()
     useEffect(()=>{
        const datte=[ Object.keys(bookedDate).map((keys)=>{
-           console.log(new Date(parseInt(bookedDate[keys].eventDate.slice(0,4)),parseInt(bookedDate[keys].eventDate.slice(6,7))-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1))
+           console.log(new Date(parseInt(bookedDate[keys].eventDate.slice(0,4)),parseInt(bookedDate[keys].eventDate.slice(5,7))-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1))
             return {
                 Id: keys,
                 Subject: `Wedding, hallNo=${bookedDate[keys].hallNo}`,
-                StartTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1),
-                EndTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(6,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+2),
+                StartTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(5,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+1),
+                EndTime: new Date(bookedDate[keys].eventDate.slice(0,4),bookedDate[keys].eventDate.slice(5,7)-1, parseInt(bookedDate[keys].eventDate.slice(8,10))+2),
                 IsAllDay: true
             }
         })]
@@ -36,6 +36,7 @@ function ReactCalender() {
     }, [])
     return (
         <div className='reactCalender'>
+            {console.log(bookDate)}
             <ScheduleComponent currentView='Month' selectedDate={new Date(2020,10,9)}
              eventSettings={{ dataSource: bookDate[0],
                 fields: {
