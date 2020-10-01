@@ -48,6 +48,7 @@ function PartyDetail({ history }) {
             setPhoto(allData.rows2);
             setHalls(allData.rows1)
             console.log(data)
+            console.log(allData)
         }
         getHostData();
     }, [vatNo])
@@ -58,6 +59,7 @@ function PartyDetail({ history }) {
             setPending(allData.rows ?? [])
             setPendingPhoto(allData.rows2);
             setStatus(allData.rows[0].status)
+            
         }
         pendingHost();
     }, [])
@@ -84,7 +86,7 @@ function PartyDetail({ history }) {
 
     const display = !admin ? Object.keys(data).map((keys) => {
         return (<div className='partyDetail'>
-            <div className='partyDetail__leftPart'>
+            <div className='partyDetail__leftPart'>{console.log(data,Halls)}
                 {book ? <Booking /> : (
                     <div>
                         <div className="partyDetail__infoHeader">

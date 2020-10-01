@@ -122,7 +122,7 @@ exports.updateHostData = async (req, res, next) => {
 exports.deleteHostData = async (req, res, next) => {
   try {
     var sql = ` DELETE FROM  hostPhoto WHERE vatNo = ${req.query.vatNo} `;
-    var sql1 = ` DELETE FROM  hosthalls WHERE vatNo = ${req.query.vatNo} `;
+    var sql1 = ` DELETE FROM  hostHalls WHERE vatNo = ${req.query.vatNo} `;
     var sql2 = ` DELETE FROM  host WHERE vatNo = ${req.query.vatNo} `;
 
     mysqlConnection.query(sql, (err) => {
@@ -151,7 +151,7 @@ exports.deleteHostData = async (req, res, next) => {
 
 exports.addHalls = async (req, res, next) => {
   try {
-    var sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES (${req.body.hallNo},${req.body.vatNo},${req.body.capacity}) `;
+    var sql = ` INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES (${req.body.hallNo},${req.body.vatNo},${req.body.capacity}) `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("data upload sucessful");
@@ -181,7 +181,7 @@ exports.addPhoto = async (req, res, next) => {
 
 exports.updateHalls = async (req, res, next) => {
   try {
-    var sql = ` UPDATE hosthalls SET capacity = ${req.body.capacity} WHERE hallNo=${req.body.hallNo} AND vatNo=${req.body.vatNo} `;
+    var sql = ` UPDATE hostHalls SET capacity = ${req.body.capacity} WHERE hallNo=${req.body.hallNo} AND vatNo=${req.body.vatNo} `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         res.json("halls updated sucessful");
@@ -211,7 +211,7 @@ exports.deletePhoto = async (req, res, next) => {
 
 exports.pendingRequests = (req, res, next) => {
   try {
-    var sql = `  SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN menu m ON m.eventId = e.id INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='PENDING' AND  vatNo = ${req.query.vatNo}`;
+    var sql = ` SELECT * FROM booking INNER JOIN event e ON e.id = eventId INNER JOIN menu m ON m.eventId = e.id INNER JOIN organizer o ON o.id = e.organizerId Natural JOIN user  WHERE hostStatus='PENDING' AND  vatNo = ${req.query.vatNo}`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

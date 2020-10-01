@@ -40,7 +40,7 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
             )
         case '/bands':
             return (
-                <div className="detailCard" onClick={()=>{history.push(`/admin/partypalace/${name}`)}}>
+                <div className="detailCard" onClick={()=>{history.push(`/bands/${name}`)}}>
                     <img src={image} alt={name} style={{ width: '400px', height: '230px' }} />
                     <div className="detailCard__detail">
                         <h2>{name}</h2>

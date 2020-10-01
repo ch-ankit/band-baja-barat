@@ -57,8 +57,7 @@ function Host() {
     }, [hostEmail])
     //Hardcoded
     useEffect(() => {
-
-
+        alert(vatNo)
         async function getRequestData() {
             const response = await fetch(`http://localhost:9000/host/requests?vatNo=${vatNo}`)
             const allData = await response.json();

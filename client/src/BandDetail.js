@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import explore3 from './images/explore3.jpg'
 import { useParams } from 'react-router-dom'
 import './BandDetail.css'
+import UserHeader from './UserHeader';
 function BandDetail() {
     let bandName = useParams();
     const [data, setdata] = useState([]);
@@ -12,9 +13,11 @@ function BandDetail() {
             setdata(allData.data)
         }
         getBandData();
-    }, []);
+    }, [bandName]);
     console.log(data)
     return (
+        <div>
+        <UserHeader />
         <div className="bandDetail">
             {Object.keys(data).map((keys) => {
                 return (
@@ -32,6 +35,7 @@ function BandDetail() {
                     </>
                 )
             })}
+        </div>
         </div>
     )
 }

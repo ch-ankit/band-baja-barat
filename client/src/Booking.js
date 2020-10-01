@@ -79,16 +79,15 @@ export default function Booking() {
               method: "post"
             });
           }
-          event();
-          console.log(EventDate)
+          console.log()
+          event().then(getEventId);
           async function getEventId() {
             const response = await fetch(`http://localhost:9000/event?organizerId=${organizerId}`);
-            console.log(response)
             const data = await response.json();
-            data.data[0] ==undefined ? setEventId(null) :setEventId(data.data[0].id);
+            const alldata=data.data
+            setEventId(alldata[0].id);
             
           }
-          getEventId();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           setCondition(true);
         }
