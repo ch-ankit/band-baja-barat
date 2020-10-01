@@ -51,29 +51,29 @@ exports.addHost = async (req, res, next) => {
     mysqlConnection.query(sql, (err) => {
       if (!err) {
         if (req.body.hall1) {
-          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          sql = ` INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES 
           (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}) `;
         }
         if (req.body.hall2) {
-          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          sql = ` INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES 
           (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
           (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}) `;
         }
         if (req.body.hall3) {
-          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          sql = ` INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES 
           (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
           (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
           (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}) `;
         }
         if (req.body.hall4) {
-          sql = ` INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          sql = ` INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES 
           (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
           (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
           (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}),
           (4,${parseInt(req.body.vatNo)},${parseInt(req.body.hall4)})`;
         }
         if (req.body.hall5) {
-          sql = `INSERT INTO hosthalls (hallNo,vatNo,capacity) VALUES 
+          sql = `INSERT INTO hostHalls (hallNo,vatNo,capacity) VALUES 
           (1,${parseInt(req.body.vatNo)},${parseInt(req.body.hall1)}),
           (2,${parseInt(req.body.vatNo)},${parseInt(req.body.hall2)}),
           (3,${parseInt(req.body.vatNo)},${parseInt(req.body.hall3)}),

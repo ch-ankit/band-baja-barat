@@ -36,8 +36,8 @@ function PartyDetail({ history }) {
     const [pending, setPending] = useState([])
     const [pendingPhoto, setPendingPhoto] = useState([])
     const [status, setStatus] = useState('')
-    const [bookedDate,setbookedDate]=useState([]);
-    const date=new Date();
+    const [bookedDate, setbookedDate] = useState([]);
+    const date = new Date();
     const [Halls, setHalls] = useState([]);
 
     useEffect(() => {
@@ -114,27 +114,27 @@ function PartyDetail({ history }) {
                                     </div>
                                 </div>
                                 <div className='partyDetail__info3'>
-                                <h6>Total Halls:{data[keys].totalHalls + 1}</h6>
+                                    <h6>Total Halls:{data[keys].totalHalls + 1}</h6>
                                 </div>
                             </div>
                         </div>
                         <div className='partyDetail__details'>
                             <h4>About us</h4>
                             <hr />
-                            <pre style={{whiteSpace:'pre-wrap'}}>{data[keys].description}</pre>
+                            <pre style={{ whiteSpace: 'pre-wrap' }}>{data[keys].description}</pre>
                         </div>
                         <div className='partyDetail__halls'>
                             <h4>Halls</h4>
                             <hr />
-                            <div className='partyDetail__hallDetail'>  
-                            {Object.keys(Halls).map((keys)=>{
-                              return( 
-                                   <div>
-                                    Hall No :{Halls[keys].hallNo} <br />
+                            <div className='partyDetail__hallDetail'>
+                                {Object.keys(Halls).map((keys) => {
+                                    return (
+                                        <div>
+                                            Hall No :{Halls[keys].hallNo} <br />
                                     Capacity:{Halls[keys].capacity}
-                                    </div>)
-                                
-                            })}
+                                        </div>)
+
+                                })}
                             </div>
                         </div>
                         <div className='partyDetail__userGallery'>
@@ -157,27 +157,27 @@ function PartyDetail({ history }) {
                         </ul>
                     </div>) : (<div>
                         <h5>Booked Date</h5>
-                            <ReactCalender className='partyDetail__bookedDate' />
-                        </div>)}
-                        <div className='partyDetail__googleMap'>
-                    <iframe src={`https://maps.google.com/maps?q= ${data[keys].latitude}, ${data[keys].longitude}&z=15&output=embed`} width="100%" height="200px" frameborder="0" style={{ border: "0" }}></iframe>
-                </div>
-                <div className='partyDetail__Gallery'>
-                    <h4>Top photos</h4>
-                    <hr />
-                    <div className="partyDetail__images">
-                        {Object.keys(Photo).map((keys) => {
-                            if (keys < 5) {
-                                return (
-                                    <img src={Photo[keys].photo} alt="image" className='partyDetail__GImage' />
-                                );
-                            }
-                        })}
-                    
-                </div>
-            </div>
+                        <ReactCalender className='partyDetail__bookedDate' />
+                    </div>)}
+                    <div className='partyDetail__googleMap'>
+                        <iframe src={`https://maps.google.com/maps?q= ${data[keys].latitude}, ${data[keys].longitude}&z=15&output=embed`} width="100%" height="200px" frameborder="0" style={{ border: "0" }}></iframe>
                     </div>
-                
+                    <div className='partyDetail__Gallery'>
+                        <h4>Top photos</h4>
+                        <hr />
+                        <div className="partyDetail__images">
+                            {Object.keys(Photo).map((keys) => {
+                                if (keys < 5) {
+                                    return (
+                                        <img src={Photo[keys].photo} alt="image" className='partyDetail__GImage' />
+                                    );
+                                }
+                            })}
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -212,11 +212,28 @@ function PartyDetail({ history }) {
                                     <div className='partyDetail__info2'>
                                         <h6>Price per Plate</h6>
                                     </div>
+                                    <div className='partyDetail__info3'>
+                                        <h6>Total Halls:{pending[keys].totalHalls + 1}</h6>
+                                    </div>
                                 </div>
                                 <div className='partyDetail__details'>
                                     <h4>About us</h4>
                                     <hr />
                                     {pending[keys].description}
+                                </div>
+                                <div className='partyDetail__halls'>
+                                    <h4>Halls</h4>
+                                    <hr />
+                                    <div className='partyDetail__hallDetail'>
+                                        {Object.keys(Halls).map((keys) => {
+                                            return (
+                                                <div>
+                                                    Hall No :{Halls[keys].hallNo} <br />
+                                                    Capacity:{Halls[keys].capacity}
+                                                </div>)
+
+                                        })}
+                                    </div>
                                 </div>
                             </div>)}
                     </div>

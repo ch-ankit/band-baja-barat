@@ -12,16 +12,16 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
         dispatch(actionvatNo(vatno))
     }
     const dispatch = useDispatch();
-    const history=useHistory()
+    const history = useHistory()
     switch (path) {
         case '/party':
             return (
-                <div className="detailCard" onClick={()=>{history.push(`/partypalace/${name}`);addVatNo()}}>
+                <div className="detailCard" onClick={() => { history.push(`/partypalace/${name}`); addVatNo() }}>
                     {admin ? <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>
                         <img src={image} alt={name} className="detailCard__image" />
                     </Link> :
                         <img src={image} alt={name} className="detailCard__image" />}
-                    <div className="detailCard__detail">
+                    <div className="detailCard__detail" style={{ padding: '1.5rem' }}>
                         <h2>{name}</h2>
                         {!admin && <p>{details ?? ''.substr(0, 150)} <Link to={uid ? `/partypalace/${name}` : '/SignUp'} onClick={addVatNo}>...See More</Link></p>}
                         {admin &&
@@ -32,7 +32,7 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
                                     <p>Provience: {provience}</p>
                                     <div>Status: <strong style={{ backgroundColor: 'orange' }}>{status}</strong></div>
                                 </div>
-                                <p style={{ marginLeft: '20px' }}>{details==null ? '': details.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
+                                <p style={{ marginLeft: '20px' }}>{details == null ? '' : details.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
                             </div>
                         }
                     </div>
@@ -40,9 +40,9 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
             )
         case '/bands':
             return (
-                <div className="detailCard" onClick={()=>{history.push(`/admin/partypalace/${name}`)}}>
+                <div className="detailCard" onClick={() => { history.push(`/admin/partypalace/${name}`) }}>
                     <img src={image} alt={name} style={{ width: '400px', height: '230px' }} />
-                    <div className="detailCard__detail">
+                    <div className="detailCard__detail" style={{ padding: '1.5rem' }}>
                         <h2>{name}</h2>
                         <p>{details.substr(0, 250)} <Link to={uid ? `/bands/${name}` : '/SignUp'}>...See More</Link></p>
                     </div>
@@ -60,11 +60,11 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
             )
         case '/search':
             return (
-            <div>
-                    
-            </div>
+                <div>
+
+                </div>
             )
-            
+
     }
 }
 
