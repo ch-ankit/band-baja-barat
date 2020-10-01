@@ -80,3 +80,10 @@ export const AdminLog = (value) => {
         value: value
     }
 }
+
+export const Search = (value) => {
+    return {
+        type: 'Search',
+        payload: value
+    }
+}

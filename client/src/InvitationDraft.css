@@ -24,3 +24,17 @@
     width: 100%;
     text-align: center;
 }
+.invitationDraft__honorableMention{
+    background-color: aqua;
+    position: absolute; 
+    bottom: 30px;
+    right:10px;
+    float:right; 
+}
+
+.invitationDraft__location{
+    background-color: aqua;
+    position: absolute; 
+    bottom: 30px;
+    float:right; 
+}

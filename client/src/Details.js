@@ -44,10 +44,11 @@ function Details({ location, history }) {
         async function getInvitations() {
             const response = await fetch(`http://localhost:9000/userhome/invitationrecieved?userName=${userName}`);
             const { data } = await response.json()
+            console.log(data)
             setInvitations(data)
         }
         getInvitations();
-    }, [])
+    }, [userName])
 
     useEffect(() => {
         async function productRating() {
@@ -452,7 +453,7 @@ function Details({ location, history }) {
                                     </button>
                                 ))}
 
-                        <div className="product__quantity">
+                        <div className="product__quantity">{console.log(invitations)}
                             <p>Quantity:</p>
                             {!isAdmin ? (<div className="product__quantityView">
                                 {removeIcon}

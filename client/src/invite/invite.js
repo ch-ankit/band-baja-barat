@@ -36,7 +36,7 @@ class Invite extends React.Component {
                                 <Card>
                                     <Accordion.Toggle eventKey='0'>
                                         <Card.Header id='invit'>
-                                            Name: {this.state.invitation[keys].userName}
+                                            Name: {this.state.userName}
                                         </Card.Header>
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey='0'>
@@ -44,9 +44,15 @@ class Invite extends React.Component {
                                             <p> {this.state.invitation[keys].groomName} son of {this.state.invitation[keys].groomFather} and {this.state.invitation[keys].groomMother}</p>
                                             <h4>Weds</h4>
                                             <p> {this.state.invitation[keys].brideName} daughter of {this.state.invitation[keys].brideFather} and {this.state.invitation[keys].brideMother}</p>
+                                            <div className='invitationDraft__honorableMention'>
+                                                <h2>Honorable Mention</h2>
+                                                {this.state.invitation[keys].honorableMention1}
+                                                {this.state.invitation[keys].honorableMention2}
+                                                {console.log(this.state.invitation)}
+                                            </div>
                                             <div className='invitationDraft__location'>
                                                 Party Palace:{this.state.invitation[keys].hostName}<br />
-                                        Date:{this.state.invitation[keys].eventDate.slice(0, 10)}
+                                                Date:{this.state.invitation[keys].eventDate.slice(0, 10)}
                                             </div>
                                         </Card.Body>
                                     </Accordion.Collapse>

@@ -31,7 +31,7 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
                                     <p>Provience: {provience}</p>
                                     <div>Status: <strong style={{ backgroundColor: 'orange' }}>{status}</strong></div>
                                 </div>
-                                <p style={{ marginLeft: '20px' }}>{details.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
+                                <p style={{ marginLeft: '20px' }}>{details==null ? '': details.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
                             </div>
                         }
                     </div>
@@ -57,6 +57,13 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
                     </div>
                 </div>
             )
+        case '/search':
+            return (
+            <div>
+                    
+            </div>
+            )
+            
     }
 }
 
