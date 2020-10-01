@@ -85,10 +85,10 @@ function History({ userId }) {
           </p>
         </div>
       ) : (
-        <div>
-          <h2 className="History__title">Your History</h2>
-        </div>
-      )}
+          <div>
+            <h2 className="History__title">Your History</h2>
+          </div>
+        )}
       <div className="products__display">{display}</div>
     </div>
   );

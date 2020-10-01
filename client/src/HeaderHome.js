@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import HelpIcon from '@material-ui/icons/Help';
 import { useDispatch } from 'react-redux';
 import { AdminLog } from './redux/action';
-function Header() {
+function Header({ aboutUs }) {
     const [Sign, setSign] = React.useState(false)
     const dispatch = useDispatch();
     const [adminLog, setAdminLog] = useState(false)
@@ -17,15 +17,15 @@ function Header() {
         }
     }
     return (
-        <div className="header">
+        <div className="header" style={{ marginTop: '0', backgroundColor: `${aboutUs && 'black'}` }}>
             <div className="header__logo">
                 <h1 onClick={handleClick}>BBB</h1>
             </div>
             <div className="header__right">
-                <Link to='/' className="header__link">Home</Link>
-                <Link to='/User' className="header__link">About Us</Link>
-                <Link className="header__link" to='/SignUp'>Sign Up</Link>
-                <Link to="/help" className="header_link"><HelpIcon className="header__icon" /></Link>
+                <Link to='/' className="header__link" style={{ color: `${aboutUs && 'white'}` }}>Home</Link>
+                <Link to='/aboutUs' className="header__link" style={{ color: `${aboutUs && 'white'}` }}>About Us</Link>
+                <Link className="header__link" to='/SignUp' style={{ color: `${aboutUs && 'white'}` }}>Sign Up</Link>
+                <Link to="/help" className="header_link" style={{ color: `${aboutUs && 'white'}` }}><HelpIcon className="header__icon" /></Link>
             </div>
         </div>
     )

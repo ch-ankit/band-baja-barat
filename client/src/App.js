@@ -29,6 +29,7 @@ import InvitationDraft from "./InvitationDraft";
 import GuestList from "./GuestList";
 import EventInfo from './EventInfo'
 import SearchedUser from './SearchedUser'
+import AboutUs from "./AboutUs";
 
 function App() {
   const [{ searchQuery }] = useStateValue();
@@ -88,6 +89,7 @@ function App() {
           <Route exact path={`/giftstore/products/search`} render={(routeProps) => <SearchDisplay {...routeProps} />} />
           <Route exact path={`/giftstore/addpoints`} render={(routeProps) => <Payment {...routeProps} />} />
           <Route exact path={`/admin`} render={(routeProps) => <AdminDisplay />} />
+          <Route exact path={`/aboutUs`} render={(routeProps) => <AboutUs />} />
         </Switch>
       </div>
     </Router >

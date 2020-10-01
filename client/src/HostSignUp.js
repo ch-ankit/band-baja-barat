@@ -12,6 +12,7 @@ import usePlacesAutocomplete, {
     getLatLng,
 } from "use-places-autocomplete";
 import mapStyles from "./mapStyles";
+import { useHistory } from 'react-router-dom';
 
 function HostSignUp() {
     const [Street, setStreet] = useState('');
@@ -36,7 +37,7 @@ function HostSignUp() {
     const [hall3, setHall3] = useState('')
     const [hall4, setHall4] = useState('')
     const [hall5, setHall5] = useState('')
-
+    const history = useHistory();
     const libraries = ["places"];
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyA7TVORrDdi2WUm4l2GSkWIVqyq8AovX7U",
@@ -164,6 +165,7 @@ function HostSignUp() {
                             alert("Signup Complete!!")
                         }
                         sign();
+                        history.push('/')
                     }));
                 setProgress(0);
                 setimage(null);

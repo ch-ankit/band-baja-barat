@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { db, storage, auth } from './firebaseConfig'
 import firebase from 'firebase'
 import './Gallery.css'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function Gallery() {
     const [Progress, setProgress] = useState(0);
@@ -57,18 +57,19 @@ function Gallery() {
                         setUrl(url);
                         console.log(url);
                         async function addPhoto(params) {
-                            const response = await fetch('http://localhost:9000/host/addphoto',{
-                                method:'POST',
-                                headers: {"Content-Type":"application/json"},
-                                body:JSON.stringify({
-                                    "vatNo":vatNo,
-                                    "caption":Caption,
-                                    'photo':url
+                            const response = await fetch('http://localhost:9000/host/addphoto', {
+                                method: 'POST',
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    "vatNo": vatNo,
+                                    "caption": Caption,
+                                    'photo': url
                                 })
-                            })    
+                            })
                         }
                         addPhoto();
                     }));
+                // window.location.reload()
                 setProgress(0);
                 setDummy(!Dummy);
                 setimage(null);
@@ -86,7 +87,7 @@ function Gallery() {
 
         <div className="Gallery">
             <h1>Gallery</h1>
-            <input type='text' placeholder='Caption' value={Caption} onChange={(e)=>setCaption(e.target.value)} />
+            <input type='text' placeholder='Caption' value={Caption} onChange={(e) => setCaption(e.target.value)} />
             <progress value={Progress} max='100' />
             <input type='file' onChange={handleChange} />
             <button onClick={handleUpload}>Upload</button>
