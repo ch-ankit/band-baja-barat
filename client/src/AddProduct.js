@@ -89,7 +89,7 @@ function AddProduct({ history }) {
                 setProgress(0);
                 setViewFile(null);
                 setImage(null);
-                setTimeout(() => history.push('/giftstore'), 1000)
+                // setTimeout(() => history.push('/giftstore'), 1000)
             }
         );
 

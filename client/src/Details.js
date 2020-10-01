@@ -6,7 +6,6 @@ import ReactImageMagnify from 'react-image-magnify';
 import "./Details.css";
 import { useStateValue } from "./StateProvider";
 import { useSelector } from "react-redux";
-//Hello Worldz
 
 function Details({ location, history }) {
     const [{ user }, dispatch] = useStateValue();
@@ -257,6 +256,7 @@ function Details({ location, history }) {
     const handleSubmitSummary = async (event) => {
         event.preventDefault();
         const store = editableSummary.split("\u2022").join('')
+        const storeToBackend = store.split(`"`).join(`'`)
         const response = await fetch(
             "http://localhost:9000/giftstore/product",
             {
@@ -264,7 +264,7 @@ function Details({ location, history }) {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ modelNo: details.modelNo, summary: store })
+                body: JSON.stringify({ modelNo: details.modelNo, summary: storeToBackend })
             }
         );
         const { message } = await response.json();

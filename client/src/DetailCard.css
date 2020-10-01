@@ -13,9 +13,6 @@
     transform: scale(1.08);
 }
 .detailCard__image {
-    width: 250px;
-    height: 200px;
-    object-fit: contain;
-}
-.detailCard__detail {
+    width: 20vw;
+    height: 20vh;
 }

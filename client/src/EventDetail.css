@@ -28,3 +28,13 @@
 .eventDetail__Reject{
     background-color: red;
 }
+
+.eventDetail__table{
+    width:100%;
+    border: black solid 1px;
+}
+.eventDetail__table > tr{
+}
+.eventDetail__table > tr > td{
+    border: black solid 1px;
+}

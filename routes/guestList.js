@@ -4,6 +4,7 @@ router
   .route("/")
   .get(guestListController.guestList)
   .post(guestListController.addGuest)
-  .delete(guestListController.deleteGuest);
+  .delete(guestListController.deleteGuest)
+  .patch(guestListController.updatePoints)
 
 module.exports = router;

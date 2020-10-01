@@ -48,7 +48,7 @@ function Host() {
                 })
             });
             const allData = await response.json();
-            setdata(allData.data ?? []);
+            setdata( await allData.data ?? []);
             setvatNo(allData.data[0].vatNo);
             dispatch(actionvatNo(allData.data[0].vatNo))
         } 
