@@ -31,7 +31,7 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
                                     <p>Provience: {provience}</p>
                                     <div>Status: <strong style={{ backgroundColor: 'orange' }}>{status}</strong></div>
                                 </div>
-                                <p style={{ marginLeft: '20px' }}>{details ?? ''.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
+                                <p style={{ marginLeft: '20px' }}>{details.substr(0, 400)} <Link to={`/admin/partypalace/${name}`} onClick={addVatNo}>...See More</Link></p>
                             </div>
                         }
                     </div>
@@ -40,10 +40,10 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
         case '/bands':
             return (
                 <div className="detailCard">
-                    <img src={image} alt={name} className="detailCard__image" />
+                    <img src={image} alt={name} style={{ width: '400px', height: '230px' }} />
                     <div className="detailCard__detail">
                         <h2>{name}</h2>
-                        <p>{details ?? ''.substr(0, 250)} <Link to={uid ? `/bands/${name}` : '/SignUp'}>...See More</Link></p>
+                        <p>{details.substr(0, 250)} <Link to={uid ? `/bands/${name}` : '/SignUp'}>...See More</Link></p>
                     </div>
                 </div>
             )

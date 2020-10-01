@@ -1,11 +1,11 @@
 GET http://localhost:9000/giftstore/rating?userName=pujamatta&modelNo=ddsd
 
 ###
-POST http://localhost:9000/giftstore/rating?userName=junushu&modelNo=BGO4644
+POST http://localhost:9000/giftstore/rating?userName=shreali&modelNo=SSQ1291
 Content-Type: application/json
 
 {
-    "value":5
+    "value":4.5
 }
 
 ###
