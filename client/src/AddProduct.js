@@ -49,9 +49,8 @@ function AddProduct({ history }) {
                     .child(image.name)
                     .getDownloadURL()
                     .then((url => {
-                        alert('hello')
+                        alert(`${name} added sucessfully to gift store`)
                         setUrl(url);
-                        console.log(url);
                         async function addProduct() {
                             console.log(summary)
                             let summaryToBackend = summary[0].split("\u2022").join('').split(`"`).join(`'`)
@@ -89,7 +88,7 @@ function AddProduct({ history }) {
                 setProgress(0);
                 setViewFile(null);
                 setImage(null);
-                // setTimeout(() => history.push('/giftstore'), 1000)
+                setTimeout(() => history.push('/giftstore'), 1000)
             }
         );
 

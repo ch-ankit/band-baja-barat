@@ -186,12 +186,18 @@ CREATE TABLE organizer
    backgroundImage2 VARCHAR
               (255),
    draft text,
-   groomFather varchar(255),
-   groomMother varchar(255),
-   brideFather varchar(255),
-   brideMother varchar(255),
-   honorableMention1 varchar(255),
-   honorableMention2 varchar(255),
+   groomFather varchar
+              (255),
+   groomMother varchar
+              (255),
+   brideFather varchar
+              (255),
+   brideMother varchar
+              (255),
+   honorableMention1 varchar
+              (255),
+   honorableMention2 varchar
+              (255),
    PRIMARY KEY
               (id),
    FOREIGN KEY

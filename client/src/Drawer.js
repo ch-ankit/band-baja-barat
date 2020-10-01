@@ -13,7 +13,7 @@ import './Drawer.css'
 import { auth } from "./firebaseConfig"
 import { useHistory } from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import { actionCreate, SetAdmin } from './redux/action.js';
+import { actionCreate, SetAdmin, AdminLog } from './redux/action.js';
 import { useSelector } from 'react-redux';
 const useStyles = makeStyles({
   list: {
@@ -74,6 +74,7 @@ export default function TemporaryDrawer({ isGiftStore }) {
           <ListItem button key={text} onClick={() => {
             auth.signOut();
             dispatch(actionCreate(null));
+            dispatch(AdminLog(false));
             dispatch(SetAdmin(null));
             history.push('/');
           }}>

@@ -21,7 +21,7 @@ import { Hostuid, EventData } from './redux/action.js';
 import { useHistory } from 'react-router-dom'
 import EventDetail from './EventDetail.js';
 import HostHeader from './HostHeader.js';
-import {actionvatNo} from './redux/action.js'
+import { actionvatNo } from './redux/action.js'
 function Host() {
     const history = useHistory();
     const [book, setbook] = useState(false);
@@ -44,20 +44,21 @@ function Host() {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email:hostEmail
+                    email: hostEmail
                 })
             });
             const allData = await response.json();
-            setdata( await allData.data ?? []);
+            console.log(allData)
+            setdata(await allData.data ?? []);
             setvatNo(allData.data[0].vatNo);
             dispatch(actionvatNo(allData.data[0].vatNo))
-        } 
+        }
         getHostData();
     }, [hostEmail])
     //Hardcoded
     useEffect(() => {
-        
-        
+
+
         async function getRequestData() {
             const response = await fetch(`http://localhost:9000/host/requests?vatNo=${vatNo}`)
             const allData = await response.json();
@@ -76,21 +77,21 @@ function Host() {
             setApprovedData(allData.data ?? [])
         }
         getApprovedData();
-        async function hello(){
-                const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
-                const data=await response.json();
-                setPhoto(data.rows2); 
+        async function hello() {
+            const response = await fetch(`http://localhost:9000/host?vatNo=${vatNo}`);
+            const data = await response.json();
+            setPhoto(data.rows2);
         }
         hello();
     }, [vatNo])
     console.log(data, Photo)
-    async function updateHost(){
-        const response = await fetch('http://localhost:9000/host',{
-            method:'PATCH',
-            headers:{"Content-Type":"application/json"},
+    async function updateHost() {
+        const response = await fetch('http://localhost:9000/host', {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                'vatNo':vatNo,
-                'description':description
+                'vatNo': vatNo,
+                'description': description
             })
         })
         alert('Hello')
@@ -130,9 +131,9 @@ function Host() {
                                     </div>
                                 </div>
                                 <div className='host__details'>
-                                    <h4>About us</h4> {Edit ? <button onClick={()=>{setEdit(!Edit);updateHost()}}>Change</button> : <button onClick={()=>{setEdit(!Edit);setdescription(data[keys].description)}}>Edit</button>}
+                                    <h4>About us</h4> {Edit ? <button onClick={() => { setEdit(!Edit); updateHost() }}>Change</button> : <button onClick={() => { setEdit(!Edit); setdescription(data[keys].description) }}>Edit</button>}
                                     <hr />
-                                    {Edit ? <textarea value={description} onChange={(e)=>{setdescription(e.target.value)}} style={{width:'100%',height:'440px'}}></textarea>:<pre style={{whiteSpace:'pre-wrap'}}>{data[keys].description}</pre>}
+                                    {Edit ? <textarea value={description} onChange={(e) => { setdescription(e.target.value) }} style={{ width: '100%', height: '440px' }}></textarea> : <pre style={{ whiteSpace: 'pre-wrap' }}>{data[keys].description}</pre>}
                                 </div>
 
                                 <div className='host__fullGallery'>

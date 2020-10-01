@@ -9,7 +9,7 @@ function History({ userId }) {
     const admin = useSelector(state => state.isAdmin)
     const uid = useSelector(state => state.uid)
     let userName;
-    if (!admin) { userName = userData[0] }
+    if (!admin) { userName = userData[0].userName }
     const [data, setData] = useState([]);
     const [history, setHistory] = useState([]);
     const [message, setMessage] = useState('')
