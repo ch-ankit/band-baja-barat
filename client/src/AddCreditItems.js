@@ -92,13 +92,6 @@ function AddCreditItems(props) {
     }
     return (
         <div className="product" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            <div className="product__info">
-                {/* <p>{title}</p>
-                <p className="product__price">
-                    <small>Rs.</small>
-                    <small>{price}</small>
-                </p> */}
-            </div>
             <div style={{ textDecoration: 'none', color: 'black', height: '200px', marginBottom: '15px' }}>
                 <img className="image" src="https://www.snopes.com/tachyon/2020/07/coins_fran_trudeau_flickr.jpg" alt="coins" />
             </div>
