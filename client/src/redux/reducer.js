@@ -10,7 +10,8 @@ const initialState = {
     isAdmin: null,
     center: null,
     hostEmail: null,
-    adminLog: false
+    adminLog: false,
+    searchData:null
 }
 
 export const reducerr = (state = initialState, action) => {
@@ -35,6 +36,12 @@ export const reducerr = (state = initialState, action) => {
             return {
                 ...state,
                 hostEmail: action.payload,
+
+            }
+        case 'Search':
+            return {
+                ...state,
+                searchData: action.payload
 
             }
         case 'EventData':

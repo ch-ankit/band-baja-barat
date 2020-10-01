@@ -57,6 +57,13 @@ function DetailCard({ image, name, details, path, vatno, totalHalls, street, cit
                     </div>
                 </div>
             )
+        case '/search':
+            return (
+            <div>
+                    
+            </div>
+            )
+            
     }
 }
 

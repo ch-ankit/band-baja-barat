@@ -50,7 +50,7 @@ function PartyDetail({ history }) {
             console.log(data)
         }
         getHostData();
-    }, [])
+    }, [vatNo])
     useEffect(() => {
         async function pendingHost() {
             const response = await fetch(`http://localhost:9000/admin/partypalace?vatNo=${vatNo}`)

@@ -2,7 +2,7 @@ const mysqlConnection = require("./../connection");
 
 exports.invitationRecieved = (req, res, next) => {
   try {
-    var sql = ` SELECT * FROM guestList g INNER JOIN invitationDraft i ON i.eventId = g.eventId INNER JOIN event e ON g.eventId = e.id WHERE userName = "${req.query.userName}"`;
+    var sql = ` SELECT i.*,e.groomName,e.brideName,e.eventDate,h.hostName,concat(h.street,' ',h.city,' ',h.provience) AS location FROM guestList g INNER JOIN invitationDraft i ON i.eventId = g.eventId INNER JOIN event e ON g.eventId = e.id INNER JOIN booking b ON b.eventId=e.id INNER JOIN host h on h.vatNo=b.vatNo  WHERE userName = "${req.query.userName}"`;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         res.json({ data: rows });

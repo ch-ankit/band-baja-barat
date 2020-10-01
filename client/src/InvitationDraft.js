@@ -18,7 +18,8 @@ class InvitationDraft extends React.Component{
             BFather:'',
             BMother:'',
             eventData:props.eventData,
-            honorableMention:''
+            honorableMention1:'',
+            honorableMention2:''
         }
         this.draftInvitation=this.draftInvitation.bind(this);
     }
@@ -30,6 +31,8 @@ class InvitationDraft extends React.Component{
                 "groomMother":this.state.GMother,
                 "brideFather":this.state.BFather,
                 "brideMother":this.state.BMother,
+                "honorableMention1":this.state.honorableMention1,
+                "honorableMention2":this.state.honorableMention2
             }),
             method: 'POST',
             headers:{
@@ -47,8 +50,10 @@ class InvitationDraft extends React.Component{
                 <input type='text' placeholder="Groom's Mother Name" onChange={(e)=>{this.setState({GMother:e.target.value})}} value={this.state.GMother} />
                 <input type='text' placeholder="Bride's Father Name" onChange={(e)=>{this.setState({BFather:e.target.value})}} value={this.state.BFather} />
                 <input type='text' placeholder="Bride's Mother Name" onChange={(e)=>{this.setState({BMother:e.target.value})}} value={this.state.BMother} />
-                <input type='text' placeholder="Honorable Mentions" onChange={(e)=>{this.setState({honorableMention:e.target.value})}} value={this.state.honorableMention} />
-￼            <div id='inv' style={{paddingLeft:'350px'}}>
+                <input type='text' placeholder="Honorable Mentions1" onChange={(e)=>{this.setState({honorableMention1:e.target.value})}} value={this.state.honorableMention1} />
+                <input type='text' placeholder="Honorable Mentions2" onChange={(e)=>{this.setState({honorableMention2:e.target.value})}} value={this.state.honorableMention2} />
+￼            
+    <div id='inv' style={{paddingLeft:'350px'}}>
                 <Accordion style={{width:'600px'}}>
                     <Card>{console.log(this.state.eventData)}
                         <Accordion.Toggle eventKey='0'>
@@ -61,6 +66,11 @@ class InvitationDraft extends React.Component{
                               <p> {this.state.eventData.groomName} son of {this.state.GFather} and {this.state.GMother}</p>
                               <h4>Weds</h4>
                               <p> {this.state.eventData.brideName} son of {this.state.BFather} and {this.state.BMother}</p> 
+                                <div className='invitationDraft__honorableMention'>
+                                    <h2>Honorable Mention</h2>
+                                    {this.state.honorableMention1}
+                                    {this.state.honorableMention2}
+                                </div>
                                 <div className='invitationDraft__location'>
                                     Party Palace:{this.state.eventData.hostName}<br />
                                     Date:{this.state.eventData.eventDate.slice(0,10)}
