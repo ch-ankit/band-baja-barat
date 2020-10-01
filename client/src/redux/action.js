@@ -84,6 +84,6 @@ export const AdminLog = (value) => {
 export const Search = (value) => {
     return {
         type: 'Search',
-        value: value
+        payload: value
     }
 }
