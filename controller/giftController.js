@@ -281,25 +281,61 @@ exports.productRating = async (req, res, next) => {
   }
 };
 
+// exports.addRating = async (req, res, next) => {
+//   try {
+//     var sql = ` INSERT INTO rating (userName, modelNo, value) VALUES (
+//         "${req.query.userName}",
+//         "${req.query.modelNo}",
+//          ${req.body.value}
+//       )`;
+//     var sql1 = ` UPDATE giftShop SET rating = CASE rating WHEN 0 THEN ${req.body.value} ELSE rating/2 + ${req.body.value}/2 END WHERE modelNo = "${req.query.modelNo}" `;
+//     mysqlConnection.query(sql, (err) => {
+//       if (!err) {
+//         mysqlConnection.query(sql1, (err) => {
+//           if (!err) {
+//             res.json(
+//               `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} `
+//             );
+//           } else {
+//             res.json({ error: err });
+//           }
+//         });
+//       } else {
+//         res.json({ error: err });
+//       }
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
 exports.addRating = async (req, res, next) => {
   try {
     var sql = ` INSERT INTO rating (userName, modelNo, value) VALUES (
         "${req.query.userName}",
         "${req.query.modelNo}",
-         ${req.body.value}
+         ${parseFloat(req.body.value)}
       )`;
-    var sql1 = ` UPDATE giftShop SET rating = CASE rating WHEN 0 THEN ${req.body.value} ELSE rating/2 + ${req.body.value}/2 END WHERE modelNo = "${req.query.modelNo}" `;
     mysqlConnection.query(sql, (err) => {
       if (!err) {
-        mysqlConnection.query(sql1, (err) => {
+        sql = `SELECT avg(value) AS averageValue FROM rating WHERE modelNo = "${req.query.modelNo}"  GROUP BY modelNo`;
+        mysqlConnection.query(sql, (err, rows) => {
           if (!err) {
-            res.json(
-              `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} `
-            );
+            var sql1 = ` UPDATE giftShop SET rating = ${rows[0].averageValue} WHERE modelNo = "${req.query.modelNo}" `;
+            mysqlConnection.query(sql1, (err) => {
+              if (!err) {
+                res.json(
+                  { message: `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} ` }
+                );
+              } else {
+                res.json({ error: err });
+              }
+            });
           } else {
             res.json({ error: err });
           }
-        });
+        })
       } else {
         res.json({ error: err });
       }
@@ -312,32 +348,51 @@ exports.addRating = async (req, res, next) => {
 exports.updateRating = async (req, res, next) => {
   try {
     mysqlConnection.query(
-      ` SELECT VALUE FROM rating WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}" `,
+      ` SELECT VALUE FROM rating WHERE userName = "${req.query.userName}" AND modelNo = "${req.query.modelNo}" `,
       (err, rows) => {
         if (!err) {
-          const netRating = (req.body.value - rows[0].VALUE) / 2;
-          var sql = ` UPDATE rating SET value= ${req.body.value} WHERE userName="${req.query.userName}" AND modelNo="${req.query.modelNo}"`;
-          var sql1 = ` UPDATE giftShop SET rating =rating+ ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
+          // const netRating = (req.body.value - rows[0].VALUE) / 2;
+          var sql = ` UPDATE rating SET value = ${req.body.value} WHERE userName = "${req.query.userName}" AND 
+          modelNo = "${req.query.modelNo}"`;
+          // var sql1 = ` UPDATE giftShop SET rating = rating + ${netRating} WHERE modelNo = "${req.query.modelNo}" `;
           mysqlConnection.query(sql, (err) => {
             if (!err) {
-              mysqlConnection.query(sql1, (err) => {
+              sql = `SELECT avg(value) AS averageValue FROM rating WHERE modelNo = "${req.query.modelNo}"  GROUP BY modelNo`;
+              mysqlConnection.query(sql, (err, rows) => {
                 if (!err) {
-                  res.json(
-                    `${req.query.modelNo} rating updated by ${req.query.userName}`
-                  );
+                  var sql1 = ` UPDATE giftShop SET rating = ${rows[0].averageValue} WHERE modelNo = "${req.query.modelNo}" `;
+                  mysqlConnection.query(sql1, (err) => {
+                    if (!err) {
+                      res.json(
+                        `${req.query.modelNo} rated ${req.body.value} by ${req.query.userName} `
+                      );
+                    } else {
+                      res.json({ error: err });
+                    }
+                  });
+
+                  // mysqlConnection.query(sql1, (err) => {
+                  //   if (!err) {
+                  //     res.json(
+                  //       `${req.query.modelNo} rating updated by ${req.query.userName} `
+                  //     );
+                  //   } else {
+                  //     res.json({ error: err });
+                  //   }
+                  // });
                 } else {
                   res.json({ error: err });
                 }
               });
             } else {
-              res.json({ error: err });
+              next(err);
             }
-          });
+          }
+          );
         } else {
-          next(err);
+          res.json({ error: err })
         }
-      }
-    );
+      });
   } catch (err) {
     next(err);
   }
@@ -345,7 +400,7 @@ exports.updateRating = async (req, res, next) => {
 
 exports.search = (req, res, next) => {
   try {
-    var sql = ` SELECT name,photo,modelNo FROM giftShop WHERE name REGEXP "${req.query.value}"  `;
+    var sql = ` SELECT name, photo, modelNo FROM giftShop WHERE name REGEXP "${req.query.value}"  `;
     mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         if (rows.length == 0)

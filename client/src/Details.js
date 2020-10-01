@@ -15,7 +15,7 @@ function Details({ location, history }) {
 
     const userData = useSelector(state => state.userData);
     let userName;
-    if (!isAdmin) { userName = userData[0]; }
+    if (!isAdmin) { userName = userData[0].userName; }
     const [details, setDetails] = useState({});
     const [addedQuantity, setAddedQuantity] = useState(1);
     const [productRating, setproductRating] = useState([]);
@@ -102,7 +102,7 @@ function Details({ location, history }) {
         if (productRating.length !== 0) {
             name = "PATCH";
         }
-        await fetch(
+        const response = await fetch(
             `http://localhost:9000/giftstore/rating?modelNo=${details.modelNo}&userName=${userName}`,
             {
                 method: name,
@@ -110,6 +110,8 @@ function Details({ location, history }) {
                 body: JSON.stringify({ value: data.rating }),
             }
         );
+        const { message } = await response.json();
+        setUpdateMessage(message)
     };
 
     //Check if the item is on basket and add to the basket
@@ -358,10 +360,12 @@ function Details({ location, history }) {
                                             edit={true}
                                             isHalf={true}
                                             onChange={(newRating) => {
+                                                console.log(newRating)
                                                 const data = {
                                                     modelNo: details.modelNo,
                                                     rating: newRating,
                                                 };
+                                                console.log(data)
                                                 setProdRating(newRating);
                                                 updateRating(data);
                                             }}
