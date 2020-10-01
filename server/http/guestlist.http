@@ -8,6 +8,14 @@ Content-Type: application/json
     "eventId":"6",
     "userName":"junushu"
 }
+###
+PATCH  http://localhost:9000/guestList
+Content-Type: application/json
+
+{
+    "userName":"zzxcxzc",
+    "points":10
+}
 
 ###
 DELETE http://localhost:9000/guestList

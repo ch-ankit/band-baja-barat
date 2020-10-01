@@ -23,7 +23,15 @@ function GuestList() {
                 "eventId":eventData.eventId,
                 "userName":UserName
             })
-        })
+        });
+        const response1 = await fetch("http://localhost:9000/guestList",{
+            method:'PATCH',
+            headers: {"Content-Type":'application/json'},
+            body:JSON.stringify({
+                "userName":UserName,
+                "points":10
+            })
+        });
         setcond(!cond);
     }
     async function deleteGuest(UserName){
@@ -35,7 +43,15 @@ function GuestList() {
                 "eventId":eventData.eventId,
                 "userName":UserName
             })
-        })
+        });
+        const response1 = await fetch("http://localhost:9000/guestList",{
+            method:'PATCH',
+            headers: {"Content-Type":'application/json'},
+            body:JSON.stringify({
+                "userName":UserName,
+                "points":-10
+            })
+        });
         setcond(!cond);
     }
     useEffect(()=>{
