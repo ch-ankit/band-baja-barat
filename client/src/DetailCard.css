@@ -11,6 +11,7 @@
 
 .detailCard:hover {
     transform: scale(1.08);
+    cursor: pointer;
 }
 .detailCard__image {
     width: 20vw;
