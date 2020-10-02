@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-GET  http://localhost:9000/host/requests?vatNo=789456
+GET  http://localhost:9000/host/requests?vatNo=406820
 
 ###
 GET  http://localhost:9000/host/approved?vatNo=771982
@@ -21,4 +21,4 @@ GET  http://localhost:9000/host/approved?vatNo=771982
 GET  http://localhost:9000/host/upcoming?vatNo=771982
 
 ###
-GET  http://localhost:9000/host/bookeddates?vatNo=789456
+GET  http://localhost:9000/host/bookeddates?vatNo=123456

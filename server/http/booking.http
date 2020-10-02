@@ -11,3 +11,6 @@ Content-Type: application/json
     "hallNo":2,
     "expectedGuestNo":300
 }
+
+###
+Get http://localhost:9000/event?organizerId=15

@@ -19,7 +19,9 @@ class InvitationDraft extends React.Component{
             BMother:'',
             eventData:props.eventData,
             honorableMention1:'',
-            honorableMention2:''
+            honorableMention2:'',
+            datee: new Date(props.eventData.eventDate.slice(0,4),props.eventData.eventDate.slice(5,7)-1, parseInt(props.eventData.eventDate.slice(8,10))+2).toString(),
+
         }
         this.draftInvitation=this.draftInvitation.bind(this);
     }
@@ -58,22 +60,23 @@ class InvitationDraft extends React.Component{
                     <Card>{console.log(this.state.eventData)}
                         <Accordion.Toggle eventKey='0'>
                             <Card.Header id='invit'>
-                                Name: Babin Khatri
+                                Name: User Name
                             </Card.Header>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey='0'>
                             <Card.Body id='invite'>
-                              <p> {this.state.eventData.groomName} son of {this.state.GFather} and {this.state.GMother}</p>
-                              <h4>Weds</h4>
-                              <p> {this.state.eventData.brideName} son of {this.state.BFather} and {this.state.BMother}</p> 
+                                <br/><br/>
+                              <strong> <h4>{this.state.eventData.groomName} son of {this.state.GFather} and {this.state.GMother}</h4></strong>
+                              <h2>Weds</h2>
+                              <strong><h4> {this.state.eventData.brideName} daughter of {this.state.BFather} and {this.state.BMother}</h4></strong> 
                                 <div className='invitationDraft__honorableMention'>
-                                    <h2>Honorable Mention</h2>
-                                    {this.state.honorableMention1}
+                                    <h4>Honorable Mention</h4>
+                                    {this.state.honorableMention1}<br/>
                                     {this.state.honorableMention2}
                                 </div>
                                 <div className='invitationDraft__location'>
                                     Party Palace:{this.state.eventData.hostName}<br />
-                                    Date:{this.state.eventData.eventDate.slice(0,10)}
+                                    Date:{this.state.datee.slice(0,15)}
                                 </div>
                             </Card.Body>
                         </Accordion.Collapse>

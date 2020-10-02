@@ -38,3 +38,10 @@
     bottom: 30px;
     float:right; 
 }
+#invite > strong
+{
+    color: white;
+}
+#invite > h2{
+    background-image: linear-gradient(to right,orange,yellow);
+}

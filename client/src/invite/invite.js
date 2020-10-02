@@ -40,19 +40,19 @@ class Invite extends React.Component {
                                         </Card.Header>
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey='0'>
-                                        <Card.Body id='invite'>
-                                            <p> {this.state.invitation[keys].groomName} son of {this.state.invitation[keys].groomFather} and {this.state.invitation[keys].groomMother}</p>
-                                            <h4>Weds</h4>
-                                            <p> {this.state.invitation[keys].brideName} daughter of {this.state.invitation[keys].brideFather} and {this.state.invitation[keys].brideMother}</p>
+                                        <Card.Body id='invite'><br/><br/>
+                                        <strong> <h4>{this.state.invitation[keys].groomName} son of {this.state.invitation[keys].groomFather} and {this.state.invitation[keys].groomMother}</h4></strong>
+                              <h2>Weds</h2>
+                              <strong><h4> {this.state.invitation[keys].brideName} daughter of {this.state.invitation[keys].brideFather} and {this.state.invitation[keys].brideMother}</h4></strong> 
                                             <div className='invitationDraft__honorableMention'>
                                                 <h2>Honorable Mention</h2>
-                                                {this.state.invitation[keys].honorableMention1}
+                                                {this.state.invitation[keys].honorableMention1}<br/>
                                                 {this.state.invitation[keys].honorableMention2}
                                                 {console.log(this.state.invitation)}
                                             </div>
                                             <div className='invitationDraft__location'>
                                                 Party Palace:{this.state.invitation[keys].hostName}<br />
-                                                Date:{this.state.invitation[keys].eventDate.slice(0, 10)}
+                                                Date:{new Date(this.state.invitation[keys].eventDate.slice(0,4),this.state.invitation[keys].eventDate.slice(5,7)-1, parseInt(this.state.invitation[keys].eventDate.slice(8,10))+2).toString().slice(0,15)}
                                             </div>
                                         </Card.Body>
                                     </Accordion.Collapse>

@@ -49,15 +49,18 @@ function Host() {
             });
             const allData = await response.json();
             console.log(allData)
-            setdata(await allData.data ?? []);
+            if(allData=="LOGIN ERROR"){
+
+            }
+            else{
+            setdata(allData.data ?? []);
             setvatNo(allData.data[0].vatNo);
-            dispatch(actionvatNo(allData.data[0].vatNo))
+            dispatch(actionvatNo(allData.data[0].vatNo))}
         }
         getHostData();
     }, [hostEmail])
     //Hardcoded
     useEffect(() => {
-        alert(vatNo)
         async function getRequestData() {
             const response = await fetch(`http://localhost:9000/host/requests?vatNo=${vatNo}`)
             const allData = await response.json();
@@ -93,7 +96,6 @@ function Host() {
                 'description': description
             })
         })
-        alert('Hello')
     }
     return (
         <div>

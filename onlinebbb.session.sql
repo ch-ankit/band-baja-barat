@@ -1,1 +1,2 @@
-select * from hostHalls where vatNo=488366
+delete from organizer
+

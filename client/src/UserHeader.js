@@ -111,7 +111,7 @@ function UserHeader() {
                     return (
                         <div className='userHeader__rightButton'>
                             {UserData[keys].points}
-                            <Avatar src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
+                            <Avatar style={{marginLeft:'5px'}} src={UserData[keys].photo} alt={UserData[keys].userName} onClick={() => setDrawer(!drawer)} />
                         </div>
                     )
 

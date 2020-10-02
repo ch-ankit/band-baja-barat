@@ -39,10 +39,9 @@ function BookingStatus() {
         }
     }
     const eventInfo=(eventData)=>{
-        if(eventData.hostStatus=="APPROVED"){
         dispatch(EventData(eventData));
         history.push('/eventInfo');
-        }
+        
     }
     return (
         <div>

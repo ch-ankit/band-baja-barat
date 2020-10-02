@@ -21,3 +21,7 @@
     display: flex;
     justify-content: space-between;
 }
+.eventInfo__table{
+    width:100%;
+    border: black solid 1px;
+}

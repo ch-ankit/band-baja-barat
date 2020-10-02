@@ -22,6 +22,8 @@ function SignUp({ }) {
     const [lastName, setlastName] = useState('');
     const [Hostsign, setHostsign] = useState(false);
     const [viewFile, setViewFile] = useState(null);
+    const [Hcolor,setHcolor]=useState('black');
+    const [Ucolor,setUcolor]=useState('orange')
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -106,11 +108,13 @@ function SignUp({ }) {
             <div className="signUp">
                 <h1>Sign Up</h1>
                 <div className="signUp__nav">
-                    <h3 onClick={() => setHostsign(false)}>User</h3>
-                    <h3 onClick={() => setHostsign(true)}>Host</h3>
+                    <h3 onClick={() => {setHostsign(false);setHcolor('black');setUcolor('orange')}} style={{color:Ucolor}}>User</h3>
+                    <h3 onClick={() => {setHostsign(true);setHcolor('orange');setUcolor('black')}} style={{color:Hcolor}}>Host</h3>
                 </div>
                 {Hostsign ? <HostSignUp /> :
-                    (<div className="signUp__middlepart">
+
+                    (<form onSubmit={handleSignUp}>
+                    <div className="signUp__middlepart">
                         <div className="signUp__input">
                             <div className='signUp__name'>
                                 <div>
@@ -134,7 +138,7 @@ function SignUp({ }) {
                                 </div>
                                 <div>
                                     <label>Password</label><br />
-                                    <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} required />
                                 </div>
                             </div>
                             <div className="signUp__contactInfo">
@@ -144,34 +148,38 @@ function SignUp({ }) {
                                 </div>
                                 <div>
                                     <label>Contact info</label><br />
-                                    <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} />
+                                    <input type='number' value={contactInfo} onChange={(e) => setcontactInfo(e.target.value.substring(0, 10))} required/>
                                 </div>
                             </div>
                             <div className="signUp__Address">
                                 <div>
                                     <label>Street</label><br />
-                                    <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} />
+                                    <input type="text" value={Street} onChange={(e) => setStreet(e.target.value)} required />
                                 </div>
                                 <div>
                                     <label>City</label><br />
-                                    <input type="text" value={City} onChange={(e) => setCity(e.target.value)} />
+                                    <input type="text" value={City} onChange={(e) => setCity(e.target.value)} required/>
                                 </div>
                                 <div>
                                     <label>Province</label><br />
-                                    <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} />
+                                    <input type="text" value={Province} onChange={(e) => setProvince(e.target.value)} required/>
                                 </div>
                             </div>
                             <br /><label>Profile Photo</label>
                             <progress value={Progress} max="100" />
-                            <input type="file" onChange={handleChange} />
+                            <input type="file" onChange={handleChange} required/>
                             {viewFile !== null && <div style={{ backgroundColor: 'white', height: '500px' }}><img src={viewFile} style={{ display: 'flex', marginTop: 'auto', marginBottom: 'auto', justifyContent: 'center', height: "300px", width: "300px" }} alt="host" /></div>}
                         </div>
-                        <Button className="signUp__button" onClick={handleSignUp}>
+                        <button type='submit' className="signUp__button" >
                             Sign Up
-                </Button>
-                    </div>)}
+                </button>
+                
+                    </div>
+                    </form>)}
             </div>
+            
         </div>
+        
     )
 }
 

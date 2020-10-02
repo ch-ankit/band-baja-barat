@@ -9,7 +9,6 @@ function EventDetail() {
     console.log(eventData);
     const history=useHistory();
     const datae=new Date(eventData.eventDate);
-    alert(datae)
     const updateStatus=()=>{
         alert('Hello')
         async function updateStatus1(){
@@ -21,7 +20,6 @@ function EventDetail() {
             }),
             headers: { "Content-type": "application/json" },
             method:'PATCH'});
-            alert('Hello')
     }
     updateStatus1();
     history.push('/host');
@@ -37,7 +35,6 @@ const rejectStatus=()=>{
         }),
         headers: { "Content-type": "application/json" },
         method:'PATCH'});
-        alert('Hello')
 }
 rejectStatus1();
 history.push('/host');

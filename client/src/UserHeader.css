@@ -44,7 +44,6 @@
     flex-direction: column;
     width: 40%;
     border: 1px solid lightgray;
-    border-radius: 25px !important;
 }
 .userHeader__input {
     display: flex;

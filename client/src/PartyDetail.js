@@ -116,7 +116,7 @@ function PartyDetail({ history }) {
                                     </div>
                                 </div>
                                 <div className='partyDetail__info3'>
-                                    <h6>Total Halls:{data[keys].totalHalls + 1}</h6>
+                                    <h6>Total Halls:{data[keys].totalHalls}</h6>
                                 </div>
                             </div>
                         </div>
