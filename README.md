@@ -36,9 +36,12 @@ npm start
 ```
 
 
-Usage
+##Usage
 
 Once the application is running, customers can log in to book venues, bands, and buy gifts for their weddings. They can also send invitations to their guests. Party Palace representatives can log in to manage their venue pictures and confirm bookings.
+
+##Conclusion
+Band Baja Barat provides a convenient and user-friendly platform for customers to book venues, bands, and buy gifts for their weddings. The real-time notifications and easy-to-use interface make it a great choice for both customers and Party Palace representatives.
 
 
 
